@@ -2,6 +2,6 @@
 
 exports[`successfully render the application in initial state 1`] = `
 <div>
-  Hello world
+  hello Youtrack world!
 </div>
 `;

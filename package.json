@@ -5,8 +5,11 @@
   "main": "lib/main/javascript/index.js",
   "scripts": {
     "dev": "dpat server .",
-    "package": "dpat clean . && dpat compile . && dpat verify ./dist && dpat package .",
-    "test": "dpat test ."
+    "lint": "eslint src/main/javascript/* --ext .js,.jsx --cache --cache-location=.cache/eslint",
+    "lint:fix": "npm run lint -- --fix",
+    "package": "dpat clean . && dpat compile . && dpat bundle-installer . && dpat verify ./dist && dpat package .",
+    "test": "dpat test .",
+    "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
@@ -28,25 +31,58 @@
   },
   "homepage": "https://github.com/deskpro/apps-youtrack#readme",
   "deskpro": {
-    "version": "2.1.0",
+    "version": "2.3.0",
     "title": "Youtrack",
     "isSingle": true,
     "scope": "agent",
+    "storage": [
+      {
+        "name": "oauth:youtrack",
+        "isBackendOnly": false,
+        "permRead": "EVERYBODY",
+        "permWrite": "OWNER"
+      }
+    ],
+    "settings": [
+      {
+        "name": "youtrackClientId",
+        "defaultValue": "",
+        "title": "The consumer key",
+        "required": true,
+        "type": "text"
+      },
+      {
+        "name": "youtrackHubUrl",
+        "defaultValue": "",
+        "title": "The Youtrack HUB url",
+        "required": true,
+        "type": "text"
+      },
+      {
+        "name": "urlRedirect",
+        "defaultValue": "",
+        "title": "The Youtrack redirect URL",
+        "required": true,
+        "type": "text"
+      }
+    ],
     "targets": [
       {
         "target": "ticket-sidebar",
         "url": "html/index.html"
       }
     ],
-    "settings": [],
     "deskproApiTags": [],
     "externalApis": []
   },
   "devDependencies": {
     "@deskpro/apps-dpat": "^0.9.6",
+    "@deskpro/apps-installer": "github:deskpro/apps-installer#v0.4.2",
     "@deskpro/apps-sdk-core": "^1.0.0-beta.26",
     "@deskpro/apps-sdk-react": "0.2.7",
     "babel-eslint": "^8.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
     "eslint-plugin-compat": "^1.0.4",
@@ -54,6 +90,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
+    "lodash": "4.17.4",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-test-renderer": "^15.6.2"
