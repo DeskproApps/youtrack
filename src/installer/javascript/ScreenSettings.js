@@ -32,34 +32,42 @@ export default class ScreenSettings extends React.Component {
   }
 
   onSettings(settings) {
-    const { oauth } = this.props.dpapp;
     const { finishInstall } = this.props;
-    const providerName = 'youtrack';
 
-    // retrieve the oauth proxy settings for jira
-    oauth.settings(providerName)
-      .then(oauthSettings => {
-        const connectionProps = {
-          providerName,
-          urlRedirect: oauthSettings.urlRedirect,
-          urlAuthorize: `${settings.youtrackHubUrl}/api/rest/oauth2/auth`,
-          urlAccessToken: `${settings.youtrackHubUrl}/api/rest/oauth2/token`,
-          clientId: `${settings.youtrackClientId}`,
-          clientSecret: ''
-        };
-        return oauth.register(providerName, connectionProps).then(() => connectionProps);
-      })
-      .then(connectionProps => (
-        oauth.access(providerName)
-          .then(({ oauth_token, oauth_token_secret }) => ({
-            ...connectionProps, token: oauth_token, tokenSecret: oauth_token_secret
-          }))
-      ))
-      // register again the connection, this time with the token
-      .then(connectionProps => oauth.register('youtrack', connectionProps))
-      .then(() => finishInstall(settings).then(({ onStatus }) => onStatus()))
-      .catch(error => new Error(error)); // TODO display errors
+    finishInstall(settings)
+      .then(({ onStatus }) => onStatus())
+      .catch(error => new Error(error));
   }
+
+  // onSettings(settings) {
+  //   const { oauth } = this.props.dpapp;
+  //   const { finishInstall } = this.props;
+  //   const providerName = 'youtrack';
+
+  //   // retrieve the oauth proxy settings for jira
+  //   oauth.settings(providerName)
+  //     .then(oauthSettings => {
+  //       const connectionProps = {
+  //         providerName,
+  //         urlRedirect: oauthSettings.urlRedirect,
+  //         urlAuthorize: `${settings.youtrackHubUrl}/api/rest/oauth2/auth`,
+  //         urlAccessToken: `${settings.youtrackHubUrl}/api/rest/oauth2/token`,
+  //         clientId: `${settings.youtrackClientId}`,
+  //         clientSecret: ''
+  //       };
+  //       return oauth.register(providerName, connectionProps).then(() => connectionProps);
+  //     })
+  //     .then(connectionProps => (
+  //       oauth.access(providerName)
+  //         .then(({ oauth_token, oauth_token_secret }) => ({
+  //           ...connectionProps, token: oauth_token, tokenSecret: oauth_token_secret
+  //         }))
+  //     ))
+  //     // register again the connection, this time with the token
+  //     .then(connectionProps => oauth.register('youtrack', connectionProps))
+  //     .then(() => finishInstall(settings).then(({ onStatus }) => onStatus()))
+  //     .catch(error => new Error(error)); // TODO display errors
+  // }
 
   render() {
     const { settings, values, finishInstall, settingsForm: SettingsForm } = this.props;
