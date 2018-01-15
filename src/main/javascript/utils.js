@@ -21,22 +21,29 @@ const buildReqObj = obj => {
     }, obj);
 };
 
+const isDefined = val => !isUndefined(val);
+
+const exists = val => !isUndefined(val) && !isEmpty(val);
+
+const getProp = (object = {}, path = '', defaultValue = null) => get(object, path, defaultValue);
+
+const notEmpty = val => {
+    const castValue = isNumber(val) ? Number(val) : isBoolean(val) ? Boolean(val) : void 0;
+    return isDefined(castValue) ? castValue ? castValue : false : !isEmpty(val);
+};
+
 module.exports = {
+  isDefined,
 
-  isDefined: val => !isUndefined(val),
+  exists,
 
-  exists: val => !isUndefined(val) && !isEmpty(val),
+  getProp,
 
-  getProp: (object = {}, path = '', defaultValue = null) => get(object, path, defaultValue),
+  notEmpty,
 
-  notEmpty: val => {
-      const castValue = isNumber(val) ? Number(val) : isBoolean(val) ? Boolean(val) : void 0;
-      return isDefined(castValue) ? castValue ? castValue : false : !isEmpty(val);
-  },
-
-  post: (reqURL = '', data = {}, headers = {}) => {
+  put: (reqURL = '', data = {}, headers = {}) => {
     return new Promise ((resolve, reject) => {
-      fetch(reqURL, buildReqObj({ method: 'POST', body: JSON.stringify(data), headers }))
+      fetch(reqURL, buildReqObj({ method: 'PUT', body: JSON.stringify(data), headers }))
         .then(status)
           .then(json)
             .then(resolve)
