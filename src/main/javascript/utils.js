@@ -33,6 +33,7 @@ const notEmpty = val => {
 };
 
 module.exports = {
+
   isDefined,
 
   exists,
@@ -54,6 +55,16 @@ module.exports = {
   get: (reqURL = '', headers = {}) => {
     return new Promise ((resolve, reject) => {
       fetch(reqURL, buildReqObj({ method: 'GET', headers }))
+        .then(status)
+          .then(json)
+            .then(resolve)
+            .catch(reject);
+    });
+  },
+
+  del: (reqURL = '', data = {}, headers = {}) => {
+    return new Promise ((resolve, reject) => {
+      fetch(reqURL, buildReqObj({ method: 'DELETE', body: JSON.stringify(data), headers }))
         .then(status)
           .then(json)
             .then(resolve)
