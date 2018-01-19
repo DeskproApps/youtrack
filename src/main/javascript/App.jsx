@@ -7,6 +7,7 @@ import { Loader } from '@deskpro/react-components';
 import { setRestApi, setAuthToken, notEmpty } from './utils';
 import PageHome from './ui/PageHome';
 import PageSettings from './ui/PageSettings';
+import PageError from './ui/PageError';
 
 /**
  * Renders a Youtrack Deskpro app.
@@ -28,33 +29,32 @@ export default class App extends React.PureComponent {
    * Invoked immediately after a component is mounted
    */
   componentDidMount() {
-    const { oauth, context, ui, route } = this.props;
+    const { oauth, route, settings, context, ui, route, dpapp } = this.props;
     const { storage } = this.props.dpapp;
 
-    storage.getAppStorage(['user_settings', 'youtrackHubUrl']).then(({user_settings: settings, youtrackHubUrl }) => {
-      if (settings && settings.access_token) {
-        setAuthToken(settings.access_token);
-        route.to('home');
-        return;
-      }
 
-      oauth.access('youtrack')
-        .then((resp) => {
-          if (resp && resp.access_token) {
-            setAuthToken(resp.access_token);
-            return storage.setAppStorage('user_settings', {access_token: resp.access_token });
-          }
-        })
-        .then(() =>{
-          route.to('home');
-        })
-      ;
+    storage.getAppStorage([
+      'youtrackClientId', 'youtrackClientSecret', 'youtrackHubUrl', 'youtrackServiceId', 'urlRedirect'
+		]).then(data => {
 
-    });
+      if (!every(data, notEmpty)) {
+				return route.to('settings')
+			}
 
-    // Promise.all([clientId, hubUrl, urlRedir]).then(data => (
-    //   route.to(every(data, notEmpty) ? 'home' : 'settings')
-    // )).catch(ui.error);
+		  return storage.getAppStorage(['user_settings']).then(({user_settings: settings}) => {
+				if (settings && settings.access_token) {
+					setAuthToken(settings.access_token);
+					return route.to('home');
+				}
+
+				oauth.access('youtrack').then(resp => {
+					if (resp && resp.access_token) {
+						setAuthToken(resp.access_token);
+						return storage.setAppStorage('user_settings', {access_token: resp.access_token});
+					}
+				}).then(route.to('home'));
+      });
+		}).catch(ui.error)
   }
 
   render() {
@@ -62,6 +62,7 @@ export default class App extends React.PureComponent {
       <Routes>
         <Route location={'settings'} component={PageSettings} />
         <Route location={'home'} component={PageHome} />
+        <Route location={'error'} component={PageError} />
         <Route defaultRoute>
           <div className="dp-text-center">
             <Loader />

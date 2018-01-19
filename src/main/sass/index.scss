@@ -7,6 +7,12 @@ $dp-styles-font-path: "~@deskpro/react-components/src/styles/fonts/";
     margin-bottom: 0;
   }
 
+  &--error {
+    .dp-heading {
+      color: #ed4954;
+    }
+  }
+
   .dp-button {
     width: 100%;
   }
