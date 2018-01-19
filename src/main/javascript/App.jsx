@@ -2,9 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Routes, Route } from '@deskpro/apps-sdk-react';
-import { isUndefined } from 'lodash/isUndefined';
-import { some } from 'lodash/some';
-import { setRestApi } from './utils';
+import every from 'lodash/every';
+import { Loader } from '@deskpro/react-components';
+import { setRestApi, notEmpty } from './utils';
 import PageHome from './ui/PageHome';
 import PageSettings from './ui/PageSettings';
 
@@ -34,37 +34,20 @@ export default class App extends React.PureComponent {
     const hubUrl = context.customFields.getAppField('youtrackHubUrl');
     const urlRedir = context.customFields.getAppField('urlRedirect');
 
-    // Promise.all([clientId, hubUrl, urlRedir]).then(data => {
-    //   console.log(data);
-    //   console.log(some(data, isUndefined));
-    //   if (some(data, isUndefined)) {
-    //     return route.to('settings');
-    //   }
-    // }).catch(ui.error);
-
-    // The app setting will be empty the first time the app is run.
-    // Route to the settings page on the first run so the admin can setup
-    // oauth creds.
-    // if (!storage.app.settings) {
-    //   return route.to('settings');
-    // }
-
-    // // The user does not have an oauth access token yet. Send them to the
-    // // authentication page.
-    // if (!storage.app.user_settings) {
-    //   return route.to('auth');
-    // }
-    // customFields.getAppField('youtrackCards').then(resp => {
-    //   console.log("YOUTRACK CARDS", resp);
-    // }).catch(this.props.ui.error);
+    Promise.all([clientId, hubUrl, urlRedir]).then(data => (
+      route.to(every(data, notEmpty) ? 'home' : 'settings')
+    )).catch(ui.error);
   }
 
   render() {
     return (
       <Routes>
         <Route location={'settings'} component={PageSettings} />
+        <Route location={'home'} component={PageHome} />
         <Route defaultRoute>
-          <PageHome />
+          <div className="dp-text-center">
+            <Loader />
+          </div>
         </Route>
       </Routes>
     );
@@ -79,18 +62,19 @@ App.propTypes = {
   dpapp: PropTypes.object,
 
   /**
-   * Instance of sdk oauth.
-   * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/oauth.html
-   */
-  oauth: PropTypes.object,
-
-  /**
-   * Instance of sdk route.
+   * instance of sdk route.
    * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/route.html
    */
   route: PropTypes.object,
 
+  /**
+   * instance of core-sdk context.
+   * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/route.html
+   */
   context: PropTypes.object,
 
+  /**
+   * instance of sdk ui.
+   */
   ui: PropTypes.object
 };
