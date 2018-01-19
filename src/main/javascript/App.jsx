@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Routes, Route } from '@deskpro/apps-sdk-react';
 import every from 'lodash/every';
 import { Loader } from '@deskpro/react-components';
-import { setRestApi, notEmpty } from './utils';
+import { setRestApi, setAuthToken, notEmpty } from './utils';
 import PageHome from './ui/PageHome';
 import PageSettings from './ui/PageSettings';
 
@@ -28,15 +28,33 @@ export default class App extends React.PureComponent {
    * Invoked immediately after a component is mounted
    */
   componentDidMount() {
-    const { route, context, ui } = this.props;
+    const { oauth, context, ui, route } = this.props;
+    const { storage } = this.props.dpapp;
 
-    const clientId = context.customFields.getAppField('youtrackClientId');
-    const hubUrl = context.customFields.getAppField('youtrackHubUrl');
-    const urlRedir = context.customFields.getAppField('urlRedirect');
+    storage.getAppStorage(['user_settings', 'youtrackHubUrl']).then(({user_settings: settings, youtrackHubUrl }) => {
+      if (settings && settings.access_token) {
+        setAuthToken(settings.access_token);
+        route.to('home');
+        return;
+      }
 
-    Promise.all([clientId, hubUrl, urlRedir]).then(data => (
-      route.to(every(data, notEmpty) ? 'home' : 'settings')
-    )).catch(ui.error);
+      oauth.access('youtrack')
+        .then((resp) => {
+          if (resp && resp.access_token) {
+            setAuthToken(resp.access_token);
+            return storage.setAppStorage('user_settings', {access_token: resp.access_token });
+          }
+        })
+        .then(() =>{
+          route.to('home');
+        })
+      ;
+
+    });
+
+    // Promise.all([clientId, hubUrl, urlRedir]).then(data => (
+    //   route.to(every(data, notEmpty) ? 'home' : 'settings')
+    // )).catch(ui.error);
   }
 
   render() {

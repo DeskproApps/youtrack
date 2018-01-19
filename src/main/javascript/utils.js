@@ -6,6 +6,8 @@ import isBoolean from 'lodash/isBoolean';
 import isNumber from 'lodash/isNumber';
 
 let restApi = null;
+let authToken = null;
+
 
 const buildReqObj = obj => {
   return Object.assign({
@@ -13,7 +15,7 @@ const buildReqObj = obj => {
       'X-Expect-Empty-Response': 'true',
       'Content-Type': 'application/json;charset=UTF-8',
       Accept: 'application/json',
-      Authorization: 'Bearer perm:Y2hyb2Rlcg==.VGVzdCBBUEk=.cW7kbMQ42bGqhwRtfNpI2cFDjAiswg'
+      Authorization: `Bearer ${authToken}`
     },
     credentials: 'include',
     cache: 'no-cache'
@@ -40,6 +42,8 @@ module.exports = {
   getProp,
 
   notEmpty,
+
+  setAuthToken: obj => { authToken = obj; },
 
   setRestApi: obj => { restApi = obj; },
 

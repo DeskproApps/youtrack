@@ -1,6 +1,6 @@
 {
   "name": "@deskpro/apps-youtrack",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "This application adds support for viewing and creating Youtrack issues.",
   "main": "lib/main/javascript/index.js",
   "scripts": {
@@ -38,8 +38,14 @@
     "storage": [
       {
         "name": "oauth:youtrack",
-        "isBackendOnly": false,
+        "isBackendOnly": true,
         "permRead": "EVERYBODY",
+        "permWrite": "OWNER"
+      },
+      {
+        "name": "user_settings",
+        "isBackendOnly": false,
+        "permRead": "OWNER",
         "permWrite": "OWNER"
       }
     ],
@@ -47,13 +53,27 @@
       {
         "name": "youtrackClientId",
         "defaultValue": "",
-        "title": "The consumer key",
+        "title": "The client id",
+        "required": true,
+        "type": "text"
+      },
+      {
+        "name": "youtrackClientSecret",
+        "defaultValue": "",
+        "title": "The client secret",
+        "required": true,
+        "type": "text"
+      },
+      {
+        "name": "youtrackServiceId",
+        "defaultValue": "",
+        "title": "The Youtrack service id (from HUB) ",
         "required": true,
         "type": "text"
       },
       {
         "name": "youtrackHubUrl",
-        "defaultValue": "",
+        "defaultValue": "https://deskpro-radu.myjetbrains.com/hub",
         "title": "The Youtrack HUB url",
         "required": true,
         "type": "text"

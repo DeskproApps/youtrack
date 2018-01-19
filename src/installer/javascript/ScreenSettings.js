@@ -27,51 +27,50 @@ export default class ScreenSettings extends React.Component {
     const { oauth } = this.props.dpapp;
 
     oauth.settings('youtrack')
-      .then(oauthSettings => this.setState({ oauthSettings, error: null }))
-      .catch(error => this.setState({ oauthSettings: null, error: new Error(error) }));
+      .then( oauthSettings => this.setState({ oauthSettings, error: null }) )
+      .catch( error => this.setState({ oauthSettings: null, error: new Error(error) }) )
+    ;
   }
 
   onSettings(settings) {
+    const { oauth } = this.props.dpapp;
     const { finishInstall } = this.props;
+    const providerName = 'youtrack';
 
-    finishInstall(settings)
-      .then(({ onStatus }) => onStatus())
-      .catch(error => new Error(error));
+    // retrieve the oauth proxy settings for jira
+    oauth.settings(providerName)
+      .then(oauthSettings => {
+
+        const connectionProps = {
+          providerName,
+          urlRedirect: oauthSettings.urlRedirect,
+          urlAuthorize: `${settings.youtrackHubUrl}/api/rest/oauth2/auth`,
+          urlAccessToken: `${settings.youtrackHubUrl}/api/rest/oauth2/token`,
+          clientId: `${settings.youtrackClientId}`,
+          clientSecret: `${settings.youtrackClientSecret}`,
+          scopes: [
+            `${settings.youtrackServiceId}`
+          ]
+        };
+        return oauth.register(providerName, connectionProps).then(() => connectionProps);
+      })
+      .then(connectionProps => {
+        // testing the oauth settings
+        return oauth.access(providerName)
+          .then((token) => { return connectionProps; })
+           .catch(error => Promise.reject('oauth2 error'))
+          ;
+      })
+      .then(() => finishInstall(settings).then(({ onStatus }) => onStatus()))
+      .catch(error => {
+        // auth error
+        return new Error(error);
+      }); // TODO display errors
   }
-
-  // onSettings(settings) {
-  //   const { oauth } = this.props.dpapp;
-  //   const { finishInstall } = this.props;
-  //   const providerName = 'youtrack';
-
-  //   // retrieve the oauth proxy settings for jira
-  //   oauth.settings(providerName)
-  //     .then(oauthSettings => {
-  //       const connectionProps = {
-  //         providerName,
-  //         urlRedirect: oauthSettings.urlRedirect,
-  //         urlAuthorize: `${settings.youtrackHubUrl}/api/rest/oauth2/auth`,
-  //         urlAccessToken: `${settings.youtrackHubUrl}/api/rest/oauth2/token`,
-  //         clientId: `${settings.youtrackClientId}`,
-  //         clientSecret: ''
-  //       };
-  //       return oauth.register(providerName, connectionProps).then(() => connectionProps);
-  //     })
-  //     .then(connectionProps => (
-  //       oauth.access(providerName)
-  //         .then(({ oauth_token, oauth_token_secret }) => ({
-  //           ...connectionProps, token: oauth_token, tokenSecret: oauth_token_secret
-  //         }))
-  //     ))
-  //     // register again the connection, this time with the token
-  //     .then(connectionProps => oauth.register('youtrack', connectionProps))
-  //     .then(() => finishInstall(settings).then(({ onStatus }) => onStatus()))
-  //     .catch(error => new Error(error)); // TODO display errors
-  // }
 
   render() {
     const { settings, values, finishInstall, settingsForm: SettingsForm } = this.props;
-    const redirectUrl = get(this.state, 'oauthSettings.urlRedirect');
+    const redirectUrl = this.state.oauthSettings ? this.state.oauthSettings.urlRedirect : null;
     const errorFree = !isError(this.state.error);
 
     if (settings.length) {
