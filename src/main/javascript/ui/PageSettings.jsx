@@ -28,6 +28,12 @@ class PageSettings extends React.PureComponent {
             <strong>Youtrack HUB url</strong>: URL configured for the Hub service, e.g.
             <em>https://deskpro.myjetbrains.com</em>
           </li>
+          <li>
+            <strong>Youtrack Client Secret</strong>: Client app secret
+          </li>
+          <li>
+            <strong>Youtrack Service Id</strong>: The ID of the Youtrack service.
+          </li>
         </ul>
         <p>
           To learn more, consult the <a href={url} target="_blank" rel="noopener noreferrer">Youtrack documentation.</a>
