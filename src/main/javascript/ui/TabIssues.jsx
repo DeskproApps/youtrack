@@ -7,7 +7,9 @@ import Issue from './Issue';
 
 class TabIssues extends React.PureComponent {
 
-  renderIssues = issues => issues.map(issue => <Issue issue={issue} key={issue.id} />);
+  renderIssues = issues => issues.map(issue => (
+    <Issue issue={issue} unlinkCallback={this.props.unlinkCallback} key={issue.id} />
+  ));
 
   render() {
     const { issues, hidden, callback } = this.props;
@@ -42,10 +44,18 @@ TabIssues.propTypes = {
   issues: PropTypes.array,
 
   /**
+   * Delete issue handler
+   */
+  unlinkCallback: PropTypes.func,
+
+  /**
    * Callback handler for Button
    */
   callback: PropTypes.func.isRequired
 };
 
+TabIssues.defaultProps = {
+  unlinkCallback: () => {}
+};
 
 export default sdkConnect(TabIssues);

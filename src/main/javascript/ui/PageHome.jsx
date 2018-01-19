@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { sdkConnect } from '@deskpro/apps-sdk-react';
 import { Loader, Tabs, TabLink, Container } from '@deskpro/react-components';
 import { getProp } from '../utils';
-import { fetchIssue, fetchProjects } from '../api';
+import { fetchIssue, fetchProjects, deleteIssue } from '../api';
 import TabIssues from './TabIssues';
 import TabCreateIssues from './TabCreateIssue';
 
@@ -61,6 +61,19 @@ class PageHome extends React.PureComponent {
     }
   });
 
+  unlinkCallback = data => this.setState({
+    activeTab: getProp(data, 'tab', 'issues'),
+    fetchData: getProp(data, 'fetchData', false)
+  }, () => {
+    const { context, ui } = this.props;
+    if (getProp(data, 'fetchData', false)) {
+      return context.customFields.getAppField('youtrackCards', [])
+        .then(resp => context.customFields.setAppField('youtrackCards', resp.filter(i => i !== data.issue)))
+        .then(this.fetchData)
+        .catch(ui.error);
+    }
+  });
+
   /**
    * @returns {XML}
    */
@@ -79,8 +92,17 @@ class PageHome extends React.PureComponent {
                 <TabLink name="issues">Issues</TabLink>
                 <TabLink name="create">Create Issue</TabLink>
               </Tabs>
-              <TabIssues hidden={activeTab !== 'issues'} issues={issues} callback={this.handleTabChange} />
-              <TabCreateIssues hidden={activeTab !== 'create'} projects={projects} callback={this.callback} />
+              <TabIssues
+                hidden={activeTab !== 'issues'}
+                issues={issues}
+                unlinkCallback={this.unlinkCallback}
+                callback={this.handleTabChange}
+              />
+              <TabCreateIssues
+                hidden={activeTab !== 'create'}
+                projects={projects}
+                callback={this.callback}
+              />
             </div>
         }
       </Container>
