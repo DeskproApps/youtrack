@@ -9,14 +9,13 @@ import { Container } from '@deskpro/react-components';
 class PageError extends React.PureComponent {
 
   render() {
-    const error = { type: 'Authorization', reason: 'Opps' };
+    const { route } = this.props;
+    const { error } = route.params;
 
     return (
       <Container className="dp-youtrack-container dp-youtrack-container--error">
-        <h3 className="dp-heading">{error.type} error</h3>
-        <p>
-          The following error occurred: <code>{error.reason}</code>
-        </p>
+        <h3 className="dp-heading">{error.type}</h3>
+        <code>{error.message}</code>
       </Container>
     );
   }

@@ -7,12 +7,12 @@ import Issue from './Issue';
 
 class TabIssues extends React.PureComponent {
 
-  renderIssues = issues => issues.map(issue => (
-    <Issue issue={issue} unlinkCallback={this.props.unlinkCallback} key={issue.id} />
+  renderIssues = (issues, domain) => issues.map(issue => (
+    <Issue issue={issue} domain={domain} unlinkCallback={this.props.unlinkCallback} key={issue.id} />
   ));
 
   render() {
-    const { issues, hidden, callback } = this.props;
+    const { issues, hidden, callback, domain } = this.props;
 
     if (hidden) {
       return null;
@@ -22,7 +22,7 @@ class TabIssues extends React.PureComponent {
       <Container>
         <Heading size={3}>Issues</Heading>
         <List className="dp-youtrack-issues">
-          {issues.length ? this.renderIssues(issues) : 'There are no issues currently linked.'}
+          {issues.length ? this.renderIssues(issues, domain) : 'There are no issues currently linked.'}
         </List>
         <Button onClick={() => callback('create')}>
           {issues.length ? 'Create another issue' : 'Create an issue'}
@@ -51,7 +51,12 @@ TabIssues.propTypes = {
   /**
    * Callback handler for Button
    */
-  callback: PropTypes.func.isRequired
+  callback: PropTypes.func.isRequired,
+
+  /**
+   * The youtrack domain
+   */
+  domain: PropTypes.string.isRequired
 };
 
 TabIssues.defaultProps = {

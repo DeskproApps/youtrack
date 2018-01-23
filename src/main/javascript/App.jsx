@@ -3,11 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Routes, Route } from '@deskpro/apps-sdk-react';
 import every from 'lodash/every';
+import partial from 'lodash/partial';
 import { Loader } from '@deskpro/react-components';
-import { setRestApi, setAuthToken, notEmpty } from './utils';
 import PageHome from './ui/PageHome';
 import PageSettings from './ui/PageSettings';
 import PageError from './ui/PageError';
+import {
+  setRestApi, setDomainUrl, setAuthToken, setAuthClient, fetchAccessToken, notEmpty, storeAccessToken
+} from './utils';
 
 /**
  * Renders a Youtrack Deskpro app.
@@ -23,38 +26,47 @@ export default class App extends React.PureComponent {
     super(props);
 
     setRestApi(this.props.dpapp.restApi);
+    setAuthClient(this.props.oauth);
   }
 
   /**
    * Invoked immediately after a component is mounted
    */
   componentDidMount() {
-    const { oauth, route, settings, context, ui, route, dpapp } = this.props;
+    const { oauth, settings, context, ui, route, dpapp } = this.props;
     const { storage } = this.props.dpapp;
-
 
     storage.getAppStorage([
       'youtrackClientId', 'youtrackClientSecret', 'youtrackHubUrl', 'youtrackServiceId', 'urlRedirect'
-		]).then(data => {
+    ]).then(data => {
 
       if (!every(data, notEmpty)) {
-				return route.to('settings')
-			}
+        return route.to('settings');
+      }
 
-		  return storage.getAppStorage(['user_settings']).then(({user_settings: settings}) => {
-				if (settings && settings.access_token) {
-					setAuthToken(settings.access_token);
-					return route.to('home');
-				}
+      let url = document.createElement('a');
+      url.href = data.youtrackHubUrl;
+      setDomainUrl(`${url.protocol}//${url.hostname}`); //TODO AG: REFACTOR INTO REDUX STORE!!!!!
 
-				oauth.access('youtrack').then(resp => {
-					if (resp && resp.access_token) {
-						setAuthToken(resp.access_token);
-						return storage.setAppStorage('user_settings', {access_token: resp.access_token});
-					}
-				}).then(route.to('home'));
+      return storage.getAppStorage(['user_settings']).then(({user_settings: settings}) => {
+        if (settings && settings.access_token) {
+          setAuthToken(settings.access_token);
+          return route.to('home');
+        }
+
+        return fetchAccessToken()
+          .then(partial(storeAccessToken, storage))
+          .then(route.to('home'));
       });
-		}).catch(ui.error)
+    }).catch(error => {
+      console.log(error);
+      route.to('error', {
+        error: {
+          type: 'Authentication Error',
+          message: 'An error occurred trying to authenticate the app. Please check your settings and try again.'
+        }
+      });
+    });
   }
 
   render() {
@@ -74,8 +86,12 @@ export default class App extends React.PureComponent {
 }
 
 App.propTypes = {
+
+  settings: PropTypes.object,
+
+  oauth: PropTypes.object,
   /**
-   * Instance of sdk storage.
+   * instance of sdk storage.
    * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/storage.html
    */
   dpapp: PropTypes.object,

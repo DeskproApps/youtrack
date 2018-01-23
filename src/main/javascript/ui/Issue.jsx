@@ -5,7 +5,7 @@ import { Icon, ListElement, Heading } from '@deskpro/react-components';
 
 const extractSummary = fields => fields.filter(field => field.name === 'summary');
 
-const Issue = ({ issue, unlinkCallback }) => (
+const Issue = ({ issue, unlinkCallback, domain }) => (
   <ListElement className="dp-youtrack-issue">
     <Icon
       name="times"
@@ -13,7 +13,7 @@ const Issue = ({ issue, unlinkCallback }) => (
       className="dp-youtrack-delete-icon"
       onClick={() => unlinkCallback({ issue: issue.id, fetchData: true })}
     />
-    <a href={`https://deskpro.myjetbrains.com/youtrack/issue/${issue.id}`} target="_blank" rel="noopener noreferrer">
+    <a href={`${domain}/youtrack/issue/${issue.id}`} target="_blank" rel="noopener noreferrer">
       <Heading size={4}>
         #{issue.id} - { extractSummary(issue.field)[0].value }
         <Icon name="external-link-square" />
@@ -23,6 +23,7 @@ const Issue = ({ issue, unlinkCallback }) => (
 );
 
 Issue.propTypes = {
+  domain: PropTypes.string.isRequired,
   issue: PropTypes.object.isRequired,
   unlinkCallback: PropTypes.func
 };

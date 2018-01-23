@@ -4,21 +4,13 @@ import PropTypes from 'prop-types';
 import { sdkConnect } from '@deskpro/apps-sdk-react';
 import { Container, Heading } from '@deskpro/react-components';
 import { Form, Select, Input, Textarea, Button, validators } from '@deskpro/react-components/lib/bindings/redux-form';
-import { createIssue } from '../api';
 
 class TabCreateIssue extends React.PureComponent {
 
   handleSubmit = issue => {
-    const { callback, context, ui } = this.props;
+    const { callback } = this.props;
 
-    return createIssue(issue).then(resp => {
-      return context.customFields.getAppField('youtrackCards', []).then(issues => {
-        const newYouTrackCards = [...issues, resp.headers.location.split('/').pop()];
-        return context.customFields.setAppField('youtrackCards', newYouTrackCards)
-          .then(() => callback({ activeTab: 'issues', fetchData: true }));
-      });
-    })
-    .catch(ui.error);
+    return callback({ activeTab: 'issues', fetchData: true, issue });
   };
 
   render() {
