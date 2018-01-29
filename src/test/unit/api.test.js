@@ -1,29 +1,29 @@
 
 import { fetchIssues, createIssue, deleteIssue } from '../../main/javascript/api';
-import { fixtures } from './api.fixtures.js'
+import { fixtures } from './api.fixtures';
 
 test('successfully retrieve issues', done => {
   fetch.mockResponse(JSON.stringify(fixtures));
 
   return fetchIssues().then(resp => {
-      expect(resp).toEqual(fixtures);
+    expect(resp).toEqual(fixtures);
 
-      fetch.resetMocks();
-      done();
-    }).catch(err => { done(); })
+    fetch.resetMocks();
+    return done();
+  }).catch(() => { done(); });
 });
 
 test('unsuccessfully retrieve issues', done => {
-  const error = { message: "There was an error" };
+  const error = { message: 'There was an error' };
   fetch.mockReject(error);
 
   return fetchIssues()
-    .then(resp => { done(); })
+    .then(() => { return done(); })
     .catch(err => {
       expect(err).toEqual(error);
 
       fetch.resetMocks();
-      done();
+      return done();
     });
 });
 
@@ -42,21 +42,19 @@ test('successfully create an issue with a fully payload', done => {
       expect(resp.payload).toEqual(payload);
 
       fetch.resetMocks();
-      done();
+      return done();
     })
-    .catch(err => { done(); });
+    .catch(() => { done(); });
 });
 
 test('unsuccessfully create an issue without a payload', done => {
   const error = { message: 'Missing parameters: project, summary, desc' };
 
   return createIssue()
-    .then(resp => { done(); })
+    .then(() => { return done(); })
     .catch(err => {
-      err = JSON.parse(err);
-      expect(err.message).toEqual(error.message);
-
-      done();
+      expect(JSON.parse(err).message).toEqual(error.message);
+      return done();
     });
 });
 
@@ -70,11 +68,11 @@ test('unsuccessfully create an issue', done => {
   fetch.mockReject(JSON.stringify({ message: error.message, payload }));
 
   return createIssue(payload)
-    .then(resp => { done(); })
+    .then(() => { return done(); })
     .catch(err => {
-      err = JSON.parse(err);
-      expect(err.message).toEqual(error.message);
-      expect(err.payload).toEqual(payload);
+      const er = JSON.parse(err);
+      expect(er.message).toEqual(error.message);
+      expect(er.payload).toEqual(payload);
 
       fetch.resetMocks();
       done();
@@ -92,21 +90,20 @@ test('successfully delete an issue with a fully payload', done => {
       expect(resp.payload).toEqual(payload);
 
       fetch.resetMocks();
-      done();
+      return done();
     })
-    .catch(err => { done(); });
+    .catch(() => { done(); });
 });
 
 test('unsuccessfully delete an issue without a payload', done => {
   const error = { message: 'Missing parameter: issue' };
 
   return deleteIssue()
-    .then(resp => { done(); })
+    .then(() => { return done(); })
     .catch(err => {
-      err = JSON.parse(err);
-      expect(err.message).toEqual(error.message);
+      expect(JSON.parse(err).message).toEqual(error.message);
 
-      done();
+      return done();
     });
 });
 
@@ -116,11 +113,11 @@ test('unsuccessfully delete an issue', done => {
   fetch.mockReject(JSON.stringify({ message: error.message, payload }));
 
   return deleteIssue(payload)
-    .then(resp => { done(); })
+    .then(() => { return done(); })
     .catch(err => {
-      err = JSON.parse(err);
-      expect(err.message).toEqual(error.message);
-      expect(err.payload).toEqual(payload);
+      const er = JSON.parse(err);
+      expect(er.message).toEqual(error.message);
+      expect(er.payload).toEqual(payload);
 
       fetch.resetMocks();
       done();

@@ -1,10 +1,11 @@
 import React from 'react';
-import { createAppFromProps } from '@deskpro/apps-sdk-core';
-import renderer from 'react-test-renderer';
-
+import { mount, shallow } from 'enzyme';
 import App from '../../main/javascript/App';
+import { createAppFromProps } from '@deskpro/apps-sdk-core';
+import { DeskproSDK, configureStore } from '@deskpro/apps-sdk-react';
+import { WidgetWindowBridge } from '@deskpro/apps-sdk-core/lib/main/javascript/Widget/WidgetWindowBridge.js'
 
-test('successfully render the application in initial state', done => {
+test('successfully render the application in initial state', () => {
 
   const contextProps = {
     // context
@@ -12,7 +13,10 @@ test('successfully render the application in initial state', done => {
     entityId: '1',
     locationId: 'ticket-sidebar',
     tabId: 'tab-id',
-    tabUrl: 'http://127.0.0.1'
+    tabUrl: 'http://127.0.0.1',
+    route: {
+      location
+    }
   };
 
   const instanceProps = {
@@ -22,11 +26,25 @@ test('successfully render the application in initial state', done => {
     instanceId: '1'
   };
 
-  const dpapp = createAppFromProps({ contextProps, instanceProps });
-  const component = renderer.create(<App dpapp={dpapp} />);
+  const widgetWindow = new WidgetWindowBridge({
+    location : {
+      search: 'somethingSomething',
+      hash: `#somethingSomething`
+    },
+    document: { readyState : 'notReady' }
+  }, {});
 
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  const dpapp = createAppFromProps({ widgetWindow, contextProps, instanceProps });
+  dpapp.manifest = {
+    storage: []
+  };
 
-  done();
+  const store = configureStore(dpapp);
+  const wrapper = mount(
+    <DeskproSDK dpapp={dpapp} store={store}>
+      <App />
+    </DeskproSDK>,
+  );
+
+  wrapper.html();
 });

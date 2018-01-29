@@ -59,7 +59,6 @@ export default class App extends React.PureComponent {
           .then(route.to('home'));
       });
     }).catch(error => {
-      console.log(error);
       route.to('error', {
         error: {
           type: 'Authentication Error',
