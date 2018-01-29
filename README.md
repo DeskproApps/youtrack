@@ -4,6 +4,10 @@
 
 Youtrack integration app which allows agents to create links between DeskPRO tickets and Youtrack issues. It also allows agents to create new Youtrack issues directly from the DeskPRO interface.
 
+![Screenshot](screenshot-1.png)
+![Screenshot](screenshot-2.png)
+![Screenshot](screenshot-3.png)
+
 ## Contents
 - [Installation](#installation)
 - [Development](#development)
