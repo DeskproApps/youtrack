@@ -1,6 +1,6 @@
 {
   "name": "@deskpro/apps-youtrack",
-  "version": "0.2.5",
+  "version": "0.1.0-beta.1",
   "description": "This application adds support for viewing and creating Youtrack issues.",
   "main": "lib/main/javascript/index.js",
   "scripts": {
@@ -133,5 +133,9 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-thunk": "^2.2.0"
+  },
+  "optionalDependencies": {
+    "changelog-verify": "^1.0.4",
+    "version-changelog": "^2.1.0"
   }
 }

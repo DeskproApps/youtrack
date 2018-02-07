@@ -1,5 +1,17 @@
 language: node_js
 node_js:
-  - '6'
+- '6'
 install:
-  - npm install --no-optional && npm install @deskpro/apps-dpat@0.9.1
+  - npm install -g npm@5.3.0 && npm -v
+  - npm install --no-optional --no-save
+script:
+  - npm test && npm run package
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: mjR5aaELPtbudXqirWL8bp/vEy9A6FxGhJJSwVADcYIUuWPCJl/OCYPXTGw9kCWU2BkzF5b/psnBwox+R6ZVYPOEIqZ0bJt21YWktYUTt+XngG29gpIWHRa1duWx8/rPVIb6X17T19/0YNhUm45tetgkpKFY8LznpsJMG5QJImZHRLCAAj7zXwXHdZvHzGH+wGo70b7FMLQKrt6f7InJ4SwnqDC8Z40W9yeObmB9nMSntzxXYY5xmGzQmNCPHd/5I22O0bCVoYGiBY8HnzvXLqfRJ4mJt1YmwVwVRNnytz4nKzWdlUBmaioZSnKADGMpLBUgaq1yQdWeMXHMRXj2QhvyAOrs7PxSlm04RoTjE/rL6YcrJqUTwhd48BOSGRDA8suVbZ5yUXvyct1R1j5KOiJy+DrDmc7VYs3RK3wdpJeTPyMP+HsWgcDl28kr7MSswaw6Yq4ywAHZwCVMXcB+NleDaVtrfJ6avknN44H3CGMWBou+BlxT8S8LqrHEcQkmoO2oudBL98y5QPzNeP4y4expxyKVqIowFWFqhkMIg99F005SmchD9Xy6SwElh2OY4IgEdXOYWCpW/tdlG2zxD+hHnpMqr4AQgS2xdsCPPK1KEtAnU1Pwgtm28bsuAsod3yBECUITQCaqqSqrvtiGUuGjlxd9ZF/QI5x/dY9+4M8=
+  file: dist/app.zip
+  on:
+    repo: DeskproApps/youtrack
+    tags: true
