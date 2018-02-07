@@ -1,9 +1,12 @@
 
 import { fetchIssues, createIssue, deleteIssue } from '../../main/javascript/api';
+import { setRestApi } from '../../main/javascript/utils';
 import { fixtures } from './api.fixtures';
 
 test('successfully retrieve issues', done => {
-  fetch.mockResponse(JSON.stringify(fixtures));
+  setRestApi({
+    fetchCORS: () => Promise.resolve(JSON.stringify(fixtures))
+  });
 
   return fetchIssues().then(resp => {
     expect(resp).toEqual(fixtures);
@@ -15,7 +18,9 @@ test('successfully retrieve issues', done => {
 
 test('unsuccessfully retrieve issues', done => {
   const error = { message: 'There was an error' };
-  fetch.mockReject(error);
+  setRestApi({
+    fetchCORS: () => Promise.reject(error)
+  });
 
   return fetchIssues()
     .then(() => { return done(); })
@@ -34,7 +39,9 @@ test('successfully create an issue with a fully payload', done => {
     summary: 'The end of everything',
     desc: 'Burn'
   };
-  fetch.mockResponse(JSON.stringify({ message: success.message, payload }));
+  setRestApi({
+    fetchCORS: () => Promise.resolve(JSON.stringify({ message: success.message, payload }))
+  });
 
   return createIssue(payload)
     .then(resp => {
@@ -65,7 +72,10 @@ test('unsuccessfully create an issue', done => {
     summary: 'The end of everything',
     desc: 'Burn'
   };
-  fetch.mockReject(JSON.stringify({ message: error.message, payload }));
+
+  setRestApi({
+    fetchCORS: () => Promise.reject(JSON.stringify({ message: error.message, payload }))
+  });
 
   return createIssue(payload)
     .then(() => { return done(); })
@@ -74,7 +84,6 @@ test('unsuccessfully create an issue', done => {
       expect(er.message).toEqual(error.message);
       expect(er.payload).toEqual(payload);
 
-      fetch.resetMocks();
       done();
     });
 });
@@ -82,14 +91,15 @@ test('unsuccessfully create an issue', done => {
 test('successfully delete an issue with a fully payload', done => {
   const success = { message: 'An issue was successfully deleted' };
   const payload = 'TST-123';
-  fetch.mockResponse(JSON.stringify({ message: success.message, payload }));
+  setRestApi({
+    fetchCORS: () => Promise.resolve(JSON.stringify({ message: success.message, payload }))
+  });
 
   return deleteIssue(payload)
     .then(resp => {
       expect(resp.message).toEqual(success.message);
       expect(resp.payload).toEqual(payload);
 
-      fetch.resetMocks();
       return done();
     })
     .catch(() => { done(); });
@@ -110,7 +120,10 @@ test('unsuccessfully delete an issue without a payload', done => {
 test('unsuccessfully delete an issue', done => {
   const error = { message: 'There was an error' };
   const payload = 'TST-123';
-  fetch.mockReject(JSON.stringify({ message: error.message, payload }));
+
+  setRestApi({
+    fetchCORS: () => Promise.reject(JSON.stringify({ message: error.message, payload }))
+  });
 
   return deleteIssue(payload)
     .then(() => { return done(); })
@@ -119,7 +132,6 @@ test('unsuccessfully delete an issue', done => {
       expect(er.message).toEqual(error.message);
       expect(er.payload).toEqual(payload);
 
-      fetch.resetMocks();
       done();
     });
 });
