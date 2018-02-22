@@ -4,6 +4,8 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+ - fix loading webpack manifest
+
 ## [0.1.0-beta.2][] - 2018-02-09
 
  - default `process.env.NODE_ENV` to `production` when packaging the app for distribution with webpack  
