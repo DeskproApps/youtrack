@@ -58,7 +58,7 @@ class PageHome extends React.PureComponent {
 
   storeData = data => {
     const [projects, issues, ...tail] = data;
-console.log(getProp(issues, 'body.issue', []));
+
     return this.setState({
       projects: getProp(projects, 'body', []),
       projectIssues: getProp(issues, 'body.issue', []),
