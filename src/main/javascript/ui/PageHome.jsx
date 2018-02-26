@@ -5,7 +5,7 @@ import { sdkConnect } from '@deskpro/apps-sdk-react';
 import { Loader, Tabs, TabLink, Container } from '@deskpro/react-components';
 import partial from 'lodash/partial';
 import { getProp, fetchAccessToken, storeAccessToken, setAuthToken, getDomainUrl } from '../utils';
-import { fetchIssue, fetchProjects, createIssue, deleteIssue } from '../api';
+import { fetchIssue, fetchIssues, fetchProjects, createIssue, deleteIssue } from '../api';
 import TabIssues from './TabIssues';
 import TabCreateIssues from './TabCreateIssue';
 
@@ -26,6 +26,7 @@ class PageHome extends React.PureComponent {
     this.state = {
       issues: [],
       projects: [],
+      projectIssues: [],
       activeTab: 'issues',
       fetchData: true
     };
@@ -53,13 +54,14 @@ class PageHome extends React.PureComponent {
       });
   };
 
-  fetchData = resp => Promise.all([fetchProjects(), ...resp.map(fetchIssue)]);
+  fetchData = resp => Promise.all([fetchProjects(), fetchIssues(), ...resp.map(fetchIssue)]);
 
   storeData = data => {
-    const [head, ...tail] = data;
+    const [projects, issues, ...tail] = data;
 
     return this.setState({
-      projects: getProp(head, 'body', []),
+      projects: getProp(projects, 'body', []),
+      projectIssues: getProp(issues, 'body.issue', []),
       issues: tail.map(issue => getProp(issue, 'body', {})),
       fetchData: false
     });
@@ -94,11 +96,18 @@ class PageHome extends React.PureComponent {
 
     return createIssue(getProp(data, 'issue', '')).then(resp => {
       return customFields.getAppField('youtrackCards', []).then(issues => {
-        return customFields.setAppField('youtrackCards', [...issues, resp.headers.location.split('/').pop()])
+        let issueId;
+        if (resp.body.id !== undefined) {
+          issueId = resp.body.id;
+        } else {
+          issueId = resp.headers.location.split('/').pop();
+        }
+
+        return customFields.setAppField('youtrackCards', [...issues, issueId])
           .then(() => this.setStateCallback(data))
           .catch(console.log);
-      })
-    })
+      });
+    });
   };
 
   createIssueCallback = data => {
@@ -125,7 +134,7 @@ class PageHome extends React.PureComponent {
    * @returns {XML}
    */
   render() {
-    const { issues, projects, activeTab, fetchData } = this.state;
+    const { issues, projects, projectIssues, activeTab, fetchData } = this.state;
 
     return (
       <Container className="dp-youtrack-container" style={{ padding: 0 }}>
@@ -137,7 +146,7 @@ class PageHome extends React.PureComponent {
             <div>
               <Tabs active={activeTab} onChange={this.handleTabChange}>
                 <TabLink name="issues">Issues</TabLink>
-                <TabLink name="create">Create Issue</TabLink>
+                <TabLink name="create">Link Issue</TabLink>
               </Tabs>
               <TabIssues
                 hidden={activeTab !== 'issues'}
@@ -149,6 +158,7 @@ class PageHome extends React.PureComponent {
               <TabCreateIssues
                 hidden={activeTab !== 'create'}
                 projects={projects}
+                projectIssues={projectIssues}
                 callback={this.createIssueCallback}
               />
             </div>

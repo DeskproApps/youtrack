@@ -14,7 +14,7 @@ class TabCreateIssue extends React.PureComponent {
   };
 
   render() {
-    const { hidden, projects } = this.props;
+    const { hidden, projects, projectIssues } = this.props;
 
     if (hidden) {
       return null;
@@ -22,28 +22,33 @@ class TabCreateIssue extends React.PureComponent {
 
     return (
       <Container className="dp-github-container">
-        <Heading size={3} style={{ margin: '0 0 10px 0' }}>Create Issue</Heading>
         <Form name="create_issue" onSubmit={this.handleSubmit}>
+          <Heading size={3} style={{ margin: '0 0 10px 0' }}>Existing Issue</Heading>
+          <Select
+            label="Issue:"
+            id="issueId"
+            name="issueId"
+            options={(() => projectIssues.map(issue => ({ label: issue.id, value: issue.id })))()}
+          />
+
+          <Heading size={3} style={{ margin: '0 0 10px 0' }}>Create Issue</Heading>
           <Select
             label="Project:"
             id="project"
             name="project"
-            validate={validators.required}
             options={(() => projects.map(project => ({ label: project.name, value: project.shortName })))()}
           />
           <Input
             label="Summary:"
             id="summary"
             name="summary"
-            validate={validators.required}
           />
           <Textarea
             label="Description:"
             id="desc"
             name="desc"
-            validate={validators.required}
           />
-          <Button>Create issue</Button>
+          <Button>Link issue</Button>
         </Form>
       </Container>
     );
@@ -76,6 +81,11 @@ TabCreateIssue.propTypes = {
    * A list of Youtrack projects
    */
   projects: PropTypes.array.isRequired,
+
+  /**
+   * A list of existing Youtrack issues
+   */
+  projectIssues: PropTypes.array.isRequired
 };
 
 

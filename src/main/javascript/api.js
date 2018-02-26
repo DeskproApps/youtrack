@@ -28,7 +28,12 @@ export const fetchProjects = () => get(`${getApiUrl()}/project/all?verbose=false
  * @returns { Promise }
  */
 export const createIssue = (data = {}) => {
-  const { project = '', summary = '', desc = '' } = data;
+  const { project = '', issueId = '', summary = '', desc = '' } = data;
+
+  if (notEmpty(issueId)) {
+    return fetchIssue(issueId);
+  }
+
   return notEmpty(project) && notEmpty(summary) && notEmpty(desc) ?
     put(encodeURI(`${getApiUrl()}/issue?project=${project}&summary=${summary}&description=${desc}`)) :
     Promise.reject(JSON.stringify({ message: 'Missing parameters: project, summary, desc' }));
