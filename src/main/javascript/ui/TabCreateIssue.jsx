@@ -119,12 +119,7 @@ TabCreateIssue.propTypes = {
   /**
    * A list of Youtrack projects
    */
-  projects: PropTypes.array.isRequired,
-
-  /**
-   * A list of existing Youtrack issues
-   */
-  projectIssues: PropTypes.array.isRequired
+  projects: PropTypes.array.isRequired
 };
 
 

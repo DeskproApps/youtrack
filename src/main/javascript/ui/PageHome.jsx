@@ -27,7 +27,6 @@ class PageHome extends React.PureComponent {
     this.state = {
       issues: [],
       projects: [],
-      projectIssues: [],
       activeTab: 'issues',
       fetchData: true
     };
@@ -56,15 +55,14 @@ class PageHome extends React.PureComponent {
   };
 
   fetchData = resp => {
-    return Promise.all([fetchProjects(), fetchIssues(), ...resp.map(fetchIssue)]);
+    return Promise.all([fetchProjects(), ...resp.map(fetchIssue)]);
   };
 
   storeData = data => {
-    const [projects, issues, ...tail] = data;
+    const [projects, ...tail] = data;
 
     return this.setState({
       projects: getProp(projects, 'body', []),
-      projectIssues: getProp(issues, 'body.issue', []),
       issues: tail.map(issue => getProp(issue, 'body', {})),
       fetchData: false
     });
@@ -156,7 +154,7 @@ class PageHome extends React.PureComponent {
    * @returns {XML}
    */
   render() {
-    const { issues, projects, projectIssues, activeTab, fetchData } = this.state;
+    const { issues, projects, activeTab, fetchData } = this.state;
 
     return (
       <Container className="dp-youtrack-container" style={{ padding: 0 }}>
@@ -180,7 +178,6 @@ class PageHome extends React.PureComponent {
               <TabCreateIssues
                 hidden={activeTab !== 'create'}
                 projects={projects}
-                projectIssues={projectIssues}
                 callback={this.createIssueCallback}
               />
             </div>
