@@ -69,3 +69,7 @@ $dp-styles-font-path: "~@deskpro/react-components/src/styles/fonts/";
     }
   }
 }
+
+.dp-list.dp-search-inline__results {
+  padding-left: 0 !important;
+}
