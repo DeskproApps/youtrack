@@ -4,6 +4,10 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+## [0.1.0-beta.5][] - 2018-03-02
+
+* Added support for searching for issues
+
 ## [0.1.0-beta.4][] - 2018-02-26
 
  - Add ability to link to existing YouTrack issue ID
@@ -20,7 +24,8 @@ This project is following [Semantic Versioning](http://semver.org)
 
  - add support for viewing and creating Youtrack issues.
 
-[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.4...HEAD
+[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.5...HEAD
+[0.1.0-beta.5]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.4...v0.1.0-beta.5
 [0.1.0-beta.4]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.3...v0.1.0-beta.4
 [0.1.0-beta.3]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.2...v0.1.0-beta.3
 [0.1.0-beta.2]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.1...v0.1.0-beta.2
