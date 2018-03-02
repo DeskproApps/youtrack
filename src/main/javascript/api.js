@@ -9,6 +9,32 @@ import { get, put, del, getApiUrl, notEmpty } from './utils';
 export const fetchIssue = issue => get(`${getApiUrl()}/issue/${issue}`);
 
 /**
+ * Returns issues matching the given filter
+ *
+ * @param {String} filter
+ * @returns { Promise }
+ */
+export const searchIssues = (filter) => {
+  const encodedFilter = encodeURIComponent(filter);
+  return get(`${getApiUrl()}/issue?filter=${encodedFilter}`)
+    .then((resp) => {
+      return resp.body.issue.map((issue) => {
+        let description = '';
+        for (let i = 0; i < issue.field.length; i++) {
+          if (issue.field[i].name === 'description') {
+            description = issue.field[i].value;
+            if (description.length > 10) {
+              description = `${description.substr(0, 10)}...`;
+            }
+          }
+        }
+
+        return `${issue.id} - ${description}`;
+      });
+    });
+};
+
+/**
  * Returns a promise which resolves with a list of issues
  *
  * @returns { Promise }
@@ -20,7 +46,9 @@ export const fetchIssues = () => get(`${getApiUrl()}/issue`);
  *
  * @returns { Promise }
  */
-export const fetchProjects = () => get(`${getApiUrl()}/project/all?verbose=false`);
+export const fetchProjects = () => {
+  return get(`${getApiUrl()}/project/all?verbose=false`);
+};
 
 /**
  * Returns a promise which resolves with a success or failure in creating a Youtrack issue

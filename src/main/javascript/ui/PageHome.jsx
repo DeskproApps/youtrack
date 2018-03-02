@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sdkConnect } from '@deskpro/apps-sdk-react';
@@ -8,6 +7,8 @@ import { getProp, fetchAccessToken, storeAccessToken, setAuthToken, getDomainUrl
 import { fetchIssue, fetchIssues, fetchProjects, createIssue, deleteIssue } from '../api';
 import TabIssues from './TabIssues';
 import TabCreateIssues from './TabCreateIssue';
+
+const customFieldID = 'youtrackCards';
 
 /**
  * Renders a page which displays the issues which have been linked to the
@@ -26,7 +27,6 @@ class PageHome extends React.PureComponent {
     this.state = {
       issues: [],
       projects: [],
-      projectIssues: [],
       activeTab: 'issues',
       fetchData: true
     };
@@ -43,7 +43,7 @@ class PageHome extends React.PureComponent {
       .then(this.fetchData)
       .then(this.storeData)
       .catch(err => {
-        if (getProp(err, 'errorData.statusCode', null) == 401) {
+        if (getProp(err, 'errorData.statusCode', null) === 401) {
           return fetchAccessToken()
             .then(partial(storeAccessToken, dpapp.storage))
             .then(() => context.customFields.getAppField('youtrackCards', []))
@@ -54,14 +54,15 @@ class PageHome extends React.PureComponent {
       });
   };
 
-  fetchData = resp => Promise.all([fetchProjects(), fetchIssues(), ...resp.map(fetchIssue)]);
+  fetchData = resp => {
+    return Promise.all([fetchProjects(), ...resp.map(fetchIssue)]);
+  };
 
   storeData = data => {
-    const [projects, issues, ...tail] = data;
+    const [projects, ...tail] = data;
 
     return this.setState({
       projects: getProp(projects, 'body', []),
-      projectIssues: getProp(issues, 'body.issue', []),
       issues: tail.map(issue => getProp(issue, 'body', {})),
       fetchData: false
     });
@@ -84,8 +85,8 @@ class PageHome extends React.PureComponent {
   }, () => {
     const { context, ui } = this.props;
     if (getProp(data, 'fetchData', false)) {
-      return context.customFields.getAppField('youtrackCards', [])
-        .then(resp => context.customFields.setAppField('youtrackCards', resp.filter(i => i !== data.issue)))
+      return context.customFields.getAppField(customFieldID, [])
+        .then(resp => context.customFields.setAppField(customFieldID, resp.filter(i => i !== data.issue)))
         .then(this.initialiseRequests)
         .catch(ui.error);
     }
@@ -94,20 +95,39 @@ class PageHome extends React.PureComponent {
   createIssueRequest = data => {
     const { customFields } = this.props.context;
 
-    return createIssue(getProp(data, 'issue', '')).then(resp => {
-      return customFields.getAppField('youtrackCards', []).then(issues => {
-        let issueId;
-        if (resp.body.id !== undefined) {
-          issueId = resp.body.id;
-        } else {
-          issueId = resp.headers.location.split('/').pop();
+    const issue = getProp(data, 'issue', '');
+    if (issue.search !== '') {
+      if (issue.search.indexOf('http') === 0) {
+        const found = issue.search.match(/\/youtrack\/issue\/(.*)/);
+        if (found) {
+          return customFields.getAppField(customFieldID, [])
+            .then((issues) => {
+              return customFields.setAppField(customFieldID, [...issues, found[1]])
+                .then(() => this.setStateCallback(data))
+                .catch(console.log);
+            });
         }
+      } else {
+        return customFields.getAppField(customFieldID, [])
+          .then((issues) => {
+            return customFields.setAppField(customFieldID, [...issues, issue.search])
+              .then(() => this.setStateCallback(data))
+              .catch(console.log);
+          });
+      }
+    }
 
-        return customFields.setAppField('youtrackCards', [...issues, issueId])
-          .then(() => this.setStateCallback(data))
-          .catch(console.log);
+    return createIssue(issue)
+      .then((resp) => {
+        return customFields.getAppField(customFieldID, [])
+          .then((issues) => {
+            const issueId = resp.headers.location.split('/').pop();
+
+            return customFields.setAppField(customFieldID, [...issues, issueId])
+              .then(() => this.setStateCallback(data))
+              .catch(console.log);
+          });
       });
-    });
   };
 
   createIssueCallback = data => {
@@ -122,7 +142,7 @@ class PageHome extends React.PureComponent {
         return Promise.reject(new Error('MISSING TOKEN'));
       })
       .catch(err => {
-        if (getProp(err, 'errorData.statusCode', null) == 401 || getProp(err, 'message', null) === 'MISSING TOKEN') {
+        if (getProp(err, 'errorData.statusCode', null) === 401 || getProp(err, 'message', null) === 'MISSING TOKEN') {
           return fetchAccessToken()
             .then(partial(storeAccessToken, dpapp.storage))
             .then(() => this.createIssueRequest(data));
@@ -134,7 +154,7 @@ class PageHome extends React.PureComponent {
    * @returns {XML}
    */
   render() {
-    const { issues, projects, projectIssues, activeTab, fetchData } = this.state;
+    const { issues, projects, activeTab, fetchData } = this.state;
 
     return (
       <Container className="dp-youtrack-container" style={{ padding: 0 }}>
@@ -158,7 +178,6 @@ class PageHome extends React.PureComponent {
               <TabCreateIssues
                 hidden={activeTab !== 'create'}
                 projects={projects}
-                projectIssues={projectIssues}
                 callback={this.createIssueCallback}
               />
             </div>
