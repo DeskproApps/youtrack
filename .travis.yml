@@ -15,3 +15,10 @@ deploy:
   on:
     repo: DeskproApps/youtrack
     tags: true
+addons:
+  artifacts:
+    paths:
+      dist/app.zip
+    target_paths:
+      - /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}
+    s3_region: "eu-west-2"
