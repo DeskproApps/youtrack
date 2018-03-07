@@ -9,6 +9,9 @@ script:
 after_success:
   - npm run test-env
   - npm run travis -- --step=after_success
+branches:
+  only:
+  - master
 deploy:
   skip_cleanup: true
   provider: releases
