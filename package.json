@@ -10,11 +10,11 @@
     "package": "dpat clean . && dpat compile . && dpat bundle-installer . && dpat verify ./dist && dpat package .",
     "test": "dpat test .",
     "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md",
-    "travis" : "dpat travis ."
+    "dpat": "dpat"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deskpro/youtrack.git"
+    "url": "git+https://github.com/DeskproApps/youtrack.git"
   },
   "keywords": [
     "deskpro",
@@ -28,9 +28,9 @@
   },
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/deskpro/apps-youtrack/issues"
+    "url": "https://github.com/DeskproApps/youtrack/issues"
   },
-  "homepage": "https://github.com/deskpro/apps-youtrack#readme",
+  "homepage": "https://github.com/DeskproApps/youtrack#readme",
   "deskpro": {
     "version": "2.3.0",
     "title": "Youtrack",
