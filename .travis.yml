@@ -1,8 +1,8 @@
 language: node_js
 node_js:
   - '6'
-before_script:
-- if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtrack" ]; then export UPLOAD_ARTIFACT=yes ; fi
+before_install:
+- if [ ! -z "$ARTIFACTS_BUCKET" ] && [ ! -z "ARTIFACTS_KEY" ] && [ ! -z "ARTIFACTS_SECRET" ] ; then export UPLOAD_ARTIFACT=yes ; fi
 install:
   - npm install -g npm@5.3.0 && npm -v
   - npm install --no-optional --no-save
