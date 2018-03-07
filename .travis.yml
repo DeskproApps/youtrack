@@ -8,7 +8,7 @@ install:
 script:
   - npm test && npm run package
 after_success:
-  - if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtrack" ]; then artifacts upload --target-paths /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER} dist/app.zip && npm run dpat -- travis pr-comment . --s3target /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER} --debug ; fi
+  - if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtrack" ]; then artifacts upload --target-paths /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_NODE_VERSION} dist/app.zip && npm run dpat -- travis pr-comment . --s3target /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_NODE_VERSION} --debug ; fi
 branches:
   only:
   - master
