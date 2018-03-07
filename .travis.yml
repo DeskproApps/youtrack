@@ -1,14 +1,16 @@
 language: node_js
 node_js:
   - '6'
+before_script:
+- if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtrack" ]; then export UPLOAD_ARTIFACT=yes ; fi
 install:
   - npm install -g npm@5.3.0 && npm -v
   - npm install --no-optional --no-save
-  - if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtrack" ]; then curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash; fi
+  - if [ ! -z "$UPLOAD_ARTIFACT" ]; then curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash; fi
 script:
   - npm test && npm run package
 after_success:
-  - if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtrack" ]; then artifacts upload --target-paths /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_NODE_VERSION} dist/app.zip && npm run dpat -- travis pr-comment . --s3target /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_NODE_VERSION} --debug ; fi
+  - if [ ! -z "$UPLOAD_ARTIFACT" ]; then artifacts upload --target-paths /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/NODE-${TRAVIS_NODE_VERSION} dist/app.zip && npm run dpat -- travis pr-comment . --s3target /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/NODE-${TRAVIS_NODE_VERSION} ; fi
 branches:
   only:
   - master
