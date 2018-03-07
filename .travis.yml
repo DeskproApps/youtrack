@@ -1,11 +1,13 @@
 language: node_js
 node_js:
-- '6'
+  - '6'
 install:
   - npm install -g npm@5.3.0 && npm -v
   - npm install --no-optional --no-save
 script:
   - npm test && npm run package
+after_success:
+  - ./node_modules/bin/dpat travis . --step=after_success
 deploy:
   skip_cleanup: true
   provider: releases
