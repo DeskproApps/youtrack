@@ -4,11 +4,11 @@ node_js:
 install:
   - npm install -g npm@5.3.0 && npm -v
   - npm install --no-optional --no-save
-  - [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtract" ] && curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash
+  - if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtract" ]; then curl -sL https://raw.githubusercontent.com/travis-ci/artifacts/master/install | bash; fi
 script:
   - npm test && npm run package
 after_success:
-  - [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtract" ] && artifacts upload --target-paths "/${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}" dist/app.zip && npm run travis -- --step=after_success
+  - if [ "$TRAVIS_PULL_REQUEST_SLUG" == "DeskproApps/youtract" ]; then artifacts upload --target-paths /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER} dist/app.zip && npm run travis -- --step=after_success ; fi
 branches:
   only:
   - master
