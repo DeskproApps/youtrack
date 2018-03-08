@@ -1,6 +1,6 @@
 {
   "name": "@deskpro/apps-youtrack",
-  "version": "0.1.0-beta.5",
+  "version": "0.1.0-beta.6",
   "description": "This application adds support for viewing and creating Youtrack issues.",
   "main": "lib/main/javascript/index.js",
   "scripts": {
