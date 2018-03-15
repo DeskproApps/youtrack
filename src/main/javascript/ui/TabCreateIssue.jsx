@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sdkConnect } from '@deskpro/apps-sdk-react';
-import { Container, Heading, Group, SearchInline } from '@deskpro/react-components';
-import { reduxForm } from '@deskpro/react-components/dist/bindings';
+import { Container, Heading, Group, SearchInline, Button } from '@deskpro/react-components';
+import { Form, Select, Input, Textarea } from '@deskpro/redux-components';
 import { searchIssues } from '../api';
-
-const { Form, Select, Input, Textarea, Button } = reduxForm;
 
 class TabCreateIssue extends React.PureComponent {
 
