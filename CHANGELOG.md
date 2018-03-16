@@ -4,6 +4,8 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+ - replaces corrupt YT icon
+
 ## [0.1.0-beta.5][] - 2018-03-02
 
 * Added support for searching for issues
