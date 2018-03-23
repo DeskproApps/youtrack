@@ -5,10 +5,11 @@ This project is following [Semantic Versioning](http://semver.org)
 ## [Unreleased][]
 
  - replaces corrupt YT icon
+ - uses @deskpro/redux-components
 
 ## [0.1.0-beta.5][] - 2018-03-02
 
-* Added support for searching for issues
+- Added support for searching for issues
 
 ## [0.1.0-beta.4][] - 2018-02-26
 
