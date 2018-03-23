@@ -4,6 +4,7 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+ - uses @deskpro/apps-sdk-react 0.2.11
  - replaces corrupt YT icon
  - uses @deskpro/redux-components
 
