@@ -26,15 +26,7 @@ test('successfully render the application in initial state', () => {
     instanceId: '1'
   };
 
-  const widgetWindow = new WidgetWindowBridge({
-    location : {
-      search: 'somethingSomething',
-      hash: `#somethingSomething`
-    },
-    document: { readyState : 'notReady' }
-  }, {});
-
-  const dpapp = createAppFromProps({ widgetWindow, contextProps, instanceProps });
+  const dpapp = createAppFromProps({ widgetWindow: null, contextProps, instanceProps });
   dpapp.manifest = {
     storage: []
   };
