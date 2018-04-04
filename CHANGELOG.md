@@ -4,9 +4,21 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
- - uses @deskpro/apps-sdk-react 0.2.12
+### Added
+
+    - travis ci will atttach builds to Github PR's when enabled via s3 environment variables
+
+### Fixed
+
  - replaces corrupt YT icon
- - uses @deskpro/redux-components
+
+### Changed
+
+    - upgrade to `@deskpro/apps-installer` version `0.4.5`
+    - upgrade to `@deskpro/apps-dpat` version `0.10.4`
+    - upgrade to `@deskpro/apps-sdk-react` version `0.2.13`
+    - upgrade to `@deskpro/apps-sdk-core` version `^1.0.0-beta.29`
+    - uses `@deskpro/redux-components`
 
 ## [0.1.0-beta.5][] - 2018-03-02
 
