@@ -74,7 +74,7 @@
       },
       {
         "name": "youtrackHubUrl",
-        "defaultValue": "https://deskpro-radu.myjetbrains.com/hub",
+        "defaultValue": "",
         "title": "The Youtrack HUB url",
         "required": true,
         "type": "text"
