@@ -5,7 +5,7 @@ import { fixtures } from './api.fixtures';
 
 test('successfully retrieve issues', done => {
   setRestApi({
-    fetchCORS: () => Promise.resolve(JSON.stringify(fixtures))
+    fetchProxy: () => Promise.resolve(JSON.stringify(fixtures))
   });
 
   return fetchIssues().then(resp => {
@@ -19,7 +19,7 @@ test('successfully retrieve issues', done => {
 test('unsuccessfully retrieve issues', done => {
   const error = { message: 'There was an error' };
   setRestApi({
-    fetchCORS: () => Promise.reject(error)
+    fetchProxy: () => Promise.reject(error)
   });
 
   return fetchIssues()
@@ -40,7 +40,7 @@ test('successfully create an issue with a fully payload', done => {
     desc: 'Burn'
   };
   setRestApi({
-    fetchCORS: () => Promise.resolve(JSON.stringify({ message: success.message, payload }))
+    fetchProxy: () => Promise.resolve(JSON.stringify({ message: success.message, payload }))
   });
 
   return createIssue(payload)
@@ -74,7 +74,7 @@ test('unsuccessfully create an issue', done => {
   };
 
   setRestApi({
-    fetchCORS: () => Promise.reject(JSON.stringify({ message: error.message, payload }))
+    fetchProxy: () => Promise.reject(JSON.stringify({ message: error.message, payload }))
   });
 
   return createIssue(payload)
@@ -92,7 +92,7 @@ test('successfully delete an issue with a fully payload', done => {
   const success = { message: 'An issue was successfully deleted' };
   const payload = 'TST-123';
   setRestApi({
-    fetchCORS: () => Promise.resolve(JSON.stringify({ message: success.message, payload }))
+    fetchProxy: () => Promise.resolve(JSON.stringify({ message: success.message, payload }))
   });
 
   return deleteIssue(payload)
@@ -122,7 +122,7 @@ test('unsuccessfully delete an issue', done => {
   const payload = 'TST-123';
 
   setRestApi({
-    fetchCORS: () => Promise.reject(JSON.stringify({ message: error.message, payload }))
+    fetchProxy: () => Promise.reject(JSON.stringify({ message: error.message, payload }))
   });
 
   return deleteIssue(payload)

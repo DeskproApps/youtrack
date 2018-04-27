@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { sdkConnect } from '@deskpro/apps-sdk-react';
 import { Loader, Tabs, TabLink, Container } from '@deskpro/react-components';
 import partial from 'lodash/partial';
-import { getProp, fetchAccessToken, storeAccessToken, setAuthToken, getDomainUrl } from '../utils';
+import { getProp, fetchAccessToken, storeAccessToken, tryAndSetAuthToken, getDomainUrl } from '../utils';
 import { fetchIssue, fetchIssues, fetchProjects, createIssue, deleteIssue } from '../api';
 import TabIssues from './TabIssues';
 import TabCreateIssues from './TabCreateIssue';
@@ -37,21 +37,11 @@ class PageHome extends React.PureComponent {
   }
 
   initialiseRequests = () => {
-    const { context, ui, dpapp } = this.props;
-
+    const { context} = this.props;
     return context.customFields.getAppField('youtrackCards', [])
       .then(this.fetchData)
       .then(this.storeData)
-      .catch(err => {
-        if (getProp(err, 'errorData.statusCode', null) === 401) {
-          return fetchAccessToken()
-            .then(partial(storeAccessToken, dpapp.storage))
-            .then(() => context.customFields.getAppField('youtrackCards', []))
-            .then(this.fetchData)
-            .then(this.storeData)
-            .catch(console.error);
-        }
-      });
+    ;
   };
 
   fetchData = resp => {
@@ -70,12 +60,31 @@ class PageHome extends React.PureComponent {
 
   handleTabChange = activeTab => this.setState({ activeTab });
 
+  /**
+   * Generic error handler
+   *
+   * @param {*} err
+   * @returns {*}
+   */
+  handleError = err => {
+    const { dpapp, route, ui } = this.props;
+    console.log(err);
+
+    if (getProp(err, 'errorData.statusCode', null) === 401) {
+      route.to('authenticate');
+      return err;
+    }
+
+    ui.error(err);
+    return err;
+  };
+
   setStateCallback = data => this.setState({
     activeTab: getProp(data, 'tab', 'issues'),
     fetchData: getProp(data, 'fetchData', false)
   }, () => {
     if (getProp(data, 'fetchData', false)) {
-      this.initialiseRequests();
+      this.initialiseRequests().catch(this.handleError);
     }
   });
 
@@ -88,7 +97,7 @@ class PageHome extends React.PureComponent {
       return context.customFields.getAppField(customFieldID, [])
         .then(resp => context.customFields.setAppField(customFieldID, resp.filter(i => i !== data.issue)))
         .then(this.initialiseRequests)
-        .catch(ui.error);
+        .catch(this.handleError);
     }
   });
 
@@ -131,23 +140,7 @@ class PageHome extends React.PureComponent {
   };
 
   createIssueCallback = data => {
-    const { context, ui, dpapp } = this.props;
-
-    return dpapp.storage.getAppStorage(['user_settings'])
-      .then(({user_settings: settings}) => {
-        if (getProp(settings, 'access_token', null)) {
-          setAuthToken(settings.access_token);
-          return this.createIssueRequest(data);
-        }
-        return Promise.reject(new Error('MISSING TOKEN'));
-      })
-      .catch(err => {
-        if (getProp(err, 'errorData.statusCode', null) === 401 || getProp(err, 'message', null) === 'MISSING TOKEN') {
-          return fetchAccessToken()
-            .then(partial(storeAccessToken, dpapp.storage))
-            .then(() => this.createIssueRequest(data));
-        }
-      });
+    this.createIssueRequest(data).catch(this.handleError);
   };
 
   /**
