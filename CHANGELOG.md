@@ -2,7 +2,9 @@
 
 This project is following [Semantic Versioning](http://semver.org)
 
-## Unreleased[]
+## [Unreleased][]
+
+## [0.1.0-beta.7][] - 2018-04-27
 
 ### Added
 
