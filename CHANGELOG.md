@@ -4,6 +4,19 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+## [0.1.0-beta.7][] - 2018-04-27
+
+### Added
+
+    - admin readme
+
+### Changed
+
+  - oauth2 popup replaced with authentication screen
+  - authentication is now using long-lived refresh tokens to avoid authenticating the user every hour
+
+## [0.1.0-beta.6][] - 2018-04-06
+
 ### Added
 
     - travis ci will atttach builds to Github PR's when enabled via s3 environment variables
@@ -40,7 +53,9 @@ This project is following [Semantic Versioning](http://semver.org)
 
  - add support for viewing and creating Youtrack issues.
 
-[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.5...HEAD
+[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.7...HEAD
+[0.1.0-beta.7]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.6...v0.1.0-beta.7
+[0.1.0-beta.6]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.5...0.1.0-beta.6
 [0.1.0-beta.5]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.4...v0.1.0-beta.5
 [0.1.0-beta.4]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.3...v0.1.0-beta.4
 [0.1.0-beta.3]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.2...v0.1.0-beta.3

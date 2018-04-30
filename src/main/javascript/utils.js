@@ -4,11 +4,13 @@ import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 import isBoolean from 'lodash/isBoolean';
 import isNumber from 'lodash/isNumber';
+import partial from "lodash/partial";
 
 let restApi = null;
 let authToken = null;
 let authClient = null;
 let domainUrl = null;
+let storageClient = null;
 
 const buildReqObj = obj => {
   return Object.assign({
@@ -35,18 +37,47 @@ const notEmpty = val => {
 };
 
 const fetchAccessToken = () => {
-  return authClient.access('youtrack').then(resp => {
-    if (resp && resp.access_token) {
-      setAuthToken(resp.access_token);
-      return Promise.resolve(resp);
-    }
+  const query = {
+    'access_type' : 'offline'
+  };
+  return authClient.access('youtrack', { query }).then(resp => {
+    return tryAndSetAuthToken(resp) ? Promise.resolve(resp) : Promise.reject(resp);
   });
 };
 
+const refreshAccessToken = () => {
+  const query = {
+    'refresh_token' : 'user_settings'
+  };
+  return authClient.refreshAccess('youtrack', { query }).then(resp => {
+    return tryAndSetAuthToken(resp) ? Promise.resolve(resp) : Promise.reject(resp);
+  });
+};
 
-const storeAccessToken = (store, resp) => store.setAppStorage('user_settings', {access_token: resp.access_token});
+const fetchProxyOrRetry = (reqURL, reqData) => restApi.fetchProxy(reqURL, buildReqObj(reqData)).catch(err => {
+    if (getProp(err, 'errorData.statusCode', null) === 401 || getProp(err, 'message', null) === 'MISSING TOKEN') {
+      return refreshAccessToken()
+        .then(storeAccessToken)
+        .then(() => restApi.fetchProxy(reqURL, buildReqObj(reqData)))
+        ;
+    }
+    return Promise.reject(err);
+  })
+;
 
-const setAuthToken = obj => { authToken = obj; }
+const storeAccessToken = resp => storageClient.setAppStorage('user_settings', { ...resp });
+
+const tryAndSetAuthToken = obj => {
+  if (obj && obj.access_token) {
+    authToken = obj.access_token;
+    return true;
+  }
+  return false;
+};
+
+const setStorageClient = obj => {
+  storageClient = obj;
+};
 
 module.exports = {
 
@@ -60,7 +91,11 @@ module.exports = {
 
   fetchAccessToken,
 
-  setAuthToken,
+  refreshAccessToken,
+
+  tryAndSetAuthToken,
+
+  setStorageClient,
 
   storeAccessToken,
 
@@ -76,19 +111,19 @@ module.exports = {
 
   put: (reqURL = '', data = {}, headers = {}) => {
     return isDefined(restApi) ?
-      restApi.fetchCORS(reqURL, buildReqObj({ method: 'PUT', body: JSON.stringify(data) })) :
+      fetchProxyOrRetry(reqURL, { method: 'PUT', body: JSON.stringify(data) }) :
       Promise.reject({ message: 'DPAPP Rest API has not been set. Please use setRestApi to refer to it.' });
   },
 
   get: (reqURL = '', headers = {}) => {
     return isDefined(restApi)
-      ? restApi.fetchCORS(reqURL, buildReqObj({ method: 'GET' }))
+      ? fetchProxyOrRetry(reqURL, { method: 'GET' })
       : Promise.reject({ message: 'DPAPP Rest API has not been set. Please use setRestApi to refer to it.' });
   },
 
   del: (reqURL = '', data = {}, headers = {}) => {
     return isDefined(restApi) ?
-      restApi.fetchCORS(reqURL, buildReqObj({ method: 'DELETE', body: JSON.stringify(data) })) :
+      fetchProxyOrRetry(reqURL, { method: 'DELETE', body: JSON.stringify(data) }) :
       Promise.reject({ message: 'DPAPP Rest API has not been set. Please use setRestApi to refer to it.' });
   }
-}
+};

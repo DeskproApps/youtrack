@@ -3,13 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Routes, Route } from '@deskpro/apps-sdk-react';
 import every from 'lodash/every';
-import partial from 'lodash/partial';
 import { Loader } from '@deskpro/react-components';
 import PageHome from './ui/PageHome';
 import PageSettings from './ui/PageSettings';
 import PageError from './ui/PageError';
+import PageAuthenticate from './ui/PageAuthenticate';
 import {
-  setRestApi, setDomainUrl, setAuthToken, setAuthClient, fetchAccessToken, notEmpty, storeAccessToken
+  setRestApi, setDomainUrl, tryAndSetAuthToken, setAuthClient, setStorageClient, fetchAccessToken, refreshAccessToken, notEmpty, storeAccessToken
 } from './utils';
 
 /**
@@ -27,6 +27,7 @@ export default class App extends React.PureComponent {
 
     setRestApi(this.props.dpapp.restApi);
     setAuthClient(this.props.oauth);
+    setStorageClient(this.props.dpapp.storage)
   }
 
   /**
@@ -49,15 +50,12 @@ export default class App extends React.PureComponent {
       setDomainUrl(`${url.protocol}//${url.hostname}`); //TODO AG: REFACTOR INTO REDUX STORE!!!!!
 
       return storage.getAppStorage(['user_settings']).then(({user_settings: settings}) => {
-        if (settings && settings.access_token) {
-          setAuthToken(settings.access_token);
+        if (tryAndSetAuthToken(settings)) {
           return route.to('home');
         }
-
-        return fetchAccessToken()
-          .then(partial(storeAccessToken, storage))
-          .then(route.to('home'));
+        return route.to('authenticate');
       });
+
     }).catch(error => {
       route.to('error', {
         error: {
@@ -72,6 +70,7 @@ export default class App extends React.PureComponent {
     return (
       <Routes>
         <Route location={'settings'} component={PageSettings} />
+        <Route location={'authenticate'} component={PageAuthenticate} />
         <Route location={'home'} component={PageHome} />
         <Route location={'error'} component={PageError} />
         <Route defaultRoute>

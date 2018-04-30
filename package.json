@@ -1,6 +1,6 @@
 {
   "name": "@deskpro/apps-youtrack",
-  "version": "0.1.0-beta.6",
+  "version": "0.1.0-beta.7",
   "description": "This application adds support for viewing and creating Youtrack issues.",
   "main": "lib/main/javascript/index.js",
   "scripts": {
@@ -109,8 +109,8 @@
   "devDependencies": {
     "@deskpro/apps-dpat": "0.10.4",
     "@deskpro/apps-installer": "github:deskpro/apps-installer#v0.4.5",
-    "@deskpro/apps-sdk-core": "^1.0.0-beta.29",
-    "@deskpro/apps-sdk-react": "0.2.13",
+    "@deskpro/apps-sdk-core": "1.0.1",
+    "@deskpro/apps-sdk-react": "0.2.14",
     "babel-eslint": "^8.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
