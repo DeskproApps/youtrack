@@ -4,6 +4,15 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+### Changed
+
+    - webpack configurations allow compilation with @deskpro/apps-components 
+
+### Added
+
+    - @deskpro/apps-components is now a dependency as we prepare to replace @deskpro/react-components 
+    - jest configuration to allow testing with the new components 
+
 ## [0.1.0-beta.7][] - 2018-04-27
 
 ### Added

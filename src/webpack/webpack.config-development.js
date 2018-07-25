@@ -6,26 +6,26 @@ const dpat = require('@deskpro/apps-dpat');
 module.exports = function (env)
 {
   const PROJECT_ROOT_PATH = env && env.DP_PROJECT_ROOT ? env.DP_PROJECT_ROOT : path.resolve(__dirname, '../../');
-  
+
   const buildManifest = new dpat.BuildManifest(
     PROJECT_ROOT_PATH,
     { distributionType: 'development', packagingType: 'local' }
   );
-  
+
   const resources = dpat.Resources.copyDescriptors(buildManifest, PROJECT_ROOT_PATH);
   const babelOptions = dpat.Babel.resolveOptions(PROJECT_ROOT_PATH, { babelrc: false });
-  
+
   // emulate the Files API path which is used by deskpro to fetch the app files
   const FILES_API_PATH = `v${buildManifest.getAppVersion()}/files`;
   // the relative path of the assets inside the distribution bundle
   const DISTRIBUTION_ASSET_PATH = 'assets';
-  
+
   const extractCssPlugin = new dpat.Webpack.ExtractTextPlugin({
     filename: '[name].css',
     publicPath: `/${FILES_API_PATH}/${DISTRIBUTION_ASSET_PATH}/`,
     allChunks: true
   });
-  
+
   const configParts = [{}];
   configParts.push({
     devServer: {
@@ -66,7 +66,10 @@ module.exports = function (env)
         },
         {
           test: /\.css$/,
-          use: extractCssPlugin.extract({use: ['style-loader', 'css-loader']})
+          use: extractCssPlugin.extract({
+            fallback: "style-loader",
+            use: "css-loader"
+          })
         },
         {
           include: [path.resolve(PROJECT_ROOT_PATH, 'src/main/sass')],
@@ -88,11 +91,11 @@ module.exports = function (env)
     },
     plugins: [
       extractCssPlugin,
-      
+
       new dpat.Webpack.DefinePlugin({
         DPAPP_MANIFEST: JSON.stringify(buildManifest.getContent())
       }),
-      
+
       // vendor libs
       new dpat.Webpack.optimize.CommonsChunkPlugin({
         name: ['vendor'],
@@ -101,15 +104,15 @@ module.exports = function (env)
           return module.context && module.context.indexOf("node_modules") !== -1;
         }
       }),
-      
+
       new dpat.Webpack.NamedModulesPlugin(),
-      
+
       new dpat.Webpack.CopyWebpackPlugin(resources, { debug: true, copyUnmodified: true }),
       new dpat.Webpack.WriteFilePlugin({
         test: /\html\/|assets\/|dist\/|README\.md|manifest\.json/,
         useHashIndex: false
       }),
-      
+
       new dpat.Webpack.HotModuleReplacementPlugin(),
       new dpat.Webpack.NoEmitOnErrorsPlugin(),
     ],
@@ -123,6 +126,6 @@ module.exports = function (env)
     node: {fs: 'empty'},
     bail: true
   });
-  
+
   return Object.assign.apply(Object, configParts);
 };
