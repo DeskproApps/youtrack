@@ -38,7 +38,7 @@ class PageHome extends React.PureComponent {
 
   initialiseRequests = () => {
     const { context} = this.props;
-    return context.customFields.getAppField('youtrackCards', [])
+    return context.get('ticket').customFields.getAppField('youtrackCards', [])
       .then(this.fetchData)
       .then(this.storeData)
     ;
@@ -94,8 +94,8 @@ class PageHome extends React.PureComponent {
   }, () => {
     const { context, ui } = this.props;
     if (getProp(data, 'fetchData', false)) {
-      return context.customFields.getAppField(customFieldID, [])
-        .then(resp => context.customFields.setAppField(customFieldID, resp.filter(i => i !== data.issue)))
+      return context.get('ticket').customFields.getAppField(customFieldID, [])
+        .then(resp => context.get('ticket').customFields.setAppField(customFieldID, resp.filter(i => i !== data.issue)))
         .then(this.initialiseRequests)
         .catch(this.handleError);
     }
