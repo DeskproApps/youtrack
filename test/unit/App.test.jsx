@@ -1,43 +1,41 @@
-
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import '../setup';
-import App from '../../src/App';
-import { AppFrame } from '@deskpro/apps-components';
-import { createAppFromProps } from '@deskpro/apps-sdk';
-import { Provider } from "react-redux";
-
-import store from '../../src/store';
-import {setAuthClient, setRestApi, setStorageClient} from "../../src/utils";
+import App from '../../main/javascript/App';
+import { createAppFromProps } from '@deskpro/apps-sdk-core';
+import { DeskproSDK, configureStore } from '@deskpro/apps-sdk-react';
+import { WidgetWindowBridge } from '@deskpro/apps-sdk-core/lib/main/javascript/Widget/WidgetWindowBridge.js'
 
 test('successfully render the application in initial state', () => {
 
-  const dpapp = createAppFromProps({
-    instanceProps: {
-      appId:          '1',
-      appTitle:       'title',
-      appPackageName: 'com.deskpro.app',
-      instanceId:     '1',
-    },
-    contextProps: {
-      type: 'ticket',
-      entityId: '1',
-      locationId: '1',
-      tabId: 'tab-1',
-      tabUrl: 'https://127.0.0.1',
+  const contextProps = {
+    // context
+    type: 'ticket',
+    entityId: '1',
+    locationId: 'ticket-sidebar',
+    tabId: 'tab-id',
+    tabUrl: 'http://127.0.0.1',
+    route: {
+      location
     }
-  });
+  };
 
-  setRestApi(dpapp.restApi);
-  setAuthClient(dpapp.oauth);
-  setStorageClient(dpapp.storage);
+  const instanceProps = {
+    appId: '1',
+    appTitle: 'My First App',
+    appPackageName: 'apps-boilerplate',
+    instanceId: '1'
+  };
 
+  const dpapp = createAppFromProps({ widgetWindow: null, contextProps, instanceProps });
+  dpapp.manifest = {
+    storage: []
+  };
+
+  const store = configureStore(dpapp);
   const wrapper = mount(
-    <AppFrame iconUrl={"../../public/icon.png"} title={"my app"} >
-    <Provider store={store}>
-        <App dpapp={dpapp} />
-      </Provider>
-    </AppFrame>,
+    <DeskproSDK dpapp={dpapp} store={store}>
+      <App />
+    </DeskproSDK>,
   );
 
   wrapper.html();
