@@ -1,6 +1,8 @@
 
-import { fetchIssues, createIssue, deleteIssue } from '../../main/javascript/api';
-import { setRestApi } from '../../main/javascript/utils';
+import '../setup';
+
+import { fetchIssues, createIssue, deleteIssue } from '../../src/api';
+import { setRestApi } from '../../src/utils';
 import { fixtures } from './api.fixtures';
 
 test('successfully retrieve issues', done => {

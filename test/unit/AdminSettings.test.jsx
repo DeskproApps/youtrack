@@ -1,10 +1,9 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-
-import ScreenSettings from '../../installer/javascript/ScreenSettings';
-
-const TestComponent = () => <div className="dummyForm" />
+import '../setup';
+import AdminSettings from '../../src/ui/AdminSettings';
+const TestComponent = () => <div className="dummyForm" />;
 
 test('render the settings screen in loading state', done => {
 
@@ -24,7 +23,7 @@ test('render the settings screen in loading state', done => {
     }
   };
 
-  const wrapper = mount(<ScreenSettings {...props} />);
+  const wrapper = mount(<AdminSettings {...props} />);
 
   expect(wrapper.state('oauthSettings')).toBeNull();
   expect(wrapper.state('error')).toBeNull();
@@ -49,7 +48,7 @@ test('render the settings screen in error state', done => {
     }
   };
 
-  const wrapper = mount(<ScreenSettings {...props} />);
+  const wrapper = mount(<AdminSettings {...props} />);
 
   expect(wrapper.state('oauthSettings')).toBeNull();
   expect(wrapper.state('error')).toBeNull();
@@ -77,7 +76,7 @@ test('render the settings screen in successful ready state', done => {
     }
   };
 
-  const wrapper = mount(<ScreenSettings {...props} />);
+  const wrapper = mount(<AdminSettings {...props} />);
 
   expect(wrapper.state('oauthSettings')).toBeNull();
   expect(wrapper.state('error')).toBeNull();
