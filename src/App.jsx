@@ -90,29 +90,9 @@ export default class App extends React.PureComponent
 
 App.propTypes = {
 
-  settings: PropTypes.object,
-
-  oauth: PropTypes.object,
   /**
-   * instance of sdk storage.
-   * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/storage.html
+   * instance of app client.
    */
   dpapp: PropTypes.object,
 
-  /**
-   * instance of sdk route.
-   * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/route.html
-   */
-  route: PropTypes.object,
-
-  /**
-   * instance of core-sdk context.
-   * @see https://deskpro.gitbooks.io/deskpro-apps/content/api/props/route.html
-   */
-  context: PropTypes.object,
-
-  /**
-   * instance of sdk ui.
-   */
-  ui: PropTypes.object
 };
