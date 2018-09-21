@@ -4,6 +4,12 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+## [0.1.0][] - 2018-08-31
+
+ - use the new apps structure
+ - use @deskpro/apps-sdk@0.8.0
+ - use @deskpro/apps-components@0.8.0
+
 ## [0.1.0-beta.7][] - 2018-04-27
 
 ### Added
@@ -53,7 +59,8 @@ This project is following [Semantic Versioning](http://semver.org)
 
  - add support for viewing and creating Youtrack issues.
 
-[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.7...HEAD
+[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.7...v0.1.0
 [0.1.0-beta.7]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.6...v0.1.0-beta.7
 [0.1.0-beta.6]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.5...0.1.0-beta.6
 [0.1.0-beta.5]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.4...v0.1.0-beta.5
