@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader, Panel, Tabs, TabMenu } from '@deskpro/apps-components';
+import { connect } from 'react-redux';
+import { Action, List, Panel } from '@deskpro/apps-components';
 
 import { getProp, getDomainUrl } from '../utils';
-import { fetchIssue, fetchProjects, createIssue } from '../api';
-import TabIssues from './TabIssues';
-import TabCreateIssues from './TabCreateIssue';
+import Issue from './Issue';
+import { getIssues } from '../redux/selectors';
 
 const customFieldID = 'youtrackCards';
 
@@ -14,69 +14,28 @@ const customFieldID = 'youtrackCards';
  * open ticket.
  */
 class PageHome extends React.Component {
+  static propTypes = {
 
-  state = {
-    issues: [],
-    projects: [],
-    activeTab: 'issues',
-    fetchData: true
-  };
+    location: PropTypes.object.isRequired,
 
-  componentDidMount() {
-    this.initialiseRequests();
-  }
+    history: PropTypes.object.isRequired,
 
-  initialiseRequests = () => {
-    const { customFields } = this.props.dpapp.context.get('ticket');
-    return customFields.getAppField('youtrackCards', [])
-      .then(this.fetchData)
-      .then(this.storeData)
-    ;
-  };
+    /**
+     * Instance of dpapp.
+     */
+    dpapp: PropTypes.object,
 
-  fetchData = resp => {
-    return Promise.all([fetchProjects(), ...resp.map(fetchIssue)]);
-  };
+    /**
+     * Error callback
+     */
+    handleError: PropTypes.func,
 
-  storeData = data => {
-    const [projects, ...tail] = data;
+    issues: PropTypes.array,
 
-    return this.setState({
-      projects: getProp(projects, 'body', []),
-      issues: tail.map(issue => getProp(issue, 'body', {})),
-      fetchData: false
-    });
+    dispatch: PropTypes.func,
   };
 
   handleTabChange = activeTab => this.setState({ activeTab });
-
-  /**
-   * Generic error handler
-   *
-   * @param {*} err
-   * @returns {*}
-   */
-  handleError = err => {
-    const { dpapp, history } = this.props;
-
-    if (getProp(err, 'errorData.statusCode', null) === 401) {
-      history.push("authenticate", null);
-      history.go(1);
-      return err;
-    }
-
-    dpapp.ui.showErrorNotification(err);
-    return err;
-  };
-
-  setStateCallback = data => this.setState({
-    activeTab: getProp(data, 'tab', 'issues'),
-    fetchData: getProp(data, 'fetchData', false)
-  }, () => {
-    if (getProp(data, 'fetchData', false)) {
-      this.initialiseRequests().catch(this.handleError);
-    }
-  });
 
   unlinkCallback = data => this.setState({
     activeTab: getProp(data, 'tab', 'issues'),
@@ -94,93 +53,48 @@ class PageHome extends React.Component {
     }
   });
 
-  createIssueRequest = data => {
-    const { customFields } = this.props.dpapp.context.get('ticket');
-
-    const issue = getProp(data, 'issue', '');
-
-    if (issue.search !== '') {
-      if (issue.search.indexOf('http') === 0) {
-        const found = issue.search.match(/\/youtrack\/issue\/(.*)/);
-        if (found) {
-          return customFields.getAppField(customFieldID, [])
-            .then((issues) => {
-              return customFields.setAppField(customFieldID, [...issues, found[1]])
-                .then(() => this.setStateCallback(data))
-                .catch(console.log);
-            });
-        }
-      } else {
-        return customFields.getAppField(customFieldID, [])
-          .then((issues) => {
-            return customFields.setAppField(customFieldID, [...issues, issue.search])
-              .then(() => this.setStateCallback(data))
-              .catch(console.log);
-          });
-      }
-    }
-
-    return createIssue(issue)
-      .then((resp) => {
-        return customFields.getAppField(customFieldID, [])
-          .then((issues) => {
-            const issueId = resp.headers.location.split('/').pop();
-
-            return customFields.setAppField(customFieldID, [...issues, issueId])
-              .then(() => this.setStateCallback(data))
-              .catch(console.log);
-          });
-      });
+  openLink = () => {
+    const { history } = this.props;
+    history.push("link", null);
+    history.go(1);
   };
 
-  createIssueCallback = data => {
-    this.createIssueRequest(data).catch(this.handleError);
+  openCreate = () => {
+    const { history } = this.props;
+    history.push("create", null);
+    history.go(1);
+  };
+
+  handleUnlinkIssue = (issue) => {
+
   };
 
   /**
    * @returns {XML}
    */
   render() {
-    const { fetchData } = this.state;
+    const { issues } = this.props;
 
-    if (fetchData) {
-      return <Loader />;
-    }
+    return (
+      <Panel title={"Linked Issues"} border={"none"} className="dp-github-container">
+        <Action icon={"search"} label={"Find"} onClick={this.openLink}/>
+        <Action icon={"add"} label={"Create"} onClick={this.openCreate}/>
+        <List className="dp-github-issues">
+          {issues.map((issue) => (
+            <Issue
+              issue={issue}
+              key={issue.id}
+              domain={getDomainUrl()}
+              onUnlink={() => { this.handleUnlinkIssue(issue); }}
+            />
+          ))}
+        </List>
 
-    const { issues, projects, activeTab } = this.state;
-
-    return [
-      <Tabs active={activeTab} onChange={this.handleTabChange} className={"dp-spacer"}>
-        <TabMenu name="issues">Issues</TabMenu>
-        <TabMenu name="create">Link Issue</TabMenu>
-      </Tabs>,
-      <TabIssues
-        hidden=         {activeTab !== 'issues'}
-        issues=         {issues}
-        domain=         {getDomainUrl()}
-        unlinkCallback= {this.unlinkCallback}
-        callback=       {this.handleTabChange}
-      />,
-      <TabCreateIssues
-        domain=   {getDomainUrl()}
-        hidden=   {activeTab !== 'create'}
-        projects= {projects}
-        callback= {this.createIssueCallback}
-      />
-    ];
+      </Panel>
+    );
   }
 }
 
-PageHome.propTypes = {
-
-  location: PropTypes.object.isRequired,
-
-  history: PropTypes.object.isRequired,
-
-  /**
-   * Instance of dpapp.
-   */
-  dpapp: PropTypes.object
-};
-
-export default PageHome;
+export default connect(state => ({
+  issues: getIssues(state)
+}))(PageHome);

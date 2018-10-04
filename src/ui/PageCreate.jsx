@@ -1,0 +1,147 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { ActionBar, Action, Button, Panel } from '@deskpro/apps-components';
+import Issue from './Issue';
+
+import { Form, Select, Input, Textarea } from '../Forms';
+import { createIssue } from '../api';
+import { getProp } from '../utils';
+import { getProjects } from '../redux/selectors';
+
+const customFieldID = 'youtrackCards';
+
+class PageCreate extends React.Component
+{
+  static propTypes = {
+
+    /**
+     * The youtrack domain
+     */
+    domain: PropTypes.string.isRequired,
+
+    /**
+     * Error callback
+     */
+    handleError: PropTypes.func,
+  };
+
+  static defaultProps = {
+    handleError() {},
+  };
+
+  handleCreate = values => {
+
+    const { project, ...others } = values;
+    const issue = { project: project && project.value ? project.value: null, ...others };
+
+    issue.search = '';
+
+    return this.createIssueCallback({ activeTab: 'issues', fetchData: true, issue });
+  };
+
+  handleLink = ({ issue }) => {
+
+    const { callback } = this.props;
+    return callback({ activeTab: 'issues', fetchData: true, issue: { search: issue } });
+  };
+
+  createIssueRequest = data => {
+    const { customFields } = this.props.dpapp.context.get('ticket');
+
+    const issue = getProp(data, 'issue', '');
+
+    if (issue.search !== '') {
+      if (issue.search.indexOf('http') === 0) {
+        const found = issue.search.match(/\/youtrack\/issue\/(.*)/);
+        if (found) {
+          return customFields.getAppField(customFieldID, [])
+            .then((issues) => {
+              return customFields.setAppField(customFieldID, [...issues, found[1]])
+                .then(() => {
+                  this.backHome();
+                })
+                .catch(console.log);
+            });
+        }
+      } else {
+        return customFields.getAppField(customFieldID, [])
+          .then((issues) => {
+            return customFields.setAppField(customFieldID, [...issues, issue.search])
+              .then(() => {
+                this.backHome();
+              })
+              .catch(console.log);
+          });
+      }
+    }
+
+    return createIssue(issue)
+      .then((resp) => {
+        return customFields.getAppField(customFieldID, [])
+          .then((issues) => {
+            const issueId = resp.headers.location.split('/').pop();
+
+            return customFields.setAppField(customFieldID, [...issues, issueId])
+              .then(() => {
+                this.backHome();
+              })
+              .catch(console.log);
+          });
+      });
+  };
+
+  createIssueCallback = data => {
+    const { handleError } = this.props;
+    this.createIssueRequest(data).catch(handleError);
+  };
+
+  renderIssues = (issues) => issues.map(issue => (
+    <Issue issue={issue} domain={this.props.domain} linkCallback={this.handleLink} key={issue.id} />
+  ));
+
+  backHome = () => {
+    const { history }  = this.props;
+    history.push("home", null);
+    history.go(1);
+  };
+
+  render() {
+    const { projects } = this.props;
+
+    return (
+      <Form name="create_issue" onSubmit={this.handleCreate}>
+        <Panel border={"none"}>
+          <ActionBar title="Create a new issue">
+            <Action icon="close" onClick={this.backHome} />
+          </ActionBar>
+          <Select
+            label="Project:"
+            name="project"
+            options={(() => projects.map(project => ({ label: project.name, value: project.shortName })))()}
+          />
+
+          <Input
+            label="Summary:"
+            name="summary"
+          />
+
+          <Textarea
+            label="Description:"
+            name="desc"
+          />
+
+          <div className="dp-form-group">
+            <Button className={"dp-Button--wide"}>Create issue</Button>
+          </div>
+
+        </Panel>
+
+      </Form>
+    );
+  }
+}
+
+export default connect(state => ({
+  projects: getProjects(state)
+}))(PageCreate);
