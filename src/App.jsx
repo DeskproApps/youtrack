@@ -14,7 +14,7 @@ import PageAuthenticate from './ui/PageAuthenticate';
 import { setYoutrackSettings, tryAndSetAuthToken, notEmpty, getDomainUrl, getProp } from './utils';
 import { createMemoryHistory as createHistory } from "history";
 import { fetchIssue, fetchProjects } from './api';
-import { setProjects, setIssues } from './redux/actions';
+import * as actions from './redux/actions';
 
 const history = createHistory({
   initialEntries: ["loading"],
@@ -91,8 +91,9 @@ class App extends React.PureComponent
   storeData = data => {
     const [projects, ...tail] = data;
 
-    this.props.dispatch(setProjects(getProp(projects, 'body', [])));
-    this.props.dispatch(setIssues(tail.map(issue => getProp(issue, 'body', {}))))
+    this.props.dispatch(actions.setDpApp(this.props.dpapp));
+    this.props.dispatch(actions.setProjects(getProp(projects, 'body', [])));
+    this.props.dispatch(actions.setIssues(tail.map(issue => getProp(issue, 'body', {}))))
   };
 
   /**

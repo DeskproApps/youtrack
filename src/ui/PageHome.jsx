@@ -6,6 +6,7 @@ import { Action, List, Panel } from '@deskpro/apps-components';
 import { getProp, getDomainUrl } from '../utils';
 import Issue from './Issue';
 import { getIssues } from '../redux/selectors';
+import * as actions from '../redux/actions';
 
 const customFieldID = 'youtrackCards';
 
@@ -48,7 +49,6 @@ class PageHome extends React.Component {
         .then(resp => {
           return customFields.setAppField(customFieldID, resp.filter(i => i.toLowerCase() !== data.issue.toLowerCase()))
         })
-        .then(this.initialiseRequests)
         .catch(this.handleError);
     }
   });
@@ -66,7 +66,7 @@ class PageHome extends React.Component {
   };
 
   handleUnlinkIssue = (issue) => {
-
+    this.props.dispatch(actions.unlinkIssue(issue));
   };
 
   /**
@@ -85,7 +85,7 @@ class PageHome extends React.Component {
               issue={issue}
               key={issue.id}
               domain={getDomainUrl()}
-              onUnlink={() => { this.handleUnlinkIssue(issue); }}
+              unlinkCallback={this.handleUnlinkIssue}
             />
           ))}
         </List>

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ActionBar, Action, Button, Panel } from '@deskpro/apps-components';
-import Issue from './Issue';
 
 import { Form, Select, Input, Textarea } from '../Forms';
 import { createIssue } from '../api';
 import { getProp } from '../utils';
 import { getProjects } from '../redux/selectors';
+import { addIssue } from '../redux/actions';
 
 const customFieldID = 'youtrackCards';
 
@@ -40,47 +40,23 @@ class PageCreate extends React.Component
     return this.createIssueCallback({ activeTab: 'issues', fetchData: true, issue });
   };
 
-  handleLink = ({ issue }) => {
-
-    const { callback } = this.props;
-    return callback({ activeTab: 'issues', fetchData: true, issue: { search: issue } });
-  };
-
   createIssueRequest = data => {
     const { customFields } = this.props.dpapp.context.get('ticket');
 
     const issue = getProp(data, 'issue', '');
 
-    if (issue.search !== '') {
-      if (issue.search.indexOf('http') === 0) {
-        const found = issue.search.match(/\/youtrack\/issue\/(.*)/);
-        if (found) {
-          return customFields.getAppField(customFieldID, [])
-            .then((issues) => {
-              return customFields.setAppField(customFieldID, [...issues, found[1]])
-                .then(() => {
-                  this.backHome();
-                })
-                .catch(console.log);
-            });
-        }
-      } else {
-        return customFields.getAppField(customFieldID, [])
-          .then((issues) => {
-            return customFields.setAppField(customFieldID, [...issues, issue.search])
-              .then(() => {
-                this.backHome();
-              })
-              .catch(console.log);
-          });
-      }
-    }
-
     return createIssue(issue)
       .then((resp) => {
+        const issueId = resp.headers.location.split('/').pop();
+        this.props.dispatch(addIssue({
+          id: issueId,
+          field: [
+            { name: 'summary', value: issue.summary},
+            { name: 'description', value: issue.desc}
+          ]
+        }));
         return customFields.getAppField(customFieldID, [])
           .then((issues) => {
-            const issueId = resp.headers.location.split('/').pop();
 
             return customFields.setAppField(customFieldID, [...issues, issueId])
               .then(() => {
@@ -95,10 +71,6 @@ class PageCreate extends React.Component
     const { handleError } = this.props;
     this.createIssueRequest(data).catch(handleError);
   };
-
-  renderIssues = (issues) => issues.map(issue => (
-    <Issue issue={issue} domain={this.props.domain} linkCallback={this.handleLink} key={issue.id} />
-  ));
 
   backHome = () => {
     const { history }  = this.props;

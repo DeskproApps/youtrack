@@ -6,7 +6,12 @@ import { get, put, del, getApiUrl, notEmpty } from './utils';
  *
  * @returns { Promise }
  */
-export const fetchIssue = issue => get(`${getApiUrl()}/issue/${issue}`);
+export const fetchIssue = issue => {
+  if (issue) {
+    return get(`${getApiUrl()}/issue/${issue}`);
+  }
+  return null;
+};
 
 
 /**
@@ -51,7 +56,17 @@ export const searchIssues = (filter) => {
  *
  * @returns { Promise }
  */
-export const fetchIssues = () => get(`${getApiUrl()}/issue`);
+export const fetchIssues = (project) => {
+  return get(`${getApiUrl()}/issue/count?filter=project:${project}`).then(
+    resp => {
+      let after = '';
+      if (resp.body.value > 10) {
+        after = `?after=${resp.body.value - 10}`
+      }
+      return get(`${getApiUrl()}/issue/byproject/${project}${after}`).then(resp => resp.body.reverse());
+    }
+  );
+};
 
 /**
  * Returns a promise which resolves with a list of projects

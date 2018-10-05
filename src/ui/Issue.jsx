@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ListItem, Action, ActionBar, Level, Menu } from '@deskpro/apps-components';
 import youtrackLogo from "../main/resources/icon.png";
 
-const extractSummary = fields => fields.filter(field => field.name === 'summary');
+const extractSummary = fields => fields.find(field => field.name === 'summary');
 
 class Issue extends React.PureComponent
 {
@@ -16,8 +16,8 @@ class Issue extends React.PureComponent
   };
 
   static defaultProps = {
-    unlinkCallback() {},
-    linkCallback() {},
+    unlinkCallback: null,
+    linkCallback: null,
   };
 
   constructor(props) {
@@ -69,6 +69,10 @@ class Issue extends React.PureComponent
     const { issue, unlinkCallback, linkCallback, domain } = this.props;
     const { confirmUnlink, menuOpen } = this.state;
 
+    if (!issue || !issue.id) {
+      return null;
+    }
+
     return (
       <ListItem className="dp-youtrack-issue">
         <ActionBar
@@ -82,13 +86,13 @@ class Issue extends React.PureComponent
           >
             <Action key="open" label={"Open"} icon={"open"} onClick={() => window.open(`${domain}/youtrack/issue/${issue.id}`, "_blank")} />
             { unlinkCallback && !confirmUnlink && <Action key="unlink" label="Unlink issue" icon="unlink" onClick={this.confirmUnlink} /> }
-            { unlinkCallback && confirmUnlink && <Action key="unlink" label="Are you sure?" onClick={() => unlinkCallback({ issue: issue.id, fetchData: true })} /> }
-            { linkCallback && <Action key="link" label={"Link issue"} icon={"link"} onClick={() => linkCallback({ issue: issue.id, fetchData: true })} /> }
+            { unlinkCallback && confirmUnlink && <Action key="unlink" label="Are you sure?" onClick={() => unlinkCallback(issue)} /> }
+            { linkCallback && <Action key="link" label={"Link issue"} icon={"link"} onClick={() => linkCallback(issue)} /> }
           </Menu>
 
         </ActionBar>
         <Level>
-          {extractSummary(issue.field)[0].value}
+          {extractSummary(issue.field).value}
         </Level>
 
       </ListItem>

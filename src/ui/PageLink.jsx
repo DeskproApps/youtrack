@@ -6,7 +6,9 @@ import debounce from '@deskpro/js-utils/dist/debounce';
 import { Form, Input, Select, required } from '../Forms';
 import Issue from './Issue';
 import { getProjects } from '../redux/selectors';
-import { searchIssues } from '../api';
+import { fetchIssues, searchIssues } from '../api';
+import * as actions from '../redux/actions';
+import { getDomainUrl } from '../utils';
 
 /**
  * Renders a tab containing a form which is used to link an existing Github issue
@@ -14,7 +16,8 @@ import { searchIssues } from '../api';
  */
 class PageLink extends React.PureComponent {
   static propTypes = {
-    projects: PropTypes.array
+    projects: PropTypes.array,
+    dispatch: PropTypes.func,
   };
 
   static defaultProps = {
@@ -32,7 +35,12 @@ class PageLink extends React.PureComponent {
    * @param {{project: string}} project
    */
   handleProjectChange = (project) => {
-    console.warn(project);
+    const { dpapp }  = this.props;
+
+    fetchIssues(project)
+      .then((items) => {
+        this.setState({ issues: items });
+      }).catch(dpapp.ui.showErrorNotification);
   };
 
   doSearch = (value) => {
@@ -60,11 +68,15 @@ class PageLink extends React.PureComponent {
     history.go(1);
   };
 
+  linkIssue = (issue) => {
+    this.props.dispatch(actions.linkIssue(issue));
+    this.backHome();
+  };
+
   render() {
     const { projects } = this.props;
     const { issues } = this.state;
 
-    console.log(projects);
     return (
       <Panel border={"none"} >
         <ActionBar title="Search for an issue">
@@ -86,7 +98,14 @@ class PageLink extends React.PureComponent {
             required
           />
         </Form>
-        {issues.map(issue => <Issue key={issue.id} issue={issue} onLink={() => this.linkIssue(issue)}/>)}
+        {issues.map(issue => (
+          <Issue
+            key={issue.id}
+            issue={issue}
+            domain={getDomainUrl()}
+            linkCallback={this.linkIssue}
+          />
+        ))}
       </Panel>
     );
   }
