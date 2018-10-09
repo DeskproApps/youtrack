@@ -17,10 +17,6 @@ cache:
 after_success:
   - if [ ! -z "$UPLOAD_ARTIFACT" ] ; then artifacts upload --target-paths /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/NODE-${TRAVIS_NODE_VERSION} build/app.zip ; fi
   - if [ ! -z "$UPLOAD_ARTIFACT" ] && [ ! -z "$TRAVIS_PULL_REQUEST_SLUG" ] ; then node node_modules/.bin/dpbuild -- travis pr-comment . --s3target /${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/NODE-${TRAVIS_NODE_VERSION} ; fi
-branches:
-  only:
-  - master
-  - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 deploy:
   skip_cleanup: true
   provider: releases

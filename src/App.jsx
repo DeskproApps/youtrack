@@ -36,7 +36,7 @@ export default class App extends React.PureComponent
       'user_settings', 'youtrack_settings'
     ]).then(data => {
 
-      if (!every(data, notEmpty)) {
+      if (!data || typeof data !== "object" || !data.youtrack_settings || !every(data.youtrack_settings, notEmpty)) {
         history.push("settings", null);
         history.go(1);
         return;
