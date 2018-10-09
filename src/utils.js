@@ -40,7 +40,6 @@ const notEmpty = val => {
 };
 
 const fetchAccessToken = () => authClient.requestAccess('youtrack', {
-    protocolVersion: "2.0",
     grant:        "implicit",
     authorizeUri: `${youtrackSettings.youtrackHubUrl}/api/rest/oauth2/auth`,
     clientId:     `${youtrackSettings.youtrackServiceId}`,
