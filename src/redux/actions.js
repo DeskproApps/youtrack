@@ -25,11 +25,6 @@ export const unlinkIssue = content => ({
   payload: content
 });
 
-export const setDpApp = content => ({
-  type: action_types.SET_DPAPP,
-  payload: content
-});
-
 export const setErrorHandler = content => ({
   type: action_types.SET_ERROR_HANDLER,
   payload: content

@@ -1,4 +1,5 @@
 import * as action_types from './action_types';
+import { getDpApp } from '@deskpro/apps-sdk';
 
 const initialState = {
   projects: [],
@@ -10,6 +11,7 @@ const initialState = {
 const customFieldID = 'youtrackCards';
 
 function youtrackApp(state = initialState, action) {
+  const dpapp = getDpApp();
   switch (action.type) {
     case action_types.SET_PROJECTS:
       return {
@@ -17,21 +19,21 @@ function youtrackApp(state = initialState, action) {
         projects: action.payload
       };
     case action_types.SET_ISSUES:
-      state.dpapp.ui.badgeCount = action.payload.length;
+      dpapp.ui.badgeCount = action.payload.length;
       return {
         ...state,
         issues: action.payload
       };
     case action_types.ADD_ISSUE:
       const issues = [...state.issues, action.payload];
-      state.dpapp.ui.badgeCount = issues.length;
+      dpapp.ui.badgeCount = issues.length;
       return {
         ...state,
         issues
       };
     case action_types.LINK_ISSUE: {
       const issue = action.payload;
-      const { customFields } = state.dpapp.context.get('ticket');
+      const { customFields } = dpapp.context.get('ticket');
 
       customFields.getAppField(customFieldID, [])
         .then((issues) => {
@@ -39,7 +41,7 @@ function youtrackApp(state = initialState, action) {
             .catch(console.log);
         });
       const issues = [...state.issues, issue];
-      state.dpapp.ui.badgeCount = issues.length;
+      dpapp.ui.badgeCount = issues.length;
       return {
         ...state,
         issues
@@ -47,7 +49,7 @@ function youtrackApp(state = initialState, action) {
     }
     case action_types.UNLINK_ISSUE: {
       const issue = action.payload;
-      const { customFields } = state.dpapp.context.get('ticket');
+      const { customFields } = dpapp.context.get('ticket');
 
       customFields.getAppField(customFieldID, [])
         .then(resp => {
@@ -55,17 +57,12 @@ function youtrackApp(state = initialState, action) {
         })
         .catch(state.errorHandler);
       const issues = state.issues.filter(i => i.id !== issue.id);
-      state.dpapp.ui.badgeCount = issues.length;
+      dpapp.ui.badgeCount = issues.length;
       return {
         ...state,
         issues
       };
     }
-    case action_types.SET_DPAPP:
-      return {
-        ...state,
-        dpapp: action.payload
-      };
     case action_types.SET_ERROR_HANDLER:
       return {
         ...state,
