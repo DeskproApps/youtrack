@@ -1,6 +1,6 @@
 {
   "name": "@deskpro/apps-youtrack",
-  "version": "0.3.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@deskpro/apps-components": "0.8.3",
