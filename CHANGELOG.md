@@ -4,7 +4,13 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
-## [0.1.0][] - 2018-08-31
+## [0.1.0][] - 2018-10-25
+
+### Added
+
+  - the number of linked issue is displayed in the badge count
+
+### Changed
 
  - use the new apps structure
  - use @deskpro/apps-sdk@0.8.0
@@ -14,7 +20,7 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ### Added
 
-    - admin readme
+  - admin readme
 
 ### Changed
 
