@@ -40,7 +40,7 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ### Added
 
-    - admin readme
+  - admin readme
 
 ### Changed
 
