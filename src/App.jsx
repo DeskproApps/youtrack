@@ -1,15 +1,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router'
 import every from 'lodash/every';
 import { Loader } from '@deskpro/apps-components';
+import PageCreate from './ui/PageCreate';
 import PageHome from './ui/PageHome';
+import PageLink from './ui/PageLink';
 import PageSettings from './ui/PageSettings';
 import PageError from './ui/PageError';
 import PageAuthenticate from './ui/PageAuthenticate';
-import { setYoutrackSettings, tryAndSetAuthToken, notEmpty } from './utils';
+import { setYoutrackSettings, tryAndSetAuthToken, notEmpty, getDomainUrl, getProp } from './utils';
 import { createMemoryHistory as createHistory } from "history";
+import { fetchIssue, fetchProjects } from './api';
+import * as actions from './redux/actions';
 
 const history = createHistory({
   initialEntries: ["loading"],
@@ -24,7 +29,7 @@ let youtrackSettings = {
 /**
  * Renders a Youtrack Deskpro app.
  */
-export default class App extends React.PureComponent
+class App extends React.PureComponent
 {
   /**
    * Invoked immediately after a component is mounted
@@ -66,12 +71,56 @@ export default class App extends React.PureComponent
           message: 'An error occurred trying to authenticate the app. Please check your settings and try again.'
         }
       });
+    }).then(() => {
+      this.initialiseRequests();
     });
   }
+
+  initialiseRequests = () => {
+    const { customFields } = this.props.dpapp.context.get('ticket');
+    return customFields.getAppField('youtrackCards', [])
+      .then(this.fetchData)
+      .then(this.storeData)
+      ;
+  };
+
+  fetchData = resp => {
+    return Promise.all([fetchProjects(), ...resp.map(fetchIssue)]);
+  };
+
+  storeData = data => {
+    const [projects, ...tail] = data;
+
+    this.props.dispatch(actions.setProjects(getProp(projects, 'body', [])));
+    this.props.dispatch(actions.setIssues(tail.map(issue => getProp(issue, 'body', {}))));
+  };
+
+  /**
+   * Generic error handler
+   *
+   * @param {*} err
+   * @returns {*}
+   */
+  handleError = err => {
+    const { dpapp, history } = this.props;
+
+    if (getProp(err, 'errorData.statusCode', null) === 401) {
+      history.push("authenticate", null);
+      history.go(1);
+      return err;
+    }
+
+    dpapp.ui.showErrorNotification(err);
+    return err;
+  };
 
   renderPageAuthenticate = (props) => <PageAuthenticate {...props} youtrackSettings={youtrackSettings} dpapp={this.props.dpapp}/>;
 
   renderPageHome = (props) => <PageHome {...props} dpapp={this.props.dpapp}/>;
+
+  renderPageCreate = (props) => <PageCreate {...props} dpapp={this.props.dpapp} domain={getDomainUrl()} handleError={this.handleError} />;
+
+  renderPageLink = (props) => <PageLink {...props} dpapp={this.props.dpapp}/>;
 
   render() {
     return (
@@ -80,8 +129,10 @@ export default class App extends React.PureComponent
           <Route path="settings" component={PageSettings} />
           <Route path="authenticate" component={this.renderPageAuthenticate} />
           <Route path="home" render={this.renderPageHome} />
+          <Route path="link" render={this.renderPageLink} />
+          <Route path="create" render={this.renderPageCreate} />
           <Route path="error" component={PageError} />
-          <Route path={"loading"} render={() => <Loader />} />
+          <Route path="loading" render={() => <Loader />} />
         </Switch>
       </Router>
     );
@@ -96,3 +147,5 @@ App.propTypes = {
   dpapp: PropTypes.object,
 
 };
+
+export default connect()(App);

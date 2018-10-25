@@ -7,7 +7,7 @@ import { AppFrame } from '@deskpro/apps-components';
 import { createAppFromProps } from '@deskpro/apps-sdk';
 import { Provider } from "react-redux";
 
-import store from '../../src/store';
+import createAppStore from '../../src/store';
 import {setAuthClient, setRestApi, setStorageClient} from "../../src/utils";
 
 test('successfully render the application in initial state', () => {
@@ -31,6 +31,7 @@ test('successfully render the application in initial state', () => {
   setRestApi(dpapp.restApi);
   setAuthClient(dpapp.oauth);
   setStorageClient(dpapp.storage);
+  const store = createAppStore();
 
   const wrapper = mount(
     <AppFrame iconUrl={"../../public/icon.png"} title={"my app"} >

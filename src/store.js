@@ -1,9 +1,16 @@
 import { reducer as reduxFormReducer } from 'redux-form'
 import { createStore, combineReducers } from 'redux';
+import appReducers from './redux/reducers';
 
-const reducer = combineReducers({
-  form: reduxFormReducer, // mounted under "form"
-});
-const store = createStore(reducer);
+export default function createAppStore() {
 
-export default store;
+  const reducer = combineReducers({
+    form: reduxFormReducer, // mounted under "form"
+    app: appReducers,
+  });
+
+  return createStore(reducer);
+}
+
+
+

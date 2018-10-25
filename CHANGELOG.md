@@ -4,6 +4,17 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+## [0.2.0][] - 2018-10-25
+
+### Added
+
+  - the number of linked issue is displayed in the badge count
+  
+### Changed
+
+  - ux changes  
+
+
 ## [0.1.0][] - 2018-08-31
 
  - use the new apps structure
@@ -59,7 +70,8 @@ This project is following [Semantic Versioning](http://semver.org)
 
  - add support for viewing and creating Youtrack issues.
 
-[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/DeskproApps/youtrack/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.7...v0.1.0
 [0.1.0-beta.7]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.6...v0.1.0-beta.7
 [0.1.0-beta.6]: https://github.com/DeskproApps/youtrack/compare/v0.1.0-beta.5...0.1.0-beta.6

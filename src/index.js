@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 
 import './styles.css';
 import App from './App';
-import store from './store';
+import createAppStore from './store';
 import {setAuthClient, setRestApi, setStorageClient} from "./utils";
 
 createApp(dpapp => props => {
@@ -15,6 +15,7 @@ createApp(dpapp => props => {
   setRestApi(dpapp.restApi);
   setAuthClient(dpapp.oauth);
   setStorageClient(dpapp.storage);
+  const store = createAppStore();
 
   ReactDOM.render(
     <AppFrame {...props}>
