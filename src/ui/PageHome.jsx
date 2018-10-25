@@ -36,6 +36,17 @@ class PageHome extends React.Component {
     dispatch: PropTypes.func,
   };
 
+  componentDidUpdate() {
+    const { issues, dpapp } = this.props;
+
+    if (issues && issues.length) {
+      dpapp.ui.badgeCount = issues.length;
+      dpapp.ui.showBadgeCount();
+    } else if (issues) {
+      dpapp.ui.hideBadgeCount();
+    }
+  }
+
   handleTabChange = activeTab => this.setState({ activeTab });
 
   unlinkCallback = data => this.setState({

@@ -17,7 +17,13 @@ import { getDomainUrl } from '../utils';
 class PageLink extends React.PureComponent {
   static propTypes = {
     projects: PropTypes.array,
+
     dispatch: PropTypes.func,
+
+    /**
+     * Instance of dpapp.
+     */
+    dpapp: PropTypes.object,
   };
 
   static defaultProps = {
@@ -69,7 +75,9 @@ class PageLink extends React.PureComponent {
   };
 
   linkIssue = (issue) => {
-    this.props.dispatch(actions.linkIssue(issue));
+    const { dispatch, dpapp } = this.props;
+    dispatch(actions.linkIssue(issue));
+    dpapp.ui.badgeCount = dpapp.ui.badgeCount + 1;
     this.backHome();
   };
 

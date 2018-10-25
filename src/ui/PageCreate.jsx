@@ -24,6 +24,11 @@ class PageCreate extends React.Component
      * Error callback
      */
     handleError: PropTypes.func,
+
+    /**
+     * Instance of dpapp.
+     */
+    dpapp: PropTypes.object,
   };
 
   static defaultProps = {
@@ -41,6 +46,7 @@ class PageCreate extends React.Component
   };
 
   createIssueRequest = data => {
+    const { dpapp } = this.props;
     const { customFields } = this.props.dpapp.context.get('ticket');
 
     const issue = getProp(data, 'issue', '');
@@ -57,9 +63,9 @@ class PageCreate extends React.Component
         }));
         return customFields.getAppField(customFieldID, [])
           .then((issues) => {
-
             return customFields.setAppField(customFieldID, [...issues, issueId])
               .then(() => {
+                dpapp.ui.badgeCount = dpapp.ui.badgeCount + 1;
                 this.backHome();
               })
               .catch(console.log);

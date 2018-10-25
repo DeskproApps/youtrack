@@ -19,14 +19,12 @@ function youtrackApp(state = initialState, action) {
         projects: action.payload
       };
     case action_types.SET_ISSUES:
-      dpapp.ui.badgeCount = action.payload.length;
       return {
         ...state,
         issues: action.payload
       };
     case action_types.ADD_ISSUE:
       const issues = [...state.issues, action.payload];
-      dpapp.ui.badgeCount = issues.length;
       return {
         ...state,
         issues
@@ -41,7 +39,6 @@ function youtrackApp(state = initialState, action) {
             .catch(console.log);
         });
       const issues = [...state.issues, issue];
-      dpapp.ui.badgeCount = issues.length;
       return {
         ...state,
         issues
@@ -57,7 +54,6 @@ function youtrackApp(state = initialState, action) {
         })
         .catch(state.errorHandler);
       const issues = state.issues.filter(i => i.id !== issue.id);
-      dpapp.ui.badgeCount = issues.length;
       return {
         ...state,
         issues
