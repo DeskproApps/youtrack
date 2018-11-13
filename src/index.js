@@ -9,6 +9,7 @@ import './styles.css';
 import App from './App';
 import createAppStore from './store';
 import {setAuthClient, setRestApi, setStorageClient} from "./utils";
+import AppPlaceholder from './ui/AppPlaceholder';
 
 createApp(dpapp => props => {
 
@@ -20,7 +21,7 @@ createApp(dpapp => props => {
   ReactDOM.render(
     <AppFrame {...props}>
       <Provider store={store}>
-        <App dpapp={dpapp} />
+        {dpapp.getProperty('isPreRender') ? <AppPlaceholder /> : <App dpapp={dpapp} />}
       </Provider>
     </AppFrame>,
     document.getElementById('root')
