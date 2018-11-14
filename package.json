@@ -80,21 +80,21 @@
       {
         "name": "youtrackServiceId",
         "defaultValue": "",
-        "title": "The Youtrack service id (from HUB) ",
+        "title": "YouTrack Service ID in Hub",
         "required": true,
         "type": "text"
       },
       {
         "name": "youtrackHubUrl",
         "defaultValue": "",
-        "title": "The Youtrack HUB url",
+        "title": "Hub URL",
         "required": true,
         "type": "text"
       },
       {
         "name": "urlRedirect",
         "defaultValue": "",
-        "title": "The Youtrack redirect URL",
+        "title": "Redirect URI",
         "required": true,
         "type": "text"
       }

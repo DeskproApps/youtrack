@@ -9,6 +9,11 @@ This project is following [Semantic Versioning](http://semver.org)
 ### Added
 
  - show an application placeholder before the app gets a change to load
+ 
+### Fixed
+
+ - previously saved settings not appearing in the admin settings form 
+ - settings field names
 
 ### Changed
 
