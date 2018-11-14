@@ -24,7 +24,8 @@ export default class AdminSettings extends React.Component {
 
   state = {
     oauthSettings: null,
-    error: null
+    error: null,
+    values: null
   };
 
   componentDidMount() {
@@ -33,11 +34,27 @@ export default class AdminSettings extends React.Component {
     setAuthClient(this.props.dpapp.oauth);
     setStorageClient(this.props.dpapp.storage);
 
-    const { oauth } = this.props.dpapp;
+    const { oauth, storage } = this.props.dpapp;
 
-    oauth.settings('youtrack', { grant: "implicit" })
-      .then( oauthSettings => this.setState({ oauthSettings, error: null }) )
-      .catch( error => this.setState({ oauthSettings: null, error: new Error(error) }) )
+    let fetchPreviousValues;
+
+    if (this.props.installType !== 'install') {
+      fetchPreviousValues = storage.getAppStorage('youtrack_settings').then(data => ({ values:data }))
+    } else {
+      fetchPreviousValues = Promise.resolve({ values: null })
+    }
+
+    fetchPreviousValues
+      .then(
+        state => oauth.settings('youtrack', { grant: "implicit" })
+          .then(
+            oauthSettings => ({ ...state, oauthSettings, error: null } )
+          )
+          .catch(
+            error => ({ ...state, oauthSettings: null, error: new Error(error) })
+          )
+      )
+      .then(state => this.setState(state))
     ;
   }
 
@@ -66,6 +83,10 @@ export default class AdminSettings extends React.Component {
       if (redirectUrl && errorFree) {
         newValues.urlRedirect = redirectUrl;
         newSettings = newSettings.map(el => (el.name === 'urlRedirect' ? { ...el, defaultValue: redirectUrl } : el));
+      }
+
+      if (this.state.values) {
+        newValues = { ...newValues, ...this.state.values }
       }
 
       let formRef;
