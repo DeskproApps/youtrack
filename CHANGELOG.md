@@ -4,6 +4,12 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+## [0.3.1][] - 2019-02-06
+
+### Added
+ 
+ - Translations (fr)
+
 ## [0.3.0][] - 2018-11-14
 
 ### Added
