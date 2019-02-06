@@ -15,8 +15,6 @@
 # Refer to the manual for more information about translation and I18n:
 # https://deskpro.gitbook.io/deskpro-apps/i18n/translation-and-i18n
 
-admin:
-  update_settings: "Update Settings"
 home:
   linked_issues: "Linked issues"
 issue:

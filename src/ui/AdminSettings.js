@@ -10,7 +10,6 @@ import {
   setStorageClient,
   setYoutrackSettings
 } from '../utils'
-import { Phrase } from '@deskpro/apps-components';
 
 export default class AdminSettings extends React.Component {
 
@@ -99,7 +98,7 @@ export default class AdminSettings extends React.Component {
             ref={ref => formRef = ref}
             onSubmit={this.onSettings.bind(this)}
           />
-          <button className={'btn-action'} onClick={() => formRef.submit()}><Phrase id="admin.update_settings" /></button>
+          <button className={'btn-action'} onClick={() => formRef.submit()}>Update Settings</button>
         </div>
       );
     }
