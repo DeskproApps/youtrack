@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import isError from 'lodash/isError';
+import { Phrase } from '@deskpro/apps-components';
 
 export default class ScreenSettings extends React.Component {
 
@@ -91,7 +92,7 @@ export default class ScreenSettings extends React.Component {
             ref={ref => formRef = ref}
             onSubmit={this.onSettings.bind(this)}
           />
-          <button className={'btn-action'} onClick={() => formRef.submit()}>Update Settings</button>
+          <button className={'btn-action'} onClick={() => formRef.submit()}><Phrase id="admin.update_settings" /></button>
         </div>
       );
     }

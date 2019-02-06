@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Button, Panel } from '@deskpro/apps-components';
+import { Button, Panel, Phrase } from '@deskpro/apps-components';
 
 
 import { fetchAccessToken,  storeAccessToken } from '../utils'
@@ -30,10 +30,10 @@ class PageAuthenticate extends React.PureComponent {
     return (
       <Panel title="Authentication required">
         <p>
-          It seems your access token expired. You must authenticate with Youtrack before you continue.
+          <Phrase id="authenticate.token_expired" />
         </p>
         <Button onClick={this.handleClick}>
-          Authenticate
+          <Phrase id="authenticate.authenticate"/>
         </Button>
       </Panel>
     );

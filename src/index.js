@@ -1,5 +1,5 @@
 
-import { AppFrame } from '@deskpro/apps-components';
+import { DefaultDeskproApp } from '@deskpro/apps-components';
 import { createApp } from '@deskpro/apps-sdk';
 import ReactDOM from 'react-dom';
 import React from 'react';
@@ -10,6 +10,7 @@ import App from './App';
 import createAppStore from './store';
 import {setAuthClient, setRestApi, setStorageClient} from "./utils";
 import AppPlaceholder from './ui/AppPlaceholder';
+import * as phrasePacks from './locales/**/*.{json,yaml,yml}';
 
 createApp(dpapp => props => {
 
@@ -19,11 +20,11 @@ createApp(dpapp => props => {
   const store = createAppStore();
 
   ReactDOM.render(
-    <AppFrame {...props}>
+    <DefaultDeskproApp dpapp={dpapp} phrasePacks={phrasePacks} {...props}>
       <Provider store={store}>
-        {dpapp.getProperty('isPreRender') ? <AppPlaceholder /> : <App dpapp={dpapp} />}
+        {dpapp.getProperty('isPreRender') ? <AppPlaceholder dpapp={dpapp} /> : <App dpapp={dpapp} />}
       </Provider>
-    </AppFrame>,
+    </DefaultDeskproApp>,
     document.getElementById('root')
   )
 });

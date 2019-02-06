@@ -84,17 +84,19 @@ class PageHome extends React.Component {
    * @returns {XML}
    */
   render() {
-    const { issues } = this.props;
+    const { issues, dpapp } = this.props;
 
+    console.warn(dpapp.t('create'));
     return (
-      <Panel title={"Linked Issues"} border={"none"} className="dp-github-container">
-        <Action icon={"search"} label={"Find"} onClick={this.openLink}/>
-        <Action icon={"add"} label={"Create"} onClick={this.openCreate}/>
+      <Panel title={dpapp.t('home.linked_issues')} border={"none"} className="dp-github-container">
+        <Action icon={"search"} label={dpapp.t('find')} onClick={this.openLink}/>
+        <Action icon={"add"} label={dpapp.t('create')} onClick={this.openCreate}/>
         <List className="dp-github-issues">
           {issues.map((issue) => (
             <Issue
               issue={issue}
               key={issue.id}
+              dpapp={dpapp}
               domain={getDomainUrl()}
               unlinkCallback={this.handleUnlinkIssue}
             />

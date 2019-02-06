@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Action, List, Panel } from '@deskpro/apps-components';
 
 /**
@@ -6,15 +7,22 @@ import { Action, List, Panel } from '@deskpro/apps-components';
  * open ticket.
  */
 class AppPlaceholder extends React.Component {
+  static propTypes = {
+    /**
+     * instance of app client.
+     */
+    dpapp: PropTypes.object,
+  };
 
   /**
    * @returns {XML}
    */
   render() {
+    const { dpapp } = this.props;
     return (
-      <Panel title={"Linked Issues"} border={"none"} className="dp-github-container">
-        <Action icon={"search"} label={"Find"} />
-        <Action icon={"add"} label={"Create"} />
+      <Panel title={dpapp.t('home.linked_issues')} border={"none"} className="dp-github-container">
+        <Action icon={"search"} label={dpapp.t('find')} />
+        <Action icon={"add"} label={dpapp.t('create')} />
         <List className="dp-github-issues" />
       </Panel>
     );

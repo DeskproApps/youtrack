@@ -82,26 +82,27 @@ class PageLink extends React.PureComponent {
   };
 
   render() {
-    const { projects } = this.props;
+    const { projects, dpapp } = this.props;
     const { issues } = this.state;
 
     return (
       <Panel border={"none"} >
-        <ActionBar title="Search for an issue">
+        <ActionBar title={dpapp.t('link_page.search_issue')}>
           <Action icon="close" onClick={this.backHome} />
         </ActionBar>
         <Form name="search_issue">
           <Input type="search" name="search" onChange={this.handleSearch}/>
         </Form>
-        <Separator title="or" />
-        <ActionBar title="Link issue" />
+        <Separator title={dpapp.t('orSeparator')} />
+        <ActionBar title={dpapp.t('link_page.link_issue')} />
         <Form name="link_issue">
           <Select
-            label=    "Project:"
+            label={`${dpapp.t('youtrack.project')}:`}
             name=     "project"
 
             validate= {required}
             onChange= {this.handleProjectChange}
+            placeholder={dpapp.t('youtrack.please_select')}
             options={(() => projects.map(project => ({ label: project.name, value: project.shortName })))()}
             required
           />
