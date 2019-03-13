@@ -4,6 +4,11 @@ This project is following [Semantic Versioning](http://semver.org)
 
 ## [Unreleased][]
 
+## [0.3.2][] - 2019-03-13
+
+### Fixed
+
+- artificially bump the version because app already released internally as 0.3.1
 
 ## [0.3.1][] - 2019-03-13
 
@@ -94,7 +99,8 @@ This project is following [Semantic Versioning](http://semver.org)
 
  - add support for viewing and creating Youtrack issues.
 
-[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/DeskproApps/youtrack/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/DeskproApps/youtrack/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/DeskproApps/youtrack/compare/v0.3.1...v0.3.1
 [0.3.1]: https://github.com/DeskproApps/youtrack/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/DeskproApps/youtrack/compare/v0.2.0...v0.3.0
