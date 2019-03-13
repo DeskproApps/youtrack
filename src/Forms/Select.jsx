@@ -87,12 +87,13 @@ SelectComponent.defaultProps = {
  *
  * @see https://redux-form.com/7.0.4/docs/api/field.md/#2-a-stateless-function
  */
-export const SelectField = ({ options, input, label, meta, ...props }) => (
+export const SelectField = ({ options, input, label, meta, placeholder, ...props }) => (
     <Group label={label} error={meta.touched ? meta.error : ''} {...props}>
       <SelectComponent
         {...input}
-        options=  {options}
-        onBlur=   {() => {}}
+        placeholder={placeholder}
+        options=    {options}
+        onBlur=     {() => {}}
       />
     </Group>
 );

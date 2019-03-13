@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActionBar, Action, Button, Panel } from '@deskpro/apps-components';
+import { ActionBar, Action, Button, Panel, Phrase } from '@deskpro/apps-components';
 
 import { Form, Select, Input, Textarea } from '../Forms';
 import { createIssue } from '../api';
@@ -85,32 +85,33 @@ class PageCreate extends React.Component
   };
 
   render() {
-    const { projects } = this.props;
+    const { projects, dpapp } = this.props;
 
     return (
       <Form name="create_issue" onSubmit={this.handleCreate}>
         <Panel border={"none"}>
-          <ActionBar title="Create a new issue">
+          <ActionBar title={dpapp.t('create_page.create_a_new_issue')}>
             <Action icon="close" onClick={this.backHome} />
           </ActionBar>
           <Select
-            label="Project:"
+            label={`${dpapp.t('youtrack.project')}:`}
             name="project"
+            placeholder={dpapp.t('youtrack.please_select')}
             options={(() => projects.map(project => ({ label: project.name, value: project.shortName })))()}
           />
 
           <Input
-            label="Summary:"
+            label={`${dpapp.t('youtrack.summary')}:`}
             name="summary"
           />
 
           <Textarea
-            label="Description:"
+            label={`${dpapp.t('youtrack.description')}:`}
             name="desc"
           />
 
           <div className="dp-form-group">
-            <Button className={"dp-Button--wide"}>Create issue</Button>
+            <Button className={"dp-Button--wide"}><Phrase id="create_page.create_issue" /></Button>
           </div>
 
         </Panel>
