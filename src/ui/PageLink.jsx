@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Action, ActionBar, Panel, Separator } from '@deskpro/apps-components';
+import { Action, ActionBar, Panel, Separator, Icon, Level } from '@deskpro/apps-components';
 import debounce from '@deskpro/js-utils/dist/debounce';
 import { Form, Input, Select, required } from '../Forms';
 import Issue from './Issue';
@@ -33,6 +33,7 @@ class PageLink extends React.PureComponent {
   state = {
     issues: [],
     query:  '',
+    searching: false
   };
 
   /**
@@ -51,11 +52,14 @@ class PageLink extends React.PureComponent {
 
   doSearch = (value) => {
     const { dpapp }  = this.props;
-
-    searchIssues(value)
+    this.setState({ searching: true });
+    return searchIssues(value)
       .then((items) => {
         this.setState({ issues: items });
-      }).catch(dpapp.ui.showErrorNotification);
+      })
+      .catch(dpapp.ui.showErrorNotification)
+      .then(() => this.setState({ searching: false }))
+      ;
   };
 
   debouncedSearch = debounce(this.doSearch, 1000);
@@ -91,7 +95,7 @@ class PageLink extends React.PureComponent {
           <Action icon="close" onClick={this.backHome} />
         </ActionBar>
         <Form name="search_issue">
-          <Input type="search" name="search" onChange={this.handleSearch}/>
+          <Input type="search" name="search" onChange={this.handleSearch} />
         </Form>
         <Separator title={dpapp.t('orSeparator')} />
         <ActionBar title={dpapp.t('link_page.link_issue')} />
@@ -107,8 +111,18 @@ class PageLink extends React.PureComponent {
             required
           />
         </Form>
-        {issues.map(issue => (
+
+        {this.state.searching &&
+          <Level>
+            <div style={{margin: "10px auto 5px"}}>
+              <Icon name={"refreshing"}/>
+             </div>
+          </Level>
+        }
+
+        {!this.state.searching && issues.map(issue => (
           <Issue
+            dpapp={dpapp}
             key={issue.id}
             issue={issue}
             domain={getDomainUrl()}
