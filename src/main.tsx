@@ -1,11 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import { HashRouter } from "react-router-dom";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { DeskproAppProvider } from "@deskpro/app-sdk";
+import { queryClient } from "./query";
+import { App } from "./App";
 
-ReactDOM.render(
+import "iframe-resizer/js/iframeResizer.contentWindow.js";
+import "flatpickr/dist/themes/light.css";
+import "tippy.js/dist/tippy.css";
+import "simplebar/dist/simplebar.min.css";
+import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
+import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
+
+TimeAgo.addDefaultLocale(en);
+
+ReactDOM.render((
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+    <DeskproAppProvider>
+      <HashRouter>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </HashRouter>
+    </DeskproAppProvider>
+  </React.StrictMode>
+), document.getElementById("root"));

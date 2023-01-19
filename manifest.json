@@ -1,8 +1,8 @@
 {
-  "name": "@deskpro-apps/my_app",
-  "title": "My App",
-  "description": "My Deskpro app",
-  "version": "0.0.0",
+  "name": "@deskpro-apps/youtrack",
+  "title": "YouTrack",
+  "description": "This application adds support for viewing and creating Youtrack issues.",
+  "version": "1.0.0",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
@@ -10,19 +10,36 @@
     "target": "ticket_sidebar",
     "entrypoint": "index.html"
   }],
+  "entityAssociations": {
+    "linkedYouTrackIssue": {
+      "title": "Linked YouTrack Issue",
+      "entity": "ticket",
+      "type": "external_id"
+    }
+  },
   "settings": {
-    "example": {
-      "title": "Example Setting",
-      "description": "Example backend only setting",
+    "domain": {
+      "title": "Domain Prefix",
+      "description": "E.g. \"mycompany\" if your domain is \"https://mycompany.youtrack.cloud\"",
+      "validationPattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_-]*[a-zA-Z0-9])?$",
       "type": "string",
-      "isRequired": false,
-      "isBackendOnly": true
+      "isRequired": true,
+      "isBackendOnly": false,
+      "order": 10
+    },
+    "permanent_auth_token": {
+      "title": "Permanent Token",
+      "description": "YouTrack permanent authorization token, please follow the app setup guide to get this",
+      "type": "string",
+      "isRequired": true,
+      "isBackendOnly": true,
+      "order": 20
     }
   },
   "proxy": {
     "whitelist": [{
-      "url": "https://jsonplaceholder.typicode.com/.*",
-      "methods": ["GET"],
+      "url": "https://(.*).youtrack.cloud/api/.*",
+      "methods": ["GET", "POST"],
       "timeout": 20
     }]
   }
