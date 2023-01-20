@@ -66,7 +66,7 @@ const VerifySettings: FC = () => {
       {nbsp}
       {currentUser
         ? (
-          <P1 style={{ marginBottom: "6px" }}>
+          <P1>
             Verified as <Valid>{currentUser.name} {`<${currentUser.email}>`}</Valid>
           </P1>
         )
