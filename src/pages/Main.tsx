@@ -1,6 +1,6 @@
 import { useInitialisedDeskproAppClient } from "@deskpro/app-sdk";
 
-export const Main = () => {
+const Main = () => {
   useInitialisedDeskproAppClient((client) => {
     client.registerElement("refresh", { type: "refresh_button" });
   });
@@ -9,3 +9,5 @@ export const Main = () => {
     <>Main</>
   );
 };
+
+export { Main };

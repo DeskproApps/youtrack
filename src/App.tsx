@@ -6,7 +6,10 @@ import {
   LoadingSpinner,
   useDeskproAppClient,
 } from "@deskpro/app-sdk";
-import { Main } from "./pages/Main";
+import {
+  Main,
+  VerifySettings,
+} from "./pages";
 import { ErrorFallback } from "./components";
 
 const App = () => {
@@ -23,6 +26,7 @@ const App = () => {
     <Suspense fallback={<LoadingSpinner/>}>
       <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
         <Routes>
+          <Route path="/admin/verify_settings" element={<VerifySettings/>} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>
