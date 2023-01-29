@@ -10,7 +10,7 @@ const mockCurrentUser = {
   email:"armen.tamzarian@me.com",
   id:"1-1",
   login:"zpawn",
-  name:"Armen Tamzarian",
+  fullName:"Armen Tamzarian",
 }
 
 const mockClient = {
