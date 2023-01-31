@@ -1,4 +1,4 @@
-import { FC, ReactNode, isValidElement } from "react";
+import * as React from "react";
 import styled from "styled-components";
 import { P5, P8 } from "@deskpro/app-sdk";
 import type { Props } from "./types";
@@ -11,12 +11,12 @@ const Container = styled.div<Props>`
   margin-bottom: ${({ marginBottom }) => `${marginBottom}px`};
 `;
 
-const Property: FC<Props> = ({ text, label, marginBottom = 10 }) => {
-    let textBlock: ReactNode = "-";
+const Property: React.FC<Props> = ({ text, label, marginBottom = 10 }) => {
+    let textBlock: React.ReactNode = "-";
 
     if (typeof text === "string" || typeof text === "number") {
         textBlock = (<P5>{text}</P5>);
-    } else if (isValidElement(text)) {
+    } else if (React.isValidElement(text)) {
         textBlock = text;
     }
 

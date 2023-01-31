@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Stack, Checkbox, HorizontalDivider } from "@deskpro/app-sdk";
 import { getOption } from "../../utils";
 import { IssueItem } from "../IssueItem";
@@ -23,7 +23,7 @@ type Props = {
   isSubmitting: boolean,
   onChange: SearchProps["onChange"],
   onClear: SearchProps["onClear"],
-  issues: Issue[],
+  issues?: Issue[],
   projects: Project[],
   selectedProject: Option<Project["id"]|"any">,
   onChangeSelectProject: (o: Option<Project["id"]|"any">) => void,

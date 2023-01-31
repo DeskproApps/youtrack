@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import React, { FC, useState } from "react";
 import get from "lodash/get";
 import {
   faCheck,
@@ -11,7 +11,6 @@ import {
   DivAsInputWithDisplayProps,
 } from "@deskpro/deskpro-ui";
 import {
-
   Dropdown,
   DropdownTargetProps,
 } from "@deskpro/app-sdk";

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import * as React from "react";
 import styled, { css } from "styled-components";
 import { Property } from "./Property";
 import type { Props as PropertyProps } from "./types";
@@ -31,7 +31,7 @@ const Side = styled.div<{ withDivider?: boolean }>`
   }
 `;
 
-const TwoProperties: FC<Props> = ({leftLabel, leftText, rightLabel, rightText}) => (
+const TwoProperties: React.FC<Props> = ({leftLabel, leftText, rightLabel, rightText}) => (
   <Container>
     <Side>
       <Property

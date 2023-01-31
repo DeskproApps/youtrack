@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import * as React from "react";
 import styled from "styled-components";
 import { Label as UILabel } from "@deskpro/app-sdk";
 import type { FC, Ref } from "react";
@@ -9,7 +9,7 @@ export type Props = LabelProps & {
 };
 
 const Label: FC<Props> = styled(
-    forwardRef((props, ref: Ref<HTMLLabelElement>) => (
+    React.forwardRef((props, ref: Ref<HTMLLabelElement>) => (
         <UILabel ref={ref} {...props} />
     ))
 )`

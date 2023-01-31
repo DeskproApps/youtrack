@@ -1,17 +1,25 @@
-import React from "react";
+import * as React from "react";
 import fetch from "node-fetch";
 import { cleanup } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { IssueItem } from "../IssueItem";
 import { render } from "../../../testing";
-import { VerifySettings } from "../VerifySettings";
+import type { Issue } from "../../../services/youtrack/types";
 
-const mockCurrentUser = {
-  $type:"Me",
-  email:"armen.tamzarian@me.com",
-  id:"1-1",
-  login:"zpawn",
-  fullName:"Armen Tamzarian",
-}
+const issue: Issue = {
+  $type: "Issue",
+  id: "2-40",
+  idReadable: "SPDP-3",
+  summary: "Simple Deskpro Issue",
+  project: {
+    $type: "Project",
+    id: "0-4",
+    name: "Simple Deskpro",
+    shortName: "SPDP",
+  },
+  comments: [],
+  customFields: [],
+  description: "",
+};
 
 const mockClient = {
   getProxyAuth: () => new Promise(() => {}),
@@ -28,7 +36,7 @@ const mockClient = {
   entityAssociationDelete: async () => {},
   entityAssociationGet: async () => null,
   entityAssociationList: async () => [""],
-  entityAssociationCountEntities: async () => 0,
+  entityAssociationCountEntities: async () => 1,
 
   setState: async () => ({ isSuccess: false, errors: [] }),
   setUserState: async () => ({ isSuccess: false, errors: [] }),
@@ -56,8 +64,8 @@ const mockClient = {
   setAdminSettingInvalid: async () => {},
 };
 
-jest.mock("../../../services/youtrack/getCurrentUserService", () => ({
-  getCurrentUserService: () => Promise.resolve(mockCurrentUser)
+jest.mock("../../../services/entityAssociation/getEntityAssociationCountService", () => ({
+  getEntityAssociationCountService: () => Promise.resolve(0)
 }))
 
 jest.mock("@deskpro/app-sdk", () => ({
@@ -97,14 +105,11 @@ jest.mock("@deskpro/app-sdk", () => ({
   proxyFetch: async () => fetch,
 }));
 
-describe("VerifySettings Page", () => {
-  test("valid verify", async () => {
-    const { findByText, findByRole } = render(<VerifySettings />, { wrappers: { theme: true }});
-    const button = await findByRole("button", { name: /Verify Settings/i });
+describe("IssueItem", () => {
+  test("render", async () => {
+    const { findByText } = render(<IssueItem issue={issue}/>, { wrappers: { theme: true } });
 
-    await userEvent.click(button);
-
-    expect(await findByText(/Armen Tamzarian/i)).toBeInTheDocument();
+    expect(await findByText(/Simple Deskpro Issue/i)).toBeInTheDocument();
   });
 
   afterEach(() => {

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import * as React from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import {
@@ -8,7 +8,6 @@ import {
 import { getEntityAssociationCountService } from "../../services/entityAssociation";
 import { useExternalLink } from "../../hooks";
 import { YouTrackLogo, Property, TwoProperties } from "../common";
-import type { FC, MouseEvent } from "react";
 import type { Issue } from "../../services/youtrack/types";
 
 type Props = {
@@ -21,12 +20,12 @@ const TitleLink = styled.a`
     text-decoration: none;
 `;
 
-const IssueItem: FC<Props> = ({ issue, onClickTitle }) => {
+const IssueItem: React.FC<Props> = ({ issue, onClickTitle }) => {
   const { getIssueUrl } = useExternalLink();
 
-  const [ticketCount, setTicketCount] = useState<number>(0);
+  const [ticketCount, setTicketCount] = React.useState<number>(0);
 
-  const onClick = useCallback((e: MouseEvent) => {
+  const onClick = React.useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     onClickTitle && onClickTitle();
   }, [onClickTitle]);
