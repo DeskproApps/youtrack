@@ -8,6 +8,8 @@ import {
 } from "@deskpro/app-sdk";
 import {
   Main,
+  Home,
+  LinkPage,
   VerifySettings,
 } from "./pages";
 import { ErrorFallback } from "./components";
@@ -27,6 +29,8 @@ const App = () => {
       <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
         <Routes>
           <Route path="/admin/verify_settings" element={<VerifySettings/>} />
+          <Route path="/link" element={<LinkPage/>} />
+          <Route path="/home" element={<Home/>} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>
