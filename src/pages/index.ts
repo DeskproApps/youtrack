@@ -1,2 +1,4 @@
 export { Main } from "./Main";
 export { VerifySettings } from "./VerifySettings";
+export { LinkPage } from "./LinkPage";
+export { HomePage } from "./HomePage";

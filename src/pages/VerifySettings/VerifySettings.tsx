@@ -12,7 +12,7 @@ import { nbsp } from "../../constants";
 import { getCurrentUserService } from "../../services/youtrack";
 import type { FC } from "react";
 import type { Settings } from "../../types";
-import type { User } from "../../services/youtrack/types";
+import type { Me } from "../../services/youtrack/types";
 
 const Invalid = styled(P1)`
   color: ${({ theme }) => theme.colors.red100};
@@ -25,7 +25,7 @@ const Valid = styled.span`
 const VerifySettings: FC = () => {
   const { client } = useDeskproAppClient();
 
-  const [currentUser, setCurrentUser] = useState<User|null>(null);
+  const [currentUser, setCurrentUser] = useState<Me|null>(null);
   const [settings, setSettings] = useState<Settings>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -67,7 +67,7 @@ const VerifySettings: FC = () => {
       {currentUser
         ? (
           <P1>
-            Verified as <Valid>{currentUser.name} {`<${currentUser.email}>`}</Valid>
+            Verified as <Valid>{currentUser.fullName} {`<${currentUser.email}>`}</Valid>
           </P1>
         )
         : <Invalid>{error}</Invalid> || ""
