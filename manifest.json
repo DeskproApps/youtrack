@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/youtrack",
   "title": "YouTrack",
   "description": "This application adds support for viewing and creating Youtrack issues.",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
@@ -39,7 +39,7 @@
       "title": "",
       "type": "app_embedded",
       "options": {
-        "entrypoint": "http://localhost:3001/#/admin/verify_settings"
+        "entrypoint": "#/admin/verify_settings"
       },
       "isRequired": false,
       "isBackendOnly": false,

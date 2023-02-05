@@ -3,8 +3,7 @@ import fetch from "node-fetch";
 import { cleanup } from "@testing-library/react";
 import { lightTheme } from "@deskpro/deskpro-ui";
 import { render } from "../../../testing";
-import { LinkIssue } from "../LinkIssue";
-import { getOption } from "../../../utils";
+import { Home } from "../Home";
 import issues from "./issues.json";
 import type { Issue } from "../../../services/youtrack/types";
 
@@ -50,7 +49,6 @@ const mockClient = {
   setAdminSetting: async () => {},
   setAdminSettingInvalid: async () => {},
 };
-
 jest.mock("@deskpro/app-sdk", () => ({
   ...jest.requireActual("@deskpro/app-sdk"),
   useDeskproAppEvents: (
@@ -102,29 +100,16 @@ describe("LinkIssue", () => {
   test("render", async () => {
     const { findByText } = render(
       (
-        <LinkIssue
-          value=""
-          isFetching={false}
-          isSubmitting={false}
-          onChange={() => {}}
-          onClear={() => {}}
+        <Home
           issues={
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             issues as Issue[]
-        }
-          projects={[]}
-          selectedProject={getOption("id1", "project")}
-          onChangeSelectProject={() => {}}
-          onCancel={() => {}}
-          onLinkIssues={() => {}}
-          selectedIssues={[]}
-          onChangeSelectedIssue={() => {}}
+          }
         />
       ),
-      { wrappers: { theme: true } },
+      { wrappers: { theme: true } }
     );
-
 
     expect(await findByText(/Simple Project Deskpro issue/i)).toBeInTheDocument();
     expect(await findByText(/Default DP issue/i)).toBeInTheDocument();
@@ -133,51 +118,13 @@ describe("LinkIssue", () => {
   });
 
   test("empty issues array", async () => {
-    const { findByText } = render(
-      (
-        <LinkIssue
-          value=""
-          isFetching={false}
-          isSubmitting={false}
-          onChange={() => {}}
-          onClear={() => {}}
-          issues={[]}
-          projects={[]}
-          selectedProject={getOption("id1", "project")}
-          onChangeSelectProject={() => {}}
-          onCancel={() => {}}
-          onLinkIssues={() => {}}
-          selectedIssues={[]}
-          onChangeSelectedIssue={() => {}}
-        />
-      ),
-      { wrappers: { theme: true } },
-    );
+    const { findByText } = render((<Home issues={[]}/>), { wrappers: { theme: true } });
 
     expect(await findByText(/No YouTrack issues found/i)).toBeInTheDocument();
   });
 
   test("no issues were passed", async () => {
-    const { findByText } = render(
-      (
-        <LinkIssue
-          value=""
-          isFetching={false}
-          isSubmitting={false}
-          onChange={() => {}}
-          onClear={() => {}}
-          issues={undefined}
-          projects={[]}
-          selectedProject={getOption("id1", "project")}
-          onChangeSelectProject={() => {}}
-          onCancel={() => {}}
-          onLinkIssues={() => {}}
-          selectedIssues={[]}
-          onChangeSelectedIssue={() => {}}
-        />
-      ),
-      { wrappers: { theme: true } },
-    );
+    const { findByText } = render((<Home issues={undefined}/>), { wrappers: { theme: true } });
 
     expect(await findByText(/No found/i)).toBeInTheDocument();
   });

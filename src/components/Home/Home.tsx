@@ -6,7 +6,7 @@ import type { FC } from "react";
 import type { Issue } from "../../services/youtrack/types";
 
 type Props = {
-  issues: Issue[],
+  issues?: Issue[],
 };
 
 const Home: FC<Props> = ({ issues }) => {
