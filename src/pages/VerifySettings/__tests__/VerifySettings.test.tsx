@@ -1,5 +1,6 @@
 import React from "react";
 import fetch from "node-fetch";
+import { cleanup } from "@testing-library/react";
 import { render } from "../../../testing";
 import { VerifySettings } from "../VerifySettings";
 
@@ -89,5 +90,10 @@ describe("VerifySettings Page", () => {
 
     const button = await getByRole("button", { name: /Verify Settings/i });
     expect(button).toBeInTheDocument();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    cleanup();
   });
 });

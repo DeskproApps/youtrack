@@ -1,6 +1,6 @@
 import React from "react";
 import fetch from "node-fetch";
-import { act } from "@testing-library/react";
+import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render } from "../../../testing";
 import { VerifySettings } from "../VerifySettings";
@@ -10,7 +10,7 @@ const mockCurrentUser = {
   email:"armen.tamzarian@me.com",
   id:"1-1",
   login:"zpawn",
-  name:"Armen Tamzarian",
+  fullName:"Armen Tamzarian",
 }
 
 const mockClient = {
@@ -100,12 +100,15 @@ jest.mock("@deskpro/app-sdk", () => ({
 describe("VerifySettings Page", () => {
   test("valid verify", async () => {
     const { findByText, findByRole } = render(<VerifySettings />, { wrappers: { theme: true }});
+    const button = await findByRole("button", { name: /Verify Settings/i });
 
-    await act(async () => {
-      const button = await findByRole("button", { name: /Verify Settings/i });
-      await userEvent.click(button);
-    });
+    await userEvent.click(button);
 
     expect(await findByText(/Armen Tamzarian/i)).toBeInTheDocument();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    cleanup();
   });
 });
