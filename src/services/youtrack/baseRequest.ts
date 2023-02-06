@@ -1,9 +1,7 @@
-import { createSearchParams } from "react-router-dom";
-import isEmpty from "lodash/isEmpty";
 import { proxyFetch } from "@deskpro/app-sdk";
 import { BASE_URL, placeholders } from "./constants";
 import { YouTrackError } from "./YouTrackError";
-import type { ParamKeyValuePair } from "react-router-dom";
+import { getQueryParams } from "../../utils";
 import type { Request } from "../../types";
 
 const baseRequest: Request = async (client, {
@@ -11,15 +9,13 @@ const baseRequest: Request = async (client, {
     data = {},
     method = "GET",
     queryParams = {},
-    headers: customHeaders
+    headers: customHeaders,
+    skipParseQueryParams,
 }) => {
     const dpFetch = await proxyFetch(client);
 
     const baseUrl = `${BASE_URL}${url}`;
-    const parsedQueryParams = Array.isArray(queryParams)
-        ? queryParams
-        : Object.keys(queryParams).map<ParamKeyValuePair>((key) => ([key, queryParams[key]]));
-    const params = `${isEmpty(parsedQueryParams) ? "" : `?${createSearchParams(parsedQueryParams)}`}`;
+    const params = getQueryParams(queryParams, { skipParseQueryParams })
     const requestUrl = `${baseUrl}${params}`;
     const options: RequestInit = {
         method,

@@ -6,4 +6,4 @@ const useSetTitle = (title: string): void => {
   }, [title]);
 };
 
-export {useSetTitle};
+export { useSetTitle };

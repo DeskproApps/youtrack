@@ -25,6 +25,7 @@ export type RequestParams = {
   data?: any,
   headers?: Dict<string>,
   queryParams?: Dict<string>|ParamKeyValuePair[],
+  skipParseQueryParams?: boolean,
 };
 
 export type Settings = {
@@ -94,3 +95,13 @@ export type PreInstalledRequest = <T>(
     settings: Required<Pick<Settings, "domain"|"permanent_auth_token">>,
   },
 ) => Promise<T>;
+
+export type RouterPaths =
+  | "/admin/verify_settings"
+  | "/link"
+  | "/home"
+;
+
+export type EventPayload =
+  | { type: "changePage", path: RouterPaths }
+;

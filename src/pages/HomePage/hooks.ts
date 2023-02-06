@@ -13,7 +13,7 @@ import type { TicketContext } from "../../types";
 
 type UseLoadHomeDeps = () => {
   isLoading: boolean,
-  entityIds: Array<Issue["idReadable"]>,
+  issues: Issue[],
 };
 
 const useLoadHomeDeps: UseLoadHomeDeps = () => {
@@ -39,14 +39,12 @@ const useLoadHomeDeps: UseLoadHomeDeps = () => {
   const issues = useQueryWithClient(
     [QueryKey.GET_ISSUES_BY_ID, ...entityIds],
     (client) => searchIssuesByIdsService(client, entityIds),
-    {
-      enabled: Boolean(entityIds.length),
-    }
+    { enabled: Boolean(entityIds.length) }
   );
 
   return {
     isLoading: [issues].every(({ isLoading }) => isLoading),
-    entityIds,
+    issues: issues.data || [],
   };
 };
 

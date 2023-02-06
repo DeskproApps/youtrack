@@ -1,10 +1,12 @@
 import { baseRequest } from "./baseRequest";
 import type { IDeskproClient } from "@deskpro/app-sdk";
 import type { Issue } from "./types";
+import type { RequestParams } from "../../types";
 
 const searchIssuesService = (
   client: IDeskproClient,
   q: string,
+  options: Pick<RequestParams, "skipParseQueryParams"> = {},
 ) => {
   return baseRequest<Issue[]>(client, {
     url: `/issues`,
@@ -19,7 +21,8 @@ const searchIssuesService = (
         "customFields(id,name,value(id,name,value))",
       ].join(","),
       query: q
-    }
+    },
+    ...options,
   });
 };
 
@@ -34,7 +37,11 @@ const searchIssuesByIdsService = (
   client: IDeskproClient,
   readableIds: Array<Issue["idReadable"]>,
 ) => {
-  return searchIssuesService(client, `issue id:${readableIds.join(",")}`);
+  return searchIssuesService(
+    client,
+    `issue id:${readableIds.join(",")}`,
+    { skipParseQueryParams: true },
+  );
 };
 
 export { searchIssuesBySummaryService, searchIssuesByIdsService };

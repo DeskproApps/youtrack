@@ -1,8 +1,8 @@
-import { FallbackProps } from "react-error-boundary";
 import { Stack } from "@deskpro/app-sdk";
 import { ErrorBlock } from "./ErrorBlock";
 import { Container } from "../common";
 import type { FC } from "react";
+import type { FallbackProps } from "react-error-boundary";
 
 type Props = Omit<FallbackProps, "error"> & {
     error: Error,

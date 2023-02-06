@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
+import { Stack } from "@deskpro/deskpro-ui";
 import { Property } from "./Property";
 import type { Props as PropertyProps } from "./types";
 
@@ -10,7 +11,7 @@ export type Props = {
   rightText?: PropertyProps["text"],
 };
 
-const Container = styled.div`
+const Container = styled(Stack)`
   width: 100%;
   margin-bottom: -1px;
 `;
@@ -31,7 +32,7 @@ const Side = styled.div<{ withDivider?: boolean }>`
   }
 `;
 
-const TwoProperties: React.FC<Props> = ({leftLabel, leftText, rightLabel, rightText}) => (
+const TwoProperties: React.FC<Props> = ({ leftLabel, leftText, rightLabel, rightText }) => (
   <Container>
     <Side>
       <Property
@@ -50,4 +51,4 @@ const TwoProperties: React.FC<Props> = ({leftLabel, leftText, rightLabel, rightT
   </Container>
 );
 
-export {TwoProperties};
+export { TwoProperties };

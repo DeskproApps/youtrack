@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
 import {
+  useDeskproElements,
   useDeskproAppClient,
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
@@ -89,6 +90,16 @@ const LinkPage: FC = () => {
   }, [client, navigate, ticketId, selectedIssues]);
 
   useSetTitle("Link Issues");
+
+  useDeskproElements(({ registerElement, clearElements }) => {
+    clearElements();
+
+    registerElement("refresh", { type: "refresh_button" });
+    registerElement("home", {
+      type: "home_button",
+      payload: { type: "changePage", path: "/home" },
+    });
+  });
 
   return (
     <LinkIssue

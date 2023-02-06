@@ -26,4 +26,4 @@ const useQueryWithClient = <TQueryFnData = unknown, TError = unknown, TData = TQ
   );
 }
 
-export {useQueryWithClient};
+export { useQueryWithClient };

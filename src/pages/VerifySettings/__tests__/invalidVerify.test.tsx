@@ -1,6 +1,6 @@
 import React from "react";
 import fetch from "node-fetch";
-import { cleanup } from "@testing-library/react";
+import { cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render } from "../../../testing";
 import { VerifySettings } from "../VerifySettings";
@@ -94,7 +94,9 @@ describe("VerifySettings Page", () => {
     const { findByText, findByRole } = render(<VerifySettings />, { wrappers: { theme: true }});
     const button = await findByRole("button", { name: /Verify Settings/i });
 
-    await userEvent.click(button);
+    act(() => {
+      userEvent.click(button);
+    });
 
     expect(await findByText(/Failed to connect to YouTrack/i)).toBeInTheDocument();
   });

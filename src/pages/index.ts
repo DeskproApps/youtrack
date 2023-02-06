@@ -1,4 +1,4 @@
-export { Main } from "./Main/Main";
+export { Main } from "./Main";
 export { VerifySettings } from "./VerifySettings";
 export { LinkPage } from "./LinkPage";
-export { Home } from "./Home";
+export { HomePage } from "./HomePage";
