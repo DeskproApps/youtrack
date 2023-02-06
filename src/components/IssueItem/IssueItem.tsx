@@ -31,8 +31,8 @@ const IssueItem: React.FC<Props> = ({ issue, onClickTitle }) => {
   }, [onClickTitle]);
 
   useInitialisedDeskproAppClient((client) => {
-    if (issue?.id) {
-      getEntityAssociationCountService(client, issue.id).then(setTicketCount);
+    if (issue?.idReadable) {
+      getEntityAssociationCountService(client, issue.idReadable).then(setTicketCount);
     }
   }, [issue]);
 
