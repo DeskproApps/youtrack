@@ -1,7 +1,7 @@
 {
   "name": "@deskpro-apps/youtrack",
   "title": "YouTrack",
-  "description": "This application adds support for viewing and creating Youtrack issues.",
+  "description": "View your YouTrack issues linked with Deskpro tickets to streamline communication with users.",
   "version": "1.0.0",
   "scope": "agent",
   "isSingleInstall": false,

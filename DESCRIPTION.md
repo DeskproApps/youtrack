@@ -1,4 +1,4 @@
-My App
-======
+YouTrack App
+===
 
-todo: add a description that will appear alongside your app in Deskpro admin
+***Link issues to tickets:*** Linking issues to tickets in the app lets agents easily view information from YouTrack while interacting with users making communication more efficient.
