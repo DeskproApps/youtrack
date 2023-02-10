@@ -11,8 +11,9 @@ const queryClient = new QueryClient({
 });
 
 enum QueryKey {
-  SEARCH_ISSUES = "searchIssues",
-  GET_ISSUES_BY_ID = "getIssuesById",
+  SEARCH_ISSUES_BY_SUMMARY = "searchIssuesBySummary",
+  SEARCH_ISSUES_BY_ID = "getIssuesById",
+  ISSUE = "issue",
 }
 
 export { queryClient, QueryKey };

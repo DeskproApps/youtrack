@@ -8,10 +8,12 @@ import {
   useDeskproAppClient,
   useDeskproAppEvents,
 } from "@deskpro/app-sdk";
+import { useUnlinkIssue } from "./hooks";
 import {
   Main,
   HomePage,
   LinkPage,
+  ViewIssuePage,
   VerifySettings,
 } from "./pages";
 import { ErrorFallback } from "./components";
@@ -21,6 +23,9 @@ const App = () => {
   const navigate = useNavigate();
   const { reset } = useQueryErrorResetBoundary();
   const { client } = useDeskproAppClient();
+  const { unlinkIssue, isLoading: isLoadingUnlink } = useUnlinkIssue();
+
+  const isLoading = [isLoadingUnlink].some((isLoading) => isLoading);
 
   const debounceElementEvent = useDebouncedCallback((_, __, payload) => {
     const p = payload as EventPayload;
@@ -28,6 +33,9 @@ const App = () => {
     switch (p.type) {
       case "changePage":
         payload.path && navigate(payload.path);
+        break;
+      case "unlinkIssue":
+        unlinkIssue(p.issueId);
         break;
     }
   }, 500);
@@ -39,7 +47,7 @@ const App = () => {
     onElementEvent: debounceElementEvent,
   });
 
-  if (!client) {
+  if (!client || isLoading) {
     return (
       <LoadingSpinner/>
     );
@@ -52,6 +60,7 @@ const App = () => {
           <Route path="/admin/verify_settings" element={<VerifySettings/>} />
           <Route path="/link" element={<LinkPage/>} />
           <Route path="/home" element={<HomePage/>} />
+          <Route path="/view/:issueId" element={<ViewIssuePage/>} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>

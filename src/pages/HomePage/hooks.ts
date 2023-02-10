@@ -37,7 +37,7 @@ const useLoadHomeDeps: UseLoadHomeDeps = () => {
   }, [ticketId]);
 
   const issues = useQueryWithClient(
-    [QueryKey.GET_ISSUES_BY_ID, ...entityIds],
+    [QueryKey.SEARCH_ISSUES_BY_ID, ...entityIds],
     (client) => searchIssuesByIdsService(client, entityIds),
     { enabled: Boolean(entityIds.length) }
   );

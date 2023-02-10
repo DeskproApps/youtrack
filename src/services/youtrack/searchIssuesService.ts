@@ -1,4 +1,5 @@
 import { baseRequest } from "./baseRequest";
+import { ISSUE_FIELDS } from "./constants";
 import type { IDeskproClient } from "@deskpro/app-sdk";
 import type { Issue } from "./types";
 import type { RequestParams } from "../../types";
@@ -11,15 +12,7 @@ const searchIssuesService = (
   return baseRequest<Issue[]>(client, {
     url: `/issues`,
     queryParams: {
-      fields: [
-        "id",
-        "idReadable",
-        "summary",
-        "description",
-        "project(id,shortName,name)",
-        "comments(text,textPreview)",
-        "customFields(id,name,value(id,name,value))",
-      ].join(","),
+      fields: ISSUE_FIELDS.join(","),
       query: q
     },
     ...options,

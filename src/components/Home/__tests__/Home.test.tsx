@@ -101,6 +101,7 @@ describe("LinkIssue", () => {
     const { findByText } = render(
       (
         <Home
+          onClickTitle={jest.fn()}
           issues={
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -118,13 +119,17 @@ describe("LinkIssue", () => {
   });
 
   test("empty issues array", async () => {
-    const { findByText } = render((<Home issues={[]}/>), { wrappers: { theme: true } });
+    const { findByText } = render((
+      <Home issues={[]} onClickTitle={jest.fn()} />
+    ), { wrappers: { theme: true } });
 
     expect(await findByText(/No YouTrack issues found/i)).toBeInTheDocument();
   });
 
   test("no issues were passed", async () => {
-    const { findByText } = render((<Home issues={undefined}/>), { wrappers: { theme: true } });
+    const { findByText } = render((
+      <Home issues={undefined} onClickTitle={jest.fn()}/>
+    ), { wrappers: { theme: true } });
 
     expect(await findByText(/No found/i)).toBeInTheDocument();
   });

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   LoadingSpinner,
   useDeskproElements,
@@ -7,8 +8,10 @@ import { Home } from "../../components";
 import { useSetTitle } from "../../hooks";
 import { useLoadHomeDeps } from "./hooks";
 import type { FC } from "react";
+import type { Issue } from "../../services/youtrack/types";
 
 const HomePage: FC = () => {
+  const navigate = useNavigate();
   const { issues, isLoading } = useLoadHomeDeps();
 
   useSetTitle("YouTrack Issues");
@@ -23,13 +26,17 @@ const HomePage: FC = () => {
     });
   });
 
+  const onClickTitle = useCallback((issueId: Issue["id"]) => {
+    navigate(`/view/${issueId}`);
+  }, [navigate]);
+
   if (isLoading) {
     return (
       <LoadingSpinner/>
     );
   }
 
-  return (<Home issues={issues} />);
+  return (<Home issues={issues} onClickTitle={onClickTitle} />);
 };
 
 export { HomePage };
