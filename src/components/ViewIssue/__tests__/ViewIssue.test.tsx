@@ -1,26 +1,10 @@
-import * as React from "react";
+import React from "react";
 import fetch from "node-fetch";
 import { cleanup } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { IssueItem } from "../IssueItem";
+import { lightTheme } from "@deskpro/deskpro-ui";
 import { render } from "../../../testing";
-import type { Issue } from "../../../services/youtrack/types";
-
-const issue: Issue = {
-  $type: "Issue",
-  id: "2-40",
-  idReadable: "SPDP-3",
-  summary: "Simple Deskpro Issue",
-  project: {
-    $type: "Project",
-    id: "0-4",
-    name: "Simple Deskpro",
-    shortName: "SPDP",
-  },
-  comments: [],
-  customFields: [],
-  description: "",
-};
+import { ViewIssue } from "../ViewIssue";
+import issue from "./issue.json";
 
 const mockClient = {
   getProxyAuth: () => new Promise(() => {}),
@@ -65,10 +49,6 @@ const mockClient = {
   setAdminSettingInvalid: async () => {},
 };
 
-jest.mock("../../../services/entityAssociation/getEntityAssociationCountService", () => ({
-  getEntityAssociationCountService: () => Promise.resolve(0)
-}))
-
 jest.mock("@deskpro/app-sdk", () => ({
   ...jest.requireActual("@deskpro/app-sdk"),
   useDeskproAppEvents: (
@@ -103,31 +83,27 @@ jest.mock("@deskpro/app-sdk", () => ({
     });
   },
   useDeskproAppClient: () => ({ client: mockClient }),
+  useDeskproAppTheme: () => ({ theme: lightTheme }),
   proxyFetch: async () => fetch,
 }));
 
-describe("IssueItem", () => {
+describe("ViewIssue", () => {
   afterEach(() => {
     jest.clearAllMocks();
     cleanup();
   });
 
   test("render", async () => {
-    const { findByText } = render(<IssueItem issue={issue}/>, { wrappers: { theme: true } });
-
-    expect(await findByText(/Simple Deskpro Issue/i)).toBeInTheDocument();
-  });
-
-  test("click on title", async () => {
-    const onClick = jest.fn();
-
     const { findByText } = render(
-      <IssueItem issue={issue} onClickTitle={onClick} />,
-      { wrappers: { theme: true } },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      <ViewIssue issue={issue}/>,
+      { wrappers: { theme: true } }
     );
 
-    await userEvent.click(await findByText(/Simple Deskpro Issue/i));
-
-    expect(onClick).toBeCalledTimes(1);
+    expect(await findByText(/Simple Deskpro Issue/i)).toBeInTheDocument();
+    expect(await findByText(/SPDP-3/i)).toBeInTheDocument();
+    expect(await findByText(/Simple Deskpro Project/i)).toBeInTheDocument();
+    expect(await findByText(/one comment/i)).toBeInTheDocument();
   });
 });

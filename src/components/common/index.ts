@@ -8,3 +8,4 @@ export { NoFound } from "./NoFound";
 export { Property, TwoProperties } from "./Property";
 export { YouTrackLogo } from "./YouTrackLogo";
 export { Link } from "./Link";
+export { Comment } from "./Comment";

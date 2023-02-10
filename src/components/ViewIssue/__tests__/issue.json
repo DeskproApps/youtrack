@@ -1,0 +1,63 @@
+{
+  "idReadable": "SPDP-3",
+  "summary": "Simple Deskpro Issue",
+  "project": {
+    "shortName": "SPDP",
+    "name": "Simple Deskpro Project",
+    "id": "0-4",
+    "$type": "Project"
+  },
+  "comments": [
+    {
+      "text": "one comment",
+      "author": {
+        "email": "ilia.makarov@me.com",
+        "fullName": "Armen Tamzarian",
+        "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48",
+        "login": "zpawn",
+        "id": "1-1",
+        "$type": "User"
+      },
+      "attachments": [],
+      "updated": null,
+      "created": 1675969427812,
+      "id": "4-1",
+      "$type": "IssueComment"
+    },
+    {
+      "text": "two comment",
+      "author": {
+        "email": "ilia.makarov@me.com",
+        "fullName": "Armen Tamzarian",
+        "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48",
+        "login": "zpawn",
+        "id": "1-1",
+        "$type": "User"
+      },
+      "attachments": [],
+      "updated": null,
+      "created": 1675969431872,
+      "id": "4-2",
+      "$type": "IssueComment"
+    },
+    {
+      "text": "**comment** *number* ~~three~~",
+      "author": {
+        "email": "ilia.makarov@me.com",
+        "fullName": "Armen Tamzarian",
+        "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48",
+        "login": "zpawn",
+        "id": "1-1",
+        "$type": "User"
+      },
+      "attachments": [],
+      "updated": null,
+      "created": 1675972285728,
+      "id": "4-3",
+      "$type": "IssueComment"
+    }
+  ],
+  "description": "",
+  "id": "2-40",
+  "$type": "Issue"
+}
