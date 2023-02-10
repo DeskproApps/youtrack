@@ -5,7 +5,7 @@ import {
   useDeskproElements,
 } from "@deskpro/app-sdk";
 import { Home } from "../../components";
-import { useSetTitle } from "../../hooks";
+import { useSetTitle, useSetBadgeCount } from "../../hooks";
 import { useLoadHomeDeps } from "./hooks";
 import type { FC } from "react";
 import type { Issue } from "../../services/youtrack/types";
@@ -15,6 +15,7 @@ const HomePage: FC = () => {
   const { issues, isLoading } = useLoadHomeDeps();
 
   useSetTitle("YouTrack Issues");
+  useSetBadgeCount(issues);
 
   useDeskproElements(({ registerElement, clearElements }) => {
     clearElements();
