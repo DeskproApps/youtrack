@@ -17,6 +17,7 @@ import {
   VerifySettings,
 } from "./pages";
 import { ErrorFallback } from "./components";
+import type { TargetAction } from "@deskpro/app-sdk";
 import type { EventPayload } from "./types";
 
 const App = () => {
@@ -40,11 +41,23 @@ const App = () => {
     }
   }, 500);
 
+  const debounceTargetAction = useDebouncedCallback<(a: TargetAction) => void>(
+    (action: TargetAction) => {
+      switch (action.name) {
+        case "linkTicket":
+          navigate("/");
+          break;
+      }
+    },
+    500,
+  );
+
   useDeskproAppEvents({
     onShow: () => {
       client && setTimeout(client.resize, 200);
     },
     onElementEvent: debounceElementEvent,
+    onTargetAction: debounceTargetAction,
   });
 
   if (!client || isLoading) {
