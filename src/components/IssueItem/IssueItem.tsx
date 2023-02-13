@@ -12,7 +12,7 @@ import type { Issue } from "../../services/youtrack/types";
 
 type Props = {
   issue: Issue,
-  onClickTitle?: () => void,
+  onClickTitle?: (issueId: Issue["id"]) => void,
 };
 
 const TitleLink = styled.a`
@@ -27,8 +27,8 @@ const IssueItem: React.FC<Props> = ({ issue, onClickTitle }) => {
 
   const onClick = React.useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    onClickTitle && onClickTitle();
-  }, [onClickTitle]);
+    onClickTitle && onClickTitle(issue.id);
+  }, [onClickTitle, issue]);
 
   useInitialisedDeskproAppClient((client) => {
     if (issue?.idReadable) {

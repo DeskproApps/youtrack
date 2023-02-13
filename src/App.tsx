@@ -8,19 +8,25 @@ import {
   useDeskproAppClient,
   useDeskproAppEvents,
 } from "@deskpro/app-sdk";
+import { useUnlinkIssue } from "./hooks";
 import {
   Main,
   HomePage,
   LinkPage,
+  ViewIssuePage,
   VerifySettings,
 } from "./pages";
 import { ErrorFallback } from "./components";
+import type { TargetAction } from "@deskpro/app-sdk";
 import type { EventPayload } from "./types";
 
 const App = () => {
   const navigate = useNavigate();
   const { reset } = useQueryErrorResetBoundary();
   const { client } = useDeskproAppClient();
+  const { unlinkIssue, isLoading: isLoadingUnlink } = useUnlinkIssue();
+
+  const isLoading = [isLoadingUnlink].some((isLoading) => isLoading);
 
   const debounceElementEvent = useDebouncedCallback((_, __, payload) => {
     const p = payload as EventPayload;
@@ -29,17 +35,32 @@ const App = () => {
       case "changePage":
         payload.path && navigate(payload.path);
         break;
+      case "unlinkIssue":
+        unlinkIssue(p.issueId);
+        break;
     }
   }, 500);
+
+  const debounceTargetAction = useDebouncedCallback<(a: TargetAction) => void>(
+    (action: TargetAction) => {
+      switch (action.name) {
+        case "linkTicket":
+          navigate("/");
+          break;
+      }
+    },
+    500,
+  );
 
   useDeskproAppEvents({
     onShow: () => {
       client && setTimeout(client.resize, 200);
     },
     onElementEvent: debounceElementEvent,
+    onTargetAction: debounceTargetAction,
   });
 
-  if (!client) {
+  if (!client || isLoading) {
     return (
       <LoadingSpinner/>
     );
@@ -52,6 +73,7 @@ const App = () => {
           <Route path="/admin/verify_settings" element={<VerifySettings/>} />
           <Route path="/link" element={<LinkPage/>} />
           <Route path="/home" element={<HomePage/>} />
+          <Route path="/view/:issueId" element={<ViewIssuePage/>} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>

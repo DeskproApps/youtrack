@@ -4,6 +4,7 @@ import type {
   IDeskproClient,
   DropdownValueType,
 } from "@deskpro/app-sdk";
+import {Issue} from "./services/youtrack/types";
 
 export type Maybe<T> = T | undefined | null;
 
@@ -104,4 +105,5 @@ export type RouterPaths =
 
 export type EventPayload =
   | { type: "changePage", path: RouterPaths }
+  | { type: "unlinkIssue", issueId: Issue["id"] }
 ;

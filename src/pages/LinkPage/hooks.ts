@@ -16,7 +16,7 @@ const useSearch: UseSearch = (q) => {
   const debounceSearch = debouncePromise(searchIssuesBySummaryService, 1000);
 
   const issues = useQueryWithClient(
-    [QueryKey.SEARCH_ISSUES, q],
+    [QueryKey.SEARCH_ISSUES_BY_SUMMARY, q],
     (client) => debounceSearch(client, q),
     {
       retry: 0,
