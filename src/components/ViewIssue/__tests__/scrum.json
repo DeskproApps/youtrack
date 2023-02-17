@@ -1,0 +1,244 @@
+{
+  "comments": [],
+  "description": "Scrum Deskpro issue description",
+  "project": {
+    "shortName": "SDP",
+    "name": "Scrum Deskpro",
+    "id": "0-2",
+    "$type": "Project"
+  },
+  "idReadable": "SDP-1",
+  "summary": "Scrum Deskpro issue",
+  "customFields": [
+    {
+      "projectCustomField": {
+        "id": "130-17",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#888",
+          "background": "#e6e6e6",
+          "id": "16",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 4,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Minor",
+        "id": "109-4",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Priority",
+      "id": "130-17",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-16",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Task",
+        "id": "109-16",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Type",
+      "id": "130-16",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-14",
+        "$type": "StateProjectCustomField"
+      },
+      "value": {
+        "isResolved": false,
+        "localizedName": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 2,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "In Progress",
+        "id": "111-13",
+        "$type": "StateBundleElement"
+      },
+      "name": "State",
+      "id": "130-14",
+      "$type": "StateIssueCustomField"
+    },
+    {
+      "value": null,
+      "projectCustomField": {
+        "id": "131-2",
+        "$type": "UserProjectCustomField"
+      },
+      "name": "Assignee",
+      "id": "131-2",
+      "$type": "SingleUserIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-35",
+        "$type": "VersionProjectCustomField"
+      },
+      "value": {
+        "releaseDate": null,
+        "released": false,
+        "color": {
+          "foreground": "#fff",
+          "background": "#ff7bc3",
+          "id": "12",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 1,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "1.0.0",
+        "id": "177-0",
+        "$type": "VersionBundleElement"
+      },
+      "name": "Sprint",
+      "id": "130-35",
+      "$type": "SingleVersionIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-15",
+        "$type": "VersionProjectCustomField"
+      },
+      "value": [
+        {
+          "releaseDate": 1672574400000,
+          "released": false,
+          "color": {
+            "foreground": "#fff",
+            "background": "#1a1a1a",
+            "id": "35",
+            "$type": "FieldStyle"
+          },
+          "description": null,
+          "ordinal": -1,
+          "archived": false,
+          "hasRunningJob": false,
+          "name": "0.0.1",
+          "id": "177-6",
+          "$type": "VersionBundleElement"
+        },
+        {
+          "releaseDate": 1676376000000,
+          "released": false,
+          "color": {
+            "foreground": "#fff",
+            "background": "#0070e4",
+            "id": "4",
+            "$type": "FieldStyle"
+          },
+          "description": null,
+          "ordinal": 2,
+          "archived": false,
+          "hasRunningJob": false,
+          "name": "1.0.1",
+          "id": "177-7",
+          "$type": "VersionBundleElement"
+        },
+        {
+          "releaseDate": 1675252800000,
+          "released": false,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "description": null,
+          "ordinal": 0,
+          "archived": false,
+          "hasRunningJob": false,
+          "name": "0.0.2",
+          "id": "177-8",
+          "$type": "VersionBundleElement"
+        },
+        {
+          "releaseDate": 1677672000000,
+          "released": true,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "description": null,
+          "ordinal": 3,
+          "archived": false,
+          "hasRunningJob": false,
+          "name": "2.0.0",
+          "id": "177-9",
+          "$type": "VersionBundleElement"
+        },
+        {
+          "releaseDate": null,
+          "released": false,
+          "color": {
+            "foreground": "#fff",
+            "background": "#ff7bc3",
+            "id": "12",
+            "$type": "FieldStyle"
+          },
+          "description": null,
+          "ordinal": 1,
+          "archived": false,
+          "hasRunningJob": false,
+          "name": "1.0.0",
+          "id": "177-10",
+          "$type": "VersionBundleElement"
+        }
+      ],
+      "name": "Sprints",
+      "id": "130-15",
+      "$type": "MultiVersionIssueCustomField"
+    },
+    {
+      "value": 13,
+      "projectCustomField": {
+        "id": "170-0",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Ideal days",
+      "id": "170-0",
+      "$type": "SimpleIssueCustomField"
+    },
+    {
+      "value": 7,
+      "projectCustomField": {
+        "id": "170-1",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Original estimation",
+      "id": "170-1",
+      "$type": "SimpleIssueCustomField"
+    }
+  ],
+  "id": "2-30",
+  "$type": "Issue"
+}

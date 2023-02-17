@@ -1,0 +1,142 @@
+{
+  "comments": [],
+  "description": "Default **DP** `issue` *description*\\:\n\n# Nomerable list\n\n1. item 1\n2. item 2\n3. item 3\n\nNon marker list:\n\n* item\n* item \n* item\n\nCheckbox list:\n\n* [ ] check item \n* [x] check item\n* [ ] check item\n\n\n\n```\nCode block\nsecond line of code\n```\n\n\n\n| head cell 1 | head cell 2 |\n| --- | --- |\n| cell 3 | cell 4 |\n\n\n",
+  "project": {
+    "shortName": "DDP",
+    "name": "Default Deskpro Project",
+    "id": "0-5",
+    "$type": "Project"
+  },
+  "idReadable": "DDP-1",
+  "summary": "Default DP issue",
+  "customFields": [
+    {
+      "projectCustomField": {
+        "id": "130-28",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#4da400",
+          "background": "#e6f6cf",
+          "id": "17",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 3,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Normal",
+        "id": "109-3",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Priority",
+      "id": "130-28",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-29",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Bug",
+        "id": "109-5",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Type",
+      "id": "130-29",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-30",
+        "$type": "StateProjectCustomField"
+      },
+      "value": {
+        "isResolved": false,
+        "localizedName": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Submitted",
+        "id": "111-0",
+        "$type": "StateBundleElement"
+      },
+      "name": "State",
+      "id": "130-30",
+      "$type": "StateIssueCustomField"
+    },
+    {
+      "value": null,
+      "projectCustomField": {
+        "id": "131-5",
+        "$type": "UserProjectCustomField"
+      },
+      "name": "Assignee",
+      "id": "131-5",
+      "$type": "SingleUserIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-31",
+        "$type": "OwnedProjectCustomField"
+      },
+      "value": null,
+      "name": "Subsystem",
+      "id": "130-31",
+      "$type": "SingleOwnedIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-32",
+        "$type": "VersionProjectCustomField"
+      },
+      "value": [],
+      "name": "Fix versions",
+      "id": "130-32",
+      "$type": "MultiVersionIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-33",
+        "$type": "VersionProjectCustomField"
+      },
+      "value": [],
+      "name": "Affected versions",
+      "id": "130-33",
+      "$type": "MultiVersionIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-34",
+        "$type": "BuildProjectCustomField"
+      },
+      "value": null,
+      "name": "Fixed in build",
+      "id": "130-34",
+      "$type": "SingleBuildIssueCustomField"
+    }
+  ],
+  "id": "2-35",
+  "$type": "Issue"
+}

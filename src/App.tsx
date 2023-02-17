@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
@@ -59,6 +59,8 @@ const App = () => {
     onElementEvent: debounceElementEvent,
     onTargetAction: debounceTargetAction,
   });
+
+  // useEffect(() => navigate("/view/KDP-1"), []);
 
   if (!client || isLoading) {
     return (

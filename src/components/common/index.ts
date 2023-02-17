@@ -9,3 +9,4 @@ export { Property, TwoProperties } from "./Property";
 export { YouTrackLogo } from "./YouTrackLogo";
 export { Link } from "./Link";
 export { Comment } from "./Comment";
+export { Member } from "./Member";
