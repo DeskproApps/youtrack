@@ -27,10 +27,10 @@
     }
   },
   "settings": {
-    "domain": {
-      "title": "Domain Prefix",
-      "description": "E.g. \"mycompany\" if your domain is \"https://mycompany.youtrack.cloud\"",
-      "validationPattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9_-]*[a-zA-Z0-9])?$",
+    "instance_url": {
+      "title": "YouTrack Instance URL",
+      "description": "Enter the URL of your YouTrack instance, or \"https://<my_company>.youtrack.cloud\"",
+      "validationPattern": "^https?:\\/\\/.+\\..+\\w$",
       "type": "string",
       "isRequired": true,
       "isBackendOnly": false,
@@ -57,7 +57,7 @@
   },
   "proxy": {
     "whitelist": [{
-      "url": "https://(.*).youtrack.cloud/api/.*",
+      "url": "__instance_url__/api/.*",
       "methods": ["GET", "POST"],
       "timeout": 20
     }]

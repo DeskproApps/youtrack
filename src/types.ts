@@ -30,7 +30,7 @@ export type RequestParams = {
 };
 
 export type Settings = {
-  domain?: string,
+  instance_url?: string,
   permanent_auth_token?: string,
 };
 
@@ -93,7 +93,7 @@ export type Request = <T>(
 export type PreInstalledRequest = <T>(
   client: IDeskproClient,
   params: RequestParams & {
-    settings: Required<Pick<Settings, "domain"|"permanent_auth_token">>,
+    settings: Required<Pick<Settings, "instance_url"|"permanent_auth_token">>,
   },
 ) => Promise<T>;
 
