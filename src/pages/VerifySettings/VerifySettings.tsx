@@ -33,7 +33,7 @@ const VerifySettings: FC = () => {
   const errorMessage = useMemo(() => "Failed to connect to YouTrack, settings seem to be invalid", []);
 
   const onVerifySettings = useCallback(() => {
-    if (!client || !settings?.domain || !settings?.permanent_auth_token) {
+    if (!client || !settings?.instance_url || !settings?.permanent_auth_token) {
       return;
     }
 
@@ -42,7 +42,7 @@ const VerifySettings: FC = () => {
     setCurrentUser(null);
 
     return getCurrentUserService(client, {
-      domain: settings.domain,
+      instance_url: settings.instance_url,
       permanent_auth_token: settings.permanent_auth_token,
     })
       .then(setCurrentUser)
@@ -61,7 +61,7 @@ const VerifySettings: FC = () => {
         intent="secondary"
         onClick={onVerifySettings}
         loading={isLoading}
-        disabled={!every([settings?.domain, settings?.permanent_auth_token] || isLoading)}
+        disabled={!every([settings?.instance_url, settings?.permanent_auth_token] || isLoading)}
       />
       {nbsp}
       {currentUser

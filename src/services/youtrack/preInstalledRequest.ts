@@ -11,14 +11,14 @@ const preInstalledRequest: PreInstalledRequest = async (client, {
   method = "GET",
   queryParams = {},
 }) => {
-  const { domain, permanent_auth_token } = settings;
+  const { instance_url, permanent_auth_token } = settings;
   const dpFetch = await adminGenericProxyFetch(client);
 
   const parsedQueryParams = Array.isArray(queryParams)
     ? queryParams
     : Object.keys(queryParams).map<ParamKeyValuePair>((key) => ([key, queryParams[key]]));
 
-  const res = await dpFetch(`${replace(BASE_URL, placeholders.DOMAIN, domain)}${url}?${createSearchParams(parsedQueryParams)}`, {
+  const res = await dpFetch(`${replace(BASE_URL, placeholders.INSTANCE_URL, instance_url)}${url}?${createSearchParams(parsedQueryParams)}`, {
     method,
     headers: {
       "Accept": "application/json",

@@ -12,31 +12,31 @@ type UseExternalLink = () => {
 
 const useExternalLink: UseExternalLink = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
-  const domain = get(context, ["settings", "domain"]);
+  const instanceUrl = get(context, ["settings", "instance_url"]);
 
   const getIssueUrl = useCallback((issueId: Issue["idReadable"]) => {
-    if (!domain || !issueId) {
+    if (!instanceUrl || !issueId) {
       return "#";
     } else {
-      return `https://${domain}.youtrack.cloud/issue/${issueId}`;
+      return `${instanceUrl}/issue/${issueId}`;
     }
-  }, [domain]);
+  }, [instanceUrl]);
 
   const getProjectUrl = useCallback((projectId: Project["id"]) => {
-    if (!domain || !projectId) {
+    if (!instanceUrl || !projectId) {
       return "#";
     } else {
-      return `https://${domain}.youtrack.cloud/projects/${projectId}`;
+      return `${instanceUrl}/projects/${projectId}`;
     }
-  }, [domain]);
+  }, [instanceUrl]);
 
   const getBaseUrl = useCallback(() => {
-    if (!domain) {
+    if (!instanceUrl) {
       return "#";
     } else {
-      return `https://${domain}.youtrack.cloud`;
+      return instanceUrl;
     }
-  }, [domain]);
+  }, [instanceUrl]);
 
   return { getIssueUrl, getProjectUrl, getBaseUrl };
 };
