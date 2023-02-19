@@ -1,9 +1,9 @@
 export const placeholders = {
-  DOMAIN: "__domain__",
+  INSTANCE_URL: "__instance_url__",
   PERMANENT_AUTH_TOKEN: "__permanent_auth_token__",
 };
 
-export const BASE_URL = `https://${placeholders.DOMAIN}.youtrack.cloud/api`;
+export const BASE_URL = `${placeholders.INSTANCE_URL}/api`;
 
 export const ATTACHMENT_FIELDS = ["id", "name", "extension", "url", "base64Content"];
 

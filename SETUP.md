@@ -2,7 +2,7 @@ YouTrack App Setup Instructions
 ===
 
 To install the YouTrack app you must first create an API token. Head over to your YouTrack cloud account, the URL will look something
-like `https://<my_company>.youtrack.cloud/`.
+like `https://<my_company>.youtrack.cloud/` or your own instance.
 
 Once you've logged in, navigate to the "Profile Settings" section (under your user profile menu, top right of the screen).
 
@@ -30,7 +30,7 @@ Ok, now head back to Deskpro and navigate to the "Settings" tab of the YouTrack 
 
 From this screen, enter the following details:
 
-* **Domain Prefix** - this is your company name found in your YouTrack URL, e.g. this will be `mycompany` if your YouTrack URL is `https://mycompany.youtrack.cloud`
+* **YouTrack Instance URL** - this is your YouTrack URL (e.g. this will be `my_company` if your YouTrack URL is `https://my_company.youtrack.cloud`) or the URL of your own YouTrack instance
 * **Permanent Token** - this is the token you created in the previous steps
 
 To configure who can see and use the YouTrack app, head to the "Permissions" tab and select those users and/or groups you'd like to have access.

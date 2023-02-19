@@ -11,7 +11,7 @@ const params = {
 
 const getCurrentUserService = (
   client: IDeskproClient,
-  settings?: Required<Pick<Settings, "domain"|"permanent_auth_token">>,
+  settings?: Required<Pick<Settings, "instance_url"|"permanent_auth_token">>,
 ) => {
   return !settings
     ? baseRequest<Me>(client, params)

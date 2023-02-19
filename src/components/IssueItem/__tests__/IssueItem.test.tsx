@@ -78,7 +78,7 @@ jest.mock("@deskpro/app-sdk", () => ({
     const deskproAppEventsObj = {
       type: "ticket",
       settings: {
-        domain: "zpawn",
+        instance_url: "zpawn",
         permanent_auth_token: "this_is_token",
       },
       data: {
