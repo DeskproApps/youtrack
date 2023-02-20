@@ -13,7 +13,7 @@ const CustomField: FC<Props> = ({ field: customField }) => {
   if (isNull(field)) {
     // eslint-disable-next-line no-console
     console.warn(`Could not render field view, mapping missing for YouTrack field type ${customField.$type}`);
-    return (<NoValue text={customField.$type} />)
+    return (<NoValue />)
   }
 
   return (
