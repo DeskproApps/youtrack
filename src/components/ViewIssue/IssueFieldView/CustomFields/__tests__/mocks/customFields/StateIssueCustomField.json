@@ -1,0 +1,26 @@
+{
+  "projectCustomField": {
+    "id": "130-38",
+    "$type": "StateProjectCustomField"
+  },
+  "value": {
+    "isResolved": false,
+    "localizedName": null,
+    "color": {
+      "foreground": "#444",
+      "background": "#fff",
+      "id": "0",
+      "$type": "FieldStyle"
+    },
+    "description": null,
+    "ordinal": 1,
+    "archived": false,
+    "hasRunningJob": false,
+    "name": "Open",
+    "id": "111-1",
+    "$type": "StateBundleElement"
+  },
+  "name": "State",
+  "id": "130-38",
+  "$type": "StateIssueCustomField"
+}

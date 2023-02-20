@@ -6,9 +6,12 @@ import type { FC } from "react";
 import type { CustomFields, MappingCustomFields } from "../types";
 
 type Props = Partial<
-    | CustomFields[MappingCustomFields.SingleEnumIssueCustomField]
     | CustomFields[MappingCustomFields.StateIssueCustomField]
+    | CustomFields[MappingCustomFields.SingleEnumIssueCustomField]
     | CustomFields[MappingCustomFields.SingleVersionIssueCustomField]
+    | CustomFields[MappingCustomFields.SingleBuildIssueCustomField]
+    | CustomFields[MappingCustomFields.SingleOwnedIssueCustomField]
+    | CustomFields[MappingCustomFields.SingleGroupIssueCustomField]
   > & {
     separator?: string,
   };

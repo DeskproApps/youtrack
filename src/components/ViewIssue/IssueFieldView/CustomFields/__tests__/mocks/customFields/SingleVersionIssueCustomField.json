@@ -1,0 +1,26 @@
+{
+  "projectCustomField": {
+    "id": "130-49",
+    "$type": "VersionProjectCustomField"
+  },
+  "value": {
+    "releaseDate": 1677672000000,
+    "released": true,
+    "color": {
+      "foreground": "#444",
+      "background": "#fff",
+      "id": "0",
+      "$type": "FieldStyle"
+    },
+    "description": null,
+    "ordinal": 3,
+    "archived": false,
+    "hasRunningJob": false,
+    "name": "2.0.0",
+    "id": "177-28",
+    "$type": "VersionBundleElement"
+  },
+  "name": "Custom Version Field Single",
+  "id": "130-49",
+  "$type": "SingleVersionIssueCustomField"
+}

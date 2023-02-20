@@ -6,3 +6,4 @@ export { MultiValueIssueCustomField } from "./MultiValueIssueCustomField";
 export { TextIssueCustomField } from "./TextIssueCustomField";
 export { MultiUserIssueCustomField } from "./MultiUserIssueCustomField";
 export { DateIssueCustomField } from "./DateIssueCustomField";
+export { PeriodIssueCustomField } from "./PeriodIssueCustomField";

@@ -1,0 +1,17 @@
+{
+  "value": {
+    "usersCount": 3,
+    "ringId": "29eae037-9bd6-4d09-853c-a2f96cd66127",
+    "icon": null,
+    "name": "All Users",
+    "id": "3-0",
+    "$type": "UserGroup"
+  },
+  "projectCustomField": {
+    "id": "179-0",
+    "$type": "GroupProjectCustomField"
+  },
+  "name": "Custom group field single",
+  "id": "179-0",
+  "$type": "SingleGroupIssueCustomField"
+}

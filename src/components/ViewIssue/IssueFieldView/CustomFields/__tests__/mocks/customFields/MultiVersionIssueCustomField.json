@@ -1,0 +1,62 @@
+{
+  "projectCustomField": {
+    "id": "130-50",
+    "$type": "VersionProjectCustomField"
+  },
+  "value": [
+    {
+      "releaseDate": 1676376000000,
+      "released": false,
+      "color": {
+        "foreground": "#fff",
+        "background": "#0070e4",
+        "id": "4",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 2,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "1.0.1",
+      "id": "177-30",
+      "$type": "VersionBundleElement"
+    },
+    {
+      "releaseDate": null,
+      "released": false,
+      "color": {
+        "foreground": "#fff",
+        "background": "#ff7bc3",
+        "id": "12",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 1,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "1.0.0",
+      "id": "177-31",
+      "$type": "VersionBundleElement"
+    },
+    {
+      "releaseDate": 1672574400000,
+      "released": false,
+      "color": {
+        "foreground": "#fff",
+        "background": "#1a1a1a",
+        "id": "35",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": -1,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "0.0.1",
+      "id": "177-33",
+      "$type": "VersionBundleElement"
+    }
+  ],
+  "name": "Custom Version Field Multi",
+  "id": "130-50",
+  "$type": "MultiVersionIssueCustomField"
+}

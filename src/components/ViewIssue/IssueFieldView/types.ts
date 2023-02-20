@@ -1,5 +1,6 @@
 import type { components } from "../../../services/youtrack/openapi";
-import type { Project, User } from "../../../services/youtrack/types";
+import type { User } from "../../../services/youtrack/types";
+import { Maybe } from "../../../types";
 
 export enum MappingCustomFields {
   SingleEnumIssueCustomField = "SingleEnumIssueCustomField",
@@ -22,178 +23,107 @@ export enum MappingCustomFields {
   // StateMachineIssueCustomField,
 }
 
-export type ProjectCustomField = {
-  //...
+export type PeriodValue = components["schemas"]["PeriodValue"] & {
+  $type: "PeriodValue",
 };
 
-export type PeriodValue = {
-  id: string,
-  minutes: number, // Value in minutes.
-  presentation: string, // Human-readable representation.
-};
-
-export type SimpleValue = string|number;
+export type SimpleValue = Maybe<string|number>;
 
 export type DateValue = number; // The date is presented by the timestamp that designates the midday of this date in UTC+0 timezone
 
-export type BundleElement = {
-  $type: string,
-  id: string,
-  name: string,
-  bundle: components["schemas"]["Bundle"],
-  description: string,
-  archived: boolean,
-  ordinal: number, /** Format: int32 */
-  color: Required<components["schemas"]["FieldStyle"]>,
-  hasRunningJob: boolean,
-};
-export type StateBundleElement = BundleElement & {
-  isResolved: boolean,
-  localizedName: string,
-};
-export type BuildBundleElement = BundleElement & {
-  assembleDate: number, /** Format: int64 */
-};
-export type VersionBundleElement = BundleElement & {
-  releaseDate: number, /** Format: int64 */
-  released: boolean,
-};
-export type OwnedBundleElement = BundleElement & {
-  owner: User,
-};
-export type EnumBundleElement = BundleElement &  {
-  localizedName: string,
-};
-export type UserGroup = {
-  id: string;
-  name: string;
-  ringId: string;
-  usersCount: number; /** Format: int64 */
-  icon: string;
-  allUsersGroup: boolean;
-  teamForProject: Project;
+export type StateBundleElement = components["schemas"]["StateBundleElement"] & {
+  $type: "StateBundleElement",
 };
 
-export type TextFieldValue = {
-  id: string,
-  text: string,
-  markdownText: string,
+export type BuildBundleElement = components["schemas"]["BuildBundleElement"];
+
+export type VersionBundleElement = components["schemas"]["VersionBundleElement"];
+
+export type OwnedBundleElement = components["schemas"]["OwnedBundleElement"] & {
+  owner: User,
+};
+
+export type EnumBundleElement = components["schemas"]["EnumBundleElement"];
+
+export type UserGroup = components["schemas"]["UserGroup"] & {
+  $type: "UserGroup",
+};
+
+export type TextFieldValue = components["schemas"]["TextFieldValue"] & {
+  $type: "TextFieldValue",
 };
 
 export type CustomFields = {
-  [MappingCustomFields.PeriodIssueCustomField]: {
-    id: string,
-    name: string,
+  [MappingCustomFields.PeriodIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
+    $type: "PeriodIssueCustomField",
     value: PeriodValue,
-    project: ProjectCustomField,
-  }
-  [MappingCustomFields.SimpleIssueCustomField]: {
-    $type:"SimpleIssueCustomField",
-    id: string,
-    name: string,
-    value: SimpleValue,
-    project: ProjectCustomField,
   },
-  [MappingCustomFields.DateIssueCustomField]: {
+  [MappingCustomFields.SimpleIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
+    $type:"SimpleIssueCustomField",
+    value: SimpleValue,
+  },
+  [MappingCustomFields.DateIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "DateIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: DateValue,
   }
-  [MappingCustomFields.StateIssueCustomField]: {
+  [MappingCustomFields.StateIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: MappingCustomFields.StateIssueCustomField,
-    id: string,
-    name: string,
     value: StateBundleElement,
-    project: ProjectCustomField,
   },
-  [MappingCustomFields.SingleBuildIssueCustomField]: {
+  [MappingCustomFields.SingleBuildIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "SingleBuildIssueCustomField",
-    id: string,
-    name: string,
     value: BuildBundleElement,
-    project: ProjectCustomField,
   },
-  [MappingCustomFields.SingleUserIssueCustomField]: {
+  [MappingCustomFields.SingleUserIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "SingleUserIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: User,
   },
-  [MappingCustomFields.SingleGroupIssueCustomField]: {
-    id: string,
-    name: string,
-    project: ProjectCustomField,
+  [MappingCustomFields.SingleGroupIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
+    $type: "SingleGroupIssueCustomField",
     value: UserGroup,
   },
-  [MappingCustomFields.SingleVersionIssueCustomField]: {
+  [MappingCustomFields.SingleVersionIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "SingleVersionIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: VersionBundleElement,
   },
-  [MappingCustomFields.SingleOwnedIssueCustomField]: {
-    id: string,
-    name: string,
-    project: ProjectCustomField,
+  [MappingCustomFields.SingleOwnedIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
+    $type: "SingleOwnedIssueCustomField",
     value: OwnedBundleElement,
   },
-  [MappingCustomFields.SingleEnumIssueCustomField]: {
+  [MappingCustomFields.SingleEnumIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: MappingCustomFields.SingleEnumIssueCustomField,
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: EnumBundleElement,
   },
-  [MappingCustomFields.MultiBuildIssueCustomField]: {
+  [MappingCustomFields.MultiBuildIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "MultiBuildIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: BuildBundleElement[],
   },
-  [MappingCustomFields.MultiGroupIssueCustomField]: {
-    id: string,
-    name: string,
-    project: ProjectCustomField,
+  [MappingCustomFields.MultiGroupIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
+    $type: "MultiGroupIssueCustomField",
     value:  UserGroup[],
   },
-  [MappingCustomFields.MultiVersionIssueCustomField]: {
+  [MappingCustomFields.MultiVersionIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "MultiVersionIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: VersionBundleElement[],
   },
-  [MappingCustomFields.MultiOwnedIssueCustomField]: {
+  [MappingCustomFields.MultiOwnedIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "MultiOwnedIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: OwnedBundleElement[],
   },
-  [MappingCustomFields.MultiEnumIssueCustomField]: {
+  [MappingCustomFields.MultiEnumIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "MultiEnumIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: EnumBundleElement[],
   },
-  [MappingCustomFields.MultiUserIssueCustomField]: {
+  [MappingCustomFields.MultiUserIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "MultiUserIssueCustomField",
-    id: string,
-    name: string,
-    project: ProjectCustomField,
     value: User[],
   },
-  [MappingCustomFields.TextIssueCustomField]: {
+  [MappingCustomFields.TextIssueCustomField]: Omit<components["schemas"]["IssueCustomField"], "value"> & {
     $type: "TextIssueCustomField",
-    id: string,
-    name: string,
     value: TextFieldValue,
-    project: ProjectCustomField,
   },
 };
+
+export type CustomFieldKey = keyof typeof MappingCustomFields;
+
+export type CustomFieldValue = CustomFields[CustomFieldKey];

@@ -9,7 +9,7 @@ type Props = CustomFields[MappingCustomFields.MultiUserIssueCustomField];
 
 const MultiUserIssueCustomField: FC<Props> = ({ value }) => {
   return (
-    <Stack gap={6}>
+    <Stack gap={6} wrap="wrap">
       {(Array.isArray(value) && value.length > 0)
         ? value.map((item) => (<SingleUserIssueCustomField key={item.id} value={item} />))
         : (<NoValue/>)

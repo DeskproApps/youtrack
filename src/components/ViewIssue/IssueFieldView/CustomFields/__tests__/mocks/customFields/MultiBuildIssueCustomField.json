@@ -1,0 +1,43 @@
+{
+  "projectCustomField": {
+    "id": "130-44",
+    "$type": "BuildProjectCustomField"
+  },
+  "value": [
+    {
+      "assembleDate": 1676462400000,
+      "color": {
+        "foreground": "#444",
+        "background": "#fff",
+        "id": "0",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 0,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "fix in build 1",
+      "id": "178-4",
+      "$type": "BuildBundleElement"
+    },
+    {
+      "assembleDate": 1676548800000,
+      "color": {
+        "foreground": "#444",
+        "background": "#fff",
+        "id": "0",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 1,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "fix in build 2",
+      "id": "178-5",
+      "$type": "BuildBundleElement"
+    }
+  ],
+  "name": "Custom Build Field Multi",
+  "id": "130-44",
+  "$type": "MultiBuildIssueCustomField"
+}

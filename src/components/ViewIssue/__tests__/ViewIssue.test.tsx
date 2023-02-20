@@ -49,43 +49,43 @@ const mockClient = {
   setAdminSettingInvalid: async () => {},
 };
 
-jest.mock("@deskpro/app-sdk", () => ({
-  ...jest.requireActual("@deskpro/app-sdk"),
-  useDeskproAppEvents: (
-    hooks: { [key: string]: (param: Record<string, unknown>) => void },
-    deps: [] = []
-  ) => {
-    const deskproAppEventsObj = {
-      type: "ticket",
-      settings: {
-        instance_url: "zpawn",
-        permanent_auth_token: "this_is_token",
-      },
-      data: {
-        ticket: { id: "215", subject: "Big ticket" },
-        app: {},
-        env: {},
-        currentAgent: {},
-      },
-    };
-    React.useEffect(() => {
-      !!hooks.onChange && hooks.onChange(deskproAppEventsObj);
-      !!hooks.onShow && hooks.onShow(deskproAppEventsObj);
-      !!hooks.onReady && hooks.onReady(deskproAppEventsObj);
-      !!hooks.onAdminSettingsChange && hooks.onAdminSettingsChange(deskproAppEventsObj.settings);
-      /* eslint-disable-next-line react-hooks/exhaustive-deps */
-    }, deps);
-  },
-  useInitialisedDeskproAppClient: (callback: (param: Record<string, unknown>) => void) => {
-    callback({
-      registerElement: () => {},
-      deregisterElement: () => {},
-    });
-  },
-  useDeskproAppClient: () => ({ client: mockClient }),
-  useDeskproAppTheme: () => ({ theme: lightTheme }),
-  proxyFetch: async () => fetch,
-}));
+// jest.mock("@deskpro/app-sdk", () => ({
+//   ...jest.requireActual("@deskpro/app-sdk"),
+//   useDeskproAppEvents: (
+//     hooks: { [key: string]: (param: Record<string, unknown>) => void },
+//     deps: [] = []
+//   ) => {
+//     const deskproAppEventsObj = {
+//       type: "ticket",
+//       settings: {
+//         instance_url: "zpawn",
+//         permanent_auth_token: "this_is_token",
+//       },
+//       data: {
+//         ticket: { id: "215", subject: "Big ticket" },
+//         app: {},
+//         env: {},
+//         currentAgent: {},
+//       },
+//     };
+//     React.useEffect(() => {
+//       !!hooks.onChange && hooks.onChange(deskproAppEventsObj);
+//       !!hooks.onShow && hooks.onShow(deskproAppEventsObj);
+//       !!hooks.onReady && hooks.onReady(deskproAppEventsObj);
+//       !!hooks.onAdminSettingsChange && hooks.onAdminSettingsChange(deskproAppEventsObj.settings);
+//       /* eslint-disable-next-line react-hooks/exhaustive-deps */
+//     }, deps);
+//   },
+//   useInitialisedDeskproAppClient: (callback: (param: Record<string, unknown>) => void) => {
+//     callback({
+//       registerElement: () => {},
+//       deregisterElement: () => {},
+//     });
+//   },
+//   useDeskproAppClient: () => ({ client: mockClient }),
+//   useDeskproAppTheme: () => ({ theme: lightTheme }),
+//   proxyFetch: async () => fetch,
+// }));
 
 describe("ViewIssue", () => {
   afterEach(() => {

@@ -1,0 +1,10 @@
+{
+  "value": 123,
+  "projectCustomField": {
+    "id": "170-6",
+    "$type": "SimpleProjectCustomField"
+  },
+  "name": "Custom Integer Field",
+  "id": "170-6",
+  "$type": "SimpleIssueCustomField"
+}

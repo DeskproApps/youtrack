@@ -40,6 +40,8 @@ export const CUSTOM_FIELD_VALUE_FIELDS = [
   "icon",
   "text",
   "markdownText",
+  "minutes",
+  "presentation",
   ...USER_FIELDS,
 ];
 

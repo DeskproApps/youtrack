@@ -1,0 +1,15 @@
+{
+  "value": {
+    "minutes": 510,
+    "presentation": "1d 30m",
+    "id": "P1DT30M",
+    "$type": "PeriodValue"
+  },
+  "projectCustomField": {
+    "id": "137-3",
+    "$type": "PeriodProjectCustomField"
+  },
+  "name": "Custom Period Field",
+  "id": "137-3",
+  "$type": "PeriodIssueCustomField"
+}

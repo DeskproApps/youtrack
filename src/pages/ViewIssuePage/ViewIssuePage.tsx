@@ -9,11 +9,10 @@ import { useSetTitle } from "../../hooks";
 import { useIssueDeps } from "./hooks";
 import { ViewIssue } from "../../components";
 import type { FC } from "react";
-import issue from "../../components/ViewIssue/__tests__/custom.json";
 
 const ViewIssuePage: FC = () => {
   const { issueId } = useParams();
-  // const { isLoading, issue } = useIssueDeps(issueId);
+  const { isLoading, issue } = useIssueDeps(issueId);
   const issueIdReadable = get(issue, ["idReadable"], "");
 
   useSetTitle(issueIdReadable);
@@ -35,9 +34,9 @@ const ViewIssuePage: FC = () => {
     });
   }, [issueIdReadable]);
 
-  // if (isLoading) {
-  //   return <LoadingSpinner/>
-  // }
+  if (isLoading) {
+    return <LoadingSpinner/>
+  }
 
   return (
     <ViewIssue issue={issue} />

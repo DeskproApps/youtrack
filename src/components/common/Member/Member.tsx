@@ -3,12 +3,13 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Avatar } from "@deskpro/deskpro-ui";
 import { P5, Stack } from "@deskpro/app-sdk";
 import type { FC } from "react";
+import type { AvatarProps, ImageAvatarProps } from "@deskpro/deskpro-ui";
 import type { Maybe } from "../../../types";
 
 type Props = {
-  name: any,
-  icon?: any,
-  avatarUrl?: Maybe<any>,
+  name: AvatarProps["name"],
+  icon?: AvatarProps["backupIcon"],
+  avatarUrl?: Maybe<ImageAvatarProps["imageUrl"]>,
 };
 
 const Member: FC<Props> = ({ name, icon, avatarUrl }) => (

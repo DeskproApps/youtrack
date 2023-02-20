@@ -3,13 +3,10 @@ import { Stack } from "@deskpro/app-sdk";
 import { SingleValueIssueCustomField } from "./SingleValueIssueCustomField";
 import { NoValue } from "./NoValue";
 import type { FC } from "react";
-import type { CustomFields, MappingCustomFields } from "../types";
 
-type Props = CustomFields[MappingCustomFields.MultiVersionIssueCustomField];
-
-const MultiValueIssueCustomField: FC<Props> = ({ value }) => {
+const MultiValueIssueCustomField: FC<{ value: unknown }> = ({ value }) => {
   return (
-    <Stack gap={6}>
+    <Stack gap={6} wrap="wrap">
       {(Array.isArray(value) && value.length > 0)
         ? (value.map((item, index) => (
           <SingleValueIssueCustomField

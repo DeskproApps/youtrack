@@ -1,0 +1,171 @@
+{
+  "projectCustomField": {
+    "id": "130-46",
+    "$type": "EnumProjectCustomField"
+  },
+  "value": [
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#444",
+        "background": "#ffc8ea",
+        "id": "19",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 1,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "Blocked",
+      "id": "109-21",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#888",
+        "background": "#e6e6e6",
+        "id": "16",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 0,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "Ready to pull",
+      "id": "109-22",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#900052",
+        "id": "5",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 2,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "YouTrack",
+      "id": "109-23",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#1a1a1a",
+        "id": "35",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 3,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "GitHub",
+      "id": "109-24",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#ff7123",
+        "id": "11",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 4,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "GitLab",
+      "id": "109-25",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#409600",
+        "id": "3",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 5,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "Shopify",
+      "id": "109-26",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#0070e4",
+        "id": "4",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 6,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "Trallo",
+      "id": "109-27",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#25beb2",
+        "id": "28",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 7,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "Shortcut",
+      "id": "109-28",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#ff7123",
+        "id": "11",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 8,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "HubSpot",
+      "id": "109-29",
+      "$type": "EnumBundleElement"
+    },
+    {
+      "localizedName": null,
+      "color": {
+        "foreground": "#fff",
+        "background": "#0050a1",
+        "id": "6",
+        "$type": "FieldStyle"
+      },
+      "description": null,
+      "ordinal": 9,
+      "archived": false,
+      "hasRunningJob": false,
+      "name": "JIRA",
+      "id": "109-30",
+      "$type": "EnumBundleElement"
+    }
+  ],
+  "name": "Custom Enum Field Multi",
+  "id": "130-46",
+  "$type": "MultiEnumIssueCustomField"
+}

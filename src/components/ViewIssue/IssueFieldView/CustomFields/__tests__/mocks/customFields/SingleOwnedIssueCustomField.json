@@ -1,0 +1,25 @@
+{
+  "projectCustomField": {
+    "id": "130-47",
+    "$type": "OwnedProjectCustomField"
+  },
+  "value": {
+    "owner": null,
+    "color": {
+      "foreground": "#444",
+      "background": "#fff",
+      "id": "0",
+      "$type": "FieldStyle"
+    },
+    "description": null,
+    "ordinal": 0,
+    "archived": false,
+    "hasRunningJob": false,
+    "name": "Migration",
+    "id": "138-11",
+    "$type": "OwnedBundleElement"
+  },
+  "name": "Custom Owned Field Single",
+  "id": "130-47",
+  "$type": "SingleOwnedIssueCustomField"
+}

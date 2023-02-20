@@ -1,0 +1,27 @@
+{
+  "value": [
+    {
+      "usersCount": 3,
+      "ringId": "29eae037-9bd6-4d09-853c-a2f96cd66127",
+      "icon": null,
+      "name": "All Users",
+      "id": "3-0",
+      "$type": "UserGroup"
+    },
+    {
+      "usersCount": 2,
+      "ringId": "ce724032-0fae-4163-b232-994ab2f93e52",
+      "icon": null,
+      "name": "Registered Users",
+      "id": "3-1",
+      "$type": "UserGroup"
+    }
+  ],
+  "projectCustomField": {
+    "id": "179-1",
+    "$type": "GroupProjectCustomField"
+  },
+  "name": "Custom group field multi",
+  "id": "179-1",
+  "$type": "MultiGroupIssueCustomField"
+}

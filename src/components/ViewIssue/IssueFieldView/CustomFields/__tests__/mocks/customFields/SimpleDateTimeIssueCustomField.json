@@ -1,0 +1,10 @@
+{
+  "value": 1678280400000,
+  "projectCustomField": {
+    "id": "170-4",
+    "$type": "SimpleProjectCustomField"
+  },
+  "name": "Custom DateTime Field",
+  "id": "170-4",
+  "$type": "SimpleIssueCustomField"
+}

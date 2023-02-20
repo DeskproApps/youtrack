@@ -1,0 +1,10 @@
+{
+  "value": 3.14159,
+  "projectCustomField": {
+    "id": "170-5",
+    "$type": "SimpleProjectCustomField"
+  },
+  "name": "Custom Float Field",
+  "id": "170-5",
+  "$type": "SimpleIssueCustomField"
+}

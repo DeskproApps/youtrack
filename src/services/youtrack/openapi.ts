@@ -6653,8 +6653,8 @@ export interface components {
       url?: string;
     };
     /**
-     * @description Represents a user in YouTrack. Please note that the read-only properties of a user account, like 
-     *             credentials, or email and so on, you can only change in  
+     * @description Represents a user in YouTrack. Please note that the read-only properties of a user account, like
+     *             credentials, or email and so on, you can only change in
      *             <a href="https://www.jetbrains.com/help/youtrack/devportal/?Hub-REST-API">Hub REST API</a>.
      */
     User: {
@@ -6858,7 +6858,7 @@ export interface components {
       $type?: string;
     };
     /**
-     * @description A `WatchFolder` is an `IssueFolder` that lets you enable notifications for a set 
+     * @description A `WatchFolder` is an `IssueFolder` that lets you enable notifications for a set
      * of issues that it enfolds. It is a common abstract ancestor for saved searches and issue tags.
      */
     WatchFolder: {

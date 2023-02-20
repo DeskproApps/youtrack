@@ -1,0 +1,25 @@
+{
+  "projectCustomField": {
+    "id": "130-45",
+    "$type": "EnumProjectCustomField"
+  },
+  "value": {
+    "localizedName": null,
+    "color": {
+      "foreground": "#888",
+      "background": "#e6e6e6",
+      "id": "16",
+      "$type": "FieldStyle"
+    },
+    "description": null,
+    "ordinal": 0,
+    "archived": false,
+    "hasRunningJob": false,
+    "name": "Ready to pull",
+    "id": "109-19",
+    "$type": "EnumBundleElement"
+  },
+  "name": "Custom Enum Field Single",
+  "id": "130-45",
+  "$type": "SingleEnumIssueCustomField"
+}

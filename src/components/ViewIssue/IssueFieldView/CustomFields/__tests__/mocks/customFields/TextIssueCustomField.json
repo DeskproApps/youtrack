@@ -1,0 +1,15 @@
+{
+  "value": {
+    "id": "text",
+    "text": "# Custom text field value value value\n\n\n\n1. list 1\n2. list 2\n3. list 3\n\n\n\n```javascript\nconst blockCode = \"JavaScript\"\n```",
+    "markdownText": "<div class=\"wiki text common-markdown\"><h1 id=\"custom-text-field-value-value-value\">Custom text field value value value</h1>\n<ol class=\"wiki-list0\">\n<li>list 1</li>\n<li>list 2</li>\n<li>list 3</li>\n</ol>\n<span class=\"markdown-language-tag\">javascript</span><pre class=\"wikicode prettyprint line-numbers\"><code class=\"language-javascript\">const blockCode = &quot;JavaScript&quot;\n</code></pre>\n</div>",
+    "$type": "TextFieldValue"
+  },
+  "projectCustomField": {
+    "id": "169-1",
+    "$type": "TextProjectCustomField"
+  },
+  "name": "Custom Text Field",
+  "id": "169-1",
+  "$type": "TextIssueCustomField"
+}
