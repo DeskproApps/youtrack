@@ -1,11 +1,12 @@
 import React from "react";
 import { P5 } from "@deskpro/app-sdk";
 import type { FC } from "react";
+import type { Maybe } from "../../../../types";
 
-type Props = { text?: string };
+type Props = { text?: Maybe<string> };
 
-const NoValue: FC<Props> = ({ text = "-" }) => (
-  <P5>{text}</P5>
+const NoValue: FC<Props> = ({ text }) => (
+  <P5>{!text ? "-" : text}</P5>
 );
 
 export { NoValue };
