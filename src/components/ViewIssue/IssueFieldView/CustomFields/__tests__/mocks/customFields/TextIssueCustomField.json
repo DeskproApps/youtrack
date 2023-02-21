@@ -6,6 +6,15 @@
     "$type": "TextFieldValue"
   },
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "text",
+        "id": "text",
+        "$type": "FieldType"
+      },
+      "id": "106-19",
+      "$type": "CustomField"
+    },
     "id": "169-1",
     "$type": "TextProjectCustomField"
   },

@@ -1,5 +1,14 @@
 {
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "build",
+        "id": "build[*]",
+        "$type": "FieldType"
+      },
+      "id": "106-21",
+      "$type": "CustomField"
+    },
     "id": "130-44",
     "$type": "BuildProjectCustomField"
   },

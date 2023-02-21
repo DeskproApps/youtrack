@@ -8,6 +8,15 @@
     "$type": "UserGroup"
   },
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "group",
+        "id": "group[1]",
+        "$type": "FieldType"
+      },
+      "id": "106-24",
+      "$type": "CustomField"
+    },
     "id": "179-0",
     "$type": "GroupProjectCustomField"
   },

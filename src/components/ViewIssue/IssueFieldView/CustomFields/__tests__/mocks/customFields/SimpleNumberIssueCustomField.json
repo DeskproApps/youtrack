@@ -1,6 +1,15 @@
 {
   "value": 123,
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "integer",
+        "id": "integer",
+        "$type": "FieldType"
+      },
+      "id": "106-35",
+      "$type": "CustomField"
+    },
     "id": "170-6",
     "$type": "SimpleProjectCustomField"
   },

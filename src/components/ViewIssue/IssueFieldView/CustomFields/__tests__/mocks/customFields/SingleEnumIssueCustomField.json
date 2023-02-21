@@ -1,5 +1,14 @@
 {
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "enum",
+        "id": "enum[1]",
+        "$type": "FieldType"
+      },
+      "id": "106-22",
+      "$type": "CustomField"
+    },
     "id": "130-45",
     "$type": "EnumProjectCustomField"
   },

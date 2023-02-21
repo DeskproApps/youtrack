@@ -1,5 +1,14 @@
 {
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "version",
+        "id": "version[*]",
+        "$type": "FieldType"
+      },
+      "id": "106-31",
+      "$type": "CustomField"
+    },
     "id": "130-50",
     "$type": "VersionProjectCustomField"
   },

@@ -6,6 +6,15 @@
     "$type": "PeriodValue"
   },
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "period",
+        "id": "period",
+        "$type": "FieldType"
+      },
+      "id": "106-37",
+      "$type": "CustomField"
+    },
     "id": "137-3",
     "$type": "PeriodProjectCustomField"
   },

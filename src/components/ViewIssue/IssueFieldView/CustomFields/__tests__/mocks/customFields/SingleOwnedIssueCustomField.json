@@ -1,5 +1,14 @@
 {
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "ownedField",
+        "id": "ownedField[1]",
+        "$type": "FieldType"
+      },
+      "id": "106-26",
+      "$type": "CustomField"
+    },
     "id": "130-47",
     "$type": "OwnedProjectCustomField"
   },

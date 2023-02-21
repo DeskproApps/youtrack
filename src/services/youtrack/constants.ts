@@ -45,7 +45,12 @@ export const CUSTOM_FIELD_VALUE_FIELDS = [
   ...USER_FIELDS,
 ];
 
-export const PROJECT_CUSTOM_FIELD_FIELDS = ["id","value","name"];
+export const PROJECT_CUSTOM_FIELD_FIELDS = [
+  "id",
+  "value",
+  "name",
+  "field(id,fieldType(id,valueType))",
+];
 
 export const CUSTOM_FIELD_FIELDS = [
   "id",

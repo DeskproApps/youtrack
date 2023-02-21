@@ -32,6 +32,15 @@
     }
   ],
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "user",
+        "id": "user[*]",
+        "$type": "FieldType"
+      },
+      "id": "106-29",
+      "$type": "CustomField"
+    },
     "id": "131-8",
     "$type": "UserProjectCustomField"
   },

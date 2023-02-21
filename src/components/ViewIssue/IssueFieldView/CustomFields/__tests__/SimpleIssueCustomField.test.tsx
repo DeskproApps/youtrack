@@ -19,7 +19,7 @@ describe("CustomFields", () => {
         { wrappers: { theme: true } },
       );
 
-      expect(await findByText(/1678280400000/i)).toBeInTheDocument();
+      expect(await findByText(/08 Mar, 2023 13:00/i)).toBeInTheDocument();
     });
 
     test("float", async () => {

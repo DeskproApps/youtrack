@@ -6,10 +6,12 @@ import { NoValue } from "./NoValue";
 import type { FC } from "react";
 import type { CustomFields, MappingCustomFields } from "../types";
 
-type Props = CustomFields[MappingCustomFields.DateIssueCustomField];
+type Props = Partial<CustomFields[MappingCustomFields.DateIssueCustomField]> & {
+  pattern?: string,
+};
 
-const DateIssueCustomField: FC<Props> = ({ value }) => {
-  return isNumber(value) ? (<P5>{format(value)}</P5>) : (<NoValue/>);
+const DateIssueCustomField: FC<Props> = ({ value, pattern }) => {
+  return isNumber(value) ? (<P5>{format(value, pattern)}</P5>) : (<NoValue/>);
 };
 
 export { DateIssueCustomField };

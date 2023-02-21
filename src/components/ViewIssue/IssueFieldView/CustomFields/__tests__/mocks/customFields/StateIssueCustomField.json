@@ -1,5 +1,14 @@
 {
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "state",
+        "id": "state[1]",
+        "$type": "FieldType"
+      },
+      "id": "106-2",
+      "$type": "CustomField"
+    },
     "id": "130-38",
     "$type": "StateProjectCustomField"
   },

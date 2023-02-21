@@ -1,6 +1,15 @@
 {
   "value": 1676376000000,
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "date",
+        "id": "date",
+        "$type": "FieldType"
+      },
+      "id": "106-32",
+      "$type": "CustomField"
+    },
     "id": "170-3",
     "$type": "SimpleProjectCustomField"
   },

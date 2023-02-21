@@ -1,6 +1,15 @@
 {
   "value": 3.14159,
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "float",
+        "id": "float",
+        "$type": "FieldType"
+      },
+      "id": "106-34",
+      "$type": "CustomField"
+    },
     "id": "170-5",
     "$type": "SimpleProjectCustomField"
   },

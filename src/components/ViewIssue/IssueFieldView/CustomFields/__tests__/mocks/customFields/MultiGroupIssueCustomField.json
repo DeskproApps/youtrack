@@ -18,6 +18,15 @@
     }
   ],
   "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "group",
+        "id": "group[*]",
+        "$type": "FieldType"
+      },
+      "id": "106-25",
+      "$type": "CustomField"
+    },
     "id": "179-1",
     "$type": "GroupProjectCustomField"
   },
