@@ -1,0 +1,19 @@
+import React from "react";
+import get from "lodash/get";
+import { P5 } from "@deskpro/app-sdk";
+import { mdToHtml } from "../../../../utils";
+import { NoValue } from "./NoValue";
+import type { FC } from "react";
+import type { CustomFields, MappingCustomFields } from "../types";
+
+type Props = CustomFields[MappingCustomFields.TextIssueCustomField];
+
+const TextIssueCustomField: FC<Props> = ({ value }) => {
+  const text = get(value, ["text"]);
+
+  return !text
+    ? (<NoValue/>)
+    : (<P5 dangerouslySetInnerHTML={{ __html: mdToHtml(text) }} />)
+};
+
+export { TextIssueCustomField };

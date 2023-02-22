@@ -1,0 +1,111 @@
+{
+  "comments": [],
+  "description": "Kanban *Deskpro* **issue** ~~description~~",
+  "project": {
+    "shortName": "KDP",
+    "name": "Kanban Deskpro",
+    "id": "0-3",
+    "$type": "Project"
+  },
+  "idReadable": "KDP-1",
+  "summary": "Kanban Deskpro issue",
+  "customFields": [
+    {
+      "projectCustomField": {
+        "id": "130-20",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#b45f06",
+          "background": "#ffee9c",
+          "id": "18",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 2,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Major",
+        "id": "109-2",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Priority",
+      "id": "130-20",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "value": {
+        "$type": "User",
+        "id": "1-1",
+        "fullName": "Armen Tamzarian",
+        "login": "zpawn",
+        "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48",
+        "ringId": "87146e6b-66fa-4876-8870-3c3d5eb34e20",
+        "email": "ilia.makarov@me.com",
+        "name": "Armen Tamzarian"
+      },
+      "projectCustomField": {
+        "id": "131-3",
+        "$type": "UserProjectCustomField"
+      },
+      "name": "Assignee",
+      "id": "131-3",
+      "$type": "SingleUserIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-18",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#888",
+          "background": "#e6e6e6",
+          "id": "16",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Ready to pull",
+        "id": "109-18",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Kanban State",
+      "id": "130-18",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "id": "130-19",
+        "$type": "StateProjectCustomField"
+      },
+      "value": {
+        "isResolved": false,
+        "localizedName": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "description": null,
+        "ordinal": 2,
+        "archived": false,
+        "hasRunningJob": false,
+        "name": "Develop",
+        "id": "111-18",
+        "$type": "StateBundleElement"
+      },
+      "name": "Stage",
+      "id": "130-19",
+      "$type": "StateIssueCustomField"
+    }
+  ],
+  "id": "2-32",
+  "$type": "Issue"
+}

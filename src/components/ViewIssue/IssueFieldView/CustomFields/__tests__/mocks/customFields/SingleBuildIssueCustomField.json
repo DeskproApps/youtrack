@@ -1,0 +1,34 @@
+{
+  "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "build",
+        "id": "build[1]",
+        "$type": "FieldType"
+      },
+      "id": "106-20",
+      "$type": "CustomField"
+    },
+    "id": "130-43",
+    "$type": "BuildProjectCustomField"
+  },
+  "value": {
+    "assembleDate": 1676462400000,
+    "color": {
+      "foreground": "#444",
+      "background": "#fff",
+      "id": "0",
+      "$type": "FieldStyle"
+    },
+    "description": null,
+    "ordinal": 0,
+    "archived": false,
+    "hasRunningJob": false,
+    "name": "fix in build 1",
+    "id": "178-2",
+    "$type": "BuildBundleElement"
+  },
+  "name": "Custom Build Field Single",
+  "id": "130-43",
+  "$type": "SingleBuildIssueCustomField"
+}

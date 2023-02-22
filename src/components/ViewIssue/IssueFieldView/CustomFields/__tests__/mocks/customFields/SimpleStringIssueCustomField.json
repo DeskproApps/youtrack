@@ -1,0 +1,19 @@
+{
+  "value": "1234567890a",
+  "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "string",
+        "id": "string",
+        "$type": "FieldType"
+      },
+      "id": "106-36",
+      "$type": "CustomField"
+    },
+    "id": "170-7",
+    "$type": "SimpleProjectCustomField"
+  },
+  "name": "Custom String Field",
+  "id": "170-7",
+  "$type": "SimpleIssueCustomField"
+}

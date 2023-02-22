@@ -20,6 +20,45 @@ export const COMMENT_FIELDS = [
 
 export const PROJECT_FIELDS = ["id", "shortName", "name"];
 
+export const CUSTOM_FIELD_VALUE_FIELDS = [
+  "id",
+  "name",
+  "description",
+  "archived",
+  "ordinal",
+  "color(id,background,foreground)",
+  "hasRunningJob",
+  "isResolved",
+  "localizedName",
+  "assembleDate",
+  "releaseDate",
+  "released",
+  "owner",
+  "localizedName",
+  "ringId",
+  "usersCount",
+  "icon",
+  "text",
+  "markdownText",
+  "minutes",
+  "presentation",
+  ...USER_FIELDS,
+];
+
+export const PROJECT_CUSTOM_FIELD_FIELDS = [
+  "id",
+  "value",
+  "name",
+  "field(id,fieldType(id,valueType))",
+];
+
+export const CUSTOM_FIELD_FIELDS = [
+  "id",
+  "name",
+  `value(${CUSTOM_FIELD_VALUE_FIELDS.join(",")})`,
+  `projectCustomField(${PROJECT_CUSTOM_FIELD_FIELDS.join(",")})`
+];
+
 export const ISSUE_FIELDS = [
   "id",
   "idReadable",
@@ -27,4 +66,5 @@ export const ISSUE_FIELDS = [
   "description",
   `project(${PROJECT_FIELDS.join(",")})`,
   `comments(${COMMENT_FIELDS.join(",")})`,
+  `customFields(${CUSTOM_FIELD_FIELDS.join(",")})`,
 ];

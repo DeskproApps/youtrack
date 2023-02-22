@@ -1,0 +1,28 @@
+{
+  "value": {
+    "fullName": "Armen Tamzarian",
+    "login": "zpawn",
+    "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48",
+    "ringId": "87146e6b-66fa-4876-8870-3c3d5eb34e20",
+    "email": "ilia.makarov@me.com",
+    "name": "Armen Tamzarian",
+    "id": "1-1",
+    "$type": "User"
+  },
+  "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "user",
+        "id": "user[1]",
+        "$type": "FieldType"
+      },
+      "id": "106-28",
+      "$type": "CustomField"
+    },
+    "id": "131-7",
+    "$type": "UserProjectCustomField"
+  },
+  "name": "Custom User Field Single",
+  "id": "131-7",
+  "$type": "SingleUserIssueCustomField"
+}

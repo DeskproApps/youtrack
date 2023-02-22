@@ -1,0 +1,50 @@
+{
+  "value": [
+    {
+      "fullName": "guest",
+      "login": "guest",
+      "avatarUrl": "/hub/api/rest/avatar/8717065a-9f90-4089-9dbb-1fcf6d4719c0?s=48",
+      "ringId": "8717065a-9f90-4089-9dbb-1fcf6d4719c0",
+      "email": null,
+      "name": "guest",
+      "id": "1-0",
+      "$type": "User"
+    },
+    {
+      "fullName": "Armen Tamzarian",
+      "login": "zpawn",
+      "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48",
+      "ringId": "87146e6b-66fa-4876-8870-3c3d5eb34e20",
+      "email": "ilia.makarov@me.com",
+      "name": "Armen Tamzarian",
+      "id": "1-1",
+      "$type": "User"
+    },
+    {
+      "fullName": "david.anjonrin",
+      "login": "david.anjonrin",
+      "avatarUrl": "/hub/api/rest/avatar/c0f3a6c5-1304-4100-b8e8-9b87923723e2?s=48",
+      "ringId": "c0f3a6c5-1304-4100-b8e8-9b87923723e2",
+      "email": "david.anjonrin@deskpro.com",
+      "name": "david.anjonrin",
+      "id": "1-2",
+      "$type": "User"
+    }
+  ],
+  "projectCustomField": {
+    "field": {
+      "fieldType": {
+        "valueType": "user",
+        "id": "user[*]",
+        "$type": "FieldType"
+      },
+      "id": "106-29",
+      "$type": "CustomField"
+    },
+    "id": "131-8",
+    "$type": "UserProjectCustomField"
+  },
+  "name": "Custom User Field Multi",
+  "id": "131-8",
+  "$type": "MultiUserIssueCustomField"
+}
