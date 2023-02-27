@@ -1,4 +1,5 @@
 import { z } from "zod";
+import isEmpty from "lodash/isEmpty";
 import { getOption } from "../../utils";
 import type { IssueValues, FormValidationSchema } from "./types";
 
@@ -21,8 +22,8 @@ const getInitValues = (): FormValidationSchema => {
 const getIssueValues = (data: FormValidationSchema): IssueValues => {
   return {
     summary: data.summary,
-    description: data.description,
     project: { id: data.project.value },
+    ...(isEmpty(data.description) ? {} : { description: data.description }),
   };
 };
 
