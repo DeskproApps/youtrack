@@ -1,5 +1,6 @@
 import { useState } from "react";
 import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 import {
   useDeskproLatestAppContext,
   useInitialisedDeskproAppClient,
@@ -43,7 +44,7 @@ const useLoadHomeDeps: UseLoadHomeDeps = () => {
   );
 
   return {
-    isLoading: [issues].every(({ isLoading }) => isLoading),
+    isLoading: isEmpty(entityIds) ? false : [issues].every(({ isLoading }) => isLoading),
     issues: issues.data || [],
   };
 };

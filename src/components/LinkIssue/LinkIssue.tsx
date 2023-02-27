@@ -1,5 +1,11 @@
 import React, { Fragment } from "react";
-import { Stack, Checkbox, HorizontalDivider } from "@deskpro/app-sdk";
+import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  Stack,
+  Checkbox,
+  TwoButtonGroup,
+  HorizontalDivider,
+} from "@deskpro/app-sdk";
 import { getOption } from "../../utils";
 import { IssueItem } from "../IssueItem";
 import {
@@ -30,7 +36,8 @@ type Props = {
   onCancel: () => void,
   onLinkIssues: () => void,
   selectedIssues: Array<Issue>,
-  onChangeSelectedIssue: (issue: Issue) => void
+  onChangeSelectedIssue: (issue: Issue) => void,
+  onNavigateToCreateIssue: () => void,
 };
 
 const LinkIssue: FC<Props> = ({
@@ -47,9 +54,22 @@ const LinkIssue: FC<Props> = ({
   selectedProject,
   onChangeSelectProject,
   onChangeSelectedIssue,
+  onNavigateToCreateIssue,
 }) => {
   return (
     <>
+      <Container>
+        <TwoButtonGroup
+          selected="one"
+          oneLabel="Find Issue"
+          oneIcon={faSearch}
+          twoLabel="Create Issue"
+          twoIcon={faPlus}
+          oneOnClick={() => {}}
+          twoOnClick={onNavigateToCreateIssue}
+        />
+      </Container>
+
       <Container>
         <Search
           value={value}
