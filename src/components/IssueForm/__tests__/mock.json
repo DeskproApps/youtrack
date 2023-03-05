@@ -1,0 +1,35 @@
+{
+  "data": {
+    "summary": "Title",
+    "description": "",
+    "project": {
+      "label": "Simple Deskpro",
+      "value": "0-4",
+      "key": "0-4",
+      "type": "value"
+    },
+    "130-52": {
+      "label": "Develop",
+      "value": "111-28",
+      "key": "111-28",
+      "type": "value"
+    }
+  },
+  "customFieldValues": {
+    "130-52": {
+      "label": "Develop",
+      "value": "111-28",
+      "key": "111-28",
+      "type": "value"
+    }
+  },
+  "customFieldTypes": {
+    "130-52": "state[1]"
+  },
+  "project": {
+    "label": "Simple Deskpro",
+    "value": "0-4",
+    "key": "0-4",
+    "type": "value"
+  }
+}

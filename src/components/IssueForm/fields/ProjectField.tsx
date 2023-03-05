@@ -25,7 +25,9 @@ const ProjectField: FC<{
       externalLinkIcon={faExternalLinkAlt}
       placement="bottom-start"
       hideIcons
-      options={options}
+      options={options.filter(({ label }) => {
+        return (label as string).toLowerCase().includes(inputSearch.toLowerCase());
+      })}
       onSelectOption={onChange}
       inputValue={inputSearch}
       onInputChange={setInputSearch}

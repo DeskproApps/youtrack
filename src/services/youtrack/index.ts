@@ -6,3 +6,5 @@ export { searchIssuesByIdsService, searchIssuesBySummaryService } from "./search
 export { getIssueService } from "./getIssueService";
 export { getProjectsService } from "./getProjectsService";
 export { createIssueService } from "./createIssueService";
+export { getProjectCustomFieldSettingsService } from "./getProjectCustomFieldSettingsService";
+export { getGroupProjectCustomFieldSettingsService } from "./getGroupProjectCustomFieldSettingsService";

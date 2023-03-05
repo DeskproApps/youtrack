@@ -1,0 +1,419 @@
+{
+  "customFields": [
+    {
+      "field": {
+        "aliases": null,
+        "ordinal": 0,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [
+            {
+              "$type": "EnumBundleElement"
+            }
+          ],
+          "bundle": {
+            "$type": "EnumBundle"
+          },
+          "emptyFieldText": "No Priority",
+          "canBeEmpty": false,
+          "isPublic": true,
+          "id": "107-1",
+          "$type": "EnumBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "enum",
+          "id": "enum[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          }
+        ],
+        "name": "Priority",
+        "id": "106-0",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No Priority",
+      "canBeEmpty": false,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-28",
+      "$type": "EnumProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": null,
+        "ordinal": 1,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [
+            {
+              "$type": "EnumBundleElement"
+            }
+          ],
+          "bundle": {
+            "$type": "EnumBundle"
+          },
+          "emptyFieldText": "No Type",
+          "canBeEmpty": false,
+          "isPublic": true,
+          "id": "107-3",
+          "$type": "EnumBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "enum",
+          "id": "enum[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          }
+        ],
+        "name": "Type",
+        "id": "106-1",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No Type",
+      "canBeEmpty": false,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-29",
+      "$type": "EnumProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": null,
+        "ordinal": 2,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [
+            {
+              "$type": "StateBundleElement"
+            }
+          ],
+          "bundle": {
+            "$type": "StateBundle"
+          },
+          "emptyFieldText": "No State",
+          "canBeEmpty": false,
+          "isPublic": true,
+          "id": "107-5",
+          "$type": "StateBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "state",
+          "id": "state[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "StateProjectCustomField"
+          },
+          {
+            "$type": "StateProjectCustomField"
+          },
+          {
+            "$type": "StateProjectCustomField"
+          },
+          {
+            "$type": "StateProjectCustomField"
+          }
+        ],
+        "name": "State",
+        "id": "106-2",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No State",
+      "canBeEmpty": false,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-30",
+      "$type": "StateProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "in",
+        "ordinal": 4,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": null,
+          "emptyFieldText": "No Subsystem",
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "107-7",
+          "$type": "OwnedBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "ownedField",
+          "id": "ownedField[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "OwnedProjectCustomField"
+          },
+          {
+            "$type": "OwnedProjectCustomField"
+          }
+        ],
+        "name": "Subsystem",
+        "id": "106-4",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No Subsystem",
+      "canBeEmpty": true,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-31",
+      "$type": "OwnedProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "fix for, fixed in, fix version, version",
+        "ordinal": 5,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": {
+            "$type": "VersionBundle"
+          },
+          "emptyFieldText": "Unscheduled",
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "107-9",
+          "$type": "VersionBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "version",
+          "id": "version[*]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "VersionProjectCustomField"
+          },
+          {
+            "$type": "VersionProjectCustomField"
+          }
+        ],
+        "name": "Fix versions",
+        "id": "106-5",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "Unscheduled",
+      "canBeEmpty": true,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-32",
+      "$type": "VersionProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "affects, affecting, that affect, affected version, version",
+        "ordinal": 6,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": {
+            "$type": "VersionBundle"
+          },
+          "emptyFieldText": "Unknown",
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "107-11",
+          "$type": "VersionBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "version",
+          "id": "version[*]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "VersionProjectCustomField"
+          },
+          {
+            "$type": "VersionProjectCustomField"
+          }
+        ],
+        "name": "Affected versions",
+        "id": "106-6",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "Unknown",
+      "canBeEmpty": true,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-33",
+      "$type": "VersionProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "fix for, fixed in, build, fix build",
+        "ordinal": 7,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": null,
+          "emptyFieldText": "Next Build",
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "107-13",
+          "$type": "BuildBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "build",
+          "id": "build[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": false,
+        "instances": [
+          {
+            "$type": "BuildProjectCustomField"
+          },
+          {
+            "$type": "BuildProjectCustomField"
+          }
+        ],
+        "name": "Fixed in build",
+        "id": "106-7",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "Next Build",
+      "canBeEmpty": true,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-34",
+      "$type": "BuildProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "for, assigned to",
+        "ordinal": 3,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": null,
+          "emptyFieldText": "Unassigned",
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "112-1",
+          "$type": "UserCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "user",
+          "id": "user[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "UserProjectCustomField"
+          },
+          {
+            "$type": "UserProjectCustomField"
+          },
+          {
+            "$type": "UserProjectCustomField"
+          },
+          {
+            "$type": "UserProjectCustomField"
+          }
+        ],
+        "name": "Assignee",
+        "id": "106-3",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "Unassigned",
+      "canBeEmpty": true,
+      "condition": null,
+      "isPublic": true,
+      "id": "131-5",
+      "$type": "UserProjectCustomField"
+    }
+  ],
+  "shortName": "DDP",
+  "name": "Default Deskpro Project",
+  "id": "0-5",
+  "$type": "Project"
+}

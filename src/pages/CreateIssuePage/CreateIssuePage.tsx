@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useState, useCallback } from "react";
 import get from "lodash/get";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,17 +9,17 @@ import {
 import { useSetTitle } from "../../hooks";
 import { setEntityIssueService } from "../../services/entityAssociation";
 import { createIssueService } from "../../services/youtrack"
-import { getIssueValues } from "../../components/IssueForm";
 import { CreateIssue } from "../../components";
 import type { FC } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import type { FormValidationSchema } from "../../components/IssueForm";
-import type { TicketContext } from "../../types";
+import type { IssueValues } from "../../components/IssueForm";
+import type { TicketContext, Maybe } from "../../types";
 
 const CreateIssuePage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+
+  const [error, setError] = useState<Maybe<string|string[]>>(null);
 
   const ticketId = get(context, ["data", "ticket", "id"]);
 
@@ -27,12 +27,14 @@ const CreateIssuePage: FC = () => {
 
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
-  const onSubmit: SubmitHandler<FormValidationSchema> = useCallback((data) => {
+  const onSubmit = useCallback((data: IssueValues) => {
     if (!client || !ticketId) {
       return;
     }
 
-    return createIssueService(client, getIssueValues(data))
+    setError(null);
+
+    return createIssueService(client, data)
       .then((issue) => {
         return Promise.all([
           setEntityIssueService(client, ticketId, issue.idReadable),
@@ -44,7 +46,8 @@ const CreateIssuePage: FC = () => {
         if (isSuccess) {
           navigate("/home")
         }
-      });
+      })
+      .catch((err) => setError(get(err, ["data", "error_description"])));
   }, [client, ticketId, navigate]);
 
   useSetTitle("Link Issues");
@@ -61,6 +64,7 @@ const CreateIssuePage: FC = () => {
 
   return (
     <CreateIssue
+      error={error}
       onSubmit={onSubmit}
       onCancel={onCancel}
       onNavigateToLinkIssue={onNavigateToLinkIssue}

@@ -1,6 +1,6 @@
 import type { components } from "../../../services/youtrack/openapi";
 import type { User } from "../../../services/youtrack/types";
-import { Maybe } from "../../../types";
+import type { Maybe } from "../../../types";
 
 export enum MappingCustomFields {
   SingleEnumIssueCustomField = "SingleEnumIssueCustomField",
@@ -149,6 +149,29 @@ export enum MappingFieldTypes {
   MULTI_USER = "user[*]",
   SINGLE_VERSION = "version[1]",
   MULTI_VERSION = "version[*]",
+}
+
+export const MappingTypesToIssueTypes = {
+  [MappingFieldTypes.TEXT]: MappingCustomFields.TextIssueCustomField,
+  [MappingFieldTypes.STATE]: MappingCustomFields.StateIssueCustomField,
+  [MappingFieldTypes.DATE]: MappingCustomFields.DateIssueCustomField,
+  [MappingFieldTypes.DATE_TIME]: MappingCustomFields.SimpleIssueCustomField,
+  [MappingFieldTypes.FLOAT]: MappingCustomFields.SimpleIssueCustomField,
+  [MappingFieldTypes.INTEGER]: MappingCustomFields.SimpleIssueCustomField,
+  [MappingFieldTypes.STRING]: MappingCustomFields.SimpleIssueCustomField,
+  [MappingFieldTypes.PERIOD]: MappingCustomFields.PeriodIssueCustomField,
+  [MappingFieldTypes.SINGLE_BUILD]: MappingCustomFields.SingleBuildIssueCustomField,
+  [MappingFieldTypes.MULTI_BUILD]: MappingCustomFields.MultiBuildIssueCustomField,
+  [MappingFieldTypes.SINGLE_ENUM]: MappingCustomFields.SingleEnumIssueCustomField,
+  [MappingFieldTypes.MULTI_ENUM]: MappingCustomFields.MultiEnumIssueCustomField,
+  [MappingFieldTypes.SINGLE_GROUP]: MappingCustomFields.SingleGroupIssueCustomField,
+  [MappingFieldTypes.MULTI_GROUP]: MappingCustomFields.MultiGroupIssueCustomField,
+  [MappingFieldTypes.SINGLE_OWNED]: MappingCustomFields.SingleOwnedIssueCustomField,
+  [MappingFieldTypes.MULTI_OWNED]: MappingCustomFields.MultiOwnedIssueCustomField,
+  [MappingFieldTypes.SINGLE_USER]: MappingCustomFields.SingleUserIssueCustomField,
+  [MappingFieldTypes.MULTI_USER]: MappingCustomFields.MultiUserIssueCustomField,
+  [MappingFieldTypes.SINGLE_VERSION]: MappingCustomFields.SingleVersionIssueCustomField,
+  [MappingFieldTypes.MULTI_VERSION]: MappingCustomFields.MultiVersionIssueCustomField,
 }
 
 export type FieldTypes = {

@@ -10,6 +10,7 @@ type Props = FormProps & {
 };
 
 const CreateIssue: FC<Props> = ({
+  error,
   onSubmit,
   onCancel,
   onNavigateToLinkIssue,
@@ -26,6 +27,7 @@ const CreateIssue: FC<Props> = ({
         twoOnClick={() => {}}
       />
       <IssueForm
+        error={error}
         onSubmit={onSubmit}
         onCancel={onCancel}
       />
