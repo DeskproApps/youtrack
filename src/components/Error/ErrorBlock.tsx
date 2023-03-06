@@ -1,9 +1,10 @@
-import { FC } from "react";
 import styled from "styled-components";
 import { Stack } from "@deskpro/app-sdk";
+import type { FC } from "react";
+import type { Maybe } from "../../types";
 
 type Props = {
-    text: string | JSX.Element | Array<string | JSX.Element>,
+  text?: Maybe<string|JSX.Element|Array<string|JSX.Element>>,
 }
 
 const StyledErrorBlock = styled(Stack)`

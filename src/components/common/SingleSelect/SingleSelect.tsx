@@ -88,4 +88,4 @@ const SingleSelect: FC<Props> = ({
   );
 };
 
-export {SingleSelect};
+export { SingleSelect };

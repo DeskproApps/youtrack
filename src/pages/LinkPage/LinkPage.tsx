@@ -61,6 +61,8 @@ const LinkPage: FC = () => {
     navigate("/home");
   }, [navigate]);
 
+  const onNavigateToCreateIssue = useCallback(() => navigate("/create"), [navigate]);
+
   const onChangeSelectedIssue = (issue: Issue) => {
     let newSelectedIssues = cloneDeep(selectedIssues);
 
@@ -116,6 +118,7 @@ const LinkPage: FC = () => {
       onLinkIssues={onLinkIssues}
       selectedIssues={selectedIssues}
       onChangeSelectedIssue={onChangeSelectedIssue}
+      onNavigateToCreateIssue={onNavigateToCreateIssue}
     />
   );
 };

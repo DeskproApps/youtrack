@@ -1,0 +1,204 @@
+{
+  "customFields": [
+    {
+      "field": {
+        "aliases": null,
+        "ordinal": 17,
+        "isAutoAttached": false,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": null,
+          "emptyFieldText": null,
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "107-15",
+          "$type": "EnumBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "enum",
+          "id": "enum[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "EnumProjectCustomField"
+          }
+        ],
+        "name": "Kanban State",
+        "id": "106-16",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No kanban state",
+      "canBeEmpty": false,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-18",
+      "$type": "EnumProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "state",
+        "ordinal": 18,
+        "isAutoAttached": false,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": null,
+          "emptyFieldText": null,
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "107-16",
+          "$type": "StateBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "state",
+          "id": "state[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "StateProjectCustomField"
+          }
+        ],
+        "name": "Stage",
+        "id": "106-17",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No stage",
+      "canBeEmpty": false,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-19",
+      "$type": "StateProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": null,
+        "ordinal": 0,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [
+            {
+              "$type": "EnumBundleElement"
+            }
+          ],
+          "bundle": {
+            "$type": "EnumBundle"
+          },
+          "emptyFieldText": "No Priority",
+          "canBeEmpty": false,
+          "isPublic": true,
+          "id": "107-1",
+          "$type": "EnumBundleCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "enum",
+          "id": "enum[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          },
+          {
+            "$type": "EnumProjectCustomField"
+          }
+        ],
+        "name": "Priority",
+        "id": "106-0",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "No Priority",
+      "canBeEmpty": false,
+      "condition": null,
+      "isPublic": true,
+      "id": "130-20",
+      "$type": "EnumProjectCustomField"
+    },
+    {
+      "field": {
+        "aliases": "for, assigned to",
+        "ordinal": 3,
+        "isAutoAttached": true,
+        "localizedName": null,
+        "fieldDefaults": {
+          "defaultValues": [],
+          "bundle": null,
+          "emptyFieldText": "Unassigned",
+          "canBeEmpty": true,
+          "isPublic": true,
+          "id": "112-1",
+          "$type": "UserCustomFieldDefaults"
+        },
+        "hasRunningJob": false,
+        "isUpdateable": true,
+        "fieldType": {
+          "valueType": "user",
+          "id": "user[1]",
+          "$type": "FieldType"
+        },
+        "isDisplayedInIssueList": true,
+        "instances": [
+          {
+            "$type": "UserProjectCustomField"
+          },
+          {
+            "$type": "UserProjectCustomField"
+          },
+          {
+            "$type": "UserProjectCustomField"
+          },
+          {
+            "$type": "UserProjectCustomField"
+          }
+        ],
+        "name": "Assignee",
+        "id": "106-3",
+        "$type": "CustomField"
+      },
+      "project": {
+        "$type": "Project"
+      },
+      "ordinal": 0,
+      "emptyFieldText": "Unassigned",
+      "canBeEmpty": true,
+      "condition": null,
+      "isPublic": true,
+      "id": "131-3",
+      "$type": "UserProjectCustomField"
+    }
+  ],
+  "shortName": "KDP",
+  "name": "Kanban Deskpro",
+  "id": "0-3",
+  "$type": "Project"
+}

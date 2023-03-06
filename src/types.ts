@@ -4,7 +4,7 @@ import type {
   IDeskproClient,
   DropdownValueType,
 } from "@deskpro/app-sdk";
-import {Issue} from "./services/youtrack/types";
+import { Issue } from "./services/youtrack/types";
 
 export type Maybe<T> = T | undefined | null;
 
@@ -101,6 +101,7 @@ export type RouterPaths =
   | "/admin/verify_settings"
   | "/link"
   | "/home"
+  | "/create"
 ;
 
 export type EventPayload =

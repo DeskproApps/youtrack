@@ -18,7 +18,42 @@ export const COMMENT_FIELDS = [
   `attachments(${ATTACHMENT_FIELDS.join(",")})`
 ];
 
-export const PROJECT_FIELDS = ["id", "shortName", "name"];
+export const PROJECT_CUSTOM_FIELDS = [
+  "id",
+  `field(${[
+    "id",
+    "name",
+    "localizedName",
+    "fieldType(valueType,id)", // ./src/components/ViewIssue/IssueFieldView/types.ts:MappingFieldTypes
+    "isAutoAttached",
+    "isDisplayedInIssueList",
+    "ordinal",
+    "aliases",
+    `fieldDefaults(${[
+      "id",
+      "canBeEmpty",
+      "emptyFieldText",
+      "isPublic",
+      "bundle",
+      "defaultValues",
+    ].join(",")})`,
+    "hasRunningJob",
+    "isUpdateable",
+  ].join(",")})`,
+  "project(id,shortName,name)",
+  "canBeEmpty",
+  "emptyFieldText",
+  "ordinal",
+  "isPublic",
+  "condition",
+];
+
+export const PROJECT_FIELDS = [
+  "id",
+  "shortName",
+  "name",
+  `customFields(${PROJECT_CUSTOM_FIELDS.join(",")})`,
+];
 
 export const CUSTOM_FIELD_VALUE_FIELDS = [
   "id",
@@ -29,7 +64,6 @@ export const CUSTOM_FIELD_VALUE_FIELDS = [
   "color(id,background,foreground)",
   "hasRunningJob",
   "isResolved",
-  "localizedName",
   "assembleDate",
   "releaseDate",
   "released",

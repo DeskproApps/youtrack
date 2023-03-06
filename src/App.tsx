@@ -15,6 +15,7 @@ import {
   LinkPage,
   ViewIssuePage,
   VerifySettings,
+  CreateIssuePage,
 } from "./pages";
 import { ErrorFallback } from "./components";
 import type { TargetAction } from "@deskpro/app-sdk";
@@ -45,7 +46,7 @@ const App = () => {
     (action: TargetAction) => {
       switch (action.name) {
         case "linkTicket":
-          navigate("/");
+          navigate("/link");
           break;
       }
     },
@@ -74,6 +75,7 @@ const App = () => {
           <Route path="/link" element={<LinkPage/>} />
           <Route path="/home" element={<HomePage/>} />
           <Route path="/view/:issueId" element={<ViewIssuePage/>} />
+          <Route path="/create" element={<CreateIssuePage/>} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>

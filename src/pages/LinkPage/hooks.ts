@@ -28,7 +28,7 @@ const useSearch: UseSearch = (q) => {
 
   const projects = (issues.data || [])
     .map(({ project }) => project)
-    .filter((p) => (Boolean(p) && Boolean(p?.id))) as Project[];
+    .filter((p) => (Boolean(p) && Boolean(p?.id)));
 
   return {
     isLoading: [issues].every(({ isLoading }) => isLoading),

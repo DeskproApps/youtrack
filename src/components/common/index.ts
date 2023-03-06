@@ -10,3 +10,5 @@ export { YouTrackLogo } from "./YouTrackLogo";
 export { Link } from "./Link";
 export { Comment } from "./Comment";
 export { Member } from "./Member";
+export { TextArea } from "./TextArea";
+export { DateField } from "./DateField";

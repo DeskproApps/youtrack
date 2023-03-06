@@ -37,6 +37,7 @@ describe("LinkIssue", () => {
           onLinkIssues={() => {}}
           selectedIssues={[]}
           onChangeSelectedIssue={() => {}}
+          onNavigateToCreateIssue={jest.fn()}
         />
       ),
       { wrappers: { theme: true } },
@@ -66,6 +67,7 @@ describe("LinkIssue", () => {
           onLinkIssues={() => {}}
           selectedIssues={[]}
           onChangeSelectedIssue={() => {}}
+          onNavigateToCreateIssue={jest.fn()}
         />
       ),
       { wrappers: { theme: true } },
@@ -91,6 +93,7 @@ describe("LinkIssue", () => {
           onLinkIssues={() => {}}
           selectedIssues={[]}
           onChangeSelectedIssue={() => {}}
+          onNavigateToCreateIssue={jest.fn()}
         />
       ),
       { wrappers: { theme: true } },

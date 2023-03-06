@@ -4,6 +4,7 @@ import {
   createElement,
   PropsWithChildren,
 } from "react";
+import isString from "lodash/isString";
 import {
   RenderResult,
   render as testingLibraryRender,
@@ -23,7 +24,7 @@ interface WrapperOptions {
   appSdk?: boolean;
   query?: boolean;
   theme?: boolean;
-  router?: boolean;
+  router?: boolean|string;
 }
 
 interface RenderOptions extends TestingLibraryRenderOptions {
@@ -64,6 +65,10 @@ const wrap = <P>(node: ReactElement<P>, options?: WrapperOptions): ReactElement<
   }
 
   if (options?.router) {
+    if (isString(options?.router)) {
+      window.history.pushState({}, "", `#${options.router}`)
+    }
+
     children = createElement(routerProvider.component, {}, children) as ReactElement;
   }
 

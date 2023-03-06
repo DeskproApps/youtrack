@@ -3,9 +3,8 @@ import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { IssueItem } from "../IssueItem";
 import { render } from "../../../testing";
-import type { Issue } from "../../../services/youtrack/types";
 
-const issue: Issue = {
+const issue = {
   $type: "Issue",
   id: "2-40",
   idReadable: "SPDP-3",
@@ -32,7 +31,7 @@ describe("IssueItem", () => {
   });
 
   test("render", async () => {
-    const { findByText } = render(<IssueItem issue={issue}/>, { wrappers: { theme: true } });
+    const { findByText } = render(<IssueItem issue={issue as never}/>, { wrappers: { theme: true } });
 
     expect(await findByText(/Simple Deskpro Issue/i)).toBeInTheDocument();
   });
@@ -41,7 +40,7 @@ describe("IssueItem", () => {
     const onClick = jest.fn();
 
     const { findByText } = render(
-      <IssueItem issue={issue} onClickTitle={onClick} />,
+      <IssueItem issue={issue as never} onClickTitle={onClick} />,
       { wrappers: { theme: true } },
     );
 

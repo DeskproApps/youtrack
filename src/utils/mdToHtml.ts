@@ -12,4 +12,4 @@ const mdToHtml = (value: string): string => {
   return converter.makeHtml(value);
 };
 
-export {mdToHtml};
+export { mdToHtml };
