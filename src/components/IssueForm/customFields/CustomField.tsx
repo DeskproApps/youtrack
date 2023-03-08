@@ -15,9 +15,9 @@ type Props = {
   projectId: Project["id"],
   field: components["schemas"]["ProjectCustomField"],
   formControl: {
-    field: ControllerRenderProps<FormValidationSchema>,
+    field: ControllerRenderProps<Pick<FormValidationSchema, "customFields">>,
     fieldState: ControllerFieldState,
-    formState: UseFormStateReturn<FormValidationSchema>;
+    formState: UseFormStateReturn<Pick<FormValidationSchema, "customFields">>,
   },
 };
 

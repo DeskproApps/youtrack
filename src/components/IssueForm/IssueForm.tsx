@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import has from "lodash/has";
 import get from "lodash/get";
 import { useForm } from "react-hook-form";
@@ -10,37 +11,44 @@ import { ProjectField } from "./fields";
 import { CustomFields } from "./customFields";
 import { useIssueDeps } from "./hooks";
 import {
-  getInitValues,
   getIssueValues,
   validationSchema,
   getProjectOptions,
+  getCustomInitValues,
+  getDefaultInitValues,
 } from "./utils";
 import type { FC } from "react";
 import type { Props, FormValidationSchema } from "./types";
 
-const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, error }) => {
-  const formMethods = useForm<FormValidationSchema>({
-    defaultValues: getInitValues(),
-    resolver: zodResolver(validationSchema),
-    shouldUnregister: true,
-  });
-  const {
-    watch,
-    register,
-    setValue,
-    handleSubmit,
-    formState,
-    control,
-    getValues,
-  } = formMethods;
-  const { isSubmitting, errors } = formState;
-  const [project, summary, description] = watch(["project", "summary", "description"]);
+const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, issue, error }) => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>();
 
   const { isLoading, projects } = useIssueDeps();
 
-  const onSubmitHandler = () => {
-    onSubmit(getIssueValues(getValues(), projects));
-  };
+  const defaultForm = useForm<Omit<FormValidationSchema, "customFields">>({
+    defaultValues: getDefaultInitValues(issue),
+    resolver: zodResolver(validationSchema),
+  });
+  const customForm = useForm<Pick<FormValidationSchema, "customFields">>({
+    defaultValues: getCustomInitValues(issue),
+    shouldUnregister: true,
+  });
+
+  const [project, summary, description] = defaultForm.watch(["project", "summary", "description"]);
+
+  const onClickSubmit = useCallback(async () => {
+    const isValid = await defaultForm.trigger();
+
+    if (!isValid) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const data = getIssueValues({ ...defaultForm.getValues(), ...customForm.getValues() }, projects);
+
+    onSubmit(data).finally(() => setIsSubmitting(false));
+  }, [onSubmit, projects, defaultForm, customForm]);
 
   if (isLoading) {
     return (
@@ -49,14 +57,16 @@ const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, error }) => {
   }
 
   return (
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
-        {error && <ErrorBlock text={error} />}
+    <>
+      <form onSubmit={(e) => e.preventDefault()}>
+        {error && <ErrorBlock text={error}/>}
 
         <ProjectField
           value={project}
+          disabled={isEditMode}
           options={getProjectOptions(projects)}
-          error={has(errors, ["project", "message"])}
-          onChange={(option) => setValue("project", option)}
+          error={has(defaultForm, ["formState", "errors", "project", "value", "message"])}
+          onChange={(option) => defaultForm.setValue("project", option)}
         />
 
         <Label htmlFor="summary" label="Summary" required>
@@ -65,9 +75,9 @@ const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, error }) => {
             type="text"
             inputsize="small"
             placeholder="Enter summary"
-            error={has(errors, ["summary", "message"])}
+            error={has(defaultForm, ["formState", "errors", "summary", "message"])}
             value={summary}
-            {...register("summary")}
+            {...defaultForm.register("summary")}
           />
         </Label>
 
@@ -78,27 +88,31 @@ const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, error }) => {
             minHeight="auto"
             placeholder="Enter description"
             value={description}
-            error={has(errors, ["description", "message"])}
-            {...register("description")}
+            error={has(defaultForm, ["formState", "errors", "description", "message"])}
+            {...defaultForm.register("description")}
           />
         </Label>
-
-        <CustomFields
-          control={control}
-          projects={projects}
-          selectedProjectId={get(watch("project"), ["value"])}
-        />
-
-        <Stack justify="space-between">
-          <Button
-            type="submit"
-            text={isEditMode ? "Save" : "Create"}
-            disabled={isSubmitting}
-            loading={isSubmitting}
-          />
-          {onCancel && <Button text="Cancel" intent="tertiary" onClick={onCancel} />}
-        </Stack>
       </form>
+
+      <form onSubmit={(e) => e.preventDefault()}>
+        <CustomFields
+          control={customForm.control}
+          projects={projects}
+          selectedProjectId={get(defaultForm.watch("project"), ["value"])}
+        />
+      </form>
+
+      <Stack justify="space-between">
+        <Button
+          type="button"
+          text={isEditMode ? "Save" : "Create"}
+          onClick={onClickSubmit}
+          disabled={isSubmitting}
+          loading={isSubmitting}
+        />
+        {onCancel && <Button text="Cancel" intent="tertiary" onClick={onCancel}/>}
+      </Stack>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import {
   useDeskproAppClient,
   useDeskproAppEvents,
 } from "@deskpro/app-sdk";
+import { TSpan } from "@deskpro/deskpro-ui";
 import { Button } from "../../components/common";
 import { nbsp } from "../../constants";
 import { getCurrentUserService } from "../../services/youtrack";
@@ -14,7 +15,7 @@ import type { FC } from "react";
 import type { Settings } from "../../types";
 import type { Me } from "../../services/youtrack/types";
 
-const Invalid = styled(P1)`
+const Invalid = styled(TSpan)`
   color: ${({ theme }) => theme.colors.red100};
 `;
 
@@ -70,7 +71,7 @@ const VerifySettings: FC = () => {
             Verified as <Valid>{currentUser.fullName} {`<${currentUser.email}>`}</Valid>
           </P1>
         )
-        : <Invalid>{error}</Invalid> || ""
+        : <Invalid type="p1">{error}</Invalid> || ""
       }
     </Stack>
   );

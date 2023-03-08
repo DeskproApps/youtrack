@@ -13,7 +13,11 @@ const TextIssueCustomField: FC<Props> = ({ value }) => {
 
   return !text
     ? (<NoValue/>)
-    : (<P5 dangerouslySetInnerHTML={{ __html: mdToHtml(text) }} />)
+    : (
+      <P5>
+        <span dangerouslySetInnerHTML={{ __html: mdToHtml(text) }} />
+      </P5>
+    )
 };
 
 export { TextIssueCustomField };

@@ -4,3 +4,4 @@ export { IssueItem } from "./IssueItem";
 export { Home } from "./Home";
 export { ViewIssue } from "./ViewIssue";
 export { CreateIssue } from "./CreateIssue";
+export { EditIssue } from "./EditIssue";

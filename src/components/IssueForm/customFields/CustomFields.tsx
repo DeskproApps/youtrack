@@ -9,7 +9,7 @@ import type { Project } from "../../../services/youtrack/types";
 import type { FormValidationSchema, CustomFieldValue } from "../types";
 
 type Props = {
-  control: Control<FormValidationSchema>,
+  control: Control<Pick<FormValidationSchema, "customFields">>,
   projects: Project[],
   selectedProjectId: Project["id"],
 };

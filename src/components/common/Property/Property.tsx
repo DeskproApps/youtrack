@@ -1,9 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { P5, P8 } from "@deskpro/app-sdk";
+import { P5 } from "@deskpro/app-sdk";
+import { TSpan } from "@deskpro/deskpro-ui";
 import type { Props } from "./types";
 
-const Label = styled(P8)`
+const Label = styled(TSpan)`
     color: ${({ theme }) => theme.colors.grey80};
 `;
 
@@ -22,7 +23,7 @@ const Property: React.FC<Props> = ({ text, label, marginBottom = 10 }) => {
 
     return (
         <Container marginBottom={marginBottom}>
-            {label && <Label>{label}</Label>}
+            {label && <Label type="p8">{label}</Label>}
             {textBlock && textBlock}
         </Container>
     );

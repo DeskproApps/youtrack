@@ -12,7 +12,8 @@ describe("CustomFields", () => {
   describe("TextIssueCustomField", () => {
     test("render", async () => {
       const { findByText } = render(
-        <TextIssueCustomField {...field as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <TextIssueCustomField {...field as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -21,7 +22,8 @@ describe("CustomFields", () => {
 
     test("empty value", async () => {
       const { findByText } = render(
-        <TextIssueCustomField {...field as never} value={null} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <TextIssueCustomField {...field as any} value={null} />,
         { wrappers: { theme: true } },
       );
 

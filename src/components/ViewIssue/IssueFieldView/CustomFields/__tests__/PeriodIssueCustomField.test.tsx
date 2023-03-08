@@ -12,7 +12,8 @@ describe("CustomFields", () => {
   describe("PeriodIssueCustomField", () => {
     test("render", async () => {
       const { findByText } = render(
-        <PeriodIssueCustomField {...field as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <PeriodIssueCustomField {...field as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -21,7 +22,8 @@ describe("CustomFields", () => {
 
     test.each([undefined, null, []])("empty value: %p", async (fieldValue) => {
       const { findByText } = render(
-        <PeriodIssueCustomField {...field as never} value={fieldValue} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <PeriodIssueCustomField {...field as any} value={fieldValue} />,
         { wrappers: { theme: true } },
       );
 

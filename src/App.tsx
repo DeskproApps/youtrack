@@ -14,6 +14,7 @@ import {
   HomePage,
   LinkPage,
   ViewIssuePage,
+  EditIssuePage,
   VerifySettings,
   CreateIssuePage,
 } from "./pages";
@@ -76,6 +77,7 @@ const App = () => {
           <Route path="/home" element={<HomePage/>} />
           <Route path="/view/:issueId" element={<ViewIssuePage/>} />
           <Route path="/create" element={<CreateIssuePage/>} />
+          <Route path="/edit/:issueId" element={<EditIssuePage />} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>
