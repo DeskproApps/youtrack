@@ -1,13 +1,13 @@
 import get from "lodash/get";
 import { faCheck, faCaretDown, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
-import { DivAsInputWithDisplay } from "@deskpro/deskpro-ui";
+import { DivAsInputWithDisplay, TSpan } from "@deskpro/deskpro-ui";
 import { Dropdown } from "@deskpro/app-sdk";
 import { getOption } from "../../../../utils";
 import { useQueryWithClient } from "../../../../hooks";
 import { getProjectCustomFieldSettingsService } from "../../../../services/youtrack";
 import { QueryKey } from "../../../../query";
 import type { FC } from "react";
-import type { DropdownTargetProps } from "@deskpro/app-sdk";
+import type { DropdownTargetProps, DropdownItemType } from "@deskpro/app-sdk";
 import type { CustomFieldBundleSetting } from "../../../../services/youtrack/types";
 import type { CustomFieldProps } from "../../types";
 import type { Option } from "../../../../types";
@@ -21,9 +21,10 @@ const MultiProjectCustomField: FC<CustomFieldProps> = ({ projectId, field, formC
     { enabled: Boolean(projectId) && Boolean(field.id) },
   );
 
-  const options: Array<Option<CustomFieldBundleSetting["id"]>> = (
-    get(customFieldSettings, ["data", "bundle", "values"], []) || []
-  ).map(({ id, name }: CustomFieldBundleSetting) => getOption(id, name));
+  const values = get(customFieldSettings, ["data", "bundle", "values"], []) || [];
+  const options: Array<DropdownItemType<CustomFieldBundleSetting["id"]>> = (!Array.isArray(values) || !values.length)
+    ? [{ type: "header", label: <TSpan type="p5" themeColor="grey40">No options found</TSpan> }]
+    : values.map(({ id, name }: CustomFieldBundleSetting) => getOption(id, name));
 
   return (
     <Dropdown
@@ -36,7 +37,7 @@ const MultiProjectCustomField: FC<CustomFieldProps> = ({ projectId, field, formC
       autoscrollText={"Autoscroll"}
       options={options.map((option) => ({
         ...option,
-        selected: (Array.isArray(value) ? value : []).includes(option.value),
+        selected: (Array.isArray(value) ? value : []).includes((option as Option<CustomFieldBundleSetting["id"]>).value),
       }))}
       onSelectOption={(option) => {
         if (option.value) {
@@ -53,7 +54,7 @@ const MultiProjectCustomField: FC<CustomFieldProps> = ({ projectId, field, formC
           <DivAsInputWithDisplay
             id={name}
             ref={targetRef}
-            value={options
+            value={(options as Array<Option<CustomFieldBundleSetting["id"]>>)
               .filter((o) => (Array.isArray(value) ? value : []).includes(o.value))
               .map(({ label }) => label)
               .join(", ")

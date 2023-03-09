@@ -20,6 +20,10 @@ const CustomFields: FC<Props> = ({ control, projects, selectedProjectId }) => {
   return (
     <>
       {customFields.map((field) => {
+        if (get(field, ["isSpentTime"], false)) {
+          return null;
+        }
+
         const fieldName = get(field, ["field", "name"]);
         const fieldId = get(field, ["id"]) as CustomFieldValue["id"];
         const customField = (
