@@ -6,16 +6,12 @@ const validationSchema = z.object({
   comment: z.string().nonempty(),
 });
 
-const getInitValues = () => {
-  return {
-    comment: "",
-  };
-};
+const getInitValues = () => ({
+  comment: "",
+});
 
-const getValues = (data: FormValidationSchema): CommentValues => {
-  return {
-    text: get(data, ["comment"], ""),
-  }
-};
+const getValues = (data: FormValidationSchema): CommentValues => ({
+  text: get(data, ["comment"], ""),
+});
 
 export { validationSchema, getInitValues, getValues };

@@ -24,7 +24,7 @@ export const PROJECT_CUSTOM_FIELDS = [
     "id",
     "name",
     "localizedName",
-    "fieldType(valueType,id)", // ./src/components/ViewIssue/IssueFieldView/types.ts:MappingFieldTypes
+    "fieldType(valueType,id)",
     "isAutoAttached",
     "isDisplayedInIssueList",
     "ordinal",
@@ -46,6 +46,7 @@ export const PROJECT_CUSTOM_FIELDS = [
   "ordinal",
   "isPublic",
   "condition",
+  "isSpentTime",
 ];
 
 export const PROJECT_FIELDS = [

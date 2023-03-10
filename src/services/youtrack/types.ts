@@ -11,9 +11,13 @@ export type Issue = Omit<components["schemas"]["Issue"], "id"|"idReadable"|"proj
   project: Project,
 };
 
+export type ProjectCustomField = components["schemas"]["ProjectCustomField"] & {
+  isSpentTime: boolean,
+};
+
 export type Project = Omit<components["schemas"]["Project"], "id"|"customFields"> & {
   id: NonNullable<components["schemas"]["Project"]["id"]>,
-  customFields: Array<components["schemas"]["ProjectCustomField"]>,
+  customFields: ProjectCustomField[],
 };
 
 export type Me = Omit<components["schemas"]["Me"], "id"> & {

@@ -59,12 +59,17 @@ const getCustomInitValues = (issue?: Issue): Pick<FormValidationSchema, "customF
           MappingFieldTypes.SINGLE_OWNED,
           MappingFieldTypes.SINGLE_GROUP,
         ), () => {
-          return getOption(field.value.id, field.value.name);
+          return (has(field, ["value", "id"]) && has(field, ["value", "name"]))
+            ? getOption(field.value.id, field.value.name)
+            : getOption("", "");
         })
         .with(MappingFieldTypes.SINGLE_USER, () => {
-          return getOption(field.value.id, createElement(Member, {
-            name: get(field, ["value", "fullName"]) || get(field, ["value", "login"]) || "",
-          }));
+          return !has(field, ["value", "id"])
+            ? getOption("", "")
+            : getOption(field.value.id, createElement(
+              Member,
+              { name: get(field, ["value", "fullName"]) || get(field, ["value", "login"]) || "" },
+            ));
         })
         .with(P.union(
           MappingFieldTypes.MULTI_ENUM,
@@ -148,7 +153,7 @@ const getCustomFieldValues = (
         MappingFieldTypes.SINGLE_GROUP,
         MappingFieldTypes.SINGLE_USER,
       ), () => {
-        return { id: get(fieldValue, ["value"]) };
+        return get(fieldValue, ["value"]) ? { id: get(fieldValue, ["value"]) } : undefined;
       })
       .with(P.union(
         MappingFieldTypes.MULTI_ENUM,
