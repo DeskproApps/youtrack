@@ -9,3 +9,4 @@ export { createIssueService } from "./createIssueService";
 export { getProjectCustomFieldSettingsService } from "./getProjectCustomFieldSettingsService";
 export { getGroupProjectCustomFieldSettingsService } from "./getGroupProjectCustomFieldSettingsService";
 export { updateIssueService } from "./updateIssueService";
+export { createIssueCommentService } from "./createIssueCommentService";

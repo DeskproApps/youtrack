@@ -1,18 +1,15 @@
 import type { YouTrackErrors } from "./types";
 
-export type InitData = {
+export type ErrorData = {
   status: number,
-  data: {
-    "error": "Unauthorized",
-    "error_description": string,
-  },
+  data: YouTrackErrors,
 };
 
 class YouTrackError extends Error {
   status: number;
   data: YouTrackErrors;
 
-  constructor({ status, data }: InitData) {
+  constructor({ status, data }: ErrorData) {
     super(data.error_description);
 
     this.data = data;

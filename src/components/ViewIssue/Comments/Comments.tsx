@@ -9,14 +9,15 @@ import type { Issue } from "../../../services/youtrack/types";
 
 type Props = {
   comments: Issue["comments"],
+  onCreateIssueComment: () => void,
 };
 
-const Comments: FC<Props> = ({ comments = [] }) => {
+const Comments: FC<Props> = ({ comments = [], onCreateIssueComment }) => {
   const { getBaseUrl } = useExternalLink();
 
   return (
     <Container>
-      <Title title={`Comments (${comments.length})`} />
+      <Title title={`Comments (${comments.length})`} onClick={onCreateIssueComment} />
 
       {comments
         .sort(({ created: a }, { created: b }) => (b as number) - (a as number))

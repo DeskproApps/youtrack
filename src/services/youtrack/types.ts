@@ -1,7 +1,8 @@
 import type { components } from "./openapi";
 
 export type YouTrackErrors = {
-  //...
+  error: string, // "bad_request"|"Unauthorized"|"invalid_query"|"Not Found"
+  error_description: string,
 };
 
 export type Issue = Omit<components["schemas"]["Issue"], "id"|"idReadable"|"project"> & {

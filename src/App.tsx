@@ -17,6 +17,7 @@ import {
   EditIssuePage,
   VerifySettings,
   CreateIssuePage,
+  CreateIssueCommentPage,
 } from "./pages";
 import { ErrorFallback } from "./components";
 import type { TargetAction } from "@deskpro/app-sdk";
@@ -78,6 +79,7 @@ const App = () => {
           <Route path="/view/:issueId" element={<ViewIssuePage/>} />
           <Route path="/create" element={<CreateIssuePage/>} />
           <Route path="/edit/:issueId" element={<EditIssuePage />} />
+          <Route path="/comment/create" element={<CreateIssueCommentPage/>} />
           <Route index element={<Main/>} />
         </Routes>
       </ErrorBoundary>

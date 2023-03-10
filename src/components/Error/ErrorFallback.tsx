@@ -1,4 +1,6 @@
 import { Stack } from "@deskpro/app-sdk";
+import get from "lodash/get";
+import { YouTrackError } from "../../services/youtrack";
 import { ErrorBlock } from "./ErrorBlock";
 import { Container } from "../common";
 import type { FC } from "react";
@@ -9,24 +11,27 @@ type Props = Omit<FallbackProps, "error"> & {
 };
 
 const ErrorFallback: FC<Props> = ({ error }) => {
-    const message = "There was an error!";
-    const button = null;
+  let message = "There was an error!";
+  const button = null;
 
-    // eslint-disable-next-line no-console
-    console.error(error);
+  // eslint-disable-next-line no-console
+  console.error(error);
+  if (error instanceof YouTrackError) {
+    message = get(error, ["data", "error_description"], "");
+  }
 
-    return (
-        <Container>
-            <ErrorBlock
-                text={(
-                    <Stack gap={6} vertical style={{ padding: "8px" }}>
-                        {message}
-                        {button}
-                    </Stack>
-                )}
-            />
-        </Container>
-    );
+  return (
+    <Container>
+      <ErrorBlock
+        text={(
+          <Stack gap={6} vertical style={{ padding: "8px" }}>
+            {message}
+            {button}
+          </Stack>
+        )}
+      />
+    </Container>
+  );
 };
 
 export { ErrorFallback };

@@ -12,9 +12,9 @@ import {
   YouTrackLogo,
 } from "../../common";
 import type { FC } from "react";
-import type { Props } from "../types";
+import type { Issue } from "../../../services/youtrack/types";
 
-const Info: FC<Props> = ({ issue }) => {
+const Info: FC<{ issue: Issue }> = ({ issue }) => {
   const { getIssueUrl, getProjectUrl } = useExternalLink();
 
   return (

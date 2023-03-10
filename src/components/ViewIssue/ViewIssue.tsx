@@ -7,13 +7,13 @@ import { Comments } from "./Comments";
 import type { FC } from "react";
 import type { Props } from "./types";
 
-const ViewIssue: FC<Props> = ({ issue }) => {
+const ViewIssue: FC<Props> = ({ issue, onCreateIssueComment }) => {
   return (
     <>
       <Info issue={issue} />
       <IssueFieldView fields={get(issue, ["customFields"], [])} />
       <HorizontalDivider/>
-      <Comments comments={issue.comments}/>
+      <Comments comments={issue.comments} onCreateIssueComment={onCreateIssueComment} />
     </>
   );
 };
