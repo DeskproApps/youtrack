@@ -18,7 +18,8 @@ describe("CustomFields", () => {
     describe("StateIssueCustomField", () => {
       test("render", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldState as never} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldState as any} />,
           { wrappers: { theme: true } },
         );
 
@@ -27,7 +28,8 @@ describe("CustomFields", () => {
 
       test("empty value", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldState as never} value={null} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldState as any} value={null} />,
           { wrappers: { theme: true } },
         );
 
@@ -38,7 +40,8 @@ describe("CustomFields", () => {
     describe("SingleEnumIssueCustomField", () => {
       test("render", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldEnum as never} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldEnum as any} />,
           { wrappers: { theme: true } },
         );
 
@@ -47,7 +50,8 @@ describe("CustomFields", () => {
 
       test("empty value", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldEnum as never} value={null} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldEnum as any} value={null} />,
           { wrappers: { theme: true } },
         );
 
@@ -58,7 +62,8 @@ describe("CustomFields", () => {
     describe("SingleVersionIssueCustomField", () => {
       test("render", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldVersion as never} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldVersion as any} />,
           { wrappers: { theme: true } },
         );
 
@@ -67,7 +72,8 @@ describe("CustomFields", () => {
 
       test("empty value", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldVersion as never} value={null} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldVersion as any} value={null} />,
           { wrappers: { theme: true } },
         );
 
@@ -78,7 +84,8 @@ describe("CustomFields", () => {
     describe("SingleBuildIssueCustomField", () => {
       test("render", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldBuild as never} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldBuild as any} />,
           { wrappers: { theme: true } },
         );
 
@@ -87,7 +94,8 @@ describe("CustomFields", () => {
 
       test("empty value", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldBuild as never} value={null} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldBuild as any} value={null} />,
           { wrappers: { theme: true } },
         );
 
@@ -98,7 +106,8 @@ describe("CustomFields", () => {
     describe("SingleOwnedIssueCustomField", () => {
       test("render", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldOwned as never} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldOwned as any} />,
           { wrappers: { theme: true } },
         );
 
@@ -107,7 +116,8 @@ describe("CustomFields", () => {
 
       test("empty value", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldOwned as never} value={null} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldOwned as any} value={null} />,
           { wrappers: { theme: true } },
         );
 
@@ -118,7 +128,8 @@ describe("CustomFields", () => {
     describe("SingleGroupIssueCustomField", () => {
       test("render", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldGroup as never} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldGroup as any} />,
           { wrappers: { theme: true } },
         );
 
@@ -127,7 +138,8 @@ describe("CustomFields", () => {
 
       test("empty value", async () => {
         const { findByText } = render(
-          <SingleValueIssueCustomField {...fieldGroup as never} value={null} />,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          <SingleValueIssueCustomField {...fieldGroup as any} value={null} />,
           { wrappers: { theme: true } },
         );
 

@@ -1,19 +1,23 @@
+import { createElement } from "react";
 import { z } from "zod";
 import { match, P } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import isEmpty from "lodash/isEmpty";
 import isArray from "lodash/isArray";
 import get from "lodash/get";
+import has from "lodash/has";
 import omit from "lodash/omit";
 import reduce from "lodash/reduce";
 import { getOption } from "../../utils";
 import { getTimestamp } from "../../utils/date";
+import { Member } from "../common";
 import {
   MappingFieldTypes,
   MappingTypesToIssueTypes,
 } from "../ViewIssue/IssueFieldView/types";
 import type { Option } from "../../types";
-import type { Project } from "../../services/youtrack/types";
+import type { components } from "../../services/youtrack/openapi";
+import type { Project, Issue } from "../../services/youtrack/types";
 import type { IssueValues, FormValidationSchema, CustomFieldValue } from "./types";
 
 const validationSchema = z.object({
@@ -25,12 +29,78 @@ const validationSchema = z.object({
   customFields: z.any(),
 });
 
-const getInitValues = (): FormValidationSchema => {
+const getDefaultInitValues = (issue?: Issue): Omit<FormValidationSchema, "customFields"> => {
+  const project = get(issue, ["project"]);
+
   return {
-    summary: "",
-    description: "",
-    project: getOption("", ""),
+    summary: get(issue, ["summary"], "") || "",
+    description: get(issue, ["description"], "") || "",
+    project: isEmpty(project) ? getOption("", "") : getOption(project.id, project.name),
   };
+};
+
+const getCustomInitValues = (issue?: Issue): Pick<FormValidationSchema, "customFields"> => {
+  const issueCustomFields = get(issue, ["customFields"]);
+
+  if (isEmpty(issue) || isEmpty(issueCustomFields) || !Array.isArray(issueCustomFields)) {
+    return {};
+  }
+
+  return issueCustomFields.reduce((acc, field) => {
+    const fieldType = get(field, ["projectCustomField", "field", "fieldType", "id"]);
+
+    if (!has(acc, [field.id])) {
+      acc[field.id] = match(fieldType)
+        .with(P.union(
+          MappingFieldTypes.STATE,
+          MappingFieldTypes.SINGLE_ENUM,
+          MappingFieldTypes.SINGLE_VERSION,
+          MappingFieldTypes.SINGLE_BUILD,
+          MappingFieldTypes.SINGLE_OWNED,
+          MappingFieldTypes.SINGLE_GROUP,
+        ), () => {
+          return (has(field, ["value", "id"]) && has(field, ["value", "name"]))
+            ? getOption(field.value.id, field.value.name)
+            : getOption("", "");
+        })
+        .with(MappingFieldTypes.SINGLE_USER, () => {
+          return !has(field, ["value", "id"])
+            ? getOption("", "")
+            : getOption(field.value.id, createElement(
+              Member,
+              { name: get(field, ["value", "fullName"]) || get(field, ["value", "login"]) || "" },
+            ));
+        })
+        .with(P.union(
+          MappingFieldTypes.MULTI_ENUM,
+          MappingFieldTypes.MULTI_VERSION,
+          MappingFieldTypes.MULTI_BUILD,
+          MappingFieldTypes.MULTI_OWNED,
+          MappingFieldTypes.MULTI_GROUP,
+          MappingFieldTypes.MULTI_USER,
+        ), () => {
+          return !Array.isArray(field.value)
+            ? []
+            : field.value.map(({ id }: components["schemas"]["IssueCustomField"]) => id);
+        })
+        .with(P.union(
+          MappingFieldTypes.FLOAT,
+          MappingFieldTypes.INTEGER,
+        ), () => Number(field.value))
+        .with(MappingFieldTypes.STRING, () => field.value)
+        .with(MappingFieldTypes.TEXT, () => get(field, ["value", "text"]))
+        .with(P.union(
+          MappingFieldTypes.DATE,
+          MappingFieldTypes.DATE_TIME,
+        ), () => {
+          return new Date(field.value);
+        })
+        .with(MappingFieldTypes.PERIOD, () => get(field,["value", "presentation"]))
+        .otherwise(() => "");
+    }
+
+    return acc;
+  }, {});
 };
 
 const getDefaultValues = (data: FormValidationSchema) => {
@@ -83,7 +153,7 @@ const getCustomFieldValues = (
         MappingFieldTypes.SINGLE_GROUP,
         MappingFieldTypes.SINGLE_USER,
       ), () => {
-        return { id: get(fieldValue, ["value"]) };
+        return get(fieldValue, ["value"]) ? { id: get(fieldValue, ["value"]) } : undefined;
       })
       .with(P.union(
         MappingFieldTypes.MULTI_ENUM,
@@ -145,11 +215,12 @@ const getProjectCustomFields = (
 };
 
 export {
-  getInitValues,
   getIssueValues,
   validationSchema,
   getDefaultValues,
   getProjectOptions,
+  getCustomInitValues,
+  getDefaultInitValues,
   getCustomFieldValues,
   getProjectCustomFields,
 };

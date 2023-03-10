@@ -2,10 +2,11 @@ import { cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render } from "../../../testing";
 import { IssueForm } from "../IssueForm";
-import { getProjectsService } from "../../../services/youtrack";
+import mockProjects from "./mockProjects";
+import mockIssue from "./mocks/mockIssue.json";
 
 jest.mock("../../../services/youtrack", () => ({
-  getProjectsService: jest.fn(),
+  getProjectsService: () => Promise.resolve(mockProjects),
 }));
 
 describe("IssueForm", () => {
@@ -15,40 +16,58 @@ describe("IssueForm", () => {
   });
 
   test("render create issue form", async () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    getProjectsService.mockImplementationOnce(() => Promise.resolve([]));
-    const onSubmit = jest.fn();
+    const mockOnSubmit = jest.fn();
+    mockOnSubmit.mockImplementation(() => Promise.resolve());
 
     const { findByRole } = render((
-      <IssueForm onSubmit={onSubmit} onCancel={jest.fn()} />
+      <IssueForm onSubmit={mockOnSubmit} onCancel={jest.fn()} />
     ), { wrappers: { theme: true, query: true } });
 
     const submitButton = await findByRole("button", { name: /Create/i });
     expect(submitButton).toBeInTheDocument();
   });
 
-  test.todo("render update issue form");
+  test("render update issue form", async () => {
+    const mockOnSubmit = jest.fn();
+    mockOnSubmit.mockImplementation(() => Promise.resolve());
+
+    const { findByRole } = render((
+      <IssueForm isEditMode issue={mockIssue as never} onSubmit={mockOnSubmit} onCancel={jest.fn()} />
+    ), { wrappers: { theme: true, query: true } });
+    const submitButton = await findByRole("button", { name: /Save/i });
+
+    expect(submitButton).toBeInTheDocument();
+  });
 
   test("shouldn't submit if the required fields are not filled", async () => {
-    // Arrange
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    getProjectsService.mockImplementation(() => Promise.resolve([]))
-    const onSubmit = jest.fn();
+    const mockOnSubmit = jest.fn();
+    mockOnSubmit.mockImplementation(() => Promise.resolve());
+
     const { findByRole } = render((
-      <IssueForm onSubmit={onSubmit} onCancel={jest.fn()} />
+      <IssueForm onSubmit={mockOnSubmit} onCancel={jest.fn()} />
     ), { wrappers: { theme: true, query: true } });
     const submitButton = await findByRole("button", { name: /Create/i });
 
-    // Act
     await act(async () => {
       await userEvent.click(submitButton);
     });
 
-    // Assert
-    expect(onSubmit).toHaveBeenCalledTimes(0);
+    expect(mockOnSubmit).toHaveBeenCalledTimes(0);
   });
 
-  test.todo("should submit if the required fields are filled");
+  test("should submit if the required fields are filled", async () => {
+    const mockOnSubmit = jest.fn();
+    mockOnSubmit.mockImplementation(() => Promise.resolve());
+
+    const { findByRole } = render((
+      <IssueForm isEditMode issue={mockIssue as never} onSubmit={mockOnSubmit} onCancel={jest.fn()} />
+    ), { wrappers: { theme: true, query: true } });
+    const submitButton = await findByRole("button", { name: /Save/i });
+
+    await act(async () => {
+      await userEvent.click(submitButton);
+    });
+
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+  });
 });

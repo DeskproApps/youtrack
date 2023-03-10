@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ReactTimeAgo from "react-time-ago";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Avatar } from "@deskpro/deskpro-ui";
-import { P1, P11, Stack } from "@deskpro/app-sdk";
+import { Avatar, TSpan } from "@deskpro/deskpro-ui";
+import { P11, Stack } from "@deskpro/app-sdk";
 import type { FC } from "react";
 
 const TimeAgo = styled(ReactTimeAgo)`
@@ -14,7 +14,7 @@ const Author = styled(Stack)`
     width: 35px;
 `;
 
-const Body = styled(P1)`
+const Body = styled(TSpan)`
     width: calc(100% - 35px);
     white-space: pre-line;
 
@@ -56,7 +56,9 @@ const Comment: FC<Props> = ({ name, avatarUrl, text, date }) => {
           <TimeAgo date={date} timeStyle="mini" />
         </P11>
       </Author>
-      <Body dangerouslySetInnerHTML={{ __html: text }} />
+      <Body type="p1">
+        <span dangerouslySetInnerHTML={{ __html: text }} />
+      </Body>
     </Stack>
   );
 };

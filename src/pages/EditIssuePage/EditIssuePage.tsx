@@ -1,56 +1,55 @@
 import { useState, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import get from "lodash/get";
-import { useNavigate } from "react-router-dom";
 import {
+  LoadingSpinner,
   useDeskproElements,
   useDeskproAppClient,
-  useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
+import { updateIssueService } from "../../services/youtrack";
 import { useSetTitle } from "../../hooks";
-import { setEntityIssueService } from "../../services/entityAssociation";
-import { createIssueService } from "../../services/youtrack"
-import { CreateIssue } from "../../components";
+import { useIssueDeps } from "./hooks";
+import { EditIssue } from "../../components";
 import type { FC } from "react";
 import type { IssueValues } from "../../components/IssueForm";
-import type { TicketContext, Maybe } from "../../types";
+import type { Maybe } from "../../types";
 
-const CreateIssuePage: FC = () => {
+const EditIssuePage: FC = () => {
+  const { issueId } = useParams();
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
 
   const [error, setError] = useState<Maybe<string|string[]>>(null);
 
-  const ticketId = get(context, ["data", "ticket", "id"]);
+  const { issue, isLoading } = useIssueDeps(issueId);
 
-  const onNavigateToLinkIssue = useCallback(() => navigate("/link"), [navigate]);
+  const onCancel = useCallback(() => {
+    if (!issueId) {
+      return;
+    }
 
-  const onCancel = useCallback(() => navigate("/home"), [navigate]);
+    navigate(`/view/${issueId}`)
+  }, [navigate, issueId]);
 
-  const onSubmit = useCallback((data: IssueValues) => {
-    if (!client || !ticketId) {
+  const onSubmit = useCallback((data: IssueValues): Promise<void> => {
+    if (!client || !issueId) {
       return Promise.resolve();
     }
 
     setError(null);
 
-    return createIssueService(client, data)
-      .then((issue) => {
-        return Promise.all([
-          setEntityIssueService(client, ticketId, issue.idReadable),
-        ]);
-      })
+    return updateIssueService(client, issueId, data)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore ToDo: need to fix typings in @app-sdk
       .then((isSuccess: boolean) => {
         if (isSuccess) {
-          navigate("/home")
+          navigate(`/view/${issueId}`);
         }
       })
       .catch((err) => setError(get(err, ["data", "error_description"], "An error occurred")));
-  }, [client, ticketId, navigate]);
+  }, [client, issueId, navigate]);
 
-  useSetTitle("Link Issues");
+  useSetTitle("Edit Issue");
 
   useDeskproElements(({ clearElements, registerElement }) => {
     clearElements();
@@ -62,14 +61,20 @@ const CreateIssuePage: FC = () => {
     });
   });
 
+  if (isLoading) {
+    return (
+      <LoadingSpinner/>
+    );
+  }
+
   return (
-    <CreateIssue
+    <EditIssue
+      issue={issue}
       error={error}
-      onSubmit={onSubmit}
       onCancel={onCancel}
-      onNavigateToLinkIssue={onNavigateToLinkIssue}
+      onSubmit={onSubmit}
     />
   );
 };
 
-export { CreateIssuePage };
+export { EditIssuePage };

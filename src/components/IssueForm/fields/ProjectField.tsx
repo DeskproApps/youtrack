@@ -13,7 +13,10 @@ const ProjectField: FC<{
   options: Array<Option<Project["id"]>>,
   error: boolean,
   onChange: (o: Option<Project["id"]>) => void,
-}> = ({ value, options, error, onChange }) => {
+  disabled?: boolean,
+}> = ({ value, options, error, onChange, disabled }) => {
+  const inputStyles = disabled ? { cursor: "not-allowed" } : {}
+
   const [inputSearch, setInputSearch] = useState<string>("");
 
   return (
@@ -31,6 +34,7 @@ const ProjectField: FC<{
       onSelectOption={onChange}
       inputValue={inputSearch}
       onInputChange={setInputSearch}
+      disabled={disabled}
     >
       {({ targetRef, targetProps }: DropdownTargetProps<HTMLDivElement>) => (
         <Label htmlFor="project" label="Project" required>
@@ -42,8 +46,9 @@ const ProjectField: FC<{
             rightIcon={faCaretDown}
             error={error}
             ref={targetRef}
-            {...targetProps}
             isVisibleRightIcon={false}
+            style={inputStyles}
+            {...targetProps}
           />
         </Label>
       )}

@@ -26,7 +26,9 @@ const Info: FC<Props> = ({ issue }) => {
       />
       <Property label="Issue ID" text={get(issue, ["idReadable"], "-")} />
       <Property label="Description" text={(
-        <P5 dangerouslySetInnerHTML={{ __html: mdToHtml(get(issue, ["description"]) || "-") }}/>
+        <P5>
+          <span dangerouslySetInnerHTML={{ __html: mdToHtml(get(issue, ["description"]) || "-") }}/>
+        </P5>
       )} />
       <Property label="Project" text={(
         <P5>

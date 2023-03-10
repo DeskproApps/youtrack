@@ -1,0 +1,1652 @@
+{
+  "customFields": [
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "state",
+            "id": "state[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-2",
+          "$type": "CustomField"
+        },
+        "id": "130-38",
+        "$type": "StateProjectCustomField"
+      },
+      "value": {
+        "isResolved": false,
+        "localizedName": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "ordinal": 1,
+        "archived": false,
+        "hasRunningJob": false,
+        "description": null,
+        "name": "Open",
+        "id": "111-1",
+        "$type": "StateBundleElement"
+      },
+      "name": "State",
+      "id": "130-38",
+      "$type": "StateIssueCustomField"
+    },
+    {
+      "value": {
+        "id": "text",
+        "text": "# Custom text field value value value\n\n\n\n1. list 1\n2. list 2\n3. list 3\n\n\n\n```javascript\nconst blockCode = \"JavaScript\"\n```",
+        "markdownText": "<div class=\"wiki text common-markdown\"><h1 id=\"custom-text-field-value-value-value\">Custom text field value value value</h1>\n<ol class=\"wiki-list0\">\n<li>list 1</li>\n<li>list 2</li>\n<li>list 3</li>\n</ol>\n<span class=\"markdown-language-tag\">javascript</span><pre class=\"wikicode prettyprint line-numbers\"><code class=\"language-javascript\">const blockCode = &quot;JavaScript&quot;\n</code></pre>\n</div>",
+        "$type": "TextFieldValue"
+      },
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "text",
+            "id": "text",
+            "$type": "FieldType"
+          },
+          "id": "106-19",
+          "$type": "CustomField"
+        },
+        "id": "169-1",
+        "$type": "TextProjectCustomField"
+      },
+      "name": "Custom Text Field",
+      "id": "169-1",
+      "$type": "TextIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "build",
+            "id": "build[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-20",
+          "$type": "CustomField"
+        },
+        "id": "130-43",
+        "$type": "BuildProjectCustomField"
+      },
+      "value": {
+        "assembleDate": 1676462400000,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "description": null,
+        "name": "fix in build 1",
+        "id": "178-2",
+        "$type": "BuildBundleElement"
+      },
+      "name": "Custom Build Field Single",
+      "id": "130-43",
+      "$type": "SingleBuildIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "build",
+            "id": "build[*]",
+            "$type": "FieldType"
+          },
+          "id": "106-21",
+          "$type": "CustomField"
+        },
+        "id": "130-44",
+        "$type": "BuildProjectCustomField"
+      },
+      "value": [
+        {
+          "assembleDate": 1676462400000,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 0,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "fix in build 1",
+          "id": "178-4",
+          "$type": "BuildBundleElement"
+        },
+        {
+          "assembleDate": 1676548800000,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 1,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "fix in build 2",
+          "id": "178-5",
+          "$type": "BuildBundleElement"
+        }
+      ],
+      "name": "Custom Build Field Multi",
+      "id": "130-44",
+      "$type": "MultiBuildIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "enum",
+            "id": "enum[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-22",
+          "$type": "CustomField"
+        },
+        "id": "130-45",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": {
+        "localizedName": null,
+        "color": {
+          "foreground": "#888",
+          "background": "#e6e6e6",
+          "id": "16",
+          "$type": "FieldStyle"
+        },
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "description": null,
+        "name": "Ready to pull",
+        "id": "109-19",
+        "$type": "EnumBundleElement"
+      },
+      "name": "Custom Enum Field Single",
+      "id": "130-45",
+      "$type": "SingleEnumIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "enum",
+            "id": "enum[*]",
+            "$type": "FieldType"
+          },
+          "id": "106-23",
+          "$type": "CustomField"
+        },
+        "id": "130-46",
+        "$type": "EnumProjectCustomField"
+      },
+      "value": [
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#444",
+            "background": "#ffc8ea",
+            "id": "19",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 1,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Blocked",
+          "id": "109-21",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#888",
+            "background": "#e6e6e6",
+            "id": "16",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 0,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Ready to pull",
+          "id": "109-22",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#900052",
+            "id": "5",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 2,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "YouTrack",
+          "id": "109-23",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#1a1a1a",
+            "id": "35",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 3,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "GitHub",
+          "id": "109-24",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#ff7123",
+            "id": "11",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 4,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "GitLab",
+          "id": "109-25",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#409600",
+            "id": "3",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 5,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Shopify",
+          "id": "109-26",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#0070e4",
+            "id": "4",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 6,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Trallo",
+          "id": "109-27",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#25beb2",
+            "id": "28",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 7,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Shortcut",
+          "id": "109-28",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#ff7123",
+            "id": "11",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 8,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "HubSpot",
+          "id": "109-29",
+          "$type": "EnumBundleElement"
+        },
+        {
+          "localizedName": null,
+          "color": {
+            "foreground": "#fff",
+            "background": "#0050a1",
+            "id": "6",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 9,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "JIRA",
+          "id": "109-30",
+          "$type": "EnumBundleElement"
+        }
+      ],
+      "name": "Custom Enum Field Multi",
+      "id": "130-46",
+      "$type": "MultiEnumIssueCustomField"
+    },
+    {
+      "value": {
+        "ringId": "29eae037-9bd6-4d09-853c-a2f96cd66127",
+        "icon": null,
+        "usersCount": 3,
+        "name": "All Users",
+        "id": "3-0",
+        "$type": "UserGroup"
+      },
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "group",
+            "id": "group[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-24",
+          "$type": "CustomField"
+        },
+        "id": "179-0",
+        "$type": "GroupProjectCustomField"
+      },
+      "name": "Custom group field single",
+      "id": "179-0",
+      "$type": "SingleGroupIssueCustomField"
+    },
+    {
+      "value": [
+        {
+          "ringId": "29eae037-9bd6-4d09-853c-a2f96cd66127",
+          "icon": null,
+          "usersCount": 3,
+          "name": "All Users",
+          "id": "3-0",
+          "$type": "UserGroup"
+        },
+        {
+          "ringId": "ce724032-0fae-4163-b232-994ab2f93e52",
+          "icon": null,
+          "usersCount": 2,
+          "name": "Registered Users",
+          "id": "3-1",
+          "$type": "UserGroup"
+        }
+      ],
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "group",
+            "id": "group[*]",
+            "$type": "FieldType"
+          },
+          "id": "106-25",
+          "$type": "CustomField"
+        },
+        "id": "179-1",
+        "$type": "GroupProjectCustomField"
+      },
+      "name": "Custom group field multi",
+      "id": "179-1",
+      "$type": "MultiGroupIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "ownedField",
+            "id": "ownedField[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-26",
+          "$type": "CustomField"
+        },
+        "id": "130-47",
+        "$type": "OwnedProjectCustomField"
+      },
+      "value": {
+        "owner": null,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "ordinal": 0,
+        "archived": false,
+        "hasRunningJob": false,
+        "description": null,
+        "name": "Migration",
+        "id": "138-11",
+        "$type": "OwnedBundleElement"
+      },
+      "name": "Custom Owned Field Single",
+      "id": "130-47",
+      "$type": "SingleOwnedIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "ownedField",
+            "id": "ownedField[*]",
+            "$type": "FieldType"
+          },
+          "id": "106-27",
+          "$type": "CustomField"
+        },
+        "id": "130-48",
+        "$type": "OwnedProjectCustomField"
+      },
+      "value": [
+        {
+          "owner": null,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 0,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Migration",
+          "id": "138-12",
+          "$type": "OwnedBundleElement"
+        },
+        {
+          "owner": null,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 2,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Project management",
+          "id": "138-13",
+          "$type": "OwnedBundleElement"
+        },
+        {
+          "owner": null,
+          "color": {
+            "foreground": "#444",
+            "background": "#fff",
+            "id": "0",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 1,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "Issue tracking",
+          "id": "138-14",
+          "$type": "OwnedBundleElement"
+        }
+      ],
+      "name": "Custom owned field multi",
+      "id": "130-48",
+      "$type": "MultiOwnedIssueCustomField"
+    },
+    {
+      "value": {
+        "fullName": "Armen Tamzarian",
+        "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48&etag==MjgtOTY%3D",
+        "login": "zpawn",
+        "ringId": "87146e6b-66fa-4876-8870-3c3d5eb34e20",
+        "email": "ilia.makarov@me.com",
+        "name": "Armen Tamzarian",
+        "id": "1-1",
+        "$type": "User"
+      },
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "user",
+            "id": "user[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-28",
+          "$type": "CustomField"
+        },
+        "id": "131-7",
+        "$type": "UserProjectCustomField"
+      },
+      "name": "Custom User Field Single",
+      "id": "131-7",
+      "$type": "SingleUserIssueCustomField"
+    },
+    {
+      "value": [
+        {
+          "fullName": "guest",
+          "avatarUrl": "/hub/api/rest/avatar/8717065a-9f90-4089-9dbb-1fcf6d4719c0?s=48",
+          "login": "guest",
+          "ringId": "8717065a-9f90-4089-9dbb-1fcf6d4719c0",
+          "email": null,
+          "name": "guest",
+          "id": "1-0",
+          "$type": "User"
+        },
+        {
+          "fullName": "Armen Tamzarian",
+          "avatarUrl": "/hub/api/rest/avatar/87146e6b-66fa-4876-8870-3c3d5eb34e20?s=48&etag==MjgtOTY%3D",
+          "login": "zpawn",
+          "ringId": "87146e6b-66fa-4876-8870-3c3d5eb34e20",
+          "email": "ilia.makarov@me.com",
+          "name": "Armen Tamzarian",
+          "id": "1-1",
+          "$type": "User"
+        },
+        {
+          "fullName": "david.anjonrin",
+          "avatarUrl": "/hub/api/rest/avatar/c0f3a6c5-1304-4100-b8e8-9b87923723e2?s=48",
+          "login": "david.anjonrin",
+          "ringId": "c0f3a6c5-1304-4100-b8e8-9b87923723e2",
+          "email": "david.anjonrin@deskpro.com",
+          "name": "david.anjonrin",
+          "id": "1-2",
+          "$type": "User"
+        }
+      ],
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "user",
+            "id": "user[*]",
+            "$type": "FieldType"
+          },
+          "id": "106-29",
+          "$type": "CustomField"
+        },
+        "id": "131-8",
+        "$type": "UserProjectCustomField"
+      },
+      "name": "Custom User Field Multi",
+      "id": "131-8",
+      "$type": "MultiUserIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "version",
+            "id": "version[1]",
+            "$type": "FieldType"
+          },
+          "id": "106-30",
+          "$type": "CustomField"
+        },
+        "id": "130-49",
+        "$type": "VersionProjectCustomField"
+      },
+      "value": {
+        "releaseDate": 1677672000000,
+        "released": true,
+        "color": {
+          "foreground": "#444",
+          "background": "#fff",
+          "id": "0",
+          "$type": "FieldStyle"
+        },
+        "ordinal": 3,
+        "archived": false,
+        "hasRunningJob": false,
+        "description": null,
+        "name": "2.0.0",
+        "id": "177-28",
+        "$type": "VersionBundleElement"
+      },
+      "name": "Custom Version Field Single",
+      "id": "130-49",
+      "$type": "SingleVersionIssueCustomField"
+    },
+    {
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "version",
+            "id": "version[*]",
+            "$type": "FieldType"
+          },
+          "id": "106-31",
+          "$type": "CustomField"
+        },
+        "id": "130-50",
+        "$type": "VersionProjectCustomField"
+      },
+      "value": [
+        {
+          "releaseDate": 1676376000000,
+          "released": false,
+          "color": {
+            "foreground": "#fff",
+            "background": "#0070e4",
+            "id": "4",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 2,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "1.0.1",
+          "id": "177-30",
+          "$type": "VersionBundleElement"
+        },
+        {
+          "releaseDate": null,
+          "released": false,
+          "color": {
+            "foreground": "#fff",
+            "background": "#ff7bc3",
+            "id": "12",
+            "$type": "FieldStyle"
+          },
+          "ordinal": 1,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "1.0.0",
+          "id": "177-31",
+          "$type": "VersionBundleElement"
+        },
+        {
+          "releaseDate": 1672574400000,
+          "released": false,
+          "color": {
+            "foreground": "#fff",
+            "background": "#1a1a1a",
+            "id": "35",
+            "$type": "FieldStyle"
+          },
+          "ordinal": -1,
+          "archived": false,
+          "hasRunningJob": false,
+          "description": null,
+          "name": "0.0.1",
+          "id": "177-33",
+          "$type": "VersionBundleElement"
+        }
+      ],
+      "name": "Custom Version Field Multi",
+      "id": "130-50",
+      "$type": "MultiVersionIssueCustomField"
+    },
+    {
+      "value": 1676376000000,
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "date",
+            "id": "date",
+            "$type": "FieldType"
+          },
+          "id": "106-32",
+          "$type": "CustomField"
+        },
+        "id": "170-3",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Custom Date Field",
+      "id": "170-3",
+      "$type": "DateIssueCustomField"
+    },
+    {
+      "value": 1678280400000,
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "date and time",
+            "id": "date and time",
+            "$type": "FieldType"
+          },
+          "id": "106-33",
+          "$type": "CustomField"
+        },
+        "id": "170-4",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Custom DateTime Field",
+      "id": "170-4",
+      "$type": "SimpleIssueCustomField"
+    },
+    {
+      "value": 3.14159,
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "float",
+            "id": "float",
+            "$type": "FieldType"
+          },
+          "id": "106-34",
+          "$type": "CustomField"
+        },
+        "id": "170-5",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Custom Float Field",
+      "id": "170-5",
+      "$type": "SimpleIssueCustomField"
+    },
+    {
+      "value": 123,
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "integer",
+            "id": "integer",
+            "$type": "FieldType"
+          },
+          "id": "106-35",
+          "$type": "CustomField"
+        },
+        "id": "170-6",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Custom Integer Field",
+      "id": "170-6",
+      "$type": "SimpleIssueCustomField"
+    },
+    {
+      "value": "1234567890",
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "string",
+            "id": "string",
+            "$type": "FieldType"
+          },
+          "id": "106-36",
+          "$type": "CustomField"
+        },
+        "id": "170-7",
+        "$type": "SimpleProjectCustomField"
+      },
+      "name": "Custom String Field",
+      "id": "170-7",
+      "$type": "SimpleIssueCustomField"
+    },
+    {
+      "value": {
+        "minutes": 510,
+        "presentation": "1d 30m",
+        "id": "P1DT30M",
+        "$type": "PeriodValue"
+      },
+      "projectCustomField": {
+        "field": {
+          "fieldType": {
+            "valueType": "period",
+            "id": "period",
+            "$type": "FieldType"
+          },
+          "id": "106-37",
+          "$type": "CustomField"
+        },
+        "id": "137-3",
+        "$type": "PeriodProjectCustomField"
+      },
+      "name": "Custom Period Field",
+      "id": "137-3",
+      "$type": "PeriodIssueCustomField"
+    }
+  ],
+  "idReadable": "CDP-1",
+  "summary": "Huston!",
+  "project": {
+    "customFields": [
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 2,
+          "isAutoAttached": true,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [
+              {
+                "$type": "StateBundleElement"
+              }
+            ],
+            "bundle": {
+              "$type": "StateBundle"
+            },
+            "emptyFieldText": "No State",
+            "canBeEmpty": false,
+            "isPublic": true,
+            "id": "107-5",
+            "$type": "StateBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "state",
+            "id": "state[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "State",
+          "id": "106-2",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 0,
+        "emptyFieldText": "No State",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-38",
+        "$type": "StateProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 21,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-18",
+            "$type": "BuildBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "build",
+            "id": "build[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Build Field Single",
+          "id": "106-20",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 3,
+        "emptyFieldText": "No custom build field single",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-43",
+        "$type": "BuildProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 22,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-19",
+            "$type": "BuildBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "build",
+            "id": "build[*]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Build Field Multi",
+          "id": "106-21",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 4,
+        "emptyFieldText": "No custom build field multi",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-44",
+        "$type": "BuildProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 23,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-20",
+            "$type": "EnumBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "enum",
+            "id": "enum[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Enum Field Single",
+          "id": "106-22",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 5,
+        "emptyFieldText": "No custom enum field single",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-45",
+        "$type": "EnumProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 24,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-21",
+            "$type": "EnumBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "enum",
+            "id": "enum[*]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Enum Field Multi",
+          "id": "106-23",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 6,
+        "emptyFieldText": "No custom enum field multi",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-46",
+        "$type": "EnumProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 27,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-22",
+            "$type": "OwnedBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "ownedField",
+            "id": "ownedField[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Owned Field Single",
+          "id": "106-26",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 9,
+        "emptyFieldText": "No custom owned field single",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-47",
+        "$type": "OwnedProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 28,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-23",
+            "$type": "OwnedBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "ownedField",
+            "id": "ownedField[*]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom owned field multi",
+          "id": "106-27",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 10,
+        "emptyFieldText": "No custom owned field multi",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-48",
+        "$type": "OwnedProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 31,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-24",
+            "$type": "VersionBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "version",
+            "id": "version[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Version Field Single",
+          "id": "106-30",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 13,
+        "emptyFieldText": "No custom version field single",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-49",
+        "$type": "VersionProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 32,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "107-25",
+            "$type": "VersionBundleCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "version",
+            "id": "version[*]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Version Field Multi",
+          "id": "106-31",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 14,
+        "emptyFieldText": "No custom version field multi",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "130-50",
+        "$type": "VersionProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 29,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "112-2",
+            "$type": "UserCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "user",
+            "id": "user[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom User Field Single",
+          "id": "106-28",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 11,
+        "emptyFieldText": "No custom user field single",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "131-7",
+        "$type": "UserProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 30,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "defaultValues": [],
+            "bundle": null,
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "112-3",
+            "$type": "UserCustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "user",
+            "id": "user[*]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom User Field Multi",
+          "id": "106-29",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 12,
+        "emptyFieldText": "No custom user field multi",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "131-8",
+        "$type": "UserProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 38,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-16",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "period",
+            "id": "period",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Period Field",
+          "id": "106-37",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 20,
+        "emptyFieldText": "?",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "137-3",
+        "$type": "PeriodProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 20,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-8",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "text",
+            "id": "text",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Text Field",
+          "id": "106-19",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 2,
+        "emptyFieldText": "No custom text field",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "169-1",
+        "$type": "TextProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 33,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-11",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "date",
+            "id": "date",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Date Field",
+          "id": "106-32",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 15,
+        "emptyFieldText": "No custom date field",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "170-3",
+        "$type": "SimpleProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 34,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-12",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "date and time",
+            "id": "date and time",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom DateTime Field",
+          "id": "106-33",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 16,
+        "emptyFieldText": "No custom datetime field",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "170-4",
+        "$type": "SimpleProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 35,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-13",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "float",
+            "id": "float",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Float Field",
+          "id": "106-34",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 17,
+        "emptyFieldText": "No custom float field",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "170-5",
+        "$type": "SimpleProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 36,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-14",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "integer",
+            "id": "integer",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom Integer Field",
+          "id": "106-35",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 18,
+        "emptyFieldText": "No custom integer field",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "170-6",
+        "$type": "SimpleProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 37,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-15",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "string",
+            "id": "string",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom String Field",
+          "id": "106-36",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 19,
+        "emptyFieldText": "No custom string field",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "170-7",
+        "$type": "SimpleProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 25,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-9",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "group",
+            "id": "group[1]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom group field single",
+          "id": "106-24",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 7,
+        "emptyFieldText": "No custom group field single",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "179-0",
+        "$type": "GroupProjectCustomField"
+      },
+      {
+        "field": {
+          "aliases": null,
+          "ordinal": 26,
+          "isAutoAttached": false,
+          "localizedName": null,
+          "fieldDefaults": {
+            "emptyFieldText": null,
+            "canBeEmpty": true,
+            "isPublic": true,
+            "id": "114-10",
+            "$type": "CustomFieldDefaults"
+          },
+          "hasRunningJob": false,
+          "isUpdateable": true,
+          "fieldType": {
+            "valueType": "group",
+            "id": "group[*]",
+            "$type": "FieldType"
+          },
+          "isDisplayedInIssueList": true,
+          "name": "Custom group field multi",
+          "id": "106-25",
+          "$type": "CustomField"
+        },
+        "project": {
+          "shortName": "CDP",
+          "name": "Custom DP Project",
+          "id": "0-6",
+          "$type": "Project"
+        },
+        "ordinal": 8,
+        "emptyFieldText": "No custom group field multi",
+        "canBeEmpty": true,
+        "condition": null,
+        "isPublic": true,
+        "id": "179-1",
+        "$type": "GroupProjectCustomField"
+      }
+    ],
+    "shortName": "CDP",
+    "name": "Custom DP Project",
+    "id": "0-6",
+    "$type": "Project"
+  },
+  "comments": [],
+  "description": "We have a problem...",
+  "id": "2-42",
+  "$type": "Issue"
+}

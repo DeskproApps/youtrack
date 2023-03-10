@@ -5,8 +5,7 @@ import type {
   ControllerFieldState,
   ControllerRenderProps,
 } from "react-hook-form";
-import type { components } from "../../services/youtrack/openapi";
-import type { Project } from "../../services/youtrack/types";
+import type { Project, Issue, ProjectCustomField } from "../../services/youtrack/types";
 import type { Maybe } from "../../types";
 
 export type FormValidationSchema = z.infer<typeof validationSchema>;
@@ -22,18 +21,19 @@ export type IssueValues = {
 };
 
 export type Props = {
-  onSubmit: (data: IssueValues) => Maybe<Promise<void>>,
+  onSubmit: (data: IssueValues) => Promise<void>,
   onCancel?: () => void,
   isEditMode?: boolean,
+  issue?: Issue,
   error?: Maybe<string|string[]>
 };
 
 export type CustomFieldProps = {
   projectId: Project["id"],
-  field: components["schemas"]["ProjectCustomField"],
+  field: ProjectCustomField,
   formControl: {
-    field: ControllerRenderProps<FormValidationSchema>,
+    field: ControllerRenderProps<Pick<FormValidationSchema, "customFields">>,
     fieldState: ControllerFieldState,
-    formState: UseFormStateReturn<FormValidationSchema>;
+    formState: UseFormStateReturn<Pick<FormValidationSchema, "customFields">>,
   },
 };

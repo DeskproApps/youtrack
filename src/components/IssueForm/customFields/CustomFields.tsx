@@ -9,7 +9,7 @@ import type { Project } from "../../../services/youtrack/types";
 import type { FormValidationSchema, CustomFieldValue } from "../types";
 
 type Props = {
-  control: Control<FormValidationSchema>,
+  control: Control<Pick<FormValidationSchema, "customFields">>,
   projects: Project[],
   selectedProjectId: Project["id"],
 };
@@ -20,6 +20,10 @@ const CustomFields: FC<Props> = ({ control, projects, selectedProjectId }) => {
   return (
     <>
       {customFields.map((field) => {
+        if (get(field, ["isSpentTime"], false)) {
+          return null;
+        }
+
         const fieldName = get(field, ["field", "name"]);
         const fieldId = get(field, ["id"]) as CustomFieldValue["id"];
         const customField = (

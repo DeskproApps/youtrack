@@ -16,7 +16,8 @@ describe("CustomFields", () => {
   describe("MultiValueIssueCustomField", () => {
     test("MultiEnumIssueCustomField", async () => {
       const { findByText } = render(
-        <MultiValueIssueCustomField {...fieldEnum as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <MultiValueIssueCustomField {...fieldEnum as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -29,7 +30,8 @@ describe("CustomFields", () => {
 
     test("MultiVersionIssueCustomField", async () => {
       const { findByText } = render(
-        <MultiValueIssueCustomField {...fieldVersion as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <MultiValueIssueCustomField {...fieldVersion as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -40,7 +42,8 @@ describe("CustomFields", () => {
 
     test("MultiBuildIssueCustomField", async () => {
       const { findByText } = render(
-        <MultiValueIssueCustomField {...fieldBuild as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <MultiValueIssueCustomField {...fieldBuild as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -50,7 +53,8 @@ describe("CustomFields", () => {
 
     test("MultiOwnedIssueCustomField", async () => {
       const { findByText } = render(
-        <MultiValueIssueCustomField {...fieldOwned as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <MultiValueIssueCustomField {...fieldOwned as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -61,7 +65,8 @@ describe("CustomFields", () => {
 
     test("MultiGroupIssueCustomField", async () => {
       const { findByText } = render(
-        <MultiValueIssueCustomField {...fieldGroup as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <MultiValueIssueCustomField {...fieldGroup as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -71,7 +76,8 @@ describe("CustomFields", () => {
 
     test.each([null, undefined, "", {}, []])("empty value: %p", async (field) => {
       const { findByText } = render(
-        <MultiValueIssueCustomField {...fieldVersion as never} value={field} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <MultiValueIssueCustomField {...fieldVersion as any} value={field} />,
         { wrappers: { theme: true } },
       );
 

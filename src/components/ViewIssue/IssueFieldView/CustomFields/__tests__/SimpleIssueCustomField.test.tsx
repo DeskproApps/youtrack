@@ -15,7 +15,8 @@ describe("CustomFields", () => {
   describe("SimpleIssueCustomField", () => {
     test("DateTime", async () => {
       const { findByText } = render(
-        <SimpleIssueCustomField {...fieldDateTime as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <SimpleIssueCustomField {...fieldDateTime as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -24,7 +25,8 @@ describe("CustomFields", () => {
 
     test("float", async () => {
       const { findByText } = render(
-        <SimpleIssueCustomField {...fieldFloat as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <SimpleIssueCustomField {...fieldFloat as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -33,7 +35,8 @@ describe("CustomFields", () => {
 
     test("number", async () => {
       const { findByText } = render(
-        <SimpleIssueCustomField {...fieldNumber as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <SimpleIssueCustomField {...fieldNumber as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -42,7 +45,8 @@ describe("CustomFields", () => {
 
     test("string", async () => {
       const { findByText } = render(
-        <SimpleIssueCustomField {...fieldString as never} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <SimpleIssueCustomField {...fieldString as any} />,
         { wrappers: { theme: true } },
       );
 
@@ -51,7 +55,8 @@ describe("CustomFields", () => {
 
     test.each([undefined, null, [], {}])("empty value: %p", async (fieldValue) => {
       const { findByText } = render(
-        <SimpleIssueCustomField {...fieldString as never} value={fieldValue} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <SimpleIssueCustomField {...fieldString as any} value={fieldValue} />,
         { wrappers: { theme: true } },
       );
 

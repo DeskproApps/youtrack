@@ -11,7 +11,7 @@ import type { Issue } from "../services/youtrack/types";
 
 type UseUnlinkIssue = () => {
   isLoading: boolean,
-  unlinkIssue: (issueId: Issue["id"]) => void,
+  unlinkIssue: (issueId: Issue["idReadable"]) => void,
 };
 
 const useUnlinkIssue: UseUnlinkIssue = () => {
@@ -22,7 +22,7 @@ const useUnlinkIssue: UseUnlinkIssue = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const ticketId = get(context, ["data", "ticket", "id"]);
 
-  const unlinkIssue = useCallback((issueId: Issue["id"]) => {
+  const unlinkIssue = useCallback((issueId: Issue["idReadable"]) => {
     if (!client || !issueId) {
       return;
     }

@@ -7,17 +7,16 @@ import type {
   ControllerFieldState,
   ControllerRenderProps,
 } from "react-hook-form";
-import type { components } from "../../../services/youtrack/openapi";
-import type { Project } from "../../../services/youtrack/types";
+import type { Project, ProjectCustomField } from "../../../services/youtrack/types";
 import type { FormValidationSchema } from "../types";
 
 type Props = {
   projectId: Project["id"],
-  field: components["schemas"]["ProjectCustomField"],
+  field: ProjectCustomField,
   formControl: {
-    field: ControllerRenderProps<FormValidationSchema>,
+    field: ControllerRenderProps<Pick<FormValidationSchema, "customFields">>,
     fieldState: ControllerFieldState,
-    formState: UseFormStateReturn<FormValidationSchema>;
+    formState: UseFormStateReturn<Pick<FormValidationSchema, "customFields">>,
   },
 };
 
