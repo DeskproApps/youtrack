@@ -11,6 +11,7 @@ import {
   Container,
   YouTrackLogo,
 } from "../../common";
+import { Attachments } from "./Attachments";
 import type { FC } from "react";
 import type { Issue } from "../../../services/youtrack/types";
 
@@ -24,12 +25,20 @@ const Info: FC<{ issue: Issue }> = ({ issue }) => {
         link={getIssueUrl(issue.idReadable)}
         icon={<YouTrackLogo/>}
       />
+
       <Property label="Issue ID" text={get(issue, ["idReadable"], "-")} />
+
       <Property label="Description" text={(
         <P5>
           <span dangerouslySetInnerHTML={{ __html: mdToHtml(get(issue, ["description"]) || "-") }}/>
         </P5>
       )} />
+
+      <Property
+        label="Attachments"
+        text={<Attachments attachments={get(issue, ["attachments"], []) || []} />}
+      />
+
       <Property label="Project" text={(
         <P5>
           {issue?.project?.name}{nbsp}

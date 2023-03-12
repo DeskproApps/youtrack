@@ -5,7 +5,7 @@ export const placeholders = {
 
 export const BASE_URL = `${placeholders.INSTANCE_URL}/api`;
 
-export const ATTACHMENT_FIELDS = ["id", "name", "extension", "url", "base64Content"];
+export const ATTACHMENT_FIELDS = ["id", "name", "url", "size"];
 
 export const USER_FIELDS = ["id", "login", "fullName", "email", "avatarUrl"];
 
@@ -101,5 +101,6 @@ export const ISSUE_FIELDS = [
   "description",
   `project(${PROJECT_FIELDS.join(",")})`,
   `comments(${COMMENT_FIELDS.join(",")})`,
+  `attachments(${ATTACHMENT_FIELDS.join(",")})`,
   `customFields(${CUSTOM_FIELD_FIELDS.join(",")})`,
 ];
