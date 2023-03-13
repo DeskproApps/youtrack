@@ -7,7 +7,7 @@ type Props = FormProps & {
   //...
 };
 
-const EditIssue: FC<Props> = ({ onSubmit, onCancel, issue, error }) => (
+const EditIssue: FC<Props> = ({ onSubmit, onCancel, issue, error, onUploadFile }) => (
   <Container>
     <IssueForm
       isEditMode
@@ -15,6 +15,7 @@ const EditIssue: FC<Props> = ({ onSubmit, onCancel, issue, error }) => (
       issue={issue}
       onSubmit={onSubmit}
       onCancel={onCancel}
+      onUploadFile={onUploadFile}
     />
   </Container>
 );
