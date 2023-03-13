@@ -7,7 +7,7 @@ import { InputWithDisplay } from "@deskpro/deskpro-ui";
 import { Stack, LoadingSpinner } from "@deskpro/app-sdk";
 import { Button, Label, TextArea } from "../common";
 import { ErrorBlock } from "../Error";
-import { ProjectField } from "./fields";
+import { ProjectField, Attachments } from "./fields";
 import { CustomFields } from "./customFields";
 import { useIssueDeps } from "./hooks";
 import {
@@ -20,7 +20,7 @@ import {
 import type { FC } from "react";
 import type { Props, FormValidationSchema } from "./types";
 
-const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, issue, error }) => {
+const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, issue, error, onUploadFile }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>();
 
   const { isLoading, projects } = useIssueDeps();
@@ -93,6 +93,13 @@ const IssueForm: FC<Props> = ({ isEditMode, onSubmit, onCancel, issue, error }) 
           />
         </Label>
       </form>
+
+      {isEditMode && (
+        <Attachments
+          attachments={get(issue, ["attachments"], []) || []}
+          onUploadFile={onUploadFile}
+        />
+      )}
 
       <form onSubmit={(e) => e.preventDefault()}>
         <CustomFields

@@ -5,7 +5,7 @@ import type {
   ControllerFieldState,
   ControllerRenderProps,
 } from "react-hook-form";
-import type { Project, Issue, ProjectCustomField } from "../../services/youtrack/types";
+import type { Project, Issue, ProjectCustomField, IssueAttachment } from "../../services/youtrack/types";
 import type { Maybe } from "../../types";
 
 export type FormValidationSchema = z.infer<typeof validationSchema>;
@@ -25,7 +25,8 @@ export type Props = {
   onCancel?: () => void,
   isEditMode?: boolean,
   issue?: Issue,
-  error?: Maybe<string|string[]>
+  error?: Maybe<string|string[]>,
+  onUploadFile?: (file: File) => Promise<IssueAttachment|void>,
 };
 
 export type CustomFieldProps = {

@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import { useCallback } from "react";
+import { useParams, useNavigate, createSearchParams } from "react-router-dom";
 import get from "lodash/get";
 import {
   LoadingSpinner,
@@ -11,9 +11,23 @@ import { ViewIssue } from "../../components";
 import type { FC } from "react";
 
 const ViewIssuePage: FC = () => {
+  const navigate = useNavigate();
   const { issueId } = useParams();
   const { isLoading, issue } = useIssueDeps(issueId);
   const issueIdReadable = get(issue, ["idReadable"], "");
+
+  const onCreateIssueComment = useCallback(() => {
+    if (!issueId) {
+      return;
+    }
+
+    navigate({
+      pathname: "/comment/create",
+      search: `?${createSearchParams([
+        ["issueId", issueId],
+      ])}`,
+    });
+  }, [navigate, issueId]);
 
   useSetTitle(issueIdReadable);
 
@@ -43,7 +57,7 @@ const ViewIssuePage: FC = () => {
   }
 
   return (
-    <ViewIssue issue={issue} />
+    <ViewIssue issue={issue} onCreateIssueComment={onCreateIssueComment} />
   );
 };
 

@@ -1,13 +1,23 @@
 import type { components } from "./openapi";
 
 export type YouTrackErrors = {
-  //...
+  error: string, // "bad_request"|"Unauthorized"|"invalid_query"|"Not Found"
+  error_description: string,
 };
 
-export type Issue = Omit<components["schemas"]["Issue"], "id"|"idReadable"|"project"> & {
+export type IssueAttachment = Omit<components["schemas"]["IssueAttachment"], "id"|"name"|"size"|"url"> & {
+  $type: "IssueAttachment",
+  id: NonNullable<components["schemas"]["IssueAttachment"]["id"]>,
+  name: NonNullable<components["schemas"]["IssueAttachment"]["name"]>,
+  size: NonNullable<components["schemas"]["IssueAttachment"]["size"]>,
+  url: NonNullable<components["schemas"]["IssueAttachment"]["url"]>
+};
+
+export type Issue = Omit<components["schemas"]["Issue"], "id"|"idReadable"|"project"|"attachments"> & {
   id: NonNullable<components["schemas"]["Issue"]["id"]>,
   idReadable: NonNullable<components["schemas"]["Issue"]["idReadable"]>,
   project: Project,
+  attachments: IssueAttachment[],
 };
 
 export type ProjectCustomField = components["schemas"]["ProjectCustomField"] & {
