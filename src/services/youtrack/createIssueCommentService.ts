@@ -10,7 +10,7 @@ const createIssueCommentService = (
     text: NonNullable<components["schemas"]["IssueComment"]["text"]>,
   },
 ) => {
-  return baseRequest(client, {
+  return baseRequest<components["schemas"]["IssueComment"]>(client, {
     url: `/issues/${issueId}/comments`,
     method: "POST",
     data,

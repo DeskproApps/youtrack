@@ -3,7 +3,7 @@
   "title": "YouTrack",
   "description": "View your YouTrack issues linked with Deskpro tickets to streamline communication with users.",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/youtrack",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
@@ -70,6 +70,14 @@
       "isRequired": false,
       "isBackendOnly": false,
       "order": 50
+    },
+    "dont_add_comment_when_linking_issue": {
+      "title": "Don't leave a comment on the issue in YouTrack when it is linked to a ticket in Deskpro",
+      "description": "",
+      "type": "boolean",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 60
     }
   },
   "proxy": {

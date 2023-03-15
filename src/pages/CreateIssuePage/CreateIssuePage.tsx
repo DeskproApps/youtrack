@@ -6,7 +6,7 @@ import {
   useDeskproAppClient,
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
-import { useSetTitle } from "../../hooks";
+import { useSetTitle, useAutoCommentLinkedIssue } from "../../hooks";
 import { setEntityIssueService } from "../../services/entityAssociation";
 import { createIssueService } from "../../services/youtrack"
 import { CreateIssue } from "../../components";
@@ -18,6 +18,7 @@ const CreateIssuePage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
 
   const [error, setError] = useState<Maybe<string|string[]>>(null);
 
@@ -38,6 +39,7 @@ const CreateIssuePage: FC = () => {
       .then((issue) => {
         return Promise.all([
           setEntityIssueService(client, ticketId, issue.idReadable),
+          addLinkCommentIssue(issue.id),
         ]);
       })
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -48,7 +50,7 @@ const CreateIssuePage: FC = () => {
         }
       })
       .catch((err) => setError(get(err, ["data", "error_description"], "An error occurred")));
-  }, [client, ticketId, navigate]);
+  }, [client, ticketId, navigate, addLinkCommentIssue]);
 
   useSetTitle("Link Issues");
 

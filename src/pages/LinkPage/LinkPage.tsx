@@ -8,8 +8,7 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { setEntityIssueService } from "../../services/entityAssociation";
-import { useSetTitle } from "../../hooks";
-import { useReplyBox } from "../../hooks";
+import { useSetTitle, useReplyBox, useAutoCommentLinkedIssue } from "../../hooks";
 import { useSearch } from "./hooks";
 import { getOption } from "../../utils";
 import { LinkIssue } from "../../components";
@@ -33,6 +32,7 @@ const LinkPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { setSelectionState } = useReplyBox();
+  const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
 
   const [search, setSearch] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -86,6 +86,7 @@ const LinkPage: FC = () => {
     Promise
       .all([
         ...selectedIssues.map((issue) => setEntityIssueService(client, ticketId, issue.idReadable)),
+        ...selectedIssues.map((issue) => addLinkCommentIssue(issue.id)),
         ...selectedIssues.map((issue) => setSelectionState(issue.idReadable, true, "email")),
         ...selectedIssues.map((issue) => setSelectionState(issue.idReadable, true, "note")),
       ])
@@ -93,7 +94,7 @@ const LinkPage: FC = () => {
         setIsSubmitting(false);
         navigate("/home")
       });
-  }, [client, navigate, ticketId, selectedIssues, setSelectionState]);
+  }, [client, navigate, ticketId, selectedIssues, setSelectionState, addLinkCommentIssue]);
 
   useSetTitle("Link Issues");
 

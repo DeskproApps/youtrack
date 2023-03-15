@@ -32,6 +32,9 @@ export type RequestParams = {
 export type Settings = {
   instance_url?: string,
   permanent_auth_token?: string,
+  default_comment_on_ticket_reply?: boolean,
+  default_comment_on_ticket_note?: boolean,
+  dont_add_comment_when_linking_issue?: boolean,
 };
 
 export type TicketData = {
