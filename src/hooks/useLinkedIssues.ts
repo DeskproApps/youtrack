@@ -5,19 +5,19 @@ import {
   useDeskproLatestAppContext,
   useInitialisedDeskproAppClient,
 } from "@deskpro/app-sdk";
-import { getEntityIssueListService } from "../../services/entityAssociation";
-import { searchIssuesByIdsService } from "../../services/youtrack";
-import { useQueryWithClient } from "../../hooks";
-import { QueryKey } from "../../query";
-import type { Issue } from "../../services/youtrack/types";
-import type { TicketContext } from "../../types";
+import { getEntityIssueListService } from "../services/entityAssociation";
+import { searchIssuesByIdsService } from "../services/youtrack";
+import { useQueryWithClient } from "./useQueryWithClient";
+import { QueryKey } from "../query";
+import type { Issue } from "../services/youtrack/types";
+import type { TicketContext } from "../types";
 
-type UseLoadHomeDeps = () => {
+type UseLinkedIssues = () => {
   isLoading: boolean,
   issues: Issue[],
 };
 
-const useLoadHomeDeps: UseLoadHomeDeps = () => {
+const useLinkedIssues: UseLinkedIssues = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const ticketId = get(context, ["data", "ticket", "id"]);
 
@@ -49,4 +49,4 @@ const useLoadHomeDeps: UseLoadHomeDeps = () => {
   };
 };
 
-export { useLoadHomeDeps };
+export { useLinkedIssues };
