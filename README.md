@@ -1,33 +1,9 @@
-YouTrack
-===
+<img align="right" alt="Deskpro" src="https://raw.githubusercontent.com/DeskproApps/youtrack/master/docs/assets/deskpro-logo.svg" />
 
-Basic Usage
----
+# Youtrack App
 
-We recommend using [PNPM](https://pnpm.io/) to manage this project. First, start by installing the project 
-dependencies from inside the project directory `app-template-vite`.
+View your YouTrack issues linked with Deskpro tickets to streamline communication with users.
 
-```bash
-pnpm install
-```
+![Youtrack App - Deskpro](https://raw.githubusercontent.com/DeskproApps/youtrack/master/docs/assets/youtrack_screenshot_01.png)
 
-Then, run the development server.
-
-```bash
-pnpm run start
-```
-
-You should now be able to view the bare-bones app in your browser.
-
-For more information or to start developing an app, please take a look at our [developer guides](https://support.deskpro.com/en/guides/developers/apps/apps-1/anatomy-of-an-app).
-
-Testing
----
-
-We've included `jest` to run your tests. It will look anywhere in `/src` for test suite files ending in `.test.tsx`.
-
-You can run all tests using:
-
-```bash
-pnpm run test
-```
+[Find out more about our Youtrack App](https://www.deskpro.com/apps/youtrack)
