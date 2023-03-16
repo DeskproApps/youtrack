@@ -9,7 +9,7 @@ import type { Issue } from "../services/youtrack/types";
 import type { components } from "../services/youtrack/openapi";
 import type { TicketContext } from "../types";
 
-type UseAutoCommentLinkedIssue = () => {
+export type Result = {
   isLoading: boolean,
   addLinkCommentIssue: (issueId: Issue["id"]) => Promise<void|components["schemas"]["IssueComment"]>,
   addUnlinkCommentIssue: (issueId: Issue["id"]) => Promise<void|components["schemas"]["IssueComment"]>,
@@ -23,7 +23,7 @@ const getUnlinkedMessage = (ticketId: string, link?: string): string => {
   return `Unlinked from Deskpro ticket ${ticketId}${link ? `, ${link}` : ""}`
 };
 
-const useAutoCommentLinkedIssue: UseAutoCommentLinkedIssue = () => {
+const useAutoCommentLinkedIssue = (): Result => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const [isLoading, setIsLoading] = useState<boolean>(false);
