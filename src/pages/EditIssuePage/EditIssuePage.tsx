@@ -5,27 +5,33 @@ import {
   LoadingSpinner,
   useDeskproElements,
   useDeskproAppClient,
+  useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import {
   updateIssueService,
   uploadIssueAttachmentService,
 } from "../../services/youtrack";
+import { setEntityIssueService } from "../../services/entityAssociation";
 import { useSetTitle } from "../../hooks";
 import { useIssueDeps } from "./hooks";
+import { getEntityMetadata } from "../../utils";
 import { EditIssue } from "../../components";
 import type { FC } from "react";
 import type { IssueValues } from "../../components/IssueForm";
-import type { Maybe } from "../../types";
-import {IssueAttachment} from "../../services/youtrack/types";
+import type { Maybe, TicketContext } from "../../types";
+import type { IssueAttachment } from "../../services/youtrack/types";
 
 const EditIssuePage: FC = () => {
   const { issueId } = useParams();
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
+  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
 
   const [error, setError] = useState<Maybe<string|string[]>>(null);
 
   const { issue, isLoading } = useIssueDeps(issueId);
+
+  const ticketId = get(context, ["data", "ticket", "id"]);
 
   const onCancel = useCallback(() => {
     if (!issueId) {
@@ -36,13 +42,16 @@ const EditIssuePage: FC = () => {
   }, [navigate, issueId]);
 
   const onSubmit = useCallback((data: IssueValues): Promise<void> => {
-    if (!client || !issueId) {
+    if (!client || !issueId || !ticketId) {
       return Promise.resolve();
     }
 
     setError(null);
 
     return updateIssueService(client, issueId, data)
+      .then((issue) => {
+        return setEntityIssueService(client, ticketId, issue.idReadable, getEntityMetadata(issue));
+      })
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore ToDo: need to fix typings in @app-sdk
       .then((isSuccess: boolean) => {
@@ -51,7 +60,7 @@ const EditIssuePage: FC = () => {
         }
       })
       .catch((err) => setError(get(err, ["data", "error_description"], "An error occurred")));
-  }, [client, issueId, navigate]);
+  }, [client, issueId, ticketId, navigate]);
 
   const onUploadFile = useCallback((file: File): Promise<IssueAttachment|void> => {
     if (!client || !issueId) {

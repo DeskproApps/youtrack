@@ -10,7 +10,7 @@ import {
 import { setEntityIssueService } from "../../services/entityAssociation";
 import { useSetTitle, useReplyBox, useAutoCommentLinkedIssue } from "../../hooks";
 import { useSearch } from "./hooks";
-import { getOption } from "../../utils";
+import { getOption, getEntityMetadata } from "../../utils";
 import { LinkIssue } from "../../components";
 import type { FC, ChangeEvent } from "react";
 import type { Option, TicketContext } from "../../types";
@@ -85,7 +85,9 @@ const LinkPage: FC = () => {
     setIsSubmitting(true);
     Promise
       .all([
-        ...selectedIssues.map((issue) => setEntityIssueService(client, ticketId, issue.idReadable)),
+        ...selectedIssues.map((issue) => {
+          return setEntityIssueService(client, ticketId, issue.idReadable, getEntityMetadata(issue))
+        }),
         ...selectedIssues.map((issue) => addLinkCommentIssue(issue.id)),
         ...selectedIssues.map((issue) => setSelectionState(issue.idReadable, true, "email")),
         ...selectedIssues.map((issue) => setSelectionState(issue.idReadable, true, "note")),
