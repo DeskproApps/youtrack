@@ -1,3 +1,5 @@
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 import { useQuery } from "@tanstack/react-query";
 import { useDeskproAppClient } from "@deskpro/app-sdk";
 import type { IDeskproClient } from "@deskpro/app-sdk";
@@ -12,7 +14,7 @@ const useQueryWithClient = <TQueryFnData = unknown, TError = unknown, TData = TQ
   queryFn: (client: IDeskproClient) => Promise<TQueryFnData>,
   options?: Omit<UseQueryOptions<TQueryFnData, unknown, TData, readonly unknown[]>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<TData> => {
-  const {client} = useDeskproAppClient();
+  const { client } = useDeskproAppClient();
 
   const key = Array.isArray(queryKey) ? queryKey : [queryKey];
 
@@ -20,8 +22,8 @@ const useQueryWithClient = <TQueryFnData = unknown, TError = unknown, TData = TQ
     key,
     () => (client && queryFn(client)) as Promise<TQueryFnData>,
     {
-      ...(options ?? {}),
-      enabled: options?.enabled === undefined ? !!client : (client && options?.enabled),
+      ...(options || {}),
+      enabled: !isEmpty(client) && get(options, ["enabled"], true),
     } as Omit<UseQueryOptions<TQueryFnData, TError, TData, readonly unknown[]>, 'queryKey' | 'queryFn'>
   );
 }

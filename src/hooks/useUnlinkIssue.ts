@@ -5,6 +5,7 @@ import {
   useDeskproAppClient,
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
+import { useReplyBox, useAutoCommentLinkedIssue } from "../hooks";
 import { deleteEntityIssueService } from "../services/entityAssociation";
 import type { TicketContext } from "../types";
 import type { Issue } from "../services/youtrack/types";
@@ -18,6 +19,8 @@ const useUnlinkIssue: UseUnlinkIssue = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { deleteSelectionState } = useReplyBox();
+  const { addUnlinkCommentIssue } = useAutoCommentLinkedIssue();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const ticketId = get(context, ["data", "ticket", "id"]);
@@ -29,12 +32,18 @@ const useUnlinkIssue: UseUnlinkIssue = () => {
 
     setIsLoading(true);
 
-    deleteEntityIssueService(client, ticketId, issueId)
+    Promise
+      .all([
+        deleteEntityIssueService(client, ticketId, issueId),
+        addUnlinkCommentIssue(issueId),
+        deleteSelectionState(issueId, "note"),
+        deleteSelectionState(issueId, "email"),
+      ])
       .then(() => {
         setIsLoading(false);
         navigate("/home");
       });
-  }, [client, ticketId, navigate]);
+  }, [client, ticketId, navigate, deleteSelectionState, addUnlinkCommentIssue]);
 
   return { isLoading, unlinkIssue }
 };

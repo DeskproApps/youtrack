@@ -7,6 +7,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { DeskproAppProvider } from "@deskpro/app-sdk";
 import { queryClient } from "./query";
 import { App } from "./App";
+import { ReplyBoxProvider } from "./hooks";
 
 import "iframe-resizer/js/iframeResizer.contentWindow.js";
 import "flatpickr/dist/themes/light.css";
@@ -23,7 +24,9 @@ root.render((
     <DeskproAppProvider>
       <HashRouter>
         <QueryClientProvider client={queryClient}>
-          <App />
+          <ReplyBoxProvider>
+            <App />
+          </ReplyBoxProvider>
         </QueryClientProvider>
       </HashRouter>
     </DeskproAppProvider>

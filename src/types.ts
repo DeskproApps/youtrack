@@ -4,7 +4,7 @@ import type {
   IDeskproClient,
   DropdownValueType,
 } from "@deskpro/app-sdk";
-import { Issue } from "./services/youtrack/types";
+import { Issue, Project } from "./services/youtrack/types";
 
 export type Maybe<T> = T | undefined | null;
 
@@ -32,6 +32,9 @@ export type RequestParams = {
 export type Settings = {
   instance_url?: string,
   permanent_auth_token?: string,
+  default_comment_on_ticket_reply?: boolean,
+  default_comment_on_ticket_note?: boolean,
+  add_comment_when_linking_issue?: boolean,
 };
 
 export type TicketData = {
@@ -109,3 +112,10 @@ export type EventPayload =
   | { type: "changePage", path: RouterPaths }
   | { type: "unlinkIssue", issueId: Issue["idReadable"] }
 ;
+
+export type EntityMetadata = {
+  id: Issue["id"],
+  idReadable: Issue["idReadable"],
+  summary: Issue["summary"],
+  project: Project["name"],
+};

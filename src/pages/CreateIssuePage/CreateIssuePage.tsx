@@ -6,9 +6,10 @@ import {
   useDeskproAppClient,
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
-import { useSetTitle } from "../../hooks";
+import { useSetTitle, useAutoCommentLinkedIssue } from "../../hooks";
 import { setEntityIssueService } from "../../services/entityAssociation";
 import { createIssueService } from "../../services/youtrack"
+import { getEntityMetadata } from "../../utils";
 import { CreateIssue } from "../../components";
 import type { FC } from "react";
 import type { IssueValues } from "../../components/IssueForm";
@@ -18,6 +19,7 @@ const CreateIssuePage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
 
   const [error, setError] = useState<Maybe<string|string[]>>(null);
 
@@ -37,18 +39,13 @@ const CreateIssuePage: FC = () => {
     return createIssueService(client, data)
       .then((issue) => {
         return Promise.all([
-          setEntityIssueService(client, ticketId, issue.idReadable),
+          setEntityIssueService(client, ticketId, issue.idReadable, getEntityMetadata(issue)),
+          addLinkCommentIssue(issue.id),
         ]);
       })
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore ToDo: need to fix typings in @app-sdk
-      .then((isSuccess: boolean) => {
-        if (isSuccess) {
-          navigate("/home")
-        }
-      })
+      .then(() => navigate("/home"))
       .catch((err) => setError(get(err, ["data", "error_description"], "An error occurred")));
-  }, [client, ticketId, navigate]);
+  }, [client, ticketId, navigate, addLinkCommentIssue]);
 
   useSetTitle("Link Issues");
 
