@@ -28,29 +28,29 @@ const useAutoCommentLinkedIssue = (): Result => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const isDisable = get(context, ["settings", "dont_add_comment_when_linking_issue"]);
+  const isEnable = get(context, ["settings", "add_comment_when_linking_issue"], false);
   const ticketId = get(context, ["data", "ticket", "id"]);
   const permalink = get(context, ["data", "ticket", "permalinkUrl"]);
 
   const addLinkCommentIssue = useCallback((issueId: Issue["id"]) => {
-    if (!client || isDisable) {
+    if (!client || !isEnable) {
       return Promise.resolve();
     }
 
     setIsLoading(true);
     return createIssueCommentService(client, issueId, { text: getLinkedMessage(ticketId, permalink) })
       .finally(() => setIsLoading(false));
-  }, [client, isDisable, ticketId, permalink]);
+  }, [client, isEnable, ticketId, permalink]);
 
   const addUnlinkCommentIssue = useCallback((issueId: Issue["id"]) => {
-    if (!client || isDisable) {
+    if (!client || !isEnable) {
       return Promise.resolve();
     }
 
     setIsLoading(true)
     return createIssueCommentService(client, issueId, { text: getUnlinkedMessage(ticketId, permalink) })
       .finally(() => setIsLoading(false));
-  }, [client, isDisable, ticketId, permalink]);
+  }, [client, isEnable, ticketId, permalink]);
 
   return { isLoading, addLinkCommentIssue, addUnlinkCommentIssue };
 };
