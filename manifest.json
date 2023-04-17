@@ -3,23 +3,25 @@
   "title": "YouTrack",
   "description": "View your YouTrack issues linked with Deskpro tickets to streamline communication with users.",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/youtrack",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [{
-    "target": "ticket_sidebar",
-    "entrypoint": "index.html",
-    "options": {
-      "actions": {
-        "linkTicket": {
-          "type": "ticket_addition",
-          "title": "YouTrack Issue",
-          "description": "Link ticket to a YouTrack issue"
+  "targets": [
+    {
+      "target": "ticket_sidebar",
+      "entrypoint": "index.html",
+      "options": {
+        "actions": {
+          "linkTicket": {
+            "type": "ticket_addition",
+            "title": "YouTrack Issue",
+            "description": "Link ticket to a YouTrack issue"
+          }
         }
       }
     }
-  }],
+  ],
   "entityAssociations": {
     "linkedYouTrackIssue": {
       "title": "Linked YouTrack Issue",
@@ -48,9 +50,7 @@
     "verify_settings": {
       "title": "",
       "type": "app_embedded",
-      "options": {
-        "entrypoint": "#/admin/verify_settings"
-      },
+      "options": { "entrypoint": "#/admin/verify_settings" },
       "isRequired": false,
       "isBackendOnly": false,
       "order": 30
@@ -82,10 +82,12 @@
     }
   },
   "proxy": {
-    "whitelist": [{
-      "url": "__instance_url__/api/.*",
-      "methods": ["GET", "POST"],
-      "timeout": 20
-    }]
+    "whitelist": [
+      {
+        "url": "__instance_url__/api/.*",
+        "methods": ["GET", "POST"],
+        "timeout": 20
+      }
+    ]
   }
 }
