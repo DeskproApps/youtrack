@@ -74,10 +74,6 @@ jobs:
             pnpm run bumpManifestVer
           fi
 
-      - name: Get labels from pull request
-        id: labels
-        run: echo "::set-output name=milestone::$(jq --raw-output '.pull_request.labels[].name' $GITHUB_EVENT_PATH | grep -E 'major-version|minor-version' | head -1)"
-
       - name: Bump Version
         run: |
           git config --global user.name "git log -1 --pretty=format:%an"
