@@ -1,6 +1,6 @@
 import React from "react";
 import get from "lodash/get";
-import { P5 } from "@deskpro/app-sdk";
+import { P5 } from "@deskpro/deskpro-ui";
 import { mdToHtml } from "../../../../utils";
 import { NoValue } from "./NoValue";
 import type { FC } from "react";

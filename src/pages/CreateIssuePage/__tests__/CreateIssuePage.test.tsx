@@ -1,6 +1,6 @@
 import { cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { render } from "../../../testing";
+import { render } from "../../../../testing";
 import { App } from "../../../App";
 
 jest.mock("../../../services/entityAssociation/getEntityIssueListService", () => ({

@@ -1,8 +1,5 @@
 import { faFile } from "@fortawesome/free-solid-svg-icons";
-import {
-  Stack,
-  AttachmentTag,
-} from "@deskpro/app-sdk";
+import { Stack, AttachmentTag } from "@deskpro/deskpro-ui";
 import { useExternalLink } from "../../../hooks";
 import type { FC } from "react";
 import type { Issue } from "../../../services/youtrack/types";

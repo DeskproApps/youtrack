@@ -1,6 +1,6 @@
 import React from "react";
 import { cleanup } from "@testing-library/react";
-import { render } from "../../../testing";
+import { render } from "../../../../testing";
 import { Home } from "../Home";
 import issues from "./issues.json";
 import type { Issue } from "../../../services/youtrack/types";

@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import cloneDeep from "lodash/cloneDeep";
-import get from "lodash/get";
+import { get, cloneDeep } from "lodash";
+import { useDebouncedCallback } from "use-debounce";
 import {
   useDeskproElements,
   useDeskproAppClient,
@@ -12,7 +12,7 @@ import { useSetTitle, useReplyBox, useAutoCommentLinkedIssue } from "../../hooks
 import { useSearch } from "./hooks";
 import { getOption, getEntityMetadata } from "../../utils";
 import { LinkIssue } from "../../components";
-import type { FC, ChangeEvent } from "react";
+import type { FC } from "react";
 import type { Option, TicketContext } from "../../types";
 import type { Issue, Project } from "../../services/youtrack/types";
 
@@ -38,22 +38,10 @@ const LinkPage: FC = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [selectedIssues, setSelectedIssues] = useState<Issue[]>([]);
   const [selectedProject, setSelectedProject] = useState<Option<Project["id"]|"any">>(getOption("any", "Any"));
-
   const { isFetching, issues, projects } = useSearch(search);
-
   const ticketId = get(context, ["data", "ticket", "id"]);
 
-  const onChangeSearch = useCallback(({ target: { value: q }}: ChangeEvent<HTMLInputElement>) => {
-    if (!client) {
-      return;
-    }
-
-    setSearch(q);
-  }, [client]);
-
-  const onClearSearch = useCallback(() => {
-    setSearch("");
-  }, []);
+  const onChangeSearch = useDebouncedCallback(setSearch, 1000);
 
   const onChangeSelectProject = useCallback((option: Option<Project["id"]|"any">) => {
     setSelectedProject(option);
@@ -112,9 +100,7 @@ const LinkPage: FC = () => {
 
   return (
     <LinkIssue
-      onChange={onChangeSearch}
-      onClear={onClearSearch}
-      value={search}
+      onChangeSearch={onChangeSearch}
       isFetching={isFetching}
       isSubmitting={isSubmitting}
       issues={getFilteredIssues(issues, selectedProject)}

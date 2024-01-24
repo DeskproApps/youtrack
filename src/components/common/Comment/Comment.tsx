@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReactTimeAgo from "react-time-ago";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Avatar, TSpan } from "@deskpro/deskpro-ui";
-import { P11, Stack } from "@deskpro/app-sdk";
+import { P11, Stack, Avatar, TSpan } from "@deskpro/deskpro-ui";
 import type { FC } from "react";
 
 const TimeAgo = styled(ReactTimeAgo)`

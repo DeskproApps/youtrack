@@ -1,6 +1,6 @@
 import React from "react";
 import { cleanup } from "@testing-library/react";
-import { render } from "../../../testing";
+import { render } from "../../../../testing";
 import { VerifySettings } from "../VerifySettings";
 
 describe("VerifySettings Page", () => {

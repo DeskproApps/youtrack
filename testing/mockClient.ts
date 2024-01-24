@@ -1,6 +1,6 @@
 const mockClient = {
   getProxyAuth: () => new Promise(() => {}),
-  getAdminGenericProxyAuth: () => new Promise(() => {}),
+  getAdminGenericProxyAuth: () => () => new Promise(() => {}),
   resize: () => {},
   setWidth: () => {},
   setHeight: () => {},
@@ -39,6 +39,13 @@ const mockClient = {
 
   setAdminSetting: async () => {},
   setAdminSettingInvalid: async () => {},
+
+  oauth2: () => ({
+    getGenericCallbackUrl: () => Promise.resolve({
+      callbackUrl: "deskpro.test/oauth2/1/generic/callback",
+      poll: () => Promise.resolve({ token: "auth_code" }),
+    }),
+  }),
 };
 
 export { mockClient };

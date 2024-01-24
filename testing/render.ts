@@ -1,10 +1,4 @@
-import {
-  FC,
-  ReactElement,
-  createElement,
-  PropsWithChildren,
-} from "react";
-import isString from "lodash/isString";
+import { createElement } from "react";
 import {
   RenderResult,
   render as testingLibraryRender,
@@ -12,13 +6,11 @@ import {
 } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
-import {
-  lightTheme,
-  ThemeProvider,
-  ThemeProviderProps,
-} from "@deskpro/deskpro-ui";
+import { lightTheme, ThemeProvider } from "@deskpro/deskpro-ui";
 import { DeskproAppProvider } from "@deskpro/app-sdk";
-import { queryClient } from "../query";
+import { queryClient } from "../src/query";
+import type { FC, ReactElement, PropsWithChildren } from "react";
+import type { ThemeProviderProps } from "@deskpro/deskpro-ui";
 
 interface WrapperOptions {
   appSdk?: boolean;
@@ -57,7 +49,7 @@ const wrap = <P>(node: ReactElement<P>, options?: WrapperOptions): ReactElement<
   let children = node;
 
   if (options?.appSdk) {
-    children = createElement(deskproAppProvider.component) as ReactElement;
+    children = createElement(deskproAppProvider.component, { children }) as ReactElement;
   }
 
   if (options?.theme) {
@@ -65,7 +57,7 @@ const wrap = <P>(node: ReactElement<P>, options?: WrapperOptions): ReactElement<
   }
 
   if (options?.router) {
-    if (isString(options?.router)) {
+    if (typeof options?.router == "string") {
       window.history.pushState({}, "", `#${options.router}`)
     }
 
@@ -83,4 +75,4 @@ const render = (node: ReactElement, options?: RenderOptions): RenderResult => {
   return testingLibraryRender(wrap(node, options?.wrappers), options);
 };
 
-export { render };
+export { render, wrap };

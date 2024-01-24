@@ -5,6 +5,8 @@ export type YouTrackErrors = {
   error_description: string,
 };
 
+export type Response<T> = Promise<T>;
+
 export type IssueAttachment = Omit<components["schemas"]["IssueAttachment"], "id"|"name"|"size"|"url"> & {
   $type: "IssueAttachment",
   id: NonNullable<components["schemas"]["IssueAttachment"]["id"]>,

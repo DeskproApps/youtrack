@@ -5,7 +5,12 @@ import { Info } from "./Info";
 import { IssueFieldView } from "./IssueFieldView";
 import { Comments } from "./Comments";
 import type { FC } from "react";
-import type { Props } from "./types";
+import type { Issue } from "../../services/youtrack/types";
+
+export type Props = {
+  issue: Issue,
+  onCreateIssueComment: () => void,
+};
 
 const ViewIssue: FC<Props> = ({ issue, onCreateIssueComment }) => {
   return (

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { DateField } from "../../../common";
+import { DateInput } from "@deskpro/app-sdk";
 import type { FC } from "react";
 import type { CustomFieldProps } from "../../types";
 
@@ -7,7 +7,7 @@ const DateTimeProjectCustomField: FC<CustomFieldProps> = forwardRef(({ formContr
   const { field: formControlField } = formControl;
 
   return (
-    <DateField
+    <DateInput
       withTime
       id={formControlField.name}
       {...formControlField}
