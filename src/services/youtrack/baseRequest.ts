@@ -30,7 +30,7 @@ const baseRequest: Request = async (client, {
     };
 
     options.headers = {
-      ...((isForm(body) || !body) ? {} : { "Content-Type": "application/json" }),
+      ...((isForm(body) || !body) ? { "Content-Type": "multipart/form-data" } : {}),
       ...options.headers,
     };
 

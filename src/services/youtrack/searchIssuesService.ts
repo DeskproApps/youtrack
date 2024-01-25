@@ -6,10 +6,10 @@ import type { Issue } from "./types";
 const searchIssuesService = (client: IDeskproClient, q: string) => {
   return baseRequest<Issue[]>(client, {
     url: `/issues`,
-    queryParams: {
-      fields: ISSUE_FIELDS.join(","),
-      query: q
-    },
+    queryParams: [
+      `fields=${ISSUE_FIELDS.join(",")}`,
+      `query=${q}`
+    ].join("&"),
   });
 };
 
