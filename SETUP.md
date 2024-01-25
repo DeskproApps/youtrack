@@ -24,6 +24,13 @@ Close the modal window, and you can see your token in the list
 
 [![](/docs/assets/setup/youtrack-setup-05.png)](/docs/assets/setup/youtrack-setup-05.png)
 
+> __Note:__ If you have multiple URLs and one Deskpro instance, you must configure it.
+> Click on the "Gear" icon -> "Server Settings" -> "Global Settings". And on the "Resource Sharing" section specify:
+> 1. select "Allow all origins" to access all your sites to the YouTrack
+> 2. or list all your URLs in "Allowed origins" for more security
+>
+> [![](/docs/assets/setup/youtrack-setup-05-1.png)](/docs/assets/setup/youtrack-setup-05-1.png)
+
 Ok, now head back to Deskpro and navigate to the "Settings" tab of the YouTrack App.
 
 [![](/docs/assets/setup/youtrack-setup-06.png)](/docs/assets/setup/youtrack-setup-06.png)
