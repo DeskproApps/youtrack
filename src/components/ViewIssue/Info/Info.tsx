@@ -1,7 +1,8 @@
 import React from "react";
 import get from "lodash/get";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
-import { Title, P5 } from "@deskpro/app-sdk";
+import { P5 } from "@deskpro/deskpro-ui";
+import { Title } from "@deskpro/app-sdk";
 import { useExternalLink } from "../../../hooks";
 import { mdToHtml } from "../../../utils";
 import { nbsp } from "../../../constants";

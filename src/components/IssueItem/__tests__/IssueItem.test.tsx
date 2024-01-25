@@ -2,7 +2,7 @@ import * as React from "react";
 import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { IssueItem } from "../IssueItem";
-import { render } from "../../../testing";
+import { render } from "../../../../testing";
 
 const issue = {
   $type: "Issue",

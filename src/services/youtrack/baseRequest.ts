@@ -1,50 +1,65 @@
+import { isEmpty } from "lodash";
 import { proxyFetch } from "@deskpro/app-sdk";
 import { BASE_URL, placeholders } from "./constants";
 import { YouTrackError } from "./YouTrackError";
-import { getQueryParams } from "../../utils";
-import type { Request } from "../../types";
+import { getQueryParams, isForm, getRequestBody } from "../../utils";
+import type { Request, FetchOptions } from "../../types";
 
 const baseRequest: Request = async (client, {
-    url,
-    data = {},
-    method = "GET",
-    queryParams = {},
-    headers: customHeaders,
-    skipParseQueryParams,
+  url,
+  rawUrl,
+  data,
+  method = "GET",
+  queryParams = {},
+  headers: customHeaders,
 }) => {
     const dpFetch = await proxyFetch(client);
 
-    const baseUrl = `${BASE_URL}${url}`;
-    const params = getQueryParams(queryParams, { skipParseQueryParams })
-    const requestUrl = `${baseUrl}${params}`;
-    const options: RequestInit = {
+    const baseUrl = rawUrl ? rawUrl : `${BASE_URL}${url || ""}`;
+    const params = getQueryParams(queryParams);
+    const body = getRequestBody(data);
+    const requestUrl = `${baseUrl}${isEmpty(params) ? "": `?${params}`}`;
+
+    const options: FetchOptions = {
         method,
+        body,
         headers: {
             "Authorization": `Bearer ${placeholders.PERMANENT_AUTH_TOKEN}`,
             ...customHeaders,
         },
     };
 
-    if (data instanceof FormData) {
-        options.body = data;
-    } else if (data) {
-        options.body = JSON.stringify(data);
-        options.headers = {
-            ...options.headers,
-            "Content-Type": "application/json",
-        };
-    }
+    options.headers = {
+      ...((isForm(body) || !body) ? { "Content-Type": "multipart/form-data" } : {}),
+      ...options.headers,
+    };
 
     const res = await dpFetch(requestUrl, options);
 
     if (res.status < 200 || res.status > 399) {
+        let errorData;
+
+        try {
+          errorData = await res.json();
+        } catch (e) {
+          errorData = {};
+        }
+
         throw new YouTrackError({
             status: res.status,
-            data: await res.json(),
+            data: errorData,
         });
     }
 
-    return await res.json();
+    let result;
+
+    try {
+      result = await res.json();
+    } catch (e) {
+      return {};
+    }
+
+    return result;
 };
 
 export { baseRequest };

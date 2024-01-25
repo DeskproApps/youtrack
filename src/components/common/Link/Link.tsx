@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon } from "@deskpro/app-sdk";
+import { Icon } from "@deskpro/deskpro-ui";
 import type { AnchorHTMLAttributes, ElementType } from "react";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 

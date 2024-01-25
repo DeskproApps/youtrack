@@ -1,10 +1,6 @@
-import { useState } from "react";
-import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
-import {
-  useDeskproLatestAppContext,
-  useInitialisedDeskproAppClient,
-} from "@deskpro/app-sdk";
+import { useMemo } from "react";
+import { get, size, isEmpty } from "lodash";
+import { useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { getEntityIssueListService } from "../services/entityAssociation";
 import { searchIssuesByIdsService } from "../services/youtrack";
 import { useQueryWithClient } from "./useQueryWithClient";
@@ -21,30 +17,22 @@ const useLinkedIssues: UseLinkedIssues = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const ticketId = get(context, ["data", "ticket", "id"]);
 
-  const [entityIds, setEntityIds] = useState<Array<Issue["idReadable"]>>([]);
+  const linkedIds = useQueryWithClient(
+    [QueryKey.LINKED_ISSUES, ticketId],
+    (client) => getEntityIssueListService(client, ticketId),
+    { enabled: Boolean(ticketId) },
+  );
 
-  useInitialisedDeskproAppClient((client) => {
-    if (!ticketId) {
-      return;
-    }
-
-    getEntityIssueListService(client, ticketId)
-      .then((entities) => {
-        if (Array.isArray(entities) && entities.length > 0) {
-          setEntityIds(entities as Array<Issue["idReadable"]>);
-        }
-      })
-      .catch(() => {});
-  }, [ticketId]);
+  const issueIds = useMemo(() => linkedIds.data || [], [linkedIds.data]);
 
   const issues = useQueryWithClient(
-    [QueryKey.SEARCH_ISSUES_BY_ID, ...entityIds],
-    (client) => searchIssuesByIdsService(client, entityIds),
-    { enabled: Boolean(entityIds.length) }
+    [QueryKey.SEARCH_ISSUES_BY_ID, ...linkedIds.data || []],
+    (client) => searchIssuesByIdsService(client, issueIds),
+    { enabled: size(issueIds) > 0 },
   );
 
   return {
-    isLoading: isEmpty(entityIds) ? false : [issues].every(({ isLoading }) => isLoading),
+    isLoading: isEmpty(issueIds) ? false : [issues].every(({ isLoading }) => isLoading),
     issues: issues.data || [],
   };
 };

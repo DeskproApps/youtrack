@@ -1,7 +1,7 @@
 import React from "react";
-import { cleanup, act } from "@testing-library/react";
+import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { render } from "../../../testing";
+import { render } from "../../../../testing";
 import { VerifySettings } from "../VerifySettings";
 
 jest.mock("../../../services/youtrack/getCurrentUserService", () => ({
@@ -13,9 +13,7 @@ describe("VerifySettings Page", () => {
     const { findByText, findByRole } = render(<VerifySettings />, { wrappers: { theme: true }});
     const button = await findByRole("button", { name: /Verify Settings/i });
 
-    act(() => {
-      userEvent.click(button);
-    });
+    await userEvent.click(button);
 
     expect(await findByText(/Failed to connect to YouTrack/i)).toBeInTheDocument();
   });

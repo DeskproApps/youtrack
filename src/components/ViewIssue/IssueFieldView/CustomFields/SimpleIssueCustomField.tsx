@@ -1,7 +1,7 @@
 import React from "react";
 import get from "lodash/get";
 import isObject from "lodash/isObject";
-import { P5 } from "@deskpro/app-sdk";
+import { P5 } from "@deskpro/deskpro-ui";
 import { DATETIME_FORMAT } from "../../../../constants";
 import { isDateTime } from "../utils";
 import { NoValue } from "./NoValue";

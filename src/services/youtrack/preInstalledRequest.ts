@@ -1,8 +1,7 @@
-import { createSearchParams } from "react-router-dom";
 import replace from "lodash/replace";
 import { adminGenericProxyFetch } from "@deskpro/app-sdk";
+import { getQueryParams } from "../../utils";
 import { BASE_URL, placeholders } from "./constants";
-import type { ParamKeyValuePair } from "react-router-dom";
 import type { PreInstalledRequest } from "../../types";
 
 const preInstalledRequest: PreInstalledRequest = async (client, {
@@ -14,11 +13,7 @@ const preInstalledRequest: PreInstalledRequest = async (client, {
   const { instance_url, permanent_auth_token } = settings;
   const dpFetch = await adminGenericProxyFetch(client);
 
-  const parsedQueryParams = Array.isArray(queryParams)
-    ? queryParams
-    : Object.keys(queryParams).map<ParamKeyValuePair>((key) => ([key, queryParams[key]]));
-
-  const res = await dpFetch(`${replace(BASE_URL, placeholders.INSTANCE_URL, instance_url)}${url}?${createSearchParams(parsedQueryParams)}`, {
+  const res = await dpFetch(`${replace(BASE_URL, placeholders.INSTANCE_URL, instance_url)}${url}?${getQueryParams(queryParams)}`, {
     method,
     headers: {
       "Accept": "application/json",

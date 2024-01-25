@@ -1,6 +1,7 @@
 import React from "react";
 import get from "lodash/get";
-import { P5, Pill, useDeskproAppTheme } from "@deskpro/app-sdk";
+import { P5, Pill } from "@deskpro/deskpro-ui";
+import { useDeskproAppTheme } from "@deskpro/app-sdk";
 import { NoValue } from "./NoValue";
 import type { FC } from "react";
 import type { CustomFields, MappingCustomFields } from "../types";

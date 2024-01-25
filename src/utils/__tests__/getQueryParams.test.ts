@@ -1,38 +1,32 @@
 import { getQueryParams } from "../getQueryParams";
 
-describe("getQueryParams", () => {
-  test("pass empty queryParam", () => {
-    expect(getQueryParams([])).toBe("");
-    expect(getQueryParams({})).toBe("");
-    expect(getQueryParams([], { skipParseQueryParams: true })).toBe("");
-    expect(getQueryParams({}, { skipParseQueryParams: true })).toBe("");
-  });
+describe("utils", () => {
+  describe("getQueryParams", () => {
+    test.each([
+      [undefined, ""],
+      ["foo=bar", "foo=bar"],
+      ["?foo=bar", "?foo=bar"],
+      [[["type", "success"]], "type=success"],
+      [[["type", "success"], ["foo", "bar"]], "type=success&foo=bar"],
+      [{type: "error"}, "type=error"],
+      [{type: "error", armen: "tamzarian"}, "type=error&armen=tamzarian"],
+    ])("should %p", (receive, expected) => {
+      expect(getQueryParams(receive as never)).toStrictEqual(expected);
+    });
 
-  test("should encode queryParams (pass array)", () => {
-    expect(getQueryParams([
-      ["fields", "id,idReadable,summary"],
-      ["query", "issue id:SPDP-3"]
-    ])).toBe("?fields=id%2CidReadable%2Csummary&query=issue+id%3ASPDP-3");
-  });
+    test("should return form as string", () => {
+      const form = new FormData();
+      form.append("grant_type", "authorization_code");
+      form.append("client_id", "123456");
+      form.append("client_secret", "654321");
 
-  test("should encode queryParams (pass object)", () => {
-    expect(getQueryParams({
-      fields: "id,idReadable,summary",
-      query: "issue id:SPDP-3",
-    })).toBe("?fields=id%2CidReadable%2Csummary&query=issue+id%3ASPDP-3");
-  });
+      expect(getQueryParams(form as never))
+        .toStrictEqual("grant_type=authorization_code&client_id=123456&client_secret=654321");
+    });
 
-  test("should return queryParams without encode (pass array)", () => {
-    expect(getQueryParams([
-      ["fields", "id,idReadable,summary"],
-      ["query", "issue id:SPDP-3"]
-    ], { skipParseQueryParams: true })).toBe("?fields=id,idReadable,summary&query=issue id:SPDP-3");
-  });
-
-  test("should return queryParams without encode (pass object)", () => {
-    expect(getQueryParams({
-      fields: "id,idReadable,summary",
-      query: "issue id:SPDP-3"
-    }, { skipParseQueryParams: true })).toBe("?fields=id,idReadable,summary&query=issue id:SPDP-3");
+    test("should return string even if pass empty form", () => {
+      const form = new FormData();
+      expect(getQueryParams(form as never)).toStrictEqual("");
+    });
   });
 });

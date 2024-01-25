@@ -1,13 +1,8 @@
-import React, { useMemo, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import every from "lodash/every";
 import styled from "styled-components";
-import {
-  P1,
-  Stack,
-  useDeskproAppClient,
-  useDeskproAppEvents,
-} from "@deskpro/app-sdk";
-import { TSpan } from "@deskpro/deskpro-ui";
+import { TSpan, P1, Stack } from "@deskpro/deskpro-ui";
+import { useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
 import { Button } from "../../components/common";
 import { nbsp } from "../../constants";
 import { getCurrentUserService } from "../../services/youtrack";
@@ -30,8 +25,7 @@ const VerifySettings: FC = () => {
   const [settings, setSettings] = useState<Settings>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-
-  const errorMessage = useMemo(() => "Failed to connect to YouTrack, settings seem to be invalid", []);
+  const errorMessage = "Failed to connect to YouTrack, settings seem to be invalid";
 
   const onVerifySettings = useCallback(() => {
     if (!client || !settings?.instance_url || !settings?.permanent_auth_token) {

@@ -1,4 +1,4 @@
-import { Stack } from "@deskpro/app-sdk";
+import { Stack } from "@deskpro/deskpro-ui";
 import get from "lodash/get";
 import { YouTrackError } from "../../services/youtrack";
 import { ErrorBlock } from "./ErrorBlock";

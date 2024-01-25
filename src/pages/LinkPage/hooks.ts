@@ -2,7 +2,6 @@ import uniqWith from "lodash/uniqWith";
 import { searchIssuesBySummaryService } from "../../services/youtrack";
 import { useQueryWithClient } from "../../hooks";
 import { QueryKey } from "../../query";
-import { debouncePromise } from "../../utils";
 import type { Issue, Project } from "../../services/youtrack/types";
 
 type UseSearch = (q: string) => {
@@ -13,11 +12,9 @@ type UseSearch = (q: string) => {
 };
 
 const useSearch: UseSearch = (q) => {
-  const debounceSearch = debouncePromise(searchIssuesBySummaryService, 1000);
-
   const issues = useQueryWithClient(
     [QueryKey.SEARCH_ISSUES_BY_SUMMARY, q],
-    (client) => debounceSearch(client, q),
+    (client) => searchIssuesBySummaryService(client, q),
     {
       retry: 0,
       cacheTime: 0,

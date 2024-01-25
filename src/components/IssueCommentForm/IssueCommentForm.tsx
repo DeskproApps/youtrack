@@ -1,7 +1,7 @@
 import has from "lodash/has";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Stack } from "@deskpro/app-sdk";
+import { Stack } from "@deskpro/deskpro-ui";
 import { getInitValues, validationSchema } from "./utils";
 import { Label, Button, TextArea } from "../common";
 import type { FC } from "react";

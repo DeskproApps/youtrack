@@ -1,37 +1,30 @@
-import isEmpty from "lodash/isEmpty";
 import { createSearchParams } from "react-router-dom";
+import isEmpty from "lodash/isEmpty";
+import isString from "lodash/isString";
+import isPlainObject from "lodash/isPlainObject";
+import { isForm } from "./isForm";
 import type { ParamKeyValuePair } from "react-router-dom";
-import type { RequestParams } from "../types";
+import type { Dict, RequestParams } from "../types";
 
-type GetQueryParams = (
-  queryParams: RequestParams["queryParams"],
-  options?: {
-    skipParseQueryParams?: boolean,
-  }
-) => string;
-
-const getQueryParams: GetQueryParams = (
-  queryParams,
-  { skipParseQueryParams = false } = {},
-) => {
-  if (isEmpty(queryParams)) {
+const getQueryParams = (data?: RequestParams["queryParams"]|RequestInit["body"]): string => {
+  if (isEmpty(data) && !isForm(data)) {
     return "";
   }
 
-  const parsedQueryParams = Array.isArray(queryParams)
-    ? queryParams
-    : Object.keys(queryParams).map<ParamKeyValuePair>((key) => ([key, queryParams[key]]));
-
-
-  if (isEmpty(parsedQueryParams)) {
-    return "";
-  } else if (skipParseQueryParams) {
-    return `?${parsedQueryParams.reduce(((acc, currentValue, currentIndex) => {
-      return `${acc}${currentIndex === 0 ? "" : "&"}${currentValue[0]}=${currentValue[1]}`;
-    }), "")}`;
-  } else {
-    return `?${createSearchParams(parsedQueryParams)}`;
+  if (isString(data)) {
+    return data;
+  } else if (Array.isArray(data)) {
+    return `${createSearchParams(data)}`
+  } else if (isPlainObject(data)) {
+    const parsedQueryParams = Object
+      .keys(data as Dict<string>)
+      .map<ParamKeyValuePair>((key) => ([key, (data as Dict<string>)[key]]));
+    return `${createSearchParams(parsedQueryParams)}`;
+  } else if (isForm(data)) {
+    return new URLSearchParams(data as never).toString();
   }
+
+  return "";
 };
 
 export { getQueryParams };

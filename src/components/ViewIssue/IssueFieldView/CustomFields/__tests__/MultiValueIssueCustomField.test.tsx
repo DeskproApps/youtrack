@@ -1,5 +1,5 @@
 import { cleanup } from "@testing-library/react";
-import { render } from "../../../../../testing";
+import { render } from "../../../../../../testing";
 import { MultiValueIssueCustomField } from "../MultiValueIssueCustomField";
 import fieldEnum from "./mocks/customFields/MultiEnumIssueCustomField.json";
 import fieldVersion from "./mocks/customFields/MultiVersionIssueCustomField.json";

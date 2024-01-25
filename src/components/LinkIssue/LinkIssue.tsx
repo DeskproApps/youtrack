@@ -1,34 +1,26 @@
 import React, { Fragment } from "react";
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
-import {
-  Stack,
-  Checkbox,
-  TwoButtonGroup,
-  HorizontalDivider,
-} from "@deskpro/app-sdk";
+import { Stack, Checkbox } from "@deskpro/deskpro-ui";
+import { Search, TwoButtonGroup, HorizontalDivider, Select } from "@deskpro/app-sdk";
 import { getOption } from "../../utils";
 import { IssueItem } from "../IssueItem";
 import {
   Card,
-  Search,
+  Label,
   Button,
   NoFound,
   CardBody,
   CardMedia,
   Container,
-  SingleSelect,
 } from "../common";
 import type { FC } from "react";
 import type { Option } from "../../types";
 import type { Issue, Project } from "../../services/youtrack/types";
-import type { Props as SearchProps } from "../common/Search";
 
-type Props = {
-  value: string,
+export type Props = {
   isFetching: boolean,
   isSubmitting: boolean,
-  onChange: SearchProps["onChange"],
-  onClear: SearchProps["onClear"],
+  onChangeSearch: (q: string) => void,
   issues?: Issue[],
   projects: Project[],
   selectedProject: Option<Project["id"]|"any">,
@@ -41,15 +33,13 @@ type Props = {
 };
 
 const LinkIssue: FC<Props> = ({
-  value,
   issues,
-  onClear,
   onCancel,
-  onChange,
   projects,
   isFetching,
   onLinkIssues,
   isSubmitting,
+  onChangeSearch,
   selectedIssues,
   selectedProject,
   onChangeSelectProject,
@@ -72,23 +62,22 @@ const LinkIssue: FC<Props> = ({
 
       <Container>
         <Search
-          value={value}
-          onClear={onClear}
-          onChange={onChange}
+          onChange={onChangeSearch}
           isFetching={isFetching}
         />
 
-        <SingleSelect
-          id="project"
-          label="Project"
-          showInternalSearch
-          value={selectedProject}
-          options={[
-            getOption("any", "Any"),
-            ...projects.map(({ id, name }) => getOption(id, name))
-          ]}
-          onChange={onChangeSelectProject}
-        />
+        <Label htmlFor="project" label="Project">
+          <Select<string|"any">
+            id="project"
+            showInternalSearch
+            value={selectedProject as never}
+            options={[
+              getOption("any", "Any"),
+              ...projects.map(({ id, name }) => getOption(id, name)),
+            ]}
+            onChange={onChangeSelectProject as never}
+          />
+        </Label>
 
         <Stack justify="space-between" style={{ paddingBottom: "4px" }}>
           <Button
