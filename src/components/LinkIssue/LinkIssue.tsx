@@ -1,11 +1,7 @@
 import React, { Fragment } from "react";
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
-import {
-  Stack,
-  Checkbox,
-  TwoButtonGroup,
-  HorizontalDivider,
-} from "@deskpro/app-sdk";
+import { Stack, Checkbox } from "@deskpro/deskpro-ui";
+import { TwoButtonGroup, HorizontalDivider } from "@deskpro/app-sdk";
 import { getOption } from "../../utils";
 import { IssueItem } from "../IssueItem";
 import {

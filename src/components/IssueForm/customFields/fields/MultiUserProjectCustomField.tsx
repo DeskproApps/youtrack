@@ -1,14 +1,13 @@
 import get from "lodash/get";
 import { faCheck, faCaretDown, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
-import { DivAsInputWithDisplay } from "@deskpro/deskpro-ui";
-import { Stack, Dropdown } from "@deskpro/app-sdk";
+import { Stack, Dropdown, DivAsInputWithDisplay } from "@deskpro/deskpro-ui";
 import { getOption } from "../../../../utils";
 import { useQueryWithClient, useExternalLink } from "../../../../hooks";
 import { getProjectCustomFieldSettingsService } from "../../../../services/youtrack";
 import { QueryKey } from "../../../../query";
 import { Member } from "../../../common";
 import type { FC } from "react";
-import type { DropdownTargetProps } from "@deskpro/app-sdk";
+import type { DropdownTargetProps } from "@deskpro/deskpro-ui";
 import type { User } from "../../../../services/youtrack/types";
 import type { CustomFieldProps } from "../../types";
 import type { Option } from "../../../../types";

@@ -1,6 +1,6 @@
 import React from "react";
 import isNumber from "lodash/isNumber";
-import { P5 } from "@deskpro/app-sdk";
+import { P5 } from "@deskpro/deskpro-ui";
 import { format } from "../../../../utils/date";
 import { NoValue } from "./NoValue";
 import type { FC } from "react";

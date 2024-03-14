@@ -1,7 +1,6 @@
 import { isValidElement } from "react";
 import styled from "styled-components";
-import { P5 } from "@deskpro/app-sdk";
-import { TSpan } from "@deskpro/deskpro-ui";
+import { P5, TSpan } from "@deskpro/deskpro-ui";
 import type { Props } from "./types";
 
 const Label = styled(TSpan)`

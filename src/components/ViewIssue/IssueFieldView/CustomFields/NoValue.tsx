@@ -1,5 +1,5 @@
 import React from "react";
-import { P5 } from "@deskpro/app-sdk";
+import { P5 } from "@deskpro/deskpro-ui";
 import type { FC } from "react";
 import type { Maybe } from "../../../../types";
 

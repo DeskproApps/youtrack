@@ -1,12 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import get from "lodash/get";
 import { faPlus, faFile } from "@fortawesome/free-solid-svg-icons";
-import { Spinner } from "@deskpro/deskpro-ui";
-import {
-  Stack,
-  Button,
-  AttachmentTag,
-} from "@deskpro/app-sdk";
+import { Spinner, Stack, Button, AttachmentTag } from "@deskpro/deskpro-ui";
 import { useExternalLink } from "../../../hooks";
 import type { FC, ChangeEvent } from "react";
 import type { IssueAttachment } from "../../../services/youtrack/types";

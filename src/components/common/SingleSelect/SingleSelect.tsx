@@ -5,17 +5,14 @@ import {
   faCaretDown,
   faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import {
+import { Dropdown, DivAsInputWithDisplay } from "@deskpro/deskpro-ui";
+import { Label } from "../Label";
+import type {
   LabelProps,
-  DivAsInputWithDisplay,
+  DropdownTargetProps,
   DivAsInputWithDisplayProps,
 } from "@deskpro/deskpro-ui";
-import {
-  Dropdown,
-  DropdownTargetProps,
-} from "@deskpro/app-sdk";
-import {Label} from "../Label";
-import type {Option} from "../../../types";
+import type { Option } from "../../../types";
 
 type Props = {
   id: string,
@@ -62,7 +59,8 @@ const SingleSelect: FC<Props> = ({
           setInput(value);
         }
       }}
-      options={options.filter((option: Option) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      options={options.filter((option: any) => {
         return (get(option, ["label"], "") as string).includes(input);
       })}
       {...props}

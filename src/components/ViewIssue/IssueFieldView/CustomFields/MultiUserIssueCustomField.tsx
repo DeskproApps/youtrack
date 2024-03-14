@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "@deskpro/app-sdk";
+import { Stack } from "@deskpro/deskpro-ui";
 import { SingleUserIssueCustomField } from "./SingleUserIssueCustomField";
 import { NoValue } from "./NoValue";
 import type { FC } from "react";

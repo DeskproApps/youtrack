@@ -1,12 +1,8 @@
 import React, { useMemo, useState, useCallback } from "react";
 import every from "lodash/every";
 import styled from "styled-components";
-import {
-  P1,
-  Stack,
-  useDeskproAppClient,
-  useDeskproAppEvents,
-} from "@deskpro/app-sdk";
+import { P1, Stack } from "@deskpro/deskpro-ui";
+import { useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
 import { TSpan } from "@deskpro/deskpro-ui";
 import { Button } from "../../components/common";
 import { nbsp } from "../../constants";
