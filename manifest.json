@@ -3,7 +3,7 @@
   "title": "YouTrack",
   "description": "View your YouTrack issues linked with Deskpro tickets to streamline communication with users.",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/youtrack",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
