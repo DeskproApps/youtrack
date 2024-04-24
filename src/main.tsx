@@ -9,6 +9,7 @@ import { queryClient } from "./query";
 import { App } from "./App";
 import { ReplyBoxProvider } from "./hooks";
 
+import "iframe-resizer/js/iframeResizer.contentWindow.js";
 import "flatpickr/dist/themes/light.css";
 import "tippy.js/dist/tippy.css";
 import "simplebar/dist/simplebar.min.css";
@@ -17,8 +18,8 @@ import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
 
 TimeAgo.addDefaultLocale(en);
 
-const root = ReactDOM.createRoot(document.getElementById('root') as Element);
-root.render((
+const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+root.render(
   <React.StrictMode>
     <DeskproAppProvider>
       <HashRouter>
@@ -30,4 +31,4 @@ root.render((
       </HashRouter>
     </DeskproAppProvider>
   </React.StrictMode>
-));
+);
