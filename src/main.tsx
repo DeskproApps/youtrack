@@ -11,23 +11,27 @@ import { ReplyBoxProvider } from "./hooks";
 
 import "flatpickr/dist/themes/light.css";
 import "tippy.js/dist/tippy.css";
-import "simplebar/dist/simplebar.min.css";
 import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
 import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
+import "./main.css";
+import "simplebar/dist/simplebar.min.css";
+import { Scrollbar } from "@deskpro/deskpro-ui";
 
 TimeAgo.addDefaultLocale(en);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
-    <DeskproAppProvider>
-      <HashRouter>
-        <QueryClientProvider client={queryClient}>
-          <ReplyBoxProvider>
-            <App />
-          </ReplyBoxProvider>
-        </QueryClientProvider>
-      </HashRouter>
-    </DeskproAppProvider>
+    <Scrollbar style={{ height: "100%", width: "100%" }}>
+      <DeskproAppProvider>
+        <HashRouter>
+          <QueryClientProvider client={queryClient}>
+            <ReplyBoxProvider>
+              <App />
+            </ReplyBoxProvider>
+          </QueryClientProvider>
+        </HashRouter>
+      </DeskproAppProvider>
+    </Scrollbar>
   </React.StrictMode>
 );
