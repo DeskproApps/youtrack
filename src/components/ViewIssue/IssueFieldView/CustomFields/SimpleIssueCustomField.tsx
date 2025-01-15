@@ -12,6 +12,8 @@ type Props = CustomFields[MappingCustomFields.SimpleIssueCustomField];
 const SimpleIssueCustomField: FC<Props> = ({ value, projectCustomField }) => {
   const fieldType = projectCustomField?.field?.fieldType;
 
+  // Were asserting the type here because the genrated type
+  // is different from the shape of the data (could be looked into further in the future)
   if (isDateTime(fieldType as FieldTypeValue)) {
     return (<DateIssueCustomField value={value as number} pattern={DATETIME_FORMAT}/>);
   }
