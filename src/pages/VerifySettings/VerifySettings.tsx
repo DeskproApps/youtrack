@@ -58,8 +58,8 @@ const VerifySettings: FC = () => {
         intent="secondary"
         onClick={onVerifySettings}
         loading={isLoading}
-        // The button is disabled if required settings are missing and it is not currently loading.
-        disabled={!every([settings?.instance_url, settings?.permanent_auth_token]) && !isLoading}
+        // The button is disabled if the required settings are missing or it is currently loading.
+        disabled={!every([settings?.instance_url, settings?.permanent_auth_token]) || isLoading}
       />
       {nbsp}
       {currentUser
