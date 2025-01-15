@@ -33,7 +33,7 @@ const useAutoCommentLinkedIssue = (): Result => {
   const permalink = get(context, ["data", "ticket", "permalinkUrl"]);
 
   const addLinkCommentIssue = useCallback((issueId: Issue["id"]) => {
-    if (!client || !isEnable) {
+    if (!client || !isEnable || !ticketId) {
       return Promise.resolve();
     }
 
@@ -43,7 +43,7 @@ const useAutoCommentLinkedIssue = (): Result => {
   }, [client, isEnable, ticketId, permalink]);
 
   const addUnlinkCommentIssue = useCallback((issueId: Issue["id"]) => {
-    if (!client || !isEnable) {
+    if (!client || !isEnable || !ticketId) {
       return Promise.resolve();
     }
 

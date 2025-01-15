@@ -58,7 +58,8 @@ const VerifySettings: FC = () => {
         intent="secondary"
         onClick={onVerifySettings}
         loading={isLoading}
-        disabled={!every([settings?.instance_url, settings?.permanent_auth_token] || isLoading)}
+        // The button is disabled if the required settings are missing or it is currently loading.
+        disabled={!every([settings?.instance_url, settings?.permanent_auth_token]) || isLoading}
       />
       {nbsp}
       {currentUser
@@ -67,7 +68,7 @@ const VerifySettings: FC = () => {
             Verified as <Valid>{currentUser.fullName} {`<${currentUser.email}>`}</Valid>
           </P1>
         )
-        : <Invalid type="p1">{error}</Invalid> || ""
+        : <Invalid type="p1">{error}</Invalid> 
       }
     </Stack>
   );

@@ -78,7 +78,7 @@ const LinkPage: FC = () => {
   };
 
   const onLinkIssues = useCallback(() => {
-    if (!client || selectedIssues.length === 0) {
+    if (!client || selectedIssues.length === 0 || !ticketId) {
       return;
     }
 
