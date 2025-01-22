@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import { Icon } from "@deskpro/deskpro-ui";
+import { IconV2 } from "@deskpro/deskpro-ui";
 import type { AnchorHTMLAttributes, ElementType } from "react";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
@@ -8,11 +7,11 @@ type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   icon?: IconDefinition
 };
 
-const Link: ElementType = styled(({ children, icon, ...rest }) => (
+const Link: ElementType = styled(({ children, icon, ...rest }: LinkProps) => (
   <a {...rest}>
     {children}
     {icon && (
-      <Icon
+      <IconV2
         size={8}
         icon={icon}
         themeColor="grey40"

@@ -28,7 +28,7 @@ const Attach: FC<Props> = ({ existing = [], onUploadFile }) => {
 
     setIsLoading(true);
 
-    onUploadFile && onUploadFile(file)
+    onUploadFile && file && onUploadFile(file)
       .then((attachments) => {
         const attach = get(attachments, [0]);
         setFiles({ ...files, [attach.id]: attach });

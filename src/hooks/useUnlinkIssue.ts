@@ -26,7 +26,7 @@ const useUnlinkIssue: UseUnlinkIssue = () => {
   const ticketId = get(context, ["data", "ticket", "id"]);
 
   const unlinkIssue = useCallback((issueId: Issue["idReadable"]) => {
-    if (!client || !issueId) {
+    if (!client || !issueId || !ticketId) {
       return;
     }
 
