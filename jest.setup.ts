@@ -4,7 +4,6 @@ import { TextDecoder, TextEncoder } from "util";
 import React from "react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
-import fetch from "node-fetch";
 import { lightTheme } from "@deskpro/deskpro-ui";
 import { mockClient } from "./src/testing";
 
