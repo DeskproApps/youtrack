@@ -1,5 +1,9 @@
 YouTrack App Setup Instructions
 ===
+Follow these steps to install and configure the YouTrack app using either a permanent auth Token or OAuth credentials.
+
+
+## Using A Permanent Auth Token
 
 To install the YouTrack app you must first create an API token. Head over to your YouTrack cloud account, the URL will look something
 like `https://<my_company>.youtrack.cloud/` or your own instance.
@@ -33,8 +37,6 @@ Close the modal window, and you can see your token in the list
 
 Ok, now head back to Deskpro and navigate to the "Settings" tab of the YouTrack App.
 
-[![](/docs/assets/setup/youtrack-setup-06.png)](/docs/assets/setup/youtrack-setup-06.png)
-
 From this screen, enter the following details:
 
 * **YouTrack Instance URL** - this is your YouTrack URL (e.g. this will be `my_company` if your YouTrack URL is `https://my_company.youtrack.cloud`) or the URL of your own YouTrack instance
@@ -43,3 +45,32 @@ From this screen, enter the following details:
 To configure who can see and use the YouTrack app, head to the "Permissions" tab and select those users and/or groups you'd like to have access.
 
 When you're happy, click "Install".
+
+
+## Using OAuth
+
+To install the YouTrack app using OAuth you'll need to head over to `https://<my_company>.youtrack.cloud/hub/services` to create a new service.
+
+Once you're on the "Services" page click on the "New service..." button.
+
+[![](/docs/assets/setup/youtrack-setup-oauth-01.png)](/docs/assets/setup/youtrack-setup-oauth-01.png)
+
+Next, in the popup modal give your app a name(E.g. Deskpro) and click "Create".
+
+[![](/docs/assets/setup/youtrack-setup-oauth-02.png)](/docs/assets/setup/youtrack-setup-oauth-02.png)
+
+
+On the next page, you'll see details of your new service. First, click "Trust service" in the top right corner. Then, copy the `ID` and paste it into the `Service ID` field in the Settings drawer in Deskpro.
+
+[![](/docs/assets/setup/youtrack-setup-oauth-03.png)](/docs/assets/setup/youtrack-setup-oauth-03.png)
+
+Next, you'll need to update your service secret. Click `Secret`, and a popup will display your new secret. Copy this value and paste it into the `Service Secret` field in the Settings drawer. Be sure to store the secret securely, as you won’t be able to view it again in YouTrack Hub.
+
+[![](/docs/assets/setup/youtrack-setup-oauth-04.png)](/docs/assets/setup/youtrack-setup-oauth-04.png)
+
+Finally, copy the Callback URL from Deskpro and paste it into the `Redirect URIs` field.
+
+[![](/docs/assets/setup/youtrack-setup-oauth-05.png)](/docs/assets/setup/youtrack-setup-oauth-05.png)
+
+
+Once you're happy with your settings, click the "Install" button to install the app.
