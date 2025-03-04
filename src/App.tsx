@@ -67,7 +67,6 @@ const App = () => {
           <Route path="/create" element={<CreateIssuePage />} />
           <Route path="/edit/:issueId" element={<EditIssuePage />} />
           <Route path="/comment/create" element={<CreateIssueCommentPage />} />
-          {/* <Route index element={<TestPage/>} /> */}
           <Route index element={<Main />} />
         </Routes>
       </ErrorBoundary>
