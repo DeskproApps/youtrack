@@ -111,6 +111,7 @@ export type RouterPaths =
 export type EventPayload =
   | { type: "changePage", path: RouterPaths }
   | { type: "unlinkIssue", issueId: Issue["idReadable"] }
+  | { type: "logout" }
   ;
 
 export type EntityMetadata = {

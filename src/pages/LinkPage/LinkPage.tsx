@@ -1,24 +1,20 @@
-import { useState, useCallback } from "react";
+import { getOption, getEntityMetadata } from "@/utils";
+import { LinkIssue } from "@/components";
+import { setEntityIssueService } from "@/services/entityAssociation";
+import { useDeskproAppClient, useDeskproElements, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from "./hooks";
+import { useSetTitle, useReplyBox, useAutoCommentLinkedIssue } from "@/hooks";
+import { useState, useCallback } from "react";
 import cloneDeep from "lodash/cloneDeep";
 import get from "lodash/get";
-import {
-  useDeskproElements,
-  useDeskproAppClient,
-  useDeskproLatestAppContext,
-} from "@deskpro/app-sdk";
-import { setEntityIssueService } from "../../services/entityAssociation";
-import { useSetTitle, useReplyBox, useAutoCommentLinkedIssue } from "../../hooks";
-import { useSearch } from "./hooks";
-import { getOption, getEntityMetadata } from "../../utils";
-import { LinkIssue } from "../../components";
 import type { FC, ChangeEvent } from "react";
-import type { Option, TicketContext } from "../../types";
-import type { Issue, Project } from "../../services/youtrack/types";
+import type { Issue, Project } from "@/services/youtrack/types";
+import type { Option, Settings } from "@/types";
 
 const getFilteredIssues = (
   issues: Issue[],
-  selectedProject: Option<Project["id"]|"any">
+  selectedProject: Option<Project["id"] | "any">
 ) => {
   if (selectedProject.value === "any") {
     return issues
@@ -30,20 +26,21 @@ const getFilteredIssues = (
 const LinkPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { setSelectionState } = useReplyBox();
   const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
 
   const [search, setSearch] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [selectedIssues, setSelectedIssues] = useState<Issue[]>([]);
-  const [selectedProject, setSelectedProject] = useState<Option<Project["id"]|"any">>(getOption("any", "Any"));
+  const [selectedProject, setSelectedProject] = useState<Option<Project["id"] | "any">>(getOption("any", "Any"));
 
   const { isFetching, issues, projects } = useSearch(search);
 
   const ticketId = get(context, ["data", "ticket", "id"]);
 
-  const onChangeSearch = useCallback(({ target: { value: q }}: ChangeEvent<HTMLInputElement>) => {
+  const onChangeSearch = useCallback(({ target: { value: q } }: ChangeEvent<HTMLInputElement>) => {
     if (!client) {
       return;
     }
@@ -55,7 +52,7 @@ const LinkPage: FC = () => {
     setSearch("");
   }, []);
 
-  const onChangeSelectProject = useCallback((option: Option<Project["id"]|"any">) => {
+  const onChangeSelectProject = useCallback((option: Option<Project["id"] | "any">) => {
     setSelectedProject(option);
   }, []);
 
@@ -108,6 +105,16 @@ const LinkPage: FC = () => {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
+    if (isUsingOAuth) {
+      registerElement("menu", {
+        type: "menu",
+        items: [
+          {
+            title: "Logout",
+            payload: { type: "logout" },
+          }],
+      })
+    }
   });
 
   return (

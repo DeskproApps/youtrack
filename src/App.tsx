@@ -1,20 +1,25 @@
 import { AdminCallbackPage, CreateIssueCommentPage, CreateIssuePage, EditIssuePage, HomePage, LinkPage, LoadingPage, LoginPage, VerifySettings, ViewIssuePage } from "./pages";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./components";
-import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
+import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Suspense } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { useLogout } from "./hooks/deskpro";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useUnlinkIssue } from "./hooks";
-import type { EventPayload } from "./types";
+import type { EventPayload, Settings } from "./types";
 import type { TargetAction } from "@deskpro/app-sdk";
 
 const App = () => {
   const navigate = useNavigate();
-  const { reset } = useQueryErrorResetBoundary();
   const { client } = useDeskproAppClient();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const { logoutActiveUser } = useLogout()
+  const { reset } = useQueryErrorResetBoundary();
   const { unlinkIssue, isLoading: isLoadingUnlink } = useUnlinkIssue();
+
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
 
   const isLoading = [isLoadingUnlink].some((isLoading) => isLoading);
 
@@ -27,6 +32,11 @@ const App = () => {
         break;
       case "unlinkIssue":
         unlinkIssue(p.issueId);
+        break;
+        case "logout":
+        if (isUsingOAuth) {
+          logoutActiveUser()
+        }
         break;
     }
   }, 500);
