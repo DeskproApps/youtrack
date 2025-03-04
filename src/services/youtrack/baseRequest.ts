@@ -1,8 +1,8 @@
-import { proxyFetch } from "@deskpro/app-sdk";
 import { BASE_URL, placeholders } from "./constants";
+import { getQueryParams } from "@/utils";
+import { proxyFetch } from "@deskpro/app-sdk";
 import { YouTrackError } from "./YouTrackError";
-import { getQueryParams } from "../../utils";
-import type { Request } from "../../types";
+import type { Request } from "@/types";
 
 const baseRequest: Request = async (client, {
     url,
@@ -14,13 +14,15 @@ const baseRequest: Request = async (client, {
 }) => {
     const dpFetch = await proxyFetch(client);
 
+    const isUsingOAuth2 = (await client.getUserState<boolean>("isUsingOAuth"))[0]?.data
+
     const baseUrl = `${BASE_URL}${url}`;
     const params = getQueryParams(queryParams, { skipParseQueryParams })
     const requestUrl = `${baseUrl}${params}`;
     const options: RequestInit = {
         method,
         headers: {
-            "Authorization": `Bearer ${placeholders.PERMANENT_AUTH_TOKEN}`,
+            "Authorization": `Bearer ${isUsingOAuth2 ? `[user[${placeholders.OAUTH2_ACCESS_TOKEN_PATH}]]` : placeholders.PERMANENT_AUTH_TOKEN}`,
             ...customHeaders,
         },
     };
