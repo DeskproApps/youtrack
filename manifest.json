@@ -142,6 +142,13 @@
           "POST"
         ],
         "timeout": 20
+      },
+      {
+        "url": "__instance_url__/hub/api/.*",
+        "methods": [
+          "POST"
+        ],
+        "timeout": 20
       }
     ]
   }
