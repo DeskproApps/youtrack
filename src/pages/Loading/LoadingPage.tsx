@@ -22,7 +22,7 @@ const LoadingPage: FC = () => {
 
     useDeskproElements(({ registerElement, clearElements }) => {
         clearElements()
-        registerElement("refreshButton", { type: "refresh_button" })
+        registerElement("refresh", { type: "refresh_button" })
     });
 
     useInitialisedDeskproAppClient((client) => {
