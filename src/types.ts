@@ -19,16 +19,17 @@ export type ApiRequestMethod = "GET" | "POST";
 export type RequestParams = {
   url?: string,
   method?: ApiRequestMethod,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: Record<string, unknown> | FormData,
   headers?: Dict<string>,
-  queryParams?: Dict<string>|ParamKeyValuePair[],
+  queryParams?: Dict<string> | ParamKeyValuePair[],
   skipParseQueryParams?: boolean,
 };
 
 export type Settings = {
   instance_url?: string,
-  permanent_auth_token?: string,
+  client_id?: string,
+  use_deskpro_saas?: boolean,
+  use_permanent_auth_token?: boolean,
   default_comment_on_ticket_reply?: boolean,
   default_comment_on_ticket_note?: boolean,
   add_comment_when_linking_issue?: boolean,
@@ -90,10 +91,12 @@ export type Request = <T>(
   params: RequestParams,
 ) => Promise<T>;
 
+export type PreInstalledSettings = Required<Pick<Settings, "instance_url">> & { permanent_auth_token: string }
+
 export type PreInstalledRequest = <T>(
   client: IDeskproClient,
   params: RequestParams & {
-    settings: Required<Pick<Settings, "instance_url"|"permanent_auth_token">>,
+    settings: PreInstalledSettings,
   },
 ) => Promise<T>;
 
@@ -103,12 +106,12 @@ export type RouterPaths =
   | "/home"
   | "/create"
   | "/edit"
-;
+  ;
 
 export type EventPayload =
   | { type: "changePage", path: RouterPaths }
   | { type: "unlinkIssue", issueId: Issue["idReadable"] }
-;
+  ;
 
 export type EntityMetadata = {
   id: Issue["id"],
