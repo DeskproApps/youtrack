@@ -1,27 +1,14 @@
-import React, { Suspense } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
-import { useDebouncedCallback } from "use-debounce";
-import {
-  LoadingSpinner,
-  useDeskproAppClient,
-  useDeskproAppEvents,
-} from "@deskpro/app-sdk";
-import { useUnlinkIssue } from "./hooks";
-import {
-  Main,
-  HomePage,
-  LinkPage,
-  ViewIssuePage,
-  EditIssuePage,
-  VerifySettings,
-  CreateIssuePage,
-  CreateIssueCommentPage,
-} from "./pages";
 import { ErrorFallback } from "./components";
-import type { TargetAction } from "@deskpro/app-sdk";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useDebouncedCallback } from "use-debounce";
+import { useQueryErrorResetBoundary } from "@tanstack/react-query";
+import { useUnlinkIssue } from "./hooks";
+import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
+import { Main, HomePage, LinkPage, ViewIssuePage, EditIssuePage, VerifySettings, CreateIssuePage, CreateIssueCommentPage } from "./pages";
+import { Suspense } from "react";
 import type { EventPayload } from "./types";
+import type { TargetAction } from "@deskpro/app-sdk";
 
 const App = () => {
   const navigate = useNavigate();
@@ -65,22 +52,23 @@ const App = () => {
 
   if (!client || isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 
   return (
-    <Suspense fallback={<LoadingSpinner/>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
         <Routes>
-          <Route path="/admin/verify_settings" element={<VerifySettings/>} />
-          <Route path="/link" element={<LinkPage/>} />
-          <Route path="/home" element={<HomePage/>} />
-          <Route path="/view/:issueId" element={<ViewIssuePage/>} />
-          <Route path="/create" element={<CreateIssuePage/>} />
+          <Route path="/admin/verify_settings" element={<VerifySettings />} />
+          <Route path="/link" element={<LinkPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/view/:issueId" element={<ViewIssuePage />} />
+          <Route path="/create" element={<CreateIssuePage />} />
           <Route path="/edit/:issueId" element={<EditIssuePage />} />
-          <Route path="/comment/create" element={<CreateIssueCommentPage/>} />
-          <Route index element={<Main/>} />
+          <Route path="/comment/create" element={<CreateIssueCommentPage />} />
+          {/* <Route index element={<TestPage/>} /> */}
+          <Route index element={<Main />} />
         </Routes>
       </ErrorBoundary>
     </Suspense>
