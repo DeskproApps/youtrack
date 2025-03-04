@@ -26,15 +26,21 @@ const searchIssuesBySummaryService = (
   return searchIssuesService(client, `summary:${summary}`);
 };
 
-const searchIssuesByIdsService = (
+const searchIssuesByIdsService = async(
   client: IDeskproClient,
   readableIds: Array<Issue["idReadable"]>,
 ) => {
-  return searchIssuesService(
-    client,
-    `issue id:${readableIds.join(",")}`,
-    { skipParseQueryParams: true },
-  );
+
+  try {
+    return await  searchIssuesService(
+      client,
+      `issue id:${readableIds.join(",")}`,
+      { skipParseQueryParams: true },
+    );
+  } catch {
+    return []
+  }
+
 };
 
 export { searchIssuesBySummaryService, searchIssuesByIdsService };
