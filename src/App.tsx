@@ -1,12 +1,12 @@
+import { AdminCallbackPage, CreateIssueCommentPage, CreateIssuePage, EditIssuePage, HomePage, LinkPage, LoadingPage, LoginPage, VerifySettings, ViewIssuePage } from "./pages";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./components";
+import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { Suspense } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useUnlinkIssue } from "./hooks";
-import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
-import { Main, HomePage, LinkPage, ViewIssuePage, EditIssuePage, VerifySettings, CreateIssuePage, CreateIssueCommentPage } from "./pages";
-import { Suspense } from "react";
 import type { EventPayload } from "./types";
 import type { TargetAction } from "@deskpro/app-sdk";
 
@@ -60,14 +60,18 @@ const App = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
         <Routes>
-          <Route path="/admin/verify_settings" element={<VerifySettings />} />
+          <Route path="/admin">
+            <Route path="callback" element={<AdminCallbackPage />} />
+            <Route path="verify_settings" element={<VerifySettings />} />
+          </Route>
           <Route path="/link" element={<LinkPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/view/:issueId" element={<ViewIssuePage />} />
           <Route path="/create" element={<CreateIssuePage />} />
           <Route path="/edit/:issueId" element={<EditIssuePage />} />
           <Route path="/comment/create" element={<CreateIssueCommentPage />} />
-          <Route index element={<Main />} />
+          <Route index element={<LoadingPage />} />
         </Routes>
       </ErrorBoundary>
     </Suspense>
