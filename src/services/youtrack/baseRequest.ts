@@ -6,7 +6,7 @@ import type { Request } from "../../types";
 
 const baseRequest: Request = async (client, {
     url,
-    data = {},
+    data,
     method = "GET",
     queryParams = {},
     headers: customHeaders,
@@ -27,7 +27,7 @@ const baseRequest: Request = async (client, {
 
     if (data instanceof FormData) {
         options.body = data;
-    } else if (data) {
+    } else if (data && Object.keys(data).length > 0) {
         options.body = JSON.stringify(data);
         options.headers = {
             ...options.headers,
