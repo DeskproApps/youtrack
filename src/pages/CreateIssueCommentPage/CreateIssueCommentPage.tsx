@@ -1,23 +1,24 @@
-import { useState, useCallback } from "react";
+import { CreateIssueComment } from "@/components";
+import { createIssueCommentService } from "@/services/youtrack";
+import { getValues } from "@/components/IssueCommentForm";
+import { Settings } from "@/types";
+import { useDeskproAppClient, useDeskproElements, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import get from "lodash/get";
-import {
-  useDeskproElements,
-  useDeskproAppClient,
-} from "@deskpro/app-sdk";
-import { useSetTitle } from "../../hooks";
-import { createIssueCommentService } from "../../services/youtrack";
-import { getValues } from "../../components/IssueCommentForm";
-import { CreateIssueComment } from "../../components";
+import { useSetTitle } from "@/hooks";
+import { useState, useCallback } from "react";
 import type { FC } from "react";
-import type { Issue } from "../../services/youtrack/types";
-import type { Props as FormProps } from "../../components/IssueCommentForm";
+import type { Issue } from "@/services/youtrack/types";
+import type { Props as FormProps } from "@/components/IssueCommentForm";
 
 const CreateIssueCommentPage: FC = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const [error, setError] = useState<string|boolean|null>(null);
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+
+  const [searchParams] = useSearchParams();
+  const [error, setError] = useState<string | boolean | null>(null);
+
+  const navigate = useNavigate();
 
   const issueId = (searchParams.get("issueId") || "") as Issue["id"];
 
@@ -34,7 +35,7 @@ const CreateIssueCommentPage: FC = () => {
 
     return createIssueCommentService(client, issueId, getValues(data))
       .then(() => navigate(`/view/${issueId}`))
-      .catch((err) => setError(get(err, ["error_description"], true)));
+      .catch((err) => setError(err?.error_description ?? true));
   }, [client, navigate, issueId]);
 
   useSetTitle("Comment");
@@ -47,6 +48,16 @@ const CreateIssueCommentPage: FC = () => {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
+    if (isUsingOAuth) {
+      registerElement("menu", {
+        type: "menu",
+        items: [
+          {
+            title: "Logout",
+            payload: { type: "logout" },
+          }],
+      })
+    }
   }, []);
 
   return (

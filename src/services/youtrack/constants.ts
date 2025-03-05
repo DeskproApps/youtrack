@@ -1,6 +1,8 @@
 export const placeholders = {
   INSTANCE_URL: "__instance_url__",
   PERMANENT_AUTH_TOKEN: "__permanent_auth_token__",
+  OAUTH2_ACCESS_TOKEN_PATH: "oauth2/access_token",
+  OAUTH2_REFRESH_TOKEN_PATH: "oauth2/refresh_token"
 };
 
 export const BASE_URL = `${placeholders.INSTANCE_URL}/api`;

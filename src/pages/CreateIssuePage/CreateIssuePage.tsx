@@ -1,27 +1,25 @@
-import { useState, useCallback } from "react";
-import get from "lodash/get";
+import { CreateIssue } from "@/components";
+import { createIssueService } from "@/services/youtrack"
+import { getEntityMetadata } from "@/utils";
+import { setEntityIssueService } from "@/services/entityAssociation";
+import { useAutoCommentLinkedIssue, useSetTitle } from "@/hooks";
+import { useCallback, useState } from "react";
+import { useDeskproAppClient, useDeskproElements, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { useNavigate } from "react-router-dom";
-import {
-  useDeskproElements,
-  useDeskproAppClient,
-  useDeskproLatestAppContext,
-} from "@deskpro/app-sdk";
-import { useSetTitle, useAutoCommentLinkedIssue } from "../../hooks";
-import { setEntityIssueService } from "../../services/entityAssociation";
-import { createIssueService } from "../../services/youtrack"
-import { getEntityMetadata } from "../../utils";
-import { CreateIssue } from "../../components";
+import get from "lodash/get";
 import type { FC } from "react";
-import type { IssueValues } from "../../components/IssueForm";
-import type { TicketContext, Maybe } from "../../types";
+import type { IssueValues } from "@/components/IssueForm";
+import type { Maybe, Settings } from "@/types";
 
 const CreateIssuePage: FC = () => {
-  const navigate = useNavigate();
-  const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
+  const { client } = useDeskproAppClient();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
 
-  const [error, setError] = useState<Maybe<string|string[]>>(null);
+  const navigate = useNavigate();
+
+  const [error, setError] = useState<Maybe<string | string[]>>(null);
 
   const ticketId = get(context, ["data", "ticket", "id"]);
 
@@ -57,6 +55,16 @@ const CreateIssuePage: FC = () => {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
+    if (isUsingOAuth) {
+      registerElement("menu", {
+        type: "menu",
+        items: [
+          {
+            title: "Logout",
+            payload: { type: "logout" },
+          }],
+      })
+    }
   });
 
   return (

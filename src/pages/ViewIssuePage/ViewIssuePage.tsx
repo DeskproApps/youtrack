@@ -1,20 +1,21 @@
+import { LoadingSpinner, useDeskproElements, useDeskproLatestAppContext } from "@deskpro/app-sdk";
+import { Settings } from "@/types";
 import { useCallback } from "react";
-import { useParams, useNavigate, createSearchParams } from "react-router-dom";
-import get from "lodash/get";
-import {
-  LoadingSpinner,
-  useDeskproElements,
-} from "@deskpro/app-sdk";
-import { useSetTitle } from "../../hooks";
 import { useIssueDeps } from "./hooks";
-import { ViewIssue } from "../../components";
+import { useParams, useNavigate, createSearchParams } from "react-router-dom";
+import { useSetTitle } from "@/hooks";
+import { ViewIssue } from "@/components";
+import get from "lodash/get";
 import type { FC } from "react";
 
 const ViewIssuePage: FC = () => {
   const navigate = useNavigate();
   const { issueId } = useParams();
   const { isLoading, issue } = useIssueDeps(issueId);
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
   const issueIdReadable = get(issue, ["idReadable"], "");
+
 
   const onCreateIssueComment = useCallback(() => {
     if (!issueId) {
@@ -45,15 +46,24 @@ const ViewIssuePage: FC = () => {
     });
     registerElement("menu", {
       type: "menu",
-      items: [{
-        title: "Unlink issue",
-        payload: { type: "unlinkIssue", issueId: issueIdReadable },
-      }],
+      items: [
+        {
+          title: "Unlink issue",
+          payload: { type: "unlinkIssue", issueId: issueIdReadable },
+        },
+        ...(isUsingOAuth
+          ? [
+            {
+              title: "Logout",
+              payload: { type: "logout" },
+            },
+          ]
+          : []),],
     });
   }, [issueIdReadable]);
 
   if (isLoading) {
-    return <LoadingSpinner/>
+    return <LoadingSpinner />
   }
 
   return (

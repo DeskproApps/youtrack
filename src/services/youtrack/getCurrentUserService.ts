@@ -1,7 +1,7 @@
 import { baseRequest } from "./baseRequest";
 import { preInstalledRequest } from "./preInstalledRequest";
 import type { IDeskproClient } from "@deskpro/app-sdk";
-import type { Settings } from "../../types";
+import type { PreInstalledSettings } from "@/types";
 import type { Me } from "./types";
 
 const params = {
@@ -11,7 +11,7 @@ const params = {
 
 const getCurrentUserService = (
   client: IDeskproClient,
-  settings?: Required<Pick<Settings, "instance_url"|"permanent_auth_token">>,
+  settings?: PreInstalledSettings,
 ) => {
   return !settings
     ? baseRequest<Me>(client, params)

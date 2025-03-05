@@ -1,7 +1,7 @@
 import React from "react";
 import { cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { render } from "../../../testing";
+import { render } from "@/testing";
 import { VerifySettings } from "../VerifySettings";
 
 jest.mock("../../../services/youtrack/getCurrentUserService", () => ({

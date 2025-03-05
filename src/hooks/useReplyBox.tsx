@@ -1,5 +1,4 @@
 import { useCallback, useContext, createContext } from "react";
-import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import { match } from "ts-pattern";
 import { useDebouncedCallback } from "use-debounce";
@@ -15,7 +14,7 @@ import { createIssueCommentService, searchIssuesByIdsService } from "../services
 import type { FC, PropsWithChildren } from "react";
 import type { IDeskproClient, GetStateResponse, TargetAction } from "@deskpro/app-sdk";
 import type { Issue } from "../services/youtrack/types";
-import type { TicketContext, TicketData } from "../types";
+import type { Settings, TicketData } from "../types";
 
 const appPrefix = "youtrack";
 
@@ -107,13 +106,13 @@ const ReplyBoxContext = createContext<ReturnUseReplyBox>({
 const useReplyBox = () => useContext<ReturnUseReplyBox>(ReplyBoxContext);
 
 const ReplyBoxProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { context } = useDeskproLatestAppContext<TicketData, Settings>();
   const { client } = useDeskproAppClient();
   const { issues } = useLinkedIssues();
 
-  const ticketId = get(context, ["data", "ticket", "id"]);
-  const isCommentOnNote = get(context, ["settings", "default_comment_on_ticket_note"]);
-  const isCommentOnEmail = get(context, ["settings", "default_comment_on_ticket_reply"]);
+  const ticketId = context?.data?.ticket.id
+  const isCommentOnNote = context?.settings.default_comment_on_ticket_note
+  const isCommentOnEmail = context?.settings.default_comment_on_ticket_reply
 
   const setSelectionState: SetSelectionState = useCallback((issueId, selected, type) => {
     if (!ticketId || !client) {

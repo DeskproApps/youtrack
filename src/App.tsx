@@ -1,33 +1,25 @@
-import React, { Suspense } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useQueryErrorResetBoundary } from "@tanstack/react-query";
+import { AdminCallbackPage, CreateIssueCommentPage, CreateIssuePage, EditIssuePage, HomePage, LinkPage, LoadingPage, LoginPage, VerifySettings, ViewIssuePage } from "./pages";
 import { ErrorBoundary } from "react-error-boundary";
-import { useDebouncedCallback } from "use-debounce";
-import {
-  LoadingSpinner,
-  useDeskproAppClient,
-  useDeskproAppEvents,
-} from "@deskpro/app-sdk";
-import { useUnlinkIssue } from "./hooks";
-import {
-  Main,
-  HomePage,
-  LinkPage,
-  ViewIssuePage,
-  EditIssuePage,
-  VerifySettings,
-  CreateIssuePage,
-  CreateIssueCommentPage,
-} from "./pages";
 import { ErrorFallback } from "./components";
+import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents, useDeskproLatestAppContext } from "@deskpro/app-sdk";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { Suspense } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import { useLogout } from "./hooks/deskpro";
+import { useQueryErrorResetBoundary } from "@tanstack/react-query";
+import { useUnlinkIssue } from "./hooks";
+import type { EventPayload, Settings } from "./types";
 import type { TargetAction } from "@deskpro/app-sdk";
-import type { EventPayload } from "./types";
 
 const App = () => {
   const navigate = useNavigate();
-  const { reset } = useQueryErrorResetBoundary();
   const { client } = useDeskproAppClient();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const { logoutActiveUser } = useLogout()
+  const { reset } = useQueryErrorResetBoundary();
   const { unlinkIssue, isLoading: isLoadingUnlink } = useUnlinkIssue();
+
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
 
   const isLoading = [isLoadingUnlink].some((isLoading) => isLoading);
 
@@ -40,6 +32,11 @@ const App = () => {
         break;
       case "unlinkIssue":
         unlinkIssue(p.issueId);
+        break;
+        case "logout":
+        if (isUsingOAuth) {
+          logoutActiveUser()
+        }
         break;
     }
   }, 500);
@@ -65,22 +62,26 @@ const App = () => {
 
   if (!client || isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 
   return (
-    <Suspense fallback={<LoadingSpinner/>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
         <Routes>
-          <Route path="/admin/verify_settings" element={<VerifySettings/>} />
-          <Route path="/link" element={<LinkPage/>} />
-          <Route path="/home" element={<HomePage/>} />
-          <Route path="/view/:issueId" element={<ViewIssuePage/>} />
-          <Route path="/create" element={<CreateIssuePage/>} />
+          <Route path="/admin">
+            <Route path="callback" element={<AdminCallbackPage />} />
+            <Route path="verify_settings" element={<VerifySettings />} />
+          </Route>
+          <Route path="/link" element={<LinkPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/view/:issueId" element={<ViewIssuePage />} />
+          <Route path="/create" element={<CreateIssuePage />} />
           <Route path="/edit/:issueId" element={<EditIssuePage />} />
-          <Route path="/comment/create" element={<CreateIssueCommentPage/>} />
-          <Route index element={<Main/>} />
+          <Route path="/comment/create" element={<CreateIssueCommentPage />} />
+          <Route index element={<LoadingPage />} />
         </Routes>
       </ErrorBoundary>
     </Suspense>

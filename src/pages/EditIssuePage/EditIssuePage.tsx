@@ -1,33 +1,26 @@
-import { useState, useCallback } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import get from "lodash/get";
-import {
-  LoadingSpinner,
-  useDeskproElements,
-  useDeskproAppClient,
-  useDeskproLatestAppContext,
-} from "@deskpro/app-sdk";
-import {
-  updateIssueService,
-  uploadIssueAttachmentService,
-} from "../../services/youtrack";
-import { setEntityIssueService } from "../../services/entityAssociation";
-import { useSetTitle } from "../../hooks";
+import { EditIssue } from "@/components";
+import { getEntityMetadata } from "@/utils";
+import { LoadingSpinner, useDeskproAppClient, useDeskproElements, useDeskproLatestAppContext } from "@deskpro/app-sdk";
+import { setEntityIssueService } from "@/services/entityAssociation";
+import { updateIssueService, uploadIssueAttachmentService } from "@/services/youtrack";
+import { useCallback, useState, } from "react";
 import { useIssueDeps } from "./hooks";
-import { getEntityMetadata } from "../../utils";
-import { EditIssue } from "../../components";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSetTitle } from "@/hooks";
+import get from "lodash/get";
 import type { FC } from "react";
-import type { IssueValues } from "../../components/IssueForm";
-import type { Maybe, TicketContext } from "../../types";
-import type { IssueAttachment } from "../../services/youtrack/types";
+import type { IssueAttachment } from "@/services/youtrack/types";
+import type { IssueValues } from "@/components/IssueForm";
+import type { Maybe, Settings } from "@/types";
 
 const EditIssuePage: FC = () => {
   const { issueId } = useParams();
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
-  const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
 
-  const [error, setError] = useState<Maybe<string|string[]>>(null);
+  const [error, setError] = useState<Maybe<string | string[]>>(null);
 
   const { issue, isLoading } = useIssueDeps(issueId);
 
@@ -62,7 +55,7 @@ const EditIssuePage: FC = () => {
       .catch((err) => setError(get(err, ["data", "error_description"], "An error occurred")));
   }, [client, issueId, ticketId, navigate]);
 
-  const onUploadFile = useCallback((file: File): Promise<IssueAttachment|void> => {
+  const onUploadFile = useCallback((file: File): Promise<IssueAttachment | void> => {
     if (!client || !issueId) {
       return Promise.resolve();
     }
@@ -86,11 +79,21 @@ const EditIssuePage: FC = () => {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
+    if (isUsingOAuth) {
+      registerElement("menu", {
+        type: "menu",
+        items: [
+          {
+            title: "Logout",
+            payload: { type: "logout" },
+          }],
+      })
+    }
   });
 
   if (isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 

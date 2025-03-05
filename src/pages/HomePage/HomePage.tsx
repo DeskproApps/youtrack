@@ -1,17 +1,17 @@
-import React, { useCallback } from "react";
+import { Home } from "@/components";
+import { LoadingSpinner, useDeskproElements, useDeskproLatestAppContext } from "@deskpro/app-sdk";
+import { Settings } from "@/types";
+import { useCallback } from "react";
+import { useLinkedIssues, useSetBadgeCount, useSetTitle } from "@/hooks";
 import { useNavigate } from "react-router-dom";
-import {
-  LoadingSpinner,
-  useDeskproElements,
-} from "@deskpro/app-sdk";
-import { Home } from "../../components";
-import { useSetTitle, useSetBadgeCount, useLinkedIssues } from "../../hooks";
 import type { FC } from "react";
-import type { Issue } from "../../services/youtrack/types";
+import type { Issue } from "@/services/youtrack/types";
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
   const { issues, isLoading } = useLinkedIssues();
+  const { context } = useDeskproLatestAppContext<unknown, Settings>()
+  const isUsingOAuth = context?.settings?.use_permanent_token !== true
 
   useSetTitle("YouTrack Issues");
   useSetBadgeCount(issues);
@@ -24,6 +24,16 @@ const HomePage: FC = () => {
       type: "plus_button",
       payload: { type: "changePage", path: "/link" },
     });
+    if (isUsingOAuth) {
+      registerElement("menu", {
+        type: "menu",
+        items: [
+          {
+            title: "Logout",
+            payload: { type: "logout" },
+          }],
+      })
+    }
   });
 
   const onClickTitle = useCallback((issueId: Issue["id"]) => {
@@ -32,7 +42,7 @@ const HomePage: FC = () => {
 
   if (isLoading) {
     return (
-      <LoadingSpinner/>
+      <LoadingSpinner />
     );
   }
 
