@@ -3,7 +3,7 @@
   "title": "YouTrack",
   "description": "View your YouTrack issues linked with Deskpro tickets to streamline communication with users.",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/youtrack",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
@@ -60,10 +60,7 @@
     "verify_settings": {
       "title": "",
       "type": "app_embedded",
-      "options": {
-        "entrypoint": "#/admin/verify_settings",
-        "height": "30px"
-      },
+      "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
       "isRequired": false,
       "isBackendOnly": false,
       "condition": "settings.use_permanent_token == true",
@@ -88,10 +85,7 @@
     "callback_url": {
       "title": "Callback URL",
       "type": "app_embedded",
-      "options": {
-        "entrypoint": "#/admin/callback",
-        "height": "80px"
-      },
+      "options": { "entrypoint": "#/admin/callback", "height": "80px" },
       "isRequired": false,
       "isBackendOnly": true,
       "condition": "settings.use_permanent_token != true",
@@ -127,17 +121,12 @@
     "whitelist": [
       {
         "url": "__instance_url__/api/.*",
-        "methods": [
-          "GET",
-          "POST"
-        ],
+        "methods": ["GET", "POST"],
         "timeout": 20
       },
       {
         "url": "__instance_url__/hub/api/.*",
-        "methods": [
-          "POST"
-        ],
+        "methods": ["POST"],
         "timeout": 20
       }
     ]
