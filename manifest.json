@@ -8,7 +8,6 @@
   "isSingleInstall": false,
   "hasDevMode": true,
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
-  "secrets": "RRrq4WkQTzJ56J1ZYV8I9+LtdZ6jZWTR8ZW63YXIb3R546JFq28O3iivggl1TF+HYkSbZxWu4A/FXUxRn6SgplBfAXPSVeWygaWCJUCq98Jwp8mOC2CLanBnooE+qFNtFc6w9k5qXJ7M8q2CuiZk4eGBjzUvhOJUyLIFqYIQaI5qBIqaZ2AIXZyqpReDY/TYjwfJP5QEks1cGIHBBc90IlRR1hlmTAxpwhBePB1UQ09T2pGKz+jXgHPrNUztjsvNKDBa91J8Q1p0z9SBoWglc85dyj+P3Tj1FKsWrX7zYyghQoO9utCeU6YXfFbCDBsEEwvder5lb2Gw7if0TIFKpGTwkZ1RMFHAZ85kX+vYnnHHtJOdZlktdBPSsy12MPlPh3ieplmY9PFG6IZBtTmzU7tUbnbUhKEI6l5vsJ4gNgDxkXKX2ZaVUYSq4SiENXGhcztmTCgSl1x3/T8PMP0VG1GnWK1NjTgHB/l7NIvWqoro+Pw60Y3yj1UTQCcU06324g69YN5FcUIRQyA2dF8WjZVU3NBuGVx3JxfaGnAB3agSDVg5qCpgAMHOXzFQR6d1s1bs4wnzn0n0XtlPIz+QWhEya6IyEBmchyEvbPEANPj9FXT/jTgnaHUDlWqQYk5aA2/Yjw8sWVPexZ7qUuOGacu52j/8eIctqlLPbhjBUDzBfMVpW28mxPz0aCDzdBFRH3hJBPxmk4Jc52RIiBSdzDcoTVWc4W0dwRnByBsiK36Mb67KUlN0bg7Ml1M6tTn+NkALTlAQHJtK8gkpEczWfXlV7uAZMzstAWlmSf5W89yS4YspA4uyYM1pQQTFtLbX2R//YrNBPGGgWYEOJoXJYSmT1fa9i9pdFEM9c6Y/F8vYn/z5Zlu7TPQw9u9zTkDzUGcXMtUaOvqZZQ3MkbbF9MnwHhyZxRs48V1hGJbW8wm1wOVQPUl3MptAxmPwWDg/i2gQM9cJGO8x7YCnJN+6RsWuiFOzXLJo7hVYJbMqYsPzzGaW5uww1IfQZ+Xtf3wgj3BaFO+whWgNIE+SOphSZsVRjGDDi7KqcOdpJQk5D+x+W0c2NZ0X2Il+sAhJ2Jm9I/y4Emcm1N5i09gRC2cKFLL3jPI7YFpWb0VqsRQCoV4lD2P3qNiUvC/NuKWjtl4U",
   "targets": [
     {
       "target": "ticket_sidebar",
@@ -32,21 +31,12 @@
     }
   },
   "settings": {
-    "use_deskpro_saas": {
-      "title": "One-Click Installation",
-      "type": "boolean",
-      "default": true,
-      "isRequired": false,
-      "isBackendOnly": false,
-      "order": 5
-    },
     "use_permanent_token": {
       "title": "Use Permanent Token",
       "type": "boolean",
       "isRequired": false,
       "isBackendOnly": false,
-      "default": false,
-      "condition": "settings.use_deskpro_saas != true",
+      "default": true,
       "order": 10
     },
     "instance_url": {
@@ -64,7 +54,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_deskpro_saas != true && settings.use_permanent_token == true",
+      "condition": "settings.use_permanent_token == true",
       "order": 30
     },
     "verify_settings": {
@@ -76,7 +66,7 @@
       },
       "isRequired": false,
       "isBackendOnly": false,
-      "condition": "settings.use_deskpro_saas != true && settings.use_permanent_token == true",
+      "condition": "settings.use_permanent_token == true",
       "order": 40
     },
     "client_id": {
@@ -84,7 +74,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
-      "condition": "settings.use_deskpro_saas != true && settings.use_permanent_token != true",
+      "condition": "settings.use_permanent_token != true",
       "order": 50
     },
     "client_secret": {
@@ -92,7 +82,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_deskpro_saas != true && settings.use_permanent_token != true",
+      "condition": "settings.use_permanent_token != true",
       "order": 60
     },
     "callback_url": {
@@ -104,7 +94,7 @@
       },
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_deskpro_saas != true && settings.use_permanent_token != true",
+      "condition": "settings.use_permanent_token != true",
       "order": 70
     },
     "default_comment_on_ticket_reply": {

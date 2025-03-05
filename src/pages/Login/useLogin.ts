@@ -17,7 +17,7 @@ export default function useLogin(): UseLogin {
     const [authUrl, setAuthUrl] = useState<string | null>(null)
     const [error, setError] = useState<null | string>(null)
     const [isLoading, setIsLoading] = useState(false)
-    
+
     const navigate = useNavigate()
 
     const { context } = useDeskproLatestAppContext<TicketData, Settings>()
@@ -26,7 +26,7 @@ export default function useLogin(): UseLogin {
 
 
     useInitialisedDeskproAppClient(async (client) => {
-        if (context?.settings.use_deskpro_saas === undefined || !ticketId) {
+        if (!context?.settings || !ticketId) {
             // Make sure settings have loaded.
             return
         }
@@ -35,44 +35,39 @@ export default function useLogin(): UseLogin {
         if (context.settings.use_permanent_token === true) {
             setError("Enable OAuth to access this page");
             return
-
         }
-        const mode = context?.settings.use_deskpro_saas ? 'global' : 'local';
 
         const clientId = context?.settings.client_id;
-        if (mode === 'local' && typeof clientId !== 'string') {
+        if (typeof clientId !== 'string' || !clientId) {
             // Local mode requires a clientId.
             setError("A client ID is required");
             return
         }
-        const oauth2 = mode === "local" ?
-            await client.startOauth2Local(
-                ({ state, callbackUrl }) => {
-                    return `${context?.settings.instance_url}/hub/api/rest/oauth2/auth?${createSearchParams([
-                        ["response_type", "code"],
-                        ["client_id", clientId ?? ""],
-                        ["state", state],
-                        ["redirect_uri", callbackUrl],
-                        ["scope", "YouTrack"],
-                    ])}`
-                },
-                /\bcode=(?<code>[^&#]+)/,
-                async (code: string): Promise<OAuth2Result> => {
-                    // Extract the callback URL from the authorization URL
-                    const url = new URL(oauth2.authorizationUrl);
-                    const redirectUri = url.searchParams.get("redirect_uri");
+        const oauth2 = await client.startOauth2Local(
+            ({ state, callbackUrl }) => {
+                return `${context?.settings.instance_url}/hub/api/rest/oauth2/auth?${createSearchParams([
+                    ["response_type", "code"],
+                    ["client_id", clientId ?? ""],
+                    ["state", state],
+                    ["redirect_uri", callbackUrl],
+                    ["scope", "YouTrack"],
+                ])}`
+            },
+            /\bcode=(?<code>[^&#]+)/,
+            async (code: string): Promise<OAuth2Result> => {
+                // Extract the callback URL from the authorization URL
+                const url = new URL(oauth2.authorizationUrl);
+                const redirectUri = url.searchParams.get("redirect_uri");
 
-                    if (!redirectUri) {
-                        throw new Error("Failed to get callback URL");
-                    }
-
-                    const data = await getAccessToken(client, code, redirectUri);
-
-                    return { data }
+                if (!redirectUri) {
+                    throw new Error("Failed to get callback URL");
                 }
-            )
-            // Global Proxy Service
-            : await client.startOauth2Global("4ff91659-ee64-42dc-857b-a6a21046901f");
+
+                const data = await getAccessToken(client, code, redirectUri);
+
+                return { data }
+            }
+        )
 
         setAuthUrl(oauth2.authorizationUrl)
         setIsLoading(false)
@@ -94,7 +89,6 @@ export default function useLogin(): UseLogin {
                 })
                 .catch(() => { throw new Error("Error authenticating user") })
 
-
             getEntityIssueListService(client, ticketId)
                 .then((entities) => {
                     if (entities.length > 0) {
@@ -108,7 +102,7 @@ export default function useLogin(): UseLogin {
             setError(error instanceof Error ? error.message : 'Unknown error');
             setIsLoading(false);
         }
-    }, [setAuthUrl, context?.settings.use_deskpro_saas])
+    }, [setAuthUrl, context?.settings])
 
     const onSignIn = useCallback(() => {
         setIsLoading(true);
