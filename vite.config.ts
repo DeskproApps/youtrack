@@ -1,15 +1,20 @@
-import { defineConfig } from "vite";
-import copy from "rollup-plugin-copy";
 import path from "path";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import copy from "rollup-plugin-copy";
+
+const PORT = process.env.VITE_DEV_SERVER_PORT
+  ? parseInt(process.env.VITE_DEV_SERVER_PORT)
+  : undefined;
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "",
   plugins: [react()],
   server: {
-    port: 3003,
-    allowedHosts: true,
+    host: true,
+    port: PORT,
+    allowedHosts: true
   },
   resolve:{
     alias: {
@@ -36,6 +41,6 @@ export default defineConfig({
           ],
         }),
       ],
-    }
+    },
   },
 });
