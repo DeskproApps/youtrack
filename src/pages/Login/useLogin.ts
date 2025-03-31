@@ -42,7 +42,7 @@ export default function useLogin(): UseLogin {
         const clientId = context?.settings.client_id;
         if (typeof clientId !== 'string' || !clientId) {
             // Local mode requires a clientId.
-            setError("A client ID is required");
+            setError("A service ID is required");
             return
         }
 
