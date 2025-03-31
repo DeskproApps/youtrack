@@ -16,8 +16,10 @@ const HomePage: FC = () => {
   useSetTitle("YouTrack Issues");
   useSetBadgeCount(issues);
 
-  useDeskproElements(({ registerElement, clearElements }) => {
+  useDeskproElements(({ registerElement, deRegisterElement, clearElements }) => {
     clearElements();
+    deRegisterElement("edit")
+    deRegisterElement("home")
 
     registerElement("refresh", { type: "refresh_button" });
     registerElement("plus", {
