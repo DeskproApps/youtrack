@@ -13,7 +13,7 @@ const ViewIssuePage: FC = () => {
   const { issueId } = useParams();
   const { isLoading, issue } = useIssueDeps(issueId);
   const { context } = useDeskproLatestAppContext<unknown, Settings>()
-  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+  const isUsingOAuth = context?.settings.use_permanent_token === false
   const issueIdReadable = get(issue, ["idReadable"], "");
 
 

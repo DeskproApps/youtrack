@@ -15,7 +15,7 @@ const CreateIssuePage: FC = () => {
   const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext<unknown, Settings>()
-  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+  const isUsingOAuth = context?.settings.use_permanent_token === false
 
   const navigate = useNavigate();
 

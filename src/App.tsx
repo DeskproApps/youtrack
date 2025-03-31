@@ -19,7 +19,7 @@ const App = () => {
   const { reset } = useQueryErrorResetBoundary();
   const { unlinkIssue, isLoading: isLoadingUnlink } = useUnlinkIssue();
 
-  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+  const isUsingOAuth = context?.settings.use_permanent_token === false
 
   const isLoading = [isLoadingUnlink].some((isLoading) => isLoading);
 

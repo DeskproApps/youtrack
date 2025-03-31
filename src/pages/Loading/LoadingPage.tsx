@@ -17,7 +17,7 @@ const LoadingPage: FC = () => {
     const navigate = useNavigate();
 
     // Determine authentication method from settings
-    const isUsingOAuth = context?.settings.use_permanent_token !== true
+    const isUsingOAuth = context?.settings.use_permanent_token === false
     const ticketId = context?.data?.ticket?.id
 
     useDeskproElements(({ registerElement, clearElements }) => {
@@ -63,18 +63,15 @@ const LoadingPage: FC = () => {
                 }
             })
             .catch(() => navigate("/link"))
+    } else if (isUsingOAuth) {
+        navigate("/login")
     } else {
-
-        if (isUsingOAuth) {
-            navigate("/login")
-        } else {
-            // Show error for invalid access tokens (expired or not present)
-            return (
-                <Stack padding={12}>
-                    <ErrorBlock text={"Invalid Access Token"} />
-                </Stack>
-            )
-        }
+        // Show error for invalid permanent tokens (expired or not present)
+        return (
+            <Stack padding={12}>
+                <ErrorBlock text={"Invalid Permanent Token"} />
+            </Stack>
+        )
     }
 
     return (
@@ -82,4 +79,4 @@ const LoadingPage: FC = () => {
     );
 };
 
-export {LoadingPage};
+export { LoadingPage };

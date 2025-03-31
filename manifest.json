@@ -54,7 +54,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_permanent_token == true",
+      "condition": "settings.use_permanent_token != false",
       "order": 30
     },
     "verify_settings": {
@@ -63,7 +63,7 @@
       "options": { "entrypoint": "#/admin/verify_settings", "height": "30px" },
       "isRequired": false,
       "isBackendOnly": false,
-      "condition": "settings.use_permanent_token == true",
+      "condition": "settings.use_permanent_token != false",
       "order": 40
     },
     "client_id": {
@@ -71,7 +71,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": false,
-      "condition": "settings.use_permanent_token != true",
+      "condition": "settings.use_permanent_token == false",
       "order": 50
     },
     "client_secret": {
@@ -79,7 +79,7 @@
       "type": "string",
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_permanent_token != true",
+      "condition": "settings.use_permanent_token == false",
       "order": 60
     },
     "callback_url": {
@@ -88,7 +88,7 @@
       "options": { "entrypoint": "#/admin/callback", "height": "80px" },
       "isRequired": false,
       "isBackendOnly": true,
-      "condition": "settings.use_permanent_token != true",
+      "condition": "settings.use_permanent_token == false",
       "order": 70
     },
     "default_comment_on_ticket_reply": {

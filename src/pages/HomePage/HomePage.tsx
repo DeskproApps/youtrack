@@ -11,7 +11,7 @@ const HomePage: FC = () => {
   const navigate = useNavigate();
   const { issues, isLoading } = useLinkedIssues();
   const { context } = useDeskproLatestAppContext<unknown, Settings>()
-  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+  const isUsingOAuth = context?.settings.use_permanent_token === false
 
   useSetTitle("YouTrack Issues");
   useSetBadgeCount(issues);
