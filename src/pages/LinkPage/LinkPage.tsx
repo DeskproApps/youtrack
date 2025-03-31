@@ -29,7 +29,7 @@ const LinkPage: FC = () => {
   const { setSelectionState } = useReplyBox();
   const { addLinkCommentIssue } = useAutoCommentLinkedIssue();
   const { context } = useDeskproLatestAppContext<unknown, Settings>()
-  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+  const isUsingOAuth = context?.settings.use_permanent_token === false
 
   const [search, setSearch] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);

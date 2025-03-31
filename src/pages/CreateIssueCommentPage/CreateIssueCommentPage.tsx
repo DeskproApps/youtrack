@@ -13,7 +13,7 @@ import type { Props as FormProps } from "@/components/IssueCommentForm";
 const CreateIssueCommentPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext<unknown, Settings>()
-  const isUsingOAuth = context?.settings?.use_permanent_token !== true
+  const isUsingOAuth = context?.settings.use_permanent_token === false
 
   const [searchParams] = useSearchParams();
   const [error, setError] = useState<string | boolean | null>(null);

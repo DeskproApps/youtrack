@@ -5,8 +5,12 @@ import { useDeskproElements, useInitialisedDeskproAppClient } from "@deskpro/app
 import useLogin from "./useLogin"
 
 const LoginPage: FC = () => {
-    useDeskproElements(({ registerElement, clearElements }) => {
+    useDeskproElements(({ registerElement, clearElements, deRegisterElement }) => {
         clearElements()
+        deRegisterElement("menu")
+        deRegisterElement("home")
+        deRegisterElement("edit")
+        deRegisterElement("plus")
         registerElement("refresh", { type: "refresh_button" })
     })
 
