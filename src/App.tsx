@@ -1,5 +1,4 @@
 import { AdminCallbackPage, CreateIssueCommentPage, CreateIssuePage, EditIssuePage, HomePage, LinkPage, LoadingPage, LoginPage, VerifySettings, ViewIssuePage } from "./pages";
-import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./components";
 import { LoadingSpinner, useDeskproAppClient, useDeskproAppEvents, useDeskproLatestAppContext } from "@deskpro/app-sdk";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useUnlinkIssue } from "./hooks";
 import type { EventPayload, Settings } from "./types";
 import type { TargetAction } from "@deskpro/app-sdk";
+import { ErrorBoundary } from "@sentry/react";
 
 const App = () => {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const App = () => {
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+      <ErrorBoundary onReset={reset} fallback={ErrorFallback}>
         <Routes>
           <Route path="/admin">
             <Route path="callback" element={<AdminCallbackPage />} />
