@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { IconV2 } from "@deskpro/deskpro-ui";
 import type { AnchorHTMLAttributes, ElementType } from "react";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { DeskproAppTheme } from "@deskpro/app-sdk";
 
 type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   icon?: IconDefinition
-};
+} & DeskproAppTheme;
 
 const Link: ElementType = styled(({ children, icon, ...rest }: LinkProps) => (
   <a {...rest}>

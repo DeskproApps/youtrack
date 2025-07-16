@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import {
+  DeskproAppTheme,
   Title,
   useInitialisedDeskproAppClient,
 } from "@deskpro/app-sdk";
@@ -15,7 +16,7 @@ type Props = {
   onClickTitle?: (issueId: Issue["id"]) => void,
 };
 
-const TitleLink = styled.a`
+const TitleLink = styled.a<DeskproAppTheme>`
     color: ${({ theme }) => theme.colors.cyan100};
     text-decoration: none;
 `;
