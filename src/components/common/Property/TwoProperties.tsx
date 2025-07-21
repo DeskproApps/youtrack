@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { Stack } from "@deskpro/deskpro-ui";
 import { Property } from "./Property";
 import type { Props as PropertyProps } from "./types";
+import { DeskproAppTheme } from "@deskpro/app-sdk";
 
 export type Props = {
   leftLabel?: PropertyProps["label"],
@@ -16,15 +17,15 @@ const Container = styled(Stack)`
   margin-bottom: -1px;
 `;
 
-const Side = styled.div<{ withDivider?: boolean }>`
+const Side = styled.div<{ withDivider?: boolean } & DeskproAppTheme>`
   display: inline-block;
   margin-bottom: 10px;
 
-  ${({withDivider}) => withDivider
+  ${({withDivider, theme}) => withDivider
     ? css`
       width: calc(50% - 6px - 1px);
       padding-left: 10px;
-      border-left: 1px solid ${({theme}) => theme.colors.grey20};
+      border-left: 1px solid ${theme.colors.grey20};
     `
     : css`
       width: calc(50% - 6px);

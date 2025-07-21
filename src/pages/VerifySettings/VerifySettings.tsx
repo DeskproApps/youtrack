@@ -3,7 +3,7 @@ import { getCurrentUserService } from "@/services/youtrack";
 import { nbsp } from "@/constants";
 import { P1, Stack } from "@deskpro/deskpro-ui";
 import { TSpan } from "@deskpro/deskpro-ui";
-import { useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
+import { DeskproAppTheme, useDeskproAppClient, useDeskproAppEvents } from "@deskpro/app-sdk";
 import { useState, useCallback } from "react";
 import styled from "styled-components";
 import type { FC } from "react";
@@ -14,7 +14,7 @@ const Invalid = styled(TSpan)`
   color: ${({ theme }) => theme.colors.red100};
 `;
 
-const Valid = styled.span`
+const Valid = styled.span<DeskproAppTheme>`
   color: ${({ theme }) => theme.colors.grey100};
 `;
 
